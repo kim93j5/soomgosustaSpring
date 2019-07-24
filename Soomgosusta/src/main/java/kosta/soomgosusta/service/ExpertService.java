@@ -6,7 +6,7 @@ import java.util.Map;
 import kosta.soomgosusta.domain.E_ProfileVO;
 import kosta.soomgosusta.domain.ExpertVO;
 import kosta.soomgosusta.domain.LoginDTO;
-
+import kosta.soomgosusta.domain.ExpertInfoVO;
 public interface ExpertService {
 
 	public void register(ExpertVO expertVO) throws UnsupportedEncodingException;
@@ -20,4 +20,6 @@ public interface ExpertService {
 	public int updateEPhoto(Map<String, String> param);
 
 	public int updateProfile(E_ProfileVO vo);
+	
+	public int insertExpertInfo(ExpertInfoVO expert_Info);
 }

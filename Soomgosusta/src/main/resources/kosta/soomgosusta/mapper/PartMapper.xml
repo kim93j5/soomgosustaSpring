@@ -4,10 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kosta.soomgosusta.mapper.PartMapper">
 
-	<select id="listPart" resultType="kosta.soomgosusta.domain.PartVO">
+	<select id="detailPart" resultType="kosta.soomgosusta.domain.PartVO">
 		<![CDATA[
 			SELECT * FROM PART WHERE P_L_WORD = #{data} OR P_M_WORD = #{data} OR P_S_WORD = #{data}
 		]]>
+	</select>
+
+
+	<select id="listPart" resultType="kosta.soomgosusta.domain.PartVO">
+	    select * from part
 	</select>
 
 	<select id="listLWord" resultType="String">
@@ -44,7 +49,28 @@
 		</foreach>
 	</select>
 	
+	<select id="listExpertQuestion" resultType="kosta.soomgosusta.domain.QuestionVO">
+	    select * from question where q_divide = '고수' 
+	</select>
+
+	<select id="listExpertAnswer" resultType="kosta.soomgosusta.domain.AnswerVO">
+	    select * from answer where q_seq in(1, 2, 3)
+	</select>
+	
 	<update id="updateSearchLog" parameterType="int">
 		UPDATE PART_LOG SET PL_SEARCH = PL_SEARCH+1 WHERE P_SEQ = #{p_Seq}
 	</update>
+
+	
+	
+	
+	<select id="listPSeq" resultType="Int">
+	    select p_seq from part where p_L_Word = #{p_L_Word} and
+	                                 p_M_Word = #{p_M_Word} and
+	                                 p_S_Word = #{p_S_Word}
+	</select>
+	
+		
+	
+	
 </mapper>

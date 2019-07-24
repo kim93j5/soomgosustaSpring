@@ -4,6 +4,7 @@ import java.util.Map;
 
 import kosta.soomgosusta.domain.E_ProfileVO;
 import kosta.soomgosusta.domain.ExpertVO;
+import kosta.soomgosusta.domain.ExpertInfoVO;
 
 public interface ExpertMapper {
 	void register(ExpertVO expertVO);
@@ -17,4 +18,7 @@ public interface ExpertMapper {
 	int updateEPhoto(Map<String, String> param);
 
 	int updateProfile(E_ProfileVO vo);
+
+	int insertExpertInfo(ExpertInfoVO expert_Info);
+
 }
