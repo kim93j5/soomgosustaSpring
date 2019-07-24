@@ -1,0 +1,33 @@
+@CHARSET "UTF-8";
+
+#container{
+	margin-left: 500px;
+	margin-top: 100px;
+}
+
+#listForm{
+
+	width: 460px;
+	float: left;
+   	overflow : hidden;
+}
+
+#listForm .slide{
+	width: 7500px;
+	height: 600px;
+	float: left;
+}
+.requestList{
+	width: 500px;
+	height: 500px;
+	float: left;
+}
+
+.btn{
+	margin-left: 200px;
+}
+
+.requestList ul{
+	list-style: none;
+}
+

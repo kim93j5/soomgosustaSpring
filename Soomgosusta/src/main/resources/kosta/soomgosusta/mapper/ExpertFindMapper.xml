@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kosta.soomgosusta.mapper.ExpertFindMapper">
+
+	<resultMap type="kosta.soomgosusta.domain.ExpertFindVO" id="listExInfo">
+		<result column="E_ID" property="ef_Id" />
+		<result column="EI_DISTRICT" property="ef_District" />
+		<result column="P_S_Word" property="ef_p_S_Word" />
+		<result column="E_PHOTO" property="ef_Photo" />
+		<result column="EP_OL" property="ef_OL" />
+		<result column="E_RC" property="ef_RC" />
+
+	</resultMap>
+
+	<sql id="expertFindInfo">
+		<trim prefix="(" suffix=")" prefixOverrides="AND">
+			<trim prefix="AND">
+					<if test="service == '분야 전체'">
+						p.P_L_WORD LIKE '%'
+					</if>
+
+					<if test="service != '분야 전체'">
+						<if test="serviceInfo != '전체'">
+							p.P_S_WORD = #{serviceInfo}
+						</if>
+						<if test="serviceInfo == '전체'">
+							p.P_L_WORD = #{service}
+						</if>
+					</if>
+			</trim>
+			<trim prefix="AND">		
+					<if test="sido == '지역 전체'">
+						ei.EI_DISTRICT LIKE '%'
+					</if>
+
+					<if test="sido != '지역 전체'">
+						<if test="gugun != '전체'">
+							ei.EI_DISTRICT LIKE '%'||#{sido}||'/'||#{gugun}||'%'
+						</if>
+						<if test="gugun == '전체'">
+							ei.EI_DISTRICT LIKE '%'||#{sido}||'%'
+						</if>
+					</if>
+			</trim>
+		</trim>
+
+	</sql>
+
+	<select id="listExpertFind" parameterType="hashmap" resultMap="listExInfo">
+		SELECT DISTINCT e.E_ID, ei.EI_DISTRICT, p.P_S_Word, e.E_PHOTO,
+		ep.EP_OL, e.E_RC
+		FROM EXPERT e JOIN E_INFO ei
+		ON e.E_ID = ei.E_ID
+		JOIN
+		PART p
+		ON ei.P_SEQ = p.P_SEQ
+		JOIN E_PROFILE ep
+		ON e.E_ID = ep.E_ID
+		WHERE
+
+		<include refid="expertFindInfo"></include>
+	</select>
+
+	<select id="listReview" parameterType="String"
+		resultType="kosta.soomgosusta.domain.ReviewVO">
+		SELECT * FROM REVIEW WHERE E_ID = #{e_Id}
+	</select>
+</mapper>
