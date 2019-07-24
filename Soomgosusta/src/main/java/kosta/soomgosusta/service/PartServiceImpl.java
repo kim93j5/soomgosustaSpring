@@ -14,6 +14,7 @@ import kosta.soomgosusta.mapper.PartMapper;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
+
 @Service
 @Log4j
 public class PartServiceImpl implements PartService {
@@ -22,29 +23,29 @@ public class PartServiceImpl implements PartService {
 	private PartMapper mapper;
 	
 	@Override
-	public List<PartVO> listPart(String data){
+	public List<PartVO> detailPartService(String data){
 		
 /*		mapper.listPart().forEach(part -> log.info(part));*/
 		
-		return mapper.listPart(data);
+		return mapper.detailPart(data);
 	}
 	
 	@Override
-	public List<String> listLWord(){
+	public List<String> listLWordService(){
 		
 		return mapper.listLWord();
 		
 	}
 	
 	@Override
-	public List<String> listMWord(){
+	public List<String> listMWordService(){
 		log.info(mapper.listMWord());
 		
 		return mapper.listMWord();
 	}
 	
 	@Override
-	public List<String> listSWord(){
+	public List<String> listSWordService(){
 		log.info(mapper.listSWord());
 		
 		return mapper.listSWord();
@@ -52,14 +53,14 @@ public class PartServiceImpl implements PartService {
 	}
 	
 	@Override
-	public PartVO detailPart(String searchKey) {
+	public PartVO listSearchInfoService(String searchKey) {
 		
 		return mapper.listSearchInfo(searchKey);
 	}
 
 	@Transactional
 	@Override
-	public List<QuestionVO> listQuestion(HashMap<String, String> searchMap, int p_Seq) {
+	public List<QuestionVO> listQuestionService(HashMap<String, String> searchMap, int p_Seq) {
 
 		mapper.updateSearchLog(p_Seq);
 		
@@ -67,7 +68,7 @@ public class PartServiceImpl implements PartService {
 	}
 
 	@Override
-	public List<AnswerVO> listAnswer(List<QuestionVO> listQ) {
+	public List<AnswerVO> listAnswerService(List<QuestionVO> listQ) {
 
 		HashMap<String, List<QuestionVO>> map = new HashMap<>();
 		map.put("listQ", listQ);
@@ -75,4 +76,31 @@ public class PartServiceImpl implements PartService {
 		return mapper.listAnswer(map);
 	}
 	
+	@Override
+	public List<PartVO> listPartService() {
+		
+		log.info("getListPart........");
+		return mapper.listPart();
+	}
+
+	@Override
+	public List<QuestionVO> listExpertQusetionService() {
+		
+		log.info("getListQuestion.....");
+		return mapper.listExpertQuestion();
+	}
+
+	@Override
+	public List<AnswerVO> listExpertAnswerService() {
+		log.info("getListAnswer.....");
+		return mapper.listExpertAnswer();
+	}
+
+	@Override
+	public int listPSeqService(String p_L_Word, String p_M_Word, String p_S_Word) {
+		return mapper.listPSeq(p_L_Word, p_M_Word, p_S_Word);
+	}
+
+	
+
 }

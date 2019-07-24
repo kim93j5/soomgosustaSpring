@@ -36,4 +36,18 @@
 	<update id="updateRequestLog" parameterType="int" >
 		UPDATE PART_LOG SET PL_REQUEST = PL_REQUEST+1 WHERE P_SEQ = #{p_Seq}
 	</update>
+	
+	<select id="sendRequestInfo" resultType="kosta.soomgosusta.domain.RequestVO" parameterType="String">		
+		 select * from request where m_Id = #{m_Id}
+	</select>
+	
+	<select id="partInfo" resultType="String" parameterType="int">
+	      select p_s_word from part where p_Seq = #{p_Seq}
+	</select>
+	
+	<update id="cancelRequest" parameterType="int">
+	       update request set r_Status = 'Cancel' where r_seq = #{r_Seq}
+	</update>
+
+	
 </mapper>

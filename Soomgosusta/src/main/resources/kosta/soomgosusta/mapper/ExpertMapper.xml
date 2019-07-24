@@ -38,4 +38,9 @@
 		where e_Id=#{e_Id}
 	</update>
 	
+   <insert id="insertExpertInfo" parameterType="kosta.soomgosusta.domain.ExpertInfoVO">
+        insert into e_info values (#{e_Id}, #{ei_Time}, #{ei_District}, #{ei_Start}, #{p_Seq}, #{ei_Gender})
+        
+   </insert>
+	
 </mapper>

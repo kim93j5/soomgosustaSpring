@@ -31,7 +31,7 @@ public class PartAjaxController {
 	@GetMapping(value="/listPart/{data}", produces= {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<List<PartVO>> getPart(@PathVariable("data") String data){
 		
-		return new ResponseEntity<>(service.listPart(data), HttpStatus.OK);
+		return new ResponseEntity<>(service.detailPartService(data), HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/listQNA/{data}", produces= {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE})
@@ -41,7 +41,7 @@ public class PartAjaxController {
 		
 		HashMap<String, String> searchMap = new HashMap<>();
 
-		PartVO searchPart = service.detailPart(data);
+		PartVO searchPart = service.listSearchInfoService(data);
 
 		if (searchPart != null) {
 			qnaList.setSearchPart(searchPart);
@@ -50,8 +50,8 @@ public class PartAjaxController {
 			searchMap.put("middle", "%" + searchPart.getP_M_Word() + "%");
 			searchMap.put("small", "%" + searchPart.getP_S_Word() + "%");
 
-			List<QuestionVO> listQ = service.listQuestion(searchMap, searchPart.getP_Seq());
-			List<AnswerVO> listA = service.listAnswer(listQ);
+			List<QuestionVO> listQ = service.listQuestionService(searchMap, searchPart.getP_Seq());
+			List<AnswerVO> listA = service.listAnswerService(listQ);
 
 			qnaList.setListQ(listQ);
 			qnaList.setListA(listA);

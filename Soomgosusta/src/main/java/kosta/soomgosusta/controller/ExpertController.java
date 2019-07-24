@@ -24,17 +24,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.util.WebUtils;
 
+import kosta.soomgosusta.domain.AnswerVO;
 import kosta.soomgosusta.domain.E_FilesVO;
 import kosta.soomgosusta.domain.E_ProfileVO;
+import kosta.soomgosusta.domain.ExpertInfoVO;
 import kosta.soomgosusta.domain.ExpertVO;
 import kosta.soomgosusta.domain.LoginDTO;
 import kosta.soomgosusta.interceptor.SessionNames;
 import kosta.soomgosusta.service.ExpertService;
+import kosta.soomgosusta.service.PartService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnailator;
@@ -44,14 +47,14 @@ import net.coobird.thumbnailator.Thumbnailator;
 @RequestMapping("/expert/*")
 @AllArgsConstructor
 public class ExpertController {
-
+	private PartService partService;
 	private ExpertService service;
-	
-	private boolean checkIamgeType(File file){ 
+
+	private boolean checkIamgeType(File file) {
 		try {
 			String contentType = Files.probeContentType(file.toPath());
 			return contentType.startsWith("image");
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -138,64 +141,140 @@ public class ExpertController {
 		// return "/expert/profile";
 	}
 
-	@PostMapping(value="/profile", produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PostMapping(value = "/profile", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseEntity<List<E_FilesVO>> profile(MultipartFile[] updateFile,
-			String e_Id, ExpertVO expertVO, Model model) {
+	public ResponseEntity<List<E_FilesVO>> profile(MultipartFile[] updateFile, String e_Id, ExpertVO expertVO,
+			Model model) {
 
 		List<E_FilesVO> list = new ArrayList<>();
 		String uploadFolder = "C:\\upload";
 		String uploadFolderPath = "profile";
 		File uploadPath = new File(uploadFolder, uploadFolderPath);
-		log.info("upload path: "+ uploadPath);
-		
-		if(uploadPath.exists() == false){
+		log.info("upload path: " + uploadPath);
+
+		if (uploadPath.exists() == false) {
 			uploadPath.mkdirs();
 		}
-		
+
 		for (MultipartFile multipartFile : updateFile) {
-			
+
 			E_FilesVO fileVO = new E_FilesVO();
-			
+
 			String updateFileName = multipartFile.getOriginalFilename();
 			updateFileName = updateFileName.substring(updateFileName.lastIndexOf("\\") + 1);
-			
+
 			UUID uuid = UUID.randomUUID();
 			updateFileName = uuid.toString() + "_" + updateFileName;
-			
-			//File savaFile = new File(uploadFolder, updateFileName);
-			
+
+			// File savaFile = new File(uploadFolder, updateFileName);
 
 			try {
-				
+
 				File savaFile = new File(uploadPath, updateFileName);
 				multipartFile.transferTo(savaFile);
-				
+
 				fileVO.setE_Uuid(uuid.toString());
 				fileVO.setE_Path(uploadFolderPath);
-				
-				if(checkIamgeType(savaFile)){
-					
+
+				if (checkIamgeType(savaFile)) {
+
 					fileVO.setE_Type(true);
 					fileVO.setE_From("profile");
 					fileVO.setE_Id(e_Id);
 					fileVO.setE_Photo(updateFileName);
-					FileOutputStream thumnail = new FileOutputStream(new File(uploadPath,"s_"+ updateFileName));
-					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumnail,200,200);
+					FileOutputStream thumnail = new FileOutputStream(new File(uploadPath, "s_" + updateFileName));
+					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumnail, 200, 200);
 					thumnail.close();
 				}
 				list.add(fileVO);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		
+
 			Map<String, String> param = new HashMap<String, String>();
 			param.put("e_Photo", updateFileName);
 			param.put("e_Id", e_Id);
 			service.updateEPhoto(param);
 
-			
 		}
 		return new ResponseEntity<>(list, HttpStatus.OK);
+	}
+
+	@PostMapping("/listExpertInfo")
+	public void listExpertInfo(@RequestParam("q_Seq") String[] question, @RequestParam("a_Seq") int[] answer,
+			@RequestParam("sido") String[] sido, @RequestParam("sigungu") String[] sigungu,
+			@RequestParam("large") String p_L_Word, @RequestParam("medium") String p_M_Word,
+			@RequestParam("small") String p_S_Word) {
+
+		/*
+		 * for(int i = 0; i < sido.length; i++){ log.info(sido[i]); }
+		 */
+
+		log.info(p_L_Word);
+		log.info(p_M_Word);
+		log.info(p_S_Word);
+
+		String ei_District = "";
+		String sumDistrict = "";
+		String[] district = new String[3];
+
+		for (int i = 0; i < sido.length; i++) {
+			if (!sido[i].equals("시/도 선택")) {
+				district[i] = sido[i] + "/" + sigungu[i];
+				sumDistrict += district[i];
+				sumDistrict += ",";
+			}
+		}
+
+		ei_District = sumDistrict.substring(0, sumDistrict.length() - 1);
+
+		log.info(ei_District);
+
+		int p_Seq = partService.listPSeqService(p_L_Word, p_M_Word, p_S_Word);
+		log.info(p_Seq);
+
+		/*
+		 * for(int i = 0; i <question.length; i++){ log.info(question[i]); }
+		 */
+
+		List<AnswerVO> listAnswer = partService.listExpertAnswerService();
+		String ei_Time = "";
+		String ei_Start = "";
+		String ei_Gender = "";
+
+		for (int i = 0; i < listAnswer.size(); i++) {
+			for (int j = 0; j < answer.length; j++) {
+				if (listAnswer.get(i).getA_Seq() == answer[j]) {
+					int qSeq = listAnswer.get(i).getQ_Seq();
+					if (qSeq == 1) {
+						ei_Time += listAnswer.get(i).getA_Contents() + "/";
+					} else if (qSeq == 2) {
+						ei_Start += listAnswer.get(i).getA_Contents() + "/";
+					} else if (qSeq == 3) {
+						ei_Gender = listAnswer.get(i).getA_Contents();
+					}
+				}
+			}
+
+		}
+
+		ei_Time = ei_Time.substring(0, ei_Time.length() - 1);
+		ei_Start = ei_Start.substring(0, ei_Start.length() - 1);
+
+		log.info(ei_Time);
+		log.info(ei_Start);
+		log.info(ei_Gender);
+
+		ExpertInfoVO e_Info = new ExpertInfoVO();
+		e_Info.setE_Id("nano");
+		e_Info.setEi_Time(ei_Time);
+		e_Info.setEi_Start(ei_Start);
+		e_Info.setEi_District(ei_District);
+		e_Info.setP_Seq(p_Seq);
+		e_Info.setEi_Gender(ei_Gender);
+
+		log.info(e_Info);
+		service.insertExpertInfo(e_Info);
+
 	}
 }

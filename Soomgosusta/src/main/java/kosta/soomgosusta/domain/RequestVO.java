@@ -1,9 +1,12 @@
 package kosta.soomgosusta.domain;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
 public class RequestVO {
+	
 	private int r_Seq;
 	private String m_Id;
 	private int p_Seq;
@@ -22,6 +25,7 @@ public class RequestVO {
 	private String r_QA_13;
 	private String r_QA_14;
 	private String r_QA_15;
-	private String r_Date;
+	private Date r_Date;
 	private String r_Status;
+
 }

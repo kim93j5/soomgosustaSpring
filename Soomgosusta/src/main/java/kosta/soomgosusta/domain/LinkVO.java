@@ -8,7 +8,7 @@ public class LinkVO {
 	private int r_Seq;
 	private String l_Status;
 	private String l_Date;
-	private String l_Percent;
 	private String l_Enter;
+	private int l_Percent;
 	private String e_Id;
 }
