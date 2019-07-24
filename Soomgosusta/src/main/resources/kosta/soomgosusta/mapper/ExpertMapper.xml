@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kosta.soomgosusta.mapper.ExpertMapper">
+
+   <insert id="insertExpertInfo" parameterType="kosta.soomgosusta.domain.ExpertInfoVO">
+        insert into e_info values (#{e_Id}, #{ei_Time}, #{ei_District}, #{ei_Start}, #{p_Seq}, #{ei_Gender})
+        
+   </insert>
+	
+</mapper>

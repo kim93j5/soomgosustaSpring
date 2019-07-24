@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kosta.soomgosusta.mapper.PartMapper">
+
+	<select id="listPart" resultType="kosta.soomgosusta.domain.PartVO">
+	    select * from part
+	</select>
+	
+	<select id="listQuestion" resultType="kosta.soomgosusta.domain.QuestionVO">
+	    select * from question where q_divide = '고수' 
+	</select>
+
+	<select id="listAnswer" resultType="kosta.soomgosusta.domain.AnswerVO">
+	    select * from answer where q_seq in(1, 2, 3)
+	</select>
+	
+	<select id="listPSeq" resultType="Int">
+	    select p_seq from part where p_L_Word = #{p_L_Word} and
+	                                 p_M_Word = #{p_M_Word} and
+	                                 p_S_Word = #{p_S_Word}
+	</select>
+	
+		
+	
+	
+</mapper>

@@ -1,0 +1,33 @@
+#estimate{
+	margin-top: 40px;
+	margin-left: 270px;
+	text-align: left;
+	border: outset;
+	width: 970px;
+	height: 178px;
+}
+
+#e_Photo img{
+	float: left;
+	width : 150px;
+	height: 140px;
+}
+
+#e_Photo{
+	width: 500px;
+	margin-left: 70px;
+}
+
+#estimateInfo{
+	margin-top: 40px;
+	margin-left: 300px;
+}
+
+.expectation{
+	border-top-style: outset;
+	margin-top: 50px;
+}
+
+.h2{
+	margin-left: 260px;
+}

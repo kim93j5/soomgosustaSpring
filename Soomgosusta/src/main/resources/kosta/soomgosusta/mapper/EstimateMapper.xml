@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kosta.soomgosusta.mapper.EstimateMapper">
+
+   <select id="listEstimate" resultMap="EstimateMap" parameterType="int">
+      select e.e_name, p.p_s_word, p.p_l_word, ei.ei_district, e.e_amount, e.e_amountpart, e.e_photo 
+      from estimate e JOIN link l
+      ON e.l_seq = l.l_seq
+      JOIN request r
+      ON r.r_seq = l.r_seq
+      JOIN part p 
+      ON p.p_seq = r.p_seq
+      JOIN expert e
+      ON l.e_id = e.e_id
+      JOIN e_info ei
+      ON ei.e_id = e.e_id
+      where l.r_seq = #{r_Seq}
+   </select>
+  
+	<resultMap type="kosta.soomgosusta.domain.EstimateDTO" id="EstimateMap">
+		<result column="e_name" property="e_Name"/>
+		<result column="p_s_word" property="p_S_Word"/>
+		<result column="p_l_word" property="p_L_Word"/>
+		<result column="ei_district" property="ei_District"/>
+		<result column="e_amountpart" property="e_AmountPart"/>
+		<result column="e_amount" property="e_Amount"/>
+		<result column="e_photo" property="e_Photo"/>
+	</resultMap>
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kosta.soomgosusta.mapper.RequestMapper">
+
+	<select id="sendRequestInfo" resultType="kosta.soomgosusta.domain.RequestVO" parameterType="String">		
+		 select * from request where m_Id = #{m_Id}
+	</select>
+	
+	<select id="partInfo" resultType="String" parameterType="int">
+	      select p_s_word from part where p_Seq = #{p_Seq}
+	</select>
+	
+	<update id="cancelRequest" parameterType="int">
+	       update request set r_Status = 'Cancel' where r_seq = #{r_Seq}
+	</update>
+
+	
+</mapper>
