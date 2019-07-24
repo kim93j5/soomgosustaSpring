@@ -1,0 +1,50 @@
+@CHARSET "UTF-8";
+
+#search{
+	margin-left: 350px;
+	margin-top: 100px;
+	margin-bottom: 80px;
+}
+
+#searchKey{
+	border-color: #7FFFD4;
+	padding: 5px;
+}
+
+#searchBtn{
+	padding: 5px;
+	background: #7FFFD4;
+}
+
+.largelist{
+	border-radius: 10px;
+	border-style: solid;
+	float: left;
+	padding: 10px;
+	margin-right: 40px;
+	width: 80px;
+	height: 80px;
+	text-align: center;
+	border-style: outset;
+}
+
+.part{
+	font-size: 10px;
+	font-weight: bold;
+}
+
+#group{
+	margin-left: 460px;
+}
+
+.largelist img{
+	float: none;
+	width: 50px;
+	height: 40px;
+	margin-bottom: 5px;
+}
+
+.modal-body .part{
+	font-size: 13px;
+	font-weight: normal;
+}

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="kosta.soomgosusta.mapper.SchedulerMapper">
+
+	<select id="detailExpert" parameterType="String" resultType="kosta.soomgosusta.domain.ExpertVO">
+		SELECT * FROM EXPERT WHERE E_ID = #{e_Id}
+	</select>
+	
+	<select id="detailExInfo" parameterType="String" resultType="kosta.soomgosusta.domain.ExpertInfoVO">
+		SELECT * FROM E_INFO WHERE E_ID = #{e_Id}
+	</select>
+	
+	<select id="listSchedule" parameterType="String" resultType="kosta.soomgosusta.domain.ScheduleVO">
+		SELECT * FROM SCHEDULE WHERE E_ID = #{e_Id}
+	</select>
+	
+	<insert id="insertSchedule" parameterType="kosta.soomgosusta.domain.ScheduleVO">
+		INSERT INTO SCHEDULE VALUES(SCHEDULE_SEQ.NEXTVAL, #{s_Contents}, #{s_Sd}, #{s_Ed}, #{s_Place}, #{s_Color}, #{s_Memo}, #{m_Id}, #{e_Id})
+	</insert>
+	
+	<select id="detailPart" parameterType="String" resultType="String">
+		SELECT p.P_S_WORD
+		FROM PART p
+		JOIN E_INFO e
+		ON p.P_SEQ = e.P_SEQ
+		WHERE e.E_ID = #{e_Id}
+	</select>
+	
+	<resultMap type="kosta.soomgosusta.domain.SchedulerMatchDTO" id="listMatchInfo">
+		<result column="M_ID" property="m_Id"/>
+		<result column="M_Name" property="m_Name" />
+		<result column="M_SESSION" property="m_Session" />
+		<result column="M_PHOTO" property="m_Photo" />
+
+	</resultMap>
+	
+	<select id="listMatch" parameterType="String" resultMap="listMatchInfo">
+		SELECT m.M_ID, m.M_NAME, m.M_SESSION, m.M_PHOTO
+		FROM MEMBER m
+		JOIN MATCH mc
+		ON m.M_ID = mc.M_ID
+		WHERE mc.E_ID = #{e_Id}
+		AND mc.M_STATUS = 'ing'
+	</select>
+	
+	<delete id="deleteSchedule" parameterType="int">
+		DELETE FROM SCHEDULE WHERE s_Seq = #{s_Seq}
+	</delete>
+	
+	<select id="detailSchedule" parameterType="int" resultType="kosta.soomgosusta.domain.ScheduleVO">
+		SELECT * FROM SCHEDULE WHERE s_Seq = #{s_Seq}
+	</select>
+	
+	<update id="updateSchedule" parameterType="kosta.soomgosusta.domain.ScheduleVO">
+		UPDATE SCHEDULE SET S_SD = #{s_Sd}, S_ED = #{s_Ed}, S_CONTENTS = #{s_Contents}, S_COLOR = #{s_Color},
+		S_PLACE = #{s_Place}, S_MEMO = #{s_Memo}
+		WHERE S_SEQ = #{s_Seq}
+	</update>
+	
+	<select id="listFaq" parameterType="String" resultType="kosta.soomgosusta.domain.FaqVO">
+		SELECT * FROM FAQ WHERE e_Id = #{e_Id}
+	</select>
+
+	<select id="listExpert" parameterType="String" resultType="String">
+		SELECT e_Id FROM MATCH WHERE M_Id = #{m_Id}
+	</select>
+	
+	<insert id="insertFaq" parameterType="kosta.soomgosusta.domain.FaqVO">
+		INSERT INTO FAQ VALUES(FAQ_SEQ.NEXTVAL, #{f_Contents}, sysdate, #{s_Seq})
+	</insert>
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kosta.soomgosusta.mapper.PartMapper">
+
+	<select id="listPart" resultType="kosta.soomgosusta.domain.PartVO">
+		<![CDATA[
+			SELECT * FROM PART WHERE P_L_WORD = #{data} OR P_M_WORD = #{data} OR P_S_WORD = #{data}
+		]]>
+	</select>
+
+	<select id="listLWord" resultType="String">
+		SELECT DISTINCT P_L_WORD FROM
+		PART
+	</select>
+
+	<select id="listMWord" resultType="String">
+		SELECT DISTINCT P_M_WORD FROM
+		PART
+	</select>
+
+	<select id="listSWord" resultType="String">
+		SELECT DISTINCT P_S_WORD FROM
+		PART
+	</select>
+	
+	<select id="listSearchInfo" parameterType="String" resultType="kosta.soomgosusta.domain.PartVO">
+		SELECT * FROM PART WHERE P_S_WORD = #{searchKey}
+	</select>
+
+	<select id="listQuestion" parameterType="hashmap" resultType="kosta.soomgosusta.domain.QuestionVO">
+		SELECT * FROM QUESTION
+		WHERE Q_DIVIDE LIKE #{large}
+		OR Q_DIVIDE LIKE #{middle}
+		OR Q_DIVIDE LIKE #{small}
+	</select>
+	
+	<select id="listAnswer" parameterType="hashmap" resultType="kosta.soomgosusta.domain.AnswerVO">
+		SELECT * FROM ANSWER
+		WHERE
+		<foreach collection="listQ" item="list" open="(" close=")" separator="OR">
+			Q_SEQ = #{list.q_Seq}
+		</foreach>
+	</select>
+	
+	<update id="updateSearchLog" parameterType="int">
+		UPDATE PART_LOG SET PL_SEARCH = PL_SEARCH+1 WHERE P_SEQ = #{p_Seq}
+	</update>
+</mapper>

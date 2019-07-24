@@ -17,6 +17,7 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		<context:annotation-config></context:annotation-config>
+		<mvc:annotation-driven/>
 
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 
@@ -24,7 +25,7 @@
 			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
 		<property name="jdbcUrl"
 			value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE"></property>
-		<property name="username" value="kostajava"></property>
+		<property name="username" value="soomgoprac"></property>
 		<property name="password" value="1234"></property>
 
 	</bean>
@@ -46,6 +47,13 @@
 	</bean>	
 	
 	<mybatis-spring:scan base-package="kosta.soomgosusta.mapper"/>
-	<context:component-scan base-package="kosta.soomgosusta.service"></context:component-scan>
+
+
 	<tx:annotation-driven/>
+	<mybatis-spring:scan base-package="kosta.soomgosusta.mapper"/>
+	<context:component-scan base-package="kosta.soomgosusta.service"/>
+	<context:component-scan base-package="kosta.soomgosusta.aop"/>
+	
+	<aop:aspectj-autoproxy/>
+
 </beans>

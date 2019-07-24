@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+
+#info{
+	margin-top: 100px;
+	margin-left: 40%;	
+}
+
+#btn{
+	margin-top: 50px;
+	margin-left: 20px;
+}
+#ment p{
+	margin-left: 50px;
+}
+#btn a{
+	margin-right: 30px;
+}
