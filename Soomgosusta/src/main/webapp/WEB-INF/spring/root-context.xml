@@ -24,7 +24,7 @@
 			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
 		<property name="jdbcUrl"
 			value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE"></property>
-		<property name="username" value="kostajava"></property>
+		<property name="username" value="soomgo"></property>
 		<property name="password" value="1234"></property>
 
 	</bean>
@@ -49,3 +49,4 @@
 	<context:component-scan base-package="kosta.soomgosusta.service"></context:component-scan>
 	<tx:annotation-driven/>
 </beans>
+	

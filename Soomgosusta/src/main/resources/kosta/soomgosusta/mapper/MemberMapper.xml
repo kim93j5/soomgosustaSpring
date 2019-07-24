@@ -4,5 +4,23 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kosta.soomgosusta.mapper.MemberMapper">
 
+	<insert id="register">
+		insert into member values(#{m_Id},#{m_Password},
+		#{m_Name},'Member',
+		' ' ,'default_userImg')
+	</insert>
+	
+	<select id="login" parameterType="String" resultType="kosta.soomgosusta.domain.MemberVO">
+		select * 
+		from Member
+		where m_Id=#{login_Id}
+	</select>
+	
+	<select id="findMember" parameterType="String" resultType="kosta.soomgosusta.domain.MemberVO">
+		select * 
+		from Member
+		where m_Id=#{login_Id}
+	</select>
+	
 	
 </mapper>
