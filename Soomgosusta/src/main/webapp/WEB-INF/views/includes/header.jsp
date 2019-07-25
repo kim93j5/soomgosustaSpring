@@ -5,10 +5,11 @@
 
 <html>
 <head>
-<link rel="stylesheet" href="./bootstrap-3.3.2-dist/css/bootstrap.min.css">
-<script src="./bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
-<script src="./bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="./css/header.css">
+<link rel="stylesheet"
+	href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
+<script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
+<script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/resources/css/header.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 	
@@ -72,7 +73,7 @@
 			</c:when>
 			<c:otherwise>
 				<div class="left_">
-					<a href="main.do"> <img
+					<a href="/part/main"> <img
 						src="https://dmmj3ljielax6.cloudfront.net/static/img/home/index_soomgo_logo.svg"
 						alt="숨고, 숨은고수">
 					</a>
