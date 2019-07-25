@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kosta.soomgosusta.domain.EstimateDTO;
+import kosta.soomgosusta.domain.EstimateVO;
 import kosta.soomgosusta.mapper.EstimateMapper;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -22,6 +23,19 @@ public class EstimateServiceImpl implements EstimateService {
 	
 		return mapper.listEstimate(r_Seq);
 	}
+	
+	@Override
+	public void register(EstimateVO estimate) {
+		// TODO Auto-generated method stub
+		
 
+		mapper.register(estimate);
+	}
 
+	@Override
+	public EstimateVO read(int seq) {
+		
+		return mapper.read(seq);
+	}
+	
 }
