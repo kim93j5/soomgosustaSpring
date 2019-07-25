@@ -24,12 +24,12 @@
 			<c:when test="${loginUser.user_Divide =='member'}">
 				<div class="left_">
 					<ul class="nav navbar-nav">
-						<li><a href="main.do"> <img src="https://dmmj3ljielax6.cloudfront.net/static/img/home/index_soomgo_logo.svg" alt="숨고, 숨은고수">
+						<li><a href="/main/mainPage"> <img src="https://dmmj3ljielax6.cloudfront.net/static/img/home/index_soomgo_logo.svg" alt="숨고, 숨은고수">
 							</a></li>
 						<li><a href="requestInfoForm.do?member_Id=${id }"> <span>보낸 요청</span>
 						</a></li>
 						<li><a href="memberMyPage.do?member_Id=${id }"><span>프로필</span></a>
-						<li><a href="findExpertForm.do"> <span>고수 찾기</span>
+						<li><a href="/expertFind/listExpertFind"> <span>고수 찾기</span>
 						</a></li>
 						<li><a href=""> <span>채팅</span>
 						</a></li>
@@ -80,7 +80,7 @@
 				</div>
 				<div class="right_">
 					<ul class="nav navtab">
-						<li><a href="regist">회원가입</a></li>
+						<li><a href="/main/regist">회원가입</a></li>
 						<li>
 							<div class="select">
 								<select name="" id="loginState">

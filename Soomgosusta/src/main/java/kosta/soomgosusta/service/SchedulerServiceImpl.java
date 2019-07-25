@@ -13,6 +13,7 @@ import kosta.soomgosusta.domain.FaqVO;
 import kosta.soomgosusta.domain.MScheduleInfoDTO;
 import kosta.soomgosusta.domain.ScheduleInfoDTO;
 import kosta.soomgosusta.domain.ScheduleVO;
+import kosta.soomgosusta.domain.SchedulerMatchDTO;
 import kosta.soomgosusta.mapper.SchedulerMapper;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
@@ -31,11 +32,11 @@ public class SchedulerServiceImpl implements SchedulerService {
 	public ScheduleInfoDTO listSchedule(String e_Id) {
 		
 		ScheduleInfoDTO schedule = new ScheduleInfoDTO();
+		
 		schedule.setExpert(mapper.detailExpert(e_Id));
 		schedule.setExInfo(mapper.detailExInfo(e_Id));
 		schedule.setListSchedule(mapper.listSchedule(e_Id));
 		schedule.setPart(mapper.detailPart(e_Id));
-		schedule.setListMatch(mapper.listMatch(e_Id));
 		
 		return schedule;
 	}
@@ -44,12 +45,6 @@ public class SchedulerServiceImpl implements SchedulerService {
 	public int insertSchedule(ScheduleVO schedule) {
 
 		return mapper.insertSchedule(schedule);
-	}
-
-	@Override
-	public List<ScheduleVO> mySchedule(String e_Id) {
-		
-		return mapper.listSchedule(e_Id);
 	}
 
 	@Override
@@ -78,7 +73,7 @@ public class SchedulerServiceImpl implements SchedulerService {
 		schedule.setPart(mapper.detailPart(e_Id));
 		schedule.setExpert(mapper.detailExpert(e_Id));
 		schedule.setExInfo(mapper.detailExInfo(e_Id));
-		schedule.setListSchedule(mapper.listSchedule(e_Id));
+		//schedule.setListSchedule(mapper.listSchedule(e_Id));
 		
 		return schedule;
 	}

@@ -13,10 +13,9 @@ import kosta.soomgosusta.domain.SchedulerMatchDTO;
 public interface SchedulerMapper {
 	ExpertVO detailExpert(String e_Id);
 	ExpertInfoVO detailExInfo(String e_Id);
-	List<ScheduleVO> listSchedule(String e_Id);
+	List<SchedulerMatchDTO> listSchedule(String e_Id);
 	int insertSchedule(ScheduleVO schedule);
 	String detailPart(String e_Id);
-	List<SchedulerMatchDTO> listMatch(String e_Id);
 	int deleteSchedule(int s_Seq);
 	ScheduleVO detailSchedule(int s_Seq);
 	int updateSchedule(ScheduleVO schedule);
