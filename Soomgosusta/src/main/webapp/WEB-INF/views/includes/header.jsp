@@ -38,8 +38,8 @@
 				</div>
  				<div class="right_">
 					<ul class="nav navbar-nav navbar-right">
-						<li><span>${id} 고객님</span></li>
-						<li><a href="logout.do"><span>로그아웃</span></a></li>
+						<li><span>"${loginUser.m_Name}"고객님</span></li>
+						<li><a id="logout" href="/main/logout"><span>로그아웃</span></a></li>
 					</ul>
 
 				</div>
@@ -66,8 +66,8 @@
 				</div>
 				<div class="right_">
 					<ul>
-						<li><span>${id } 고수님</span></li>
-						<li><a href = "logout"><span>로그아웃</span></a>
+						<li><span>${loginUser.e_Name} 고수님</span></li>
+						<li><a id="logout" href="/main/logout"><span>로그아웃</span></a>
 					</ul>
 				</div>
 			</c:when>
@@ -86,7 +86,8 @@
 								<select name="" id="loginState">
 									<option value="member">회원</option>
 									<option value="expert">고수</option>
-								</select> <a id="login" href="loginAction.do">로그인</a> <a id="loginteg"></a>
+								</select> <a id="login" href="#">로그인</a> <a id="loginteg"></a>
+										  
 							</div>
 						</li>
 					</ul>

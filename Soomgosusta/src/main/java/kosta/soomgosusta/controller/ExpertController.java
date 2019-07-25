@@ -93,7 +93,7 @@ public class ExpertController {
 
 		if (success == 0) {
 			model.addAttribute("expertVO", expertVO);
-			return "./main";
+			return "expert/request/received";
 		} else if (success == 1) {
 			model.addAttribute("loginResult", "login fail");
 			System.out.println("비밀번호 ");
@@ -122,7 +122,7 @@ public class ExpertController {
 
 		}
 
-		return "../home";
+		return "/main/mainPage";
 
 	}
 
