@@ -13,8 +13,28 @@
 		SELECT * FROM E_INFO WHERE E_ID = #{e_Id}
 	</select>
 	
-	<select id="listSchedule" parameterType="String" resultType="kosta.soomgosusta.domain.ScheduleVO">
-		SELECT * FROM SCHEDULE WHERE E_ID = #{e_Id}
+	<resultMap type="kosta.soomgosusta.domain.SchedulerMatchDTO" id="listMatchInfo">
+		<result column="S_SEQ" property="s_Seq"/>
+		<result column="S_CONTENTS" property="s_Contents" />
+		<result column="S_SD" property="s_Sd" />
+		<result column="S_ED" property="s_Ed" />
+		<result column="S_PLACE" property="s_Place" />
+		<result column="S_COLOR" property="s_Color" />
+		<result column="S_MEMO" property="s_Memo" />
+		<result column="M_ID" property="m_Id" />
+		<result column="M_NAME" property="m_Name" />
+		<result column="M_PHOTO" property="m_Photo" />
+	</resultMap>
+	
+	<select id="listSchedule" parameterType="String" resultMap="listMatchInfo">
+		SELECT s.S_SEQ, s.S_CONTENTS, s.S_SD, s.S_ED, s.S_PLACE, s.S_COLOR, s.S_MEMO, mc.M_ID, m.M_NAME, m.M_PHOTO
+		FROM SCHEDULE s
+		JOIN MATCH mc
+		ON s.M_SEQ = mc.M_SEQ
+		JOIN MEMBER m
+		ON mc.M_ID = m.M_ID
+		WHERE mc.E_ID = #{e_Id}
+		AND mc.M_STATUS = 'ing'
 	</select>
 	
 	<insert id="insertSchedule" parameterType="kosta.soomgosusta.domain.ScheduleVO">
@@ -27,23 +47,6 @@
 		JOIN E_INFO e
 		ON p.P_SEQ = e.P_SEQ
 		WHERE e.E_ID = #{e_Id}
-	</select>
-	
-	<resultMap type="kosta.soomgosusta.domain.SchedulerMatchDTO" id="listMatchInfo">
-		<result column="M_ID" property="m_Id"/>
-		<result column="M_Name" property="m_Name" />
-		<result column="M_SESSION" property="m_Session" />
-		<result column="M_PHOTO" property="m_Photo" />
-
-	</resultMap>
-	
-	<select id="listMatch" parameterType="String" resultMap="listMatchInfo">
-		SELECT m.M_ID, m.M_NAME, m.M_SESSION, m.M_PHOTO
-		FROM MEMBER m
-		JOIN MATCH mc
-		ON m.M_ID = mc.M_ID
-		WHERE mc.E_ID = #{e_Id}
-		AND mc.M_STATUS = 'ing'
 	</select>
 	
 	<delete id="deleteSchedule" parameterType="int">

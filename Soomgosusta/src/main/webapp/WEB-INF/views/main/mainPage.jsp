@@ -146,7 +146,7 @@ $(document).ready(function(){
       <!-- /.modal-dialog -->
    </div>
    <!-- /.modal -->
-<a href="/expertFind/listExpertFind">고수 찾기</a>
+
 
 </body>
 </html>

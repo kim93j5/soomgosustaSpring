@@ -75,7 +75,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter implements Sessi
 					session.removeAttribute(ATTEMPTED);
 					
 				}else{
-				response.sendRedirect("/main");
+				response.sendRedirect("/main/mainPage");
 				}
 			
 		}

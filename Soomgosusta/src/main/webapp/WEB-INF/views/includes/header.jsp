@@ -24,12 +24,12 @@
 			<c:when test="${loginUser.user_Divide =='member'}">
 				<div class="left_">
 					<ul class="nav navbar-nav">
-						<li><a href="main.do"> <img src="https://dmmj3ljielax6.cloudfront.net/static/img/home/index_soomgo_logo.svg" alt="숨고, 숨은고수">
+						<li><a href="/main/mainPage"> <img src="https://dmmj3ljielax6.cloudfront.net/static/img/home/index_soomgo_logo.svg" alt="숨고, 숨은고수">
 							</a></li>
 						<li><a href="requestInfoForm.do?member_Id=${id }"> <span>보낸 요청</span>
 						</a></li>
 						<li><a href="memberMyPage.do?member_Id=${id }"><span>프로필</span></a>
-						<li><a href="findExpertForm.do"> <span>고수 찾기</span>
+						<li><a href="/expertFind/listExpertFind"> <span>고수 찾기</span>
 						</a></li>
 						<li><a href=""> <span>채팅</span>
 						</a></li>
@@ -38,8 +38,8 @@
 				</div>
  				<div class="right_">
 					<ul class="nav navbar-nav navbar-right">
-						<li><span>${id} 고객님</span></li>
-						<li><a href="logout.do"><span>로그아웃</span></a></li>
+						<li><span>"${loginUser.m_Name}"고객님</span></li>
+						<li><a id="logout" href="/main/logout"><span>로그아웃</span></a></li>
 					</ul>
 
 				</div>
@@ -66,8 +66,8 @@
 				</div>
 				<div class="right_">
 					<ul>
-						<li><span>${id } 고수님</span></li>
-						<li><a href = "logout"><span>로그아웃</span></a>
+						<li><span>${loginUser.e_Name} 고수님</span></li>
+						<li><a id="logout" href="/main/logout"><span>로그아웃</span></a>
 					</ul>
 				</div>
 			</c:when>
@@ -80,13 +80,14 @@
 				</div>
 				<div class="right_">
 					<ul class="nav navtab">
-						<li><a href="regist">회원가입</a></li>
+						<li><a href="/main/regist">회원가입</a></li>
 						<li>
 							<div class="select">
 								<select name="" id="loginState">
 									<option value="member">회원</option>
 									<option value="expert">고수</option>
-								</select> <a id="login" href="loginAction.do">로그인</a> <a id="loginteg"></a>
+								</select> <a id="login" href="#">로그인</a> <a id="loginteg"></a>
+										  
 							</div>
 						</li>
 					</ul>

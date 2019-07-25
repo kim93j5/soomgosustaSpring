@@ -8,11 +8,11 @@
 </head>
 <body>
 	<div id="member_register_box">
-	<a href="./member/register">회원으로 가입</a>
+	<a href="/member/register">회원으로 가입</a>
 	</div>
 	
 	<div id="expert_register_box">
-	<a href="./expert/register">고수로 가입</a>
+	<a href="/expert/register">고수로 가입</a>
 	</div>
 </body>
 </html>

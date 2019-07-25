@@ -5,7 +5,7 @@
 <mapper namespace="kosta.soomgosusta.mapper.MemberMapper">
 
 	<insert id="register">
-		insert into member values(#{m_Id},#{m_Password},'Member',
+		insert into member values(#{m_Id},#{m_Password},'member',
 		'default_userImg','address',#{m_Name})
 	</insert>
 	

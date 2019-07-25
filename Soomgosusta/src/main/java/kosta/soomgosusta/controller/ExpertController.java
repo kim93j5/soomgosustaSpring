@@ -122,7 +122,7 @@ public class ExpertController {
 
 		}
 
-		return "../home";
+		return "/main/mainPage";
 
 	}
 
