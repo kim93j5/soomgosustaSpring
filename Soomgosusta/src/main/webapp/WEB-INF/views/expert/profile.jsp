@@ -346,6 +346,15 @@ $(document).ready(function(){
  	});
  	
  	$(modalRegisterBtn).on("click",function(e){
+ 		var m_Id=${loginUser.m_Id}
+ 		var match = reviewService.findMatch({m_Id:m_Id},function(result){
+ 			
+ 			
+ 			
+ 		})
+ 		
+ 		
+ 		
  		var modalInputStarPoint = $("#review-star").val();
  		var modalInputContents = $("#review-contents").val();
  		alert("add 이벤트 확인");
