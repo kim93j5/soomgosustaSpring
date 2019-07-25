@@ -8,11 +8,6 @@
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
- <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
- <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
-<link href="/resources/fontawesome-free/css/all.min.css" rel="stylesheet">
-<link href="/resources/css/resume.min.css" rel="stylesheet">
 <link href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
 <script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
@@ -201,63 +196,54 @@
 		<hr>
 		
 		
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-    <a class="navbar-brand js-scroll-trigger" href="#page-top">
+
       <span class="d-block d-lg-none">${expert.e_Name}</span>
      <span id="profile-Img2" class="d-none d-lg-block">
        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="/upload/profile/${expert.e_Photo}" alt="">   
      </span>
-    </a>
-    
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    
-    
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#about">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#experience">Experience</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#education">Education</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#skills">Skills</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#interests">Interests</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#awards">Awards</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-   
+
   
 </div>	
-<div id="profile-review">
+<div class="row" id="profile-review">
 	
-	<section class="" id="">
-	
-		<h3> 리뷰</h3>
-		<button type="button" id="review-register" class="btn btn-primary" data-toggle="modal" data-target="#myModal"> 등록하기 </button>
-
-	</section>	
-
+	<div class="col-lg-12">
+		<!-- /.panel  -->
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<i class="fa fa-comments fa-fw"></i> Review
+			</div>
+			
+			<!--/.panel-heading  -->
+			<div class="panel-body">
+				
+				<ul class="chat">
+					<!-- start reveiw -->
+					<li class="left clearfix" data-re_Seq='21'>
+						<div>
+							<div class="header">
+								<strong class="primary-font">writer</strong>
+								<small class="pull-right text-muted">20190505</small>
+							</div>
+							<p>contents</p>
+						</div>
+					</li>
+					<!-- end review  -->
+				</ul>
+				<!-- ./end ul  -->
+			</div>
+			 <!--/.panel .chat-panel  -->
+		</div>
+	</div>
+	<!-- /.end row -->
 </div>
-<div class="modal modal-center fade" id="myModal"  role="dialog" tabindex="-1" aria-labelledby="myModalLabel" >
+	
+	
 
-    	<div class="modal-dialog modal-center" role="document">
-     	  <div class="modal-content">
-     	  
+<div class="modal fade" id="myModal"  role="dialog" tabindex="-1" aria-labelledby="myModalLabel" >
+
+    	<div class="modal-dialog" role="document">
+     	 <div class="modal-content">
           <div class="modal-header">
-          
-        
            	<h4 class = " modal-title" id="myModal"> 리뷰 </h4>
            	  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
            	  <span aria-hidden="true">&times;</span>
@@ -301,6 +287,9 @@
     	<!-- /.modal-dialog -->
  	</div>
  	<!-- /.modal -->
+ 	<h3> 리뷰</h3>
+		<button type="button" id="review-register" class="btn btn-primary"  data-target="#myModal"> 등록하기 </button>
+ 	
 	<script type= "text/javascript" src="/resources/js/review.js"></script>
 
 <script>
@@ -321,16 +310,16 @@ $(document).ready(function(){
 	var modalModifyBtn = $("#modal-review-modify");
 	var modalDeleteBtn = $("#modal-review-delete");
 	
-	reviewService.update({
+	/* reviewService.update({
 		re_Seq: 21,
 		e_Id: e_Id,
 		re_Contents: "수정 test"
 	},function(result){
 		alert("review 수정 완료");
-	});
+	})
+	 */
 	
-	
-	reviewService.remove(22, function(count){
+	/* reviewService.remove(22, function(count){
 		
 		console.log(count);
 		if(count ==="success"){
@@ -339,7 +328,7 @@ $(document).ready(function(){
 	},function(err){
 		alert('ERROR');
 		
-	});
+	}); */
 	
 	reviewService.getList({e_Id: e_Id, page:1},function(list){
 		for(var i=0,len =list.length||0; i<len; i++){
@@ -348,7 +337,6 @@ $(document).ready(function(){
 	});
 	
  	$("#review-register").on("click",function(e){
-	 alert("모달성공")
 	 
 	 modalInputDate.closest("div").hide();
 	 modal.find("button[id != 'modal-review-close']").hide();
@@ -386,12 +374,6 @@ $(document).ready(function(){
 
 </script>
 
-<!-- Bootstrap core JavaScript -->
-  <script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.bundle.min.js"></script>
 
-
-  <!-- Custom scripts for this template -->
-  <script src="/resources/js/resume.min.js"></script>
-	
 </body>
 </html>

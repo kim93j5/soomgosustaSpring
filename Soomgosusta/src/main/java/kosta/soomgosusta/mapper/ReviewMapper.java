@@ -14,7 +14,7 @@ public interface ReviewMapper {
 
 	public int delete(int re_seq);
 
-	public List<ReviewVO> getListWithPaging(@Param("cri") Criteria cri,@Param("bno") String e_Id);
+	public List<ReviewVO> getListWithPaging(@Param("cri") Criteria cri,@Param("e_Id") String e_Id);
 
 	public int getCountByEid(String e_Id);
 	
