@@ -23,7 +23,7 @@
    <insert id="register">
 		insert into estimate
 		values
-		(estimate_seq.nextval,#{e_Amount},#{e_Amountpart},#{l_Seq},'비확인',sysdate,#{e_Contents})
+		(estimate_seq.nextval,#{l_Seq},sysdate,#{e_Amount},#{e_AmountPart},#{e_Contents},'비확인')
 	</insert>
 
 	<select id="read" resultMap="EstimateMap2">
@@ -47,7 +47,7 @@
 	<resultMap type="kosta.soomgosusta.domain.EstimateVO" id="EstimateMap2">
 		<result column="e_seq" property="e_Seq" />
 		<result column="e_amount" property="e_Amount" />
-		<result column="e_amountpart" property="e_Amountpart" />
+		<result column="e_amountpart" property="e_AmountPart" />
 		<result column="l_seq" property="l_Seq" />
 		<result column="e_status" property="e_Status" />
 		<result column="e_date" property="e_Date" />
@@ -69,6 +69,11 @@
 		<result column="l_status" property="l_Status"/>
 	</resultMap>
 	
+	
+	
+	
+	
+	
 	<resultMap type="kosta.soomgosusta.domain.MemberVO" id="Member">
 		<result column="m_id" property="m_Id"/>
 		<result column="m_password" property="m_Password"/>
@@ -78,7 +83,7 @@
 	</resultMap>
 	
 	<resultMap type="kosta.soomgosusta.domain.PartVO" id="Part">
-		<result column="p_code" property="p_Code"/>
+		<result column="p_seq" property="p_Seq"/>
 		<result column="p_image" property="p_Image"/>
 		<result column="p_l_word" property="p_L_Word"/>
 		<result column="p_m_word" property="p_M_Word"/>
@@ -87,8 +92,8 @@
 	
 	<resultMap type="kosta.soomgosusta.domain.RequestVO" id="Request">
 		<result column="r_seq" property="r_Seq"/>
-		<result column="m_id" property="M_Id"/>
-		<result column="p_code" property="p_Code"/>
+		<result column="m_id" property="m_Id"/>
+		<result column="p_seq" property="p_Seq"/>
 		<result column="r_qa_01" property="r_QA_01"/>
 		<result column="r_qa_02" property="r_QA_02"/>
 		<result column="r_qa_03" property="r_QA_03"/>

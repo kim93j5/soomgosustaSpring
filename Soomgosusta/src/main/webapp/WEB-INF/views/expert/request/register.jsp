@@ -37,7 +37,7 @@ $(document).ready(function(){
 		lSeq += "<input type='hidden' name='member_Id' value='"+data.member_Id+"' >"
 		lSeq += "<input type='hidden' name='expert_Id' value='"+data.expert_Id+"' >"
 		lSeq += "<input type='hidden' name='l_Seq' value='"+data.l_Seq+"' >"
-		lSeq += "<select name='e_Amountpart'>"
+		lSeq += "<select name='e_AmountPart'>"
 			lSeq += "<option selected='selected'>1시간당</option>"
 			lSeq += "<option>1일당</option>"
 			lSeq += "<option>1주일당</option>"	
