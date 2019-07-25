@@ -11,8 +11,29 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="/resources/js/main.js"></script>
+<script type="text/javascript" src="/resources/js/cookie.js"></script>
 <link rel="stylesheet" href="/resources/css/main.css">
 <script type="text/javascript">
+partService.getPopular(function(list){
+	console.log(list);
+	
+	$('#searchcontents').empty();
+	var str = "<ul class='nav nav-pills nav-stacked'>";
+	for(var i=0, len=10; i<len; i++){
+		str += '<li class="nav-item"><a class="popularitems" href="#">'+list[i]+'</a></li>';
+	}
+	str += '</ul>';
+	
+	$('#searchcontents').append(str);
+	
+	$(document).on("click", ".popularitems", function(e){
+		e.preventDefault();
+		var data = $(this).html();
+		
+		location.href= "/part/listQNA/"+data;
+	});
+});
+
 $(document).ready(function(){
 	$('.largelist').hover(function(){
 		$(this).css('border-style', 'groove');
@@ -52,11 +73,15 @@ $(document).ready(function(){
 	});
 	
 	$(document).ready(function(){
+		var recent = new Array();
 		$('#searchBtn').click(function(){
 			var data = $('#searchKey').val();
+			console.log(data);
+			
+			recent.push(data);
 			location.href= "/part/listQNA/"+data;
 		});
-		
+
 		$('#popular').click(function(e){
 			e.preventDefault();
 			
@@ -79,6 +104,14 @@ $(document).ready(function(){
 					location.href= "/part/listQNA/"+data;
 				});
 			});
+		});
+		
+		$('#recent').click(function(e){
+			e.preventDefault();
+			
+			$('#searchcontents').empty();
+			
+			$('#searchcontents').append(str);
 		});
 	})
 });
