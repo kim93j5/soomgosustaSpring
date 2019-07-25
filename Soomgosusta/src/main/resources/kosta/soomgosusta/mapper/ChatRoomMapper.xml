@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.zerock.mapper.ChatRoomMapper">
+<mapper namespace="kosta.soomgosusta.mapper.ChatRoomMapper">
 
 
 	<insert id="insert">
@@ -36,7 +36,7 @@
 	</select>
 
 
-	<resultMap type="org.zerock.domain.ChatRoomVO" id="ChatRoomMap">
+	<resultMap type="kosta.soomgosusta.domain.ChatRoomVO" id="ChatRoomMap">
 		<result column="crno" property="crno" />
 		<result column="e_seq" property="e_Seq" />
 		<collection property="member" resultMap="Member" />
@@ -46,7 +46,7 @@
 		<collection property="estimate" resultMap="Estimate" />
 	</resultMap>
 
-	<resultMap type="org.zerock.domain.LinkVO" id="Link">
+	<resultMap type="kosta.soomgosusta.domain.LinkVO" id="Link">
 		<result column="l_seq" property="l_Seq"/>
 		<result column="r_seq" property="r_Seq"/>
 		<result column="l_date" property="l_Date"/>
@@ -56,7 +56,7 @@
 		<result column="l_status" property="l_Status"/>
 	</resultMap>
 	
-	<resultMap type="org.zerock.domain.MemberVO" id="Member">
+	<resultMap type="kosta.soomgosusta.domain.MemberVO" id="Member">
 		<result column="m_id" property="m_Id"/>
 		<result column="m_password" property="m_Password"/>
 		<result column="m_name" property="m_Name"/>
@@ -64,7 +64,7 @@
 		<result column="m_photo" property="m_Photo"/>
 	</resultMap>
 	
-	<resultMap type="org.zerock.domain.PartVO" id="Part">
+	<resultMap type="kosta.soomgosusta.domain.PartVO" id="Part">
 		<result column="p_code" property="p_Code"/>
 		<result column="p_image" property="p_Image"/>
 		<result column="p_l_word" property="p_L_Word"/>
@@ -72,7 +72,7 @@
 		<result column="p_s_word" property="p_S_Word"/>
 	</resultMap>
 	
-	<resultMap type="org.zerock.domain.RequestVO" id="Request">
+	<resultMap type="kosta.soomgosusta.domain.RequestVO" id="Request">
 		<result column="r_seq" property="r_Seq"/>
 		<result column="m_id" property="M_Id"/>
 		<result column="p_code" property="p_Code"/>
@@ -96,7 +96,7 @@
 		
 	</resultMap>
 
-	<resultMap type="org.zerock.domain.EstimateVO" id="Estimate">
+	<resultMap type="kosta.soomgosusta.domain.EstimateVO" id="Estimate">
 		<result column="e_seq" property="e_Seq" />
 		<result column="e_amount" property="e_Amount" />
 		<result column="e_amountpart" property="e_Amountpart" />

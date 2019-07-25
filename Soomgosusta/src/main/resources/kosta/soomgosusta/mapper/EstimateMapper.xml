@@ -44,7 +44,7 @@
 		<result column="e_photo" property="e_Photo"/>
 	</resultMap>
 	
-	<resultMap type="org.zerock.domain.EstimateVO" id="EstimateMap2">
+	<resultMap type="kosta.soomgosusta.domain.EstimateVO" id="EstimateMap2">
 		<result column="e_seq" property="e_Seq" />
 		<result column="e_amount" property="e_Amount" />
 		<result column="e_amountpart" property="e_Amountpart" />
@@ -59,7 +59,7 @@
 	</resultMap>
 
 
-	<resultMap type="org.zerock.domain.LinkVO" id="Link">
+	<resultMap type="kosta.soomgosusta.domain.LinkVO" id="Link">
 		<result column="l_seq" property="l_Seq"/>
 		<result column="r_seq" property="r_Seq"/>
 		<result column="l_date" property="l_Date"/>
@@ -69,7 +69,7 @@
 		<result column="l_status" property="l_Status"/>
 	</resultMap>
 	
-	<resultMap type="org.zerock.domain.MemberVO" id="Member">
+	<resultMap type="kosta.soomgosusta.domain.MemberVO" id="Member">
 		<result column="m_id" property="m_Id"/>
 		<result column="m_password" property="m_Password"/>
 		<result column="m_name" property="m_Name"/>
@@ -77,7 +77,7 @@
 		<result column="m_photo" property="m_Photo"/>
 	</resultMap>
 	
-	<resultMap type="org.zerock.domain.PartVO" id="Part">
+	<resultMap type="kosta.soomgosusta.domain.PartVO" id="Part">
 		<result column="p_code" property="p_Code"/>
 		<result column="p_image" property="p_Image"/>
 		<result column="p_l_word" property="p_L_Word"/>
@@ -85,7 +85,7 @@
 		<result column="p_s_word" property="p_S_Word"/>
 	</resultMap>
 	
-	<resultMap type="org.zerock.domain.RequestVO" id="Request">
+	<resultMap type="kosta.soomgosusta.domain.RequestVO" id="Request">
 		<result column="r_seq" property="r_Seq"/>
 		<result column="m_id" property="M_Id"/>
 		<result column="p_code" property="p_Code"/>
