@@ -62,4 +62,10 @@ public class PartAjaxController {
 		}
 		return qnaList;
 	}
+	
+	@GetMapping(value="/listPopular", produces= {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<List<String>> getPopular(){
+
+		return new ResponseEntity<>(service.listPopularService(), HttpStatus.OK);
+	}
 }

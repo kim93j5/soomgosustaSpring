@@ -61,7 +61,13 @@
 		UPDATE PART_LOG SET PL_SEARCH = PL_SEARCH+1 WHERE P_SEQ = #{p_Seq}
 	</update>
 
-	
+	<select id="listPopular" resultType="String">
+		SELECT p.P_S_WORD
+		FROM PART p
+		JOIN PART_LOG pl
+		ON p.P_SEQ = pl.P_SEQ
+		ORDER BY pl.PL_SEARCH DESC
+	</select>
 	
 	
 	<select id="listPSeq" resultType="Int">

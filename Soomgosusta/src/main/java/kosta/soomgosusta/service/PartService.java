@@ -29,4 +29,6 @@ public interface PartService {
 	public List<AnswerVO> listExpertAnswerService();
 
 	public int listPSeqService(String p_L_Word, String p_M_Word, String p_S_Word);
+	
+	public List<String> listPopularService();
 }

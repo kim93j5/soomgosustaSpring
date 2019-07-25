@@ -21,8 +21,9 @@ public interface PartMapper {
 	List<PartVO> listPart();
 	List<QuestionVO> listExpertQuestion();
 	List<AnswerVO> listExpertAnswer();
-	
+	List<String> listPopular();
 	int listPSeq(@Param("p_L_Word") String p_L_Word, @Param("p_M_Word") String p_M_Word, @Param("p_S_Word") String p_S_Word);
+
 }
 
 

@@ -3,14 +3,13 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<header>
+	<jsp:include page="../includes/header.jsp"></jsp:include>
+</header>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet"
-	href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
-<script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
-<script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/resources/js/main.js"></script>
 <link rel="stylesheet" href="/resources/css/main.css">
 <script type="text/javascript">
@@ -57,42 +56,80 @@ $(document).ready(function(){
 			var data = $('#searchKey').val();
 			location.href= "/part/listQNA/"+data;
 		});
+		
+		$('#popular').click(function(e){
+			e.preventDefault();
+			
+			partService.getPopular(function(list){
+				console.log(list);
+				
+				$('#searchcontents').empty();
+				var str = "<ul class='nav nav-pills nav-stacked'>";
+				for(var i=0, len=10; i<len; i++){
+					str += '<li class="nav-item"><a class="popularitems" href="#">'+list[i]+'</a></li>';
+				}
+				str += '</ul>';
+				
+				$('#searchcontents').append(str);
+				
+				$(document).on("click", ".popularitems", function(e){
+					e.preventDefault();
+					var data = $(this).html();
+					
+					location.href= "/part/listQNA/"+data;
+				});
+			});
+		});
 	})
 });
-/*     	$('document').ready(function(){
-		var keylist = new Array();
-		
-		<c:forEach items= "${list}" var="list">
-			keylist.push("${list.p_S_Word}");
-		</c:forEach>
-	
-		$('#searchKey').autocomplete({
-			source: keylist
-		});	
 
-	});
-
- */ 
+ 
 </script>	
 
 <title>Insert title here</title>
 </head>
 <body>
+
+
 	<div id="search">
 		<h2>딱! 맞는 고수를<br>소개해드립니다</h2>
- 			<form method="get">
+		<div id="semi">
+ 			<form id="searchform" method="get">
 				<input id="searchKey" type="text" name="searchKey" size="30">
 				<input id="searchBtn" type="button" value="고수 검색">
  			</form>
+ 			<div id="searchresults" style="display: none; z-index: 2;">
+ 				<div>
+ 					<ul role="tablist" class="nav nav-tabs" id="search-ul">
+ 						<li role="presentation" class="nav-item">
+ 							<a role="tab" aria-setsize="1" aria-posinset="1" target="_self" href="#"
+ 							 class="nav-link" id="popular">인기 키워드</a>
+ 						</li>
+ 						<li role="presentation" class="nav-item">
+ 							<a role="tab" tabindex="-1" aria-setsize="1" aria-posinset="2" target="_self" href="#"
+ 							 class="nav-link" id="recent">최근 검색한 서비스</a>
+ 						</li>
+ 					</ul>
+ 					<div id="searchcontents" style="height:220px; background: white; overflow-y: scroll;">
+ 					
+ 					</div>
+ 					<div id="footer">
+ 						<button id="divclose" type="button" class="btn btn-default" style="margin-left: 200px;">닫기</button>
+ 					</div>
+ 				</div>
+ 			</div>
+ 			
+ 			<div id="group" style="z-index: 1;">
+				<div class="largelist"><img class="img" alt="레슨" src="/resources/images/lesson.JPG"><a class="part">레슨</a></div>
+				<div class="largelist"><img class="img" alt="홈 리빙" src="/resources/images/homeliving.JPG"><a class="part">홈/리빙</a></div>
+				<div class="largelist"><img class="img" alt="이벤트" src="/resources/images/event.JPG"><a class="part">이벤트</a></div>
+				<div class="largelist"><img class="img" alt="디자인 개발" src="/resources/images/design.JPG"><a class="part">디자인/개발</a></div>
+				<div class="largelist"><img class="img" alt="건강 미용" src="/resources/images/health.JPG"><a class="part">건강/미용</a></div>
+			</div>
+ 		</div>
 	</div>
+	
 
-	<div id="group">
-		<div class="largelist"><img class="img" alt="레슨" src="/resources/images/lesson.JPG"><a class="part">레슨</a></div>
-		<div class="largelist"><img class="img" alt="홈 리빙" src="/resources/images/homeliving.JPG"><a class="part">홈/리빙</a></div>
-		<div class="largelist"><img class="img" alt="이벤트" src="/resources/images/event.JPG"><a class="part">이벤트</a></div>
-		<div class="largelist"><img class="img" alt="디자인 개발" src="/resources/images/design.JPG"><a class="part">디자인/개발</a></div>
-		<div class="largelist"><img class="img" alt="건강 미용" src="/resources/images/health.JPG"><a class="part">건강/미용</a></div>
-	</div>
 
 	<div class="modal fade" id="modal">
       <div class="modal-dialog">
@@ -110,5 +147,6 @@ $(document).ready(function(){
    </div>
    <!-- /.modal -->
 <a href="/expertFind/listExpertFind">고수 찾기</a>
+
 </body>
 </html>
