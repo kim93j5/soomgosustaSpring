@@ -19,7 +19,6 @@
 	<c:choose>
 		<c:when test="${loginUser.user_Divide =='expert'}">
 		<a href="${path}/expert/profile?e_Id=${expertVO.e_Id}">프로필 이동</a>
-		<a href="${path}/expert/profile" + e_Id>프로필 이동</a>
 		</c:when>
 		<c:otherwise>
 		${loginUser.m_Id}
