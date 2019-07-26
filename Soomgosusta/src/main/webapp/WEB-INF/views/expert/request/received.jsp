@@ -13,7 +13,6 @@
 	href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
 <script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
 <script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
-<!--  <script type="text/javascript" src="/resources/js/jquery.js"></script>-->
 <script type="text/javascript" src="/resources/js/link.js"></script>
 
 <style>
@@ -37,10 +36,10 @@
 	{
 	content: "";
 	margin-top: 7px;
-	margin-left: 4px;
+	margin-left: 6px;
 	position: absolute;
-	width: .8rem;
-	height: .8rem;
+	width: .7rem;
+	height: .7rem;
 	background-color: #ff3131;
 	border-radius: 50%;
 }
@@ -67,7 +66,7 @@
 
 #app-body .page-body {
 	min-height: -webkit-fill-available;
-	background-color: #EEEEEE;
+	background-color: #F7F7F7;
 	padding: 2.25rem 0 9.6875rem;
 }
 
@@ -166,7 +165,8 @@
 
 </head>
 <body>
-세션 테스트 ----------------------------------${loginUser.user_Divide},${loginUser.e_Id},${loginUser.e_Name}
+	세션 테스트
+	----------------------------------${loginUser.user_Divide},${loginUser.e_Id},${loginUser.e_Name}
 	<div id="app-body">
 		<div class="page-header"></div>
 		<div class="page-body">
@@ -202,10 +202,7 @@
 							var _modalOkDelBtn = $("#modalOkDelBtn");
 							var _modalNoDelBtn = $("#modalNoDelBtn");
 
-							//var sessionId = 
-							//	${loginUser.e_id};
-
-							//console.log(sessionId);	
+							var _name = '${loginUser.e_Name}';
 
 							var _pageHeader = $(".page-header");
 							var _requestUL = $(".request-list");
@@ -276,89 +273,94 @@
 							}
 
 							linkService
-									.getList(function(list) {
+									.getList(
+											_name,
+											function(list) {
+												console.log(list);
 
-										var str = "";
+												var str = "";
 
-										if (list == null || list.length == 0) {
+												if (list == null
+														|| list.length == 0) {
 
-											str += "<div>"
-											str += "<p>아직 받은 요청서가 없어요. 요청서를 기다리는동안 고수를 위한 팁을 확인해보세요.</p>"
-											str += "</div>"
-											str += "<li class='request-item'>"
-											str += "<div>"
-											str += "<h5>받은 요청이 없습니다</h5>"
-											str += "</div>"
-											str += "</li>"
+													str += "<div>"
+													str += "<p>아직 받은 요청서가 없어요. 요청서를 기다리는동안 고수를 위한 팁을 확인해보세요.</p>"
+													str += "</div>"
+													str += "<li class='request-item'>"
+													str += "<div>"
+													str += "<h5>받은 요청이 없습니다</h5>"
+													str += "</div>"
+													str += "</li>"
 
-											_requestUL.html(str);
+													_requestUL.html(str);
 
-											return;
-										}
+													return;
+												}
 
-										for (var i = 0, len = list.length || 0; i < len; i++) {
-											console.log(list[i])
+												for (var i = 0, len = list.length || 0; i < len; i++) {
+													console.log(list[i])
 
-											var dt = list[i].l_Date
-											var conDt = replaceAll(dt, "-", "");
-											var conDt = replaceAll(conDt, ":",
-													"");
-											var conDt = replaceAll(conDt, " ",
-													"");
+													var dt = list[i].l_Date
+													var conDt = replaceAll(dt,
+															"-", "");
+													var conDt = replaceAll(
+															conDt, ":", "");
+													var conDt = replaceAll(
+															conDt, " ", "");
 
-											str += "<li class='request-item' data-seq='"+list[i].l_Seq+"'>"
-											str += "<div class='profile-img'>"
-											str += "<div class='user-profile-picture'>"
-											str += "<div data-name='image' class='is-square'>"
-											if (list[i].member.m_Photo == 'null') {
-												str += "<img src='/resources/images/default.jpg'/>"
-											} else {
+													str += "<li class='request-item' data-seq='"+list[i].l_Seq+"'>"
+													str += "<div class='profile-img'>"
+													str += "<div class='user-profile-picture'>"
+													str += "<div data-name='image' class='is-square'>"
+													if (list[i].member.m_Photo == 'null') {
+														str += "<img src='/resources/images/default.jpg'/>"
+													} else {
 
-											}
-											str += "</div>"
-											str += "</div>"
-											str += "</div>"
-											str += "<div class='request-info'>"
+													}
+													str += "</div>"
+													str += "</div>"
+													str += "</div>"
+													str += "<div class='request-info'>"
 
-											if (list[i].l_Enter != "not") {
-												str += "<div class='name-read'>"
-														+ list[i].member.m_Name
-														+ "</div>"
-											} else {
-												str += "<div class='name'>"
-														+ list[i].member.m_Name
-														+ "</div>"
-											}
-											str += "<div class='status' data-status='"+list[i].l_Status+"'>"
-											str += "</div>"
-											str += "<div class='part'>"
-													+ list[i].part.p_S_Word
-													+ " "
-													+ list[i].part.p_L_Word
-													+ "</div>"
-											str += "<div class='address'>"
-													+ "주소" + "</div>"
-											str += "</div>"
+													if (list[i].l_Enter != "not") {
+														str += "<div class='name-read'>"
+																+ list[i].member.m_Name
+																+ "</div>"
+													} else {
+														str += "<div class='name'>"
+																+ list[i].member.m_Name
+																+ "</div>"
+													}
+													str += "<div class='status' data-status='"+list[i].l_Status+"'>"
+													str += "</div>"
+													str += "<div class='part'>"
+															+ list[i].part.p_S_Word
+															+ " "
+															+ list[i].part.p_L_Word
+															+ "</div>"
+													str += "<div class='address'>"
+															+ "주소" + "</div>"
+													str += "</div>"
 
-											str += "<div class='date'>"
-											str += "<div class='date-execute'>"
-													+ transferTime(conDt)
-											str += "</div>"
-											str += "</div>"
-											str += "<div class='footer-container'>"
-											str += "<span class='percent'>"
-													+ list[i].l_Percent
-													+ "% 일치하는 요청입니다. </span>"
-											str += "<div class='footer-button-container'>"
-											str += "</div>"
-											str += "</div>"
-											str += "</li>"
+													str += "<div class='date'>"
+													str += "<div class='date-execute'>"
+															+ transferTime(conDt)
+													str += "</div>"
+													str += "</div>"
+													str += "<div class='footer-container'>"
+													str += "<span class='percent'>"
+															+ list[i].l_Percent
+															+ "% 일치하는 요청입니다. </span>"
+													str += "<div class='footer-button-container'>"
+													str += "</div>"
+													str += "</div>"
+													str += "</li>"
 
-											_requestUL.html(str);
+													_requestUL.html(str);
 
-										}
+												}
 
-									});//받은요청 리스트
+											});//받은요청 리스트
 
 							_requestUL.on('click', 'li', function() {
 
@@ -366,6 +368,7 @@
 										"status");
 
 								if (_status == "not") {
+									
 									var _seq = $(this).data("seq");
 
 									$.ajax({
@@ -438,12 +441,15 @@
 
 												var _seq = $(this).parent()
 														.parent().parent()
-														.parent().data("seq");
+														.data("seq");
+												var _sessionName = '${loginUser.e_Name}';
+												console.log(_sessionName);
 
 												var str = "";
 												str += "<div class='modal-label'>해당요청을 거절하시겠습니까?</div>"
 												str += "<div class='form-group'>"
 												str += "<input class='form-control' id='l_seq' type='hidden' name='seq' value='" + _seq + "'>"
+												str += "<input class='form-control' id='name' type='hidden' name='name' value='" + _sessionName + "'>"
 												str += "</div>"
 
 												$(".modal-body").html(str);
@@ -458,6 +464,7 @@
 											function() {
 
 												var _seq = $("#l_seq").val();
+												var _name = $("#name").val();
 
 												linkService
 														.remove(
@@ -465,82 +472,96 @@
 																function(result) {
 
 																	linkService
-																			.getList(function(
-																					list) {
+																			.getList(
+																					_name,
+																					function(
+																							list) {
 
-																				var str = "";
+																						var str = "";
 
-																				if (list == null
-																						|| list.length == 0) {
+																						if (list == null
+																								|| list.length == 0) {
 
-																					str += "<div>"
-																					str += "<p>아직 받은 요청서가 없어요. 요청서를 기다리는동안 고수를 위한 팁을 확인해보세요.</p>"
-																					str += "</div>"
-																					str += "<li class='request-item'>"
-																					str += "<div>"
-																					str += "<h5>받은 요청이 없습니다</h5>"
-																					str += "</div>"
-																					str += "</li>"
+																							str += "<div>"
+																							str += "<p>아직 받은 요청서가 없어요. 요청서를 기다리는동안 고수를 위한 팁을 확인해보세요.</p>"
+																							str += "</div>"
+																							str += "<li class='request-item'>"
+																							str += "<div>"
+																							str += "<h5>받은 요청이 없습니다</h5>"
+																							str += "</div>"
+																							str += "</li>"
 
-																					_requestUL
-																							.html(str);
+																							_requestUL
+																									.html(str);
 
-																					return;
-																				}
+																							return;
+																						}
 
-																				for (var i = 0, len = list.length || 0; i < len; i++) {
-																					console
-																							.log(list[i])
+																						for (var i = 0, len = list.length || 0; i < len; i++) {
+																							console
+																									.log(list[i])
 
-																					str += "<li class='request-item' data-seq='"+list[i].l_Seq+"'>"
-																					str += "<div class='profile-img'>"
-																					str += "<div class='user-profile-picture'>"
-																					str += "<div data-name='image' class='is-square'>"
-																					if (list[i].member.m_Photo == 'null') {
-																						str += "<img src='/resources/images/default.jpg'/>"
-																					}
-																					str += "</div>"
-																					str += "</div>"
-																					str += "</div>"
-																					str += "<div class='request-info'>"
+																							var dt = list[i].l_Date
+													var conDt = replaceAll(dt,
+															"-", "");
+													var conDt = replaceAll(
+															conDt, ":", "");
+													var conDt = replaceAll(
+															conDt, " ", "");
 
-																					if (list[i].l_Enter != "not") {
-																						str += "<div class='name-read'>"
-																								+ list[i].member.m_Name
-																								+ "</div>"
-																					} else {
-																						str += "<div class='name'>"
-																								+ list[i].member.m_Name
-																								+ "</div>"
-																					}
-																					str += "<div class='status' data-status='"+list[i].l_Status+"'>"
-																					str += "</div>"
-																					str += "<div class='part'>"
-																							+ list[i].part.p_S_Word
-																							+ " "
-																							+ list[i].part.p_L_Word
-																							+ "</div>"
-																					str += "<div class='address'>"
-																							+ "주소"
-																							+ "</div>"
-																					str += "<div class='date'>"
-																							+ prettyDate(list[i].l_Date)
-																							+ "</div>"
-																					str += "</div>"
-																					str += "<div class='footer-container'>"
-																					str += "<span class='percent'>"
-																							+ list[i].l_Percent
-																							+ "% 일치하는 요청입니다. </span>"
-																					str += "<div class='footer-button-container'>"
-																					str += "</div>"
-																					str += "</div>"
-																					str += "</li>"
+													str += "<li class='request-item' data-seq='"+list[i].l_Seq+"'>"
+													str += "<div class='profile-img'>"
+													str += "<div class='user-profile-picture'>"
+													str += "<div data-name='image' class='is-square'>"
+													if (list[i].member.m_Photo == 'null') {
+														str += "<img src='/resources/images/default.jpg'/>"
+													} else {
 
-																					_requestUL
-																							.html(str);
+													}
+													str += "</div>"
+													str += "</div>"
+													str += "</div>"
+													str += "<div class='request-info'>"
 
-																				}
-																			});//받은요청 리스트
+													if (list[i].l_Enter != "not") {
+														str += "<div class='name-read'>"
+																+ list[i].member.m_Name
+																+ "</div>"
+													} else {
+														str += "<div class='name'>"
+																+ list[i].member.m_Name
+																+ "</div>"
+													}
+													str += "<div class='status' data-status='"+list[i].l_Status+"'>"
+													str += "</div>"
+													str += "<div class='part'>"
+															+ list[i].part.p_S_Word
+															+ " "
+															+ list[i].part.p_L_Word
+															+ "</div>"
+													str += "<div class='address'>"
+															+ "주소" + "</div>"
+													str += "</div>"
+
+													str += "<div class='date'>"
+													str += "<div class='date-execute'>"
+															+ transferTime(conDt)
+													str += "</div>"
+													str += "</div>"
+													str += "<div class='footer-container'>"
+													str += "<span class='percent'>"
+															+ list[i].l_Percent
+															+ "% 일치하는 요청입니다. </span>"
+													str += "<div class='footer-button-container'>"
+													str += "</div>"
+													str += "</div>"
+													str += "</li>"
+
+																							_requestUL
+																									.html(str);
+
+																						}
+																					});//받은요청 리스트
 
 																});//요청 삭제
 

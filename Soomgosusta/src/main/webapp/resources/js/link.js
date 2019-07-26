@@ -2,9 +2,9 @@ console.log("link Module");
 
 var linkService = (function() {
 
-	function getList(callback, error) {
+	function getList(name, callback, error) {
 
-		$.getJSON("/requests/receive" + ".json", function(data) {
+		$.getJSON("/requests/receivename/" + name +".json", function(data) {
 			if (callback) {
 				callback(data);
 			}
@@ -14,6 +14,9 @@ var linkService = (function() {
 			}
 		});
 	}
+	
+	
+	
 
 	function get(seq, callback, error) {
 

@@ -20,4 +20,5 @@ public class LinkVO {
 	private MemberVO member;
 	private PartVO part;
 	private RequestVO request;
+	private ExpertVO expert;
 }

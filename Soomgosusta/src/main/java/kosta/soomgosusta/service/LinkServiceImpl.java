@@ -21,10 +21,10 @@ public class LinkServiceImpl implements LinkService {
 	private LinkMapper mapper;
 	
 	@Override
-	public List<LinkVO> getList() {
+	public List<LinkVO> getList(String id) {
 
 		
-		return mapper.getList();
+		return mapper.getList(id);
 	}
 
 	@Override
@@ -49,6 +49,12 @@ public class LinkServiceImpl implements LinkService {
 	public int modifyStatus(int seq) {
 		
 		return mapper.updateStatus(seq);
+	}
+
+	@Override
+	public List<LinkVO> getListName(String name) {
+		
+		return mapper.getListName(name);
 	}
 
 	

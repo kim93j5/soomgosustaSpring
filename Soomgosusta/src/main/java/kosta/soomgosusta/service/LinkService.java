@@ -8,8 +8,9 @@ import kosta.soomgosusta.domain.LinkVO;
 
 public interface LinkService {
 
+	public List<LinkVO> getListName(String name);
 	
-	public List<LinkVO> getList();
+	public List<LinkVO> getList(String id);
 	
 	public LinkVO read(int seq);
 
