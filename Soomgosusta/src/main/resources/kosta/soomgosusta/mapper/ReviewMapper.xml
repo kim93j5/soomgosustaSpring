@@ -6,7 +6,7 @@
 
 	<insert id="register">
 		insert into Review values(review_seq.nextval,sysdate,#{re_StarPoint},
-		#{re_Contents},1,'hj123@naver.com',#{e_Id})
+		#{re_Contents},1,#{m_Id},#{e_Id})
 	</insert>
 	
 	<select id="get" resultType="kosta.soomgosusta.domain.ReviewVO">

@@ -250,7 +250,7 @@
 											str += "<span class='expectaion'>예상금액</span>"
 											str += "<p>"
 											str += "<label>"
-													+ list[i].estimate.e_Amountpart
+													+ list[i].estimate.e_AmountPart
 													+ "</label>"
 													+ list[i].estimate.e_Amount
 													+ "원</p>"

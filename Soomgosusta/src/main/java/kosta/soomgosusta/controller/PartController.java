@@ -21,11 +21,6 @@ import lombok.extern.log4j.Log4j;
 public class PartController {
 	private PartService service;
 
-	@GetMapping("/main")
-	public void main(Model model) {
-
-	}
-
 	@GetMapping("/listQNA/{searchKey}")
 	public String listQNA(@PathVariable("searchKey") String searchKey, Model model) {
 		

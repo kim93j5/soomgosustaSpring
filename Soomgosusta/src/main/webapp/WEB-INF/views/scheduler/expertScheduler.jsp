@@ -2,7 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<header>
+	<jsp:include page="../includes/header.jsp"></jsp:include>
+</header>
+
 <html>
 <head>
 
@@ -16,10 +20,6 @@
 <script src='/resources/fullcalendar-4.2.0/packages/interaction/main.js'></script>
 <script src='/resources/fullcalendar-4.2.0/packages/daygrid/main.js'></script>
 <script src='/resources/fullcalendar-4.2.0/packages/timegrid/main.js'></script>
-<link rel="stylesheet"
-	href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
-<script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
-<script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/resources/js/expertScheduler.js"></script>
 <link rel="stylesheet" href="/resources/css/expertScheduler.css">
 <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/moment.min.js'></script>
@@ -41,26 +41,8 @@ scheduleService.getList("nano124@gmail.com", function(list){
 	 
 	 var link = "<h5>회원 목록</h5>";
 	 $('#link').append(link);
- 	 
-	 for(var j=0, len=list.listMatch.length||0; j<len; j++){
-	     var link = '<div class="m_info">';
-		 link += '<img src="/resources/images/' + list.listMatch[j].m_Photo + '">';
-		 link += '<div id="m">' + list.listMatch[j].m_Name;
-		 link += '</div>';
-		 
- 		 if(list.listMatch[j].m_Session == 'logout'){
-			 link += '<img src="/resources/images/logout.JPG" style="width:10px; height:10px; margin-top:18px;"></div>';
-		 }else{
-			 link += '<img src="/resources/images/login.JPG" style="width:10px; height:10px; margin-top:18px;"></div>';
-		 }
- 		 
- 		 $('#link').append(link);
-
-	} 
-
-
-
-	 
+ 	
+ 
 	 $('#profile').append(profile);
 
 	 
@@ -239,6 +221,8 @@ scheduleService.getList("nano124@gmail.com", function(list){
 <title>Insert title here</title>
 </head>
 <body>
+	
+	
 	
 	<div id='profile'></div>
 	
