@@ -87,6 +87,21 @@ var reviewService = (function(){
 		});
 	}
 	
+	function findMatch(param, callback, error){
+		
+		console.log("회원 : " + param);
+		$.getJSON("/review/"+param+".json",
+			function(data){
+			if(callback){
+				callback(data);
+			}
+		}).fail(function(xhr, status, err){
+			if(error){
+				error();
+			}
+		});
+	}
+	
 	return {
 		add:add,
 		getList : getList,

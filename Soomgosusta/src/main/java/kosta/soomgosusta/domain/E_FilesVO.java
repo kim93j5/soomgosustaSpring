@@ -4,10 +4,10 @@ import lombok.Data;
 
 @Data
 public class E_FilesVO {
-	private String e_Uuid;
-	private String e_From;
-	private String e_Path;
-	private boolean e_Type;
-	private	String e_Photo;
+	private String ef_Uuid;
+	private String ef_From;
+	private String ef_Path;
+	private boolean ef_Type;
+	private	String ef_Photo;
 	private String e_Id;
 }

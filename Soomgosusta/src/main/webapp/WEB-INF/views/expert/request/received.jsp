@@ -33,12 +33,11 @@
 	border-style: solid;
 }
 
-
 #app-body #request-area .request-list .request-item .request-info .name::after
 	{
 	content: "";
-	margin-top : 7px;
-	margin-left : 4px;
+	margin-top: 7px;
+	margin-left: 4px;
 	position: absolute;
 	width: .8rem;
 	height: .8rem;
@@ -78,7 +77,6 @@
 	margin-left: auto;
 	margin-right: auto;
 	cursor: pointer;
-
 }
 
 #app-body .page-body #request-area .request-list .request-item {
@@ -91,13 +89,13 @@
 	border: .06rem solid #f2f2f2;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-
 }
 
-#app-body .page-body #request-area .request-list .request-item .profile-img{
-    position: relative;
-    float: left;
-    margin-right: .75rem;
+#app-body .page-body #request-area .request-list .request-item .profile-img
+	{
+	position: relative;
+	float: left;
+	margin-right: .75rem;
 }
 
 #app-body .page-body #request-area .request-list .request-item .profile-img .user-profile-picture .is-square img
@@ -107,39 +105,63 @@
 	height: 6.5rem;
 }
 
-#app-body #request-area .request-list .request-item .footer-container{
-	margin-top: 10px;
-
+#app-body .page-body #request-area .request-list .request-item .request-info
+	{
+	display: inline-block;
+	height: 65px;
 }
 
-#app-body #request-area .request-list .request-item .footer-container .footer-button-container{
+#app-body .page-body #request-area .request-list .request-item .request-info .name-read
+	{
+	width: 100%;
+	display: inline-block;
+	margin-bottom: 3px;
+	margin-top: 0px;
+	font-weight: bold;
+}
+
+#app-body .page-body #request-area .request-list .request-item .request-info .name
+	{
+	width: 100%;
+	display: inline-block;
+	margin-bottom: 3px;
+	margin-top: 0px;
+	font-weight: bold;
+}
+
+#app-body .page-body #request-area .request-list .request-item .date {
+	position: relative;
+	float: right;
+	margin-right: .75rem;
+}
+
+#app-body #request-area .request-list .request-item .footer-container {
+	margin-top: 10px;
+}
+
+#app-body #request-area .request-list .request-item .footer-container .footer-button-container
+	{
 	display: inline-block;
 	position: absolute;
 }
 
-
 #app-body #request-area .request-list .request-item .footer-container .footer-button-container #delbtn
 	{
 	color: #999;
-    border: .0625rem solid #e1e1e1;
-    box-sizing: border-box;
-    padding: .125rem .75rem;
-    cursor: pointer;
-    float: right;
-    margin-top :0px;
-    margin-bottom :0px;
-    margin-left: 700px;
-    
+	border: .0625rem solid #e1e1e1;
+	box-sizing: border-box;
+	padding: .125rem .75rem;
+	cursor: pointer;
+	float: right;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 700px;
 }
 
 .hoverbtn {
 	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
 		rgba(0, 0, 0, 0.19);
-
-	
 }
-
-
 </style>
 
 </head>
@@ -180,6 +202,11 @@
 							var _modalOkDelBtn = $("#modalOkDelBtn");
 							var _modalNoDelBtn = $("#modalNoDelBtn");
 
+							//var sessionId = 
+							//	${loginUser.e_id};
+
+							//console.log(sessionId);	
+
 							var _pageHeader = $(".page-header");
 							var _requestUL = $(".request-list");
 
@@ -192,6 +219,61 @@
 							header += "</div>"
 
 							_pageHeader.html(header);
+
+							function transferTimeToString(time) {
+
+							}
+
+							function transferTime(time) {
+								var now = new Date();
+								var sYear = time.substring(0, 4);
+								var sMonth = time.substring(4, 6) - 1;
+								var sDate = time.substring(6, 8);
+								var sHour = time.substring(8, 10);
+								var sMin = time.substring(10, 12);
+								var sSecond = time.substring(12, 14);
+								var sc = 1000;
+
+								var today = new Date(sYear, sMonth, sDate,
+										sHour, sMin, sSecond);
+								//지나간 초
+								var pastSecond = parseInt((now - today) / sc,
+										10);
+
+								console.log(pastSecond);
+
+								var date;
+								var hour;
+								var min;
+
+								var str = "";
+
+								if (pastSecond > 86400) {
+									date = parseInt(pastSecond / 86400, 10);
+									restSecond = pastSecond % 86400;
+									str = date + "일 전 ";
+								}
+
+								if (pastSecond < 86400) {
+									hour = parseInt(pastSecond / 3600, 10);
+									str = hour + "시간 전 ";
+								}
+
+								if (pastSecond < 3600) {
+									min = parseInt(pastSecond / 60, 10);
+									str = min + "분 전"
+								}
+
+								if (pastSecond < 60) {
+									str = "방금 전"
+								}
+
+								return str;
+							}
+
+							function replaceAll(str, searchStr, replaceStr) {
+								return str.split(searchStr).join(replaceStr);
+							}
 
 							linkService
 									.getList(function(list) {
@@ -217,13 +299,22 @@
 										for (var i = 0, len = list.length || 0; i < len; i++) {
 											console.log(list[i])
 
+											var dt = list[i].l_Date
+											var conDt = replaceAll(dt, "-", "");
+											var conDt = replaceAll(conDt, ":",
+													"");
+											var conDt = replaceAll(conDt, " ",
+													"");
+
 											str += "<li class='request-item' data-seq='"+list[i].l_Seq+"'>"
 											str += "<div class='profile-img'>"
 											str += "<div class='user-profile-picture'>"
 											str += "<div data-name='image' class='is-square'>"
-												if (list[i].member.m_Photo == 'null') {
-													str += "<img src='/resources/images/default.jpg'/>"
-												}
+											if (list[i].member.m_Photo == 'null') {
+												str += "<img src='/resources/images/default.jpg'/>"
+											} else {
+
+											}
 											str += "</div>"
 											str += "</div>"
 											str += "</div>"
@@ -241,17 +332,18 @@
 											str += "<div class='status' data-status='"+list[i].l_Status+"'>"
 											str += "</div>"
 											str += "<div class='part'>"
-													+ list[i].part.p_L_Word
-													+ "/"
-													+ list[i].part.p_M_Word
-													+ "/"
 													+ list[i].part.p_S_Word
+													+ " "
+													+ list[i].part.p_L_Word
 													+ "</div>"
 											str += "<div class='address'>"
-													+ "주소"
-													+ "</div>"
+													+ "주소" + "</div>"
+											str += "</div>"
+
 											str += "<div class='date'>"
-													+ list[i].l_Date + "</div>"
+											str += "<div class='date-execute'>"
+													+ transferTime(conDt)
+											str += "</div>"
 											str += "</div>"
 											str += "<div class='footer-container'>"
 											str += "<span class='percent'>"
@@ -400,52 +492,52 @@
 																					console
 																							.log(list[i])
 
-																							str += "<li class='request-item' data-seq='"+list[i].l_Seq+"'>"
-																							str += "<div class='profile-img'>"
-																							str += "<div class='user-profile-picture'>"
-																							str += "<div data-name='image' class='is-square'>"
-																								if (list[i].member.m_Photo == 'null') {
-																									str += "<img src='/resources/images/default.jpg'/>"
-																								}
-																							str += "</div>"
-																							str += "</div>"
-																							str += "</div>"
-																							str += "<div class='request-info'>"
+																					str += "<li class='request-item' data-seq='"+list[i].l_Seq+"'>"
+																					str += "<div class='profile-img'>"
+																					str += "<div class='user-profile-picture'>"
+																					str += "<div data-name='image' class='is-square'>"
+																					if (list[i].member.m_Photo == 'null') {
+																						str += "<img src='/resources/images/default.jpg'/>"
+																					}
+																					str += "</div>"
+																					str += "</div>"
+																					str += "</div>"
+																					str += "<div class='request-info'>"
 
-																							if (list[i].l_Enter != "not") {
-																								str += "<div class='name-read'>"
-																										+ list[i].member.m_Name
-																										+ "</div>"
-																							} else {
-																								str += "<div class='name'>"
-																										+ list[i].member.m_Name
-																										+ "</div>"
-																							}
-																							str += "<div class='status' data-status='"+list[i].l_Status+"'>"
-																							str += "</div>"
-																							str += "<div class='part'>"
-																									+ list[i].part.p_L_Word
-																									+ "/"
-																									+ list[i].part.p_M_Word
-																									+ "/"
-																									+ list[i].part.p_S_Word
-																									+ "</div>"
-																							str += "<div class='address'>"
-																									+ "주소"
-																									+ "</div>"
-																							str += "<div class='date'>"
-																									+ list[i].l_Date + "</div>"
-																							str += "</div>"
-																							str += "<div class='footer-container'>"
-																							str += "<span class='percent'>"
-																									+ list[i].l_Percent
-																									+ "% 일치하는 요청입니다. </span>"
-																							str += "<div class='footer-button-container'>"
-																							str += "</div>"
-																							str += "</div>"
-																							str += "</li>"
+																					if (list[i].l_Enter != "not") {
+																						str += "<div class='name-read'>"
+																								+ list[i].member.m_Name
+																								+ "</div>"
+																					} else {
+																						str += "<div class='name'>"
+																								+ list[i].member.m_Name
+																								+ "</div>"
+																					}
+																					str += "<div class='status' data-status='"+list[i].l_Status+"'>"
+																					str += "</div>"
+																					str += "<div class='part'>"
+																							+ list[i].part.p_S_Word
+																							+ " "
+																							+ list[i].part.p_L_Word
+																							+ "</div>"
+																					str += "<div class='address'>"
+																							+ "주소"
+																							+ "</div>"
+																					str += "<div class='date'>"
+																							+ prettyDate(list[i].l_Date)
+																							+ "</div>"
+																					str += "</div>"
+																					str += "<div class='footer-container'>"
+																					str += "<span class='percent'>"
+																							+ list[i].l_Percent
+																							+ "% 일치하는 요청입니다. </span>"
+																					str += "<div class='footer-button-container'>"
+																					str += "</div>"
+																					str += "</div>"
+																					str += "</li>"
 
-																							_requestUL.html(str);
+																					_requestUL
+																							.html(str);
 
 																				}
 																			});//받은요청 리스트
