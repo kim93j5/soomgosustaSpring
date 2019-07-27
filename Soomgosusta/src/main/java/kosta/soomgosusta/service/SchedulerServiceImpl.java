@@ -9,8 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kosta.soomgosusta.domain.ExpertInfoVO;
 import kosta.soomgosusta.domain.ExpertVO;
+import kosta.soomgosusta.domain.FaqDTO;
 import kosta.soomgosusta.domain.FaqVO;
 import kosta.soomgosusta.domain.MScheduleInfoDTO;
+import kosta.soomgosusta.domain.SC_ReplyVO;
 import kosta.soomgosusta.domain.ScheduleInfoDTO;
 import kosta.soomgosusta.domain.ScheduleVO;
 import kosta.soomgosusta.domain.SchedulerMatchDTO;
@@ -40,10 +42,12 @@ public class SchedulerServiceImpl implements SchedulerService {
 		
 		return schedule;
 	}
-
+	
 	@Override
-	public int insertSchedule(ScheduleVO schedule) {
+	public int insertSchedule(ScheduleVO schedule, String m_Id, String e_Id) {
 
+		schedule.setM_Seq(mapper.detailMatch(e_Id, m_Id));
+		
 		return mapper.insertSchedule(schedule);
 	}
 
@@ -54,7 +58,7 @@ public class SchedulerServiceImpl implements SchedulerService {
 	}
 
 	@Override
-	public ScheduleVO detailSchedule(int s_Seq) {
+	public SchedulerMatchDTO detailSchedule(int s_Seq) {
 
 		return mapper.detailSchedule(s_Seq);
 	}
@@ -73,7 +77,7 @@ public class SchedulerServiceImpl implements SchedulerService {
 		schedule.setPart(mapper.detailPart(e_Id));
 		schedule.setExpert(mapper.detailExpert(e_Id));
 		schedule.setExInfo(mapper.detailExInfo(e_Id));
-		//schedule.setListSchedule(mapper.listSchedule(e_Id));
+		schedule.setListSchedule(mapper.listSchedule(e_Id));
 		
 		return schedule;
 	}
@@ -88,6 +92,30 @@ public class SchedulerServiceImpl implements SchedulerService {
 	public int insertFaq(FaqVO faq) {
 		
 		return mapper.insertFaq(faq);
+	}
+
+	@Override
+	public int countScheduleService() {
+
+		return mapper.countSchedule();
+	}
+
+	@Override
+	public List<FaqDTO> listFaq(int s_Seq) {
+
+		return mapper.listFaq(s_Seq);
+	}
+
+	@Override
+	public List<SC_ReplyVO> listReply(int f_Seq) {
+
+		return mapper.listReply(f_Seq);
+	}
+
+	@Override
+	public int insertReplyService(SC_ReplyVO reply) {
+
+		return mapper.insertReply(reply);
 	}
 	
 	

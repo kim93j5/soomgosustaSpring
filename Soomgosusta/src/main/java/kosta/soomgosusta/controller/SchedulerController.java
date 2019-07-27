@@ -25,7 +25,6 @@ public class SchedulerController {
 
 	@GetMapping("/memberScheduler/{e_Id:.+}")
 	public String memberSchedule(@PathVariable("e_Id") String e_Id, Model model){
-		log.info("e_Id :   " + e_Id);
 		model.addAttribute("e_Id", e_Id);
 		
 		return "/scheduler/memberScheduler";

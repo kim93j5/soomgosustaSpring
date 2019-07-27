@@ -111,7 +111,6 @@ $(document).ready(function(){
 			
 			$('#searchcontents').empty();
 			
-			$('#searchcontents').append(str);
 		});
 	})
 });

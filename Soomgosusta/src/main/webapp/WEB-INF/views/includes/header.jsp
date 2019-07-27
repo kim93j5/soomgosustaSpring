@@ -51,7 +51,7 @@
 			<c:when test="${loginUser.user_Divide =='expert'}">
 
 				<div class="left_">
-					<ul>
+					<ul class="nav navbar-nav">
 						<li><a href="main.do"> <img src="https://dmmj3ljielax6.cloudfront.net/static/img/home/index_soomgo_logo.svg" alt="숨고, 숨은고수">
 							</a></li>
 						<li><a href="expertMain.do"> <span>받은 요청</span>

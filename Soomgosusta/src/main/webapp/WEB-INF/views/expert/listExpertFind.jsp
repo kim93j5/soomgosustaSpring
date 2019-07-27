@@ -27,7 +27,7 @@ $('document').ready(function(){
 		$(result).each(function(i, list){
 			str += 	'<div class="expertInfo" data-id = "' + list.ef_Id +'">';
 			str += '<img src="/resources/images/' + list.ef_Photo + '">';
-			str += '<h3><a href="/part/main" data-id="'+list.ef_Id+'">'+ list.ef_OL + '</a></h3>';
+			str += '<h3><a href="/main/mainPage" data-id="'+list.ef_Id+'">'+ list.ef_OL + '</a></h3>';
 			str += '<div>'+list.ef_RC+'회 고용<strong>*</strong>'+ list.ef_District+'</div>';
 			str +=	'<div>'+list.ef_AvgStarpoint+'('+list.ef_CntReview+'개)</div><br><br><br><br>';
 				

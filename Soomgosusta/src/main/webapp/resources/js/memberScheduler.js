@@ -39,7 +39,7 @@ var scheduleService = (function(){
 		
 		$.ajax({
 	 		type: 'post',
-	 		url: '/memberSchedule/insert/',
+	 		url: '/memberSchedule/insert',
 			data: JSON.stringify(data),
 			contentType: "application/json; charset=utf-8",
 			success: function(result, status, xhr){
@@ -54,9 +54,25 @@ var scheduleService = (function(){
 		 	}
 		});
 	}
+	function getFaq(data, callback, error){
+		console.log("getFaq...........");
+		console.log("data");
+		console.log("=================");
+		
+		$.getJSON("/manageSchedule/getFaq/"+ data+".json", function(result){
+			if(callback){
+				callback(result);
+			}
+		}).fail(function(xhr, status, err){
+			if(error){
+				error();
+			}
+		})
+	}
 	return{
 		getList:getList,
 		get:get,
-		register:register
+		register:register,
+		getFaq:getFaq
 	}
 })();

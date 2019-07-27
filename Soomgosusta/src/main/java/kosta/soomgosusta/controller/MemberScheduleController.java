@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kosta.soomgosusta.domain.FaqVO;
 import kosta.soomgosusta.domain.MScheduleInfoDTO;
 import kosta.soomgosusta.domain.ScheduleVO;
+import kosta.soomgosusta.domain.SchedulerMatchDTO;
 import kosta.soomgosusta.service.SchedulerService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -29,7 +30,7 @@ public class MemberScheduleController {
 	
 	@GetMapping(value="/list/{e_Id}", produces= {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<MScheduleInfoDTO> getList(@PathVariable("e_Id") String e_Id){
-
+	
 		return new ResponseEntity<>(service.listMSchedule(e_Id), HttpStatus.OK);
 	}
 	
@@ -41,7 +42,7 @@ public class MemberScheduleController {
 	}
 	
 	@GetMapping(value="/detail/{s_Seq}",produces= {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<ScheduleVO> detail(@PathVariable("s_Seq") int s_Seq){
+	public ResponseEntity<SchedulerMatchDTO> detail(@PathVariable("s_Seq") int s_Seq){
 		
 		return new ResponseEntity<>(service.detailSchedule(s_Seq), HttpStatus.OK);
 	}

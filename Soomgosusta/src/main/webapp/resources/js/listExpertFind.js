@@ -9,7 +9,7 @@ var expertFindService = (function(){
 		var serviceInfo = data.serviceInfo;
 		
 		console.log(sido + " " + gugun + " " + ser + " " + serviceInfo);
-		$.getJSON("/listEF/list/"+sido+"/"+gugun+"/"+ser+"/"+serviceInfo , function(result){
+		$.getJSON("/expert/list/"+sido+"/"+gugun+"/"+ser+"/"+serviceInfo , function(result){
 			if(callback){
 				callback(result);
 			}
