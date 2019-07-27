@@ -103,7 +103,6 @@ public class LinkController {
 		}
 		return point;
 	}
-
 	public static int[] getPI(String memberInfo){
 		int m = memberInfo.length();
 		int j = 0;

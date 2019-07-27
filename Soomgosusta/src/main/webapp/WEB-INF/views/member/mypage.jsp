@@ -43,7 +43,6 @@
 	$('#modal').modal('show');
 })
  */
-
 	$('document').ready(function(){
 		
 		$(".changeBtn").on("click", function(e){

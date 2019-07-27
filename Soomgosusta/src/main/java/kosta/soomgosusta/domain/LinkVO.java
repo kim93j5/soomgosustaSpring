@@ -1,10 +1,5 @@
 package kosta.soomgosusta.domain;
 
-
-
-
-
-
 import lombok.Data;
 
 @Data

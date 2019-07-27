@@ -175,7 +175,6 @@ public class MemberController {
             model.addAttribute("m_Photo", updateFileName);
             model.addAttribute("m_Id", m_Id);
             service.memberImageUpdate(m_Id, updateFileName);
-            /*return "/member/mypage";*/
     }
 	
 	@PutMapping("/mypage")

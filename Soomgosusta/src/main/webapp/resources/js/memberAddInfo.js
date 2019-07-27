@@ -5,6 +5,7 @@ var memberAddInfoService = (function(){
 				callback(data);
 			}
 		});*/
+		 
 		console.log(LWord);
 		$.ajax({
 			type : 'get',

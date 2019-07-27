@@ -19,7 +19,6 @@ var mypageService = (function(){
 				}
 			}
 		});
-		
 	}
 	return {
 		checkPW : checkPW
