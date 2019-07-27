@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kosta.soomgosusta.domain.E_ProfileVO;
 import kosta.soomgosusta.domain.ExpertInfoVO;
@@ -95,11 +96,13 @@ public class ExpertServiceImpl implements ExpertService {
 		return mapper.updateProfile(vo);
 	}
 
+	@Transactional
 	@Override
-	public int insertExpertInfo(ExpertInfoVO expert_Info) {
+	public void insertExpertInfo(ExpertInfoVO expert_Info, int p_Seq) {
 
 		// log.info("get...." + expert_Info);
-		return mapper.insertExpertInfo(expert_Info);
+		mapper.insertExpertInfo(expert_Info);
+		mapper.countRegister(p_Seq);
 	}
 
 }

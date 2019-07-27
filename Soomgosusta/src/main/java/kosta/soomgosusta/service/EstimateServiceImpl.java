@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kosta.soomgosusta.domain.EstimateDTO;
+import kosta.soomgosusta.domain.MatchVO;
 import kosta.soomgosusta.mapper.EstimateMapper;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -22,6 +24,17 @@ public class EstimateServiceImpl implements EstimateService {
 	
 		return mapper.listEstimate(r_Seq);
 	}
+	
+    @Transactional
+	@Override
+	public void insertMatchService(MatchVO matchVO, int p_Seq) {
+		
+		mapper.countMatch(p_Seq);
+		mapper.insertMatch(matchVO);
+
+	}
+
+
 
 
 }

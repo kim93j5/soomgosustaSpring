@@ -22,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,6 +36,7 @@ import kosta.soomgosusta.domain.E_ProfileVO;
 import kosta.soomgosusta.domain.ExpertInfoVO;
 import kosta.soomgosusta.domain.ExpertVO;
 import kosta.soomgosusta.domain.LoginDTO;
+import kosta.soomgosusta.domain.PartVO;
 import kosta.soomgosusta.interceptor.SessionNames;
 import kosta.soomgosusta.service.ExpertService;
 import kosta.soomgosusta.service.PartService;
@@ -199,12 +201,45 @@ public class ExpertController {
 		}
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
+	
+	
+	@GetMapping("/listExpertInfo")
+	 public void listExpertInfo(Model model) {
+		
+		List<PartVO> listExpertInfo = partService.listPartService();
+		List<String> lWord = new ArrayList<>();
+       List<String> mWord = new ArrayList<>();
+	    List<String> sWord = new ArrayList<>();
+		    for(int i = 0; i < listExpertInfo.size(); i++){
+		       
+		       PartVO part = listExpertInfo.get(i);
+		       if(!lWord.contains(part.getP_L_Word())){
+		          lWord.add(part.getP_L_Word());
+		       }
+		       if(!mWord.contains(part.getP_M_Word())){
+		          mWord.add(part.getP_M_Word());
+		       }
+		       if(!sWord.contains(part.getP_S_Word())){
+		          sWord.add(part.getP_S_Word());
+		       }
+		    }
+		    
+		    model.addAttribute("large", lWord);
+		    model.addAttribute("medium", mWord);
+		    model.addAttribute("small", sWord);
+			
+		    
+		    model.addAttribute("listQuestion", partService.listExpertQusetionService());
+		    model.addAttribute("listAnswer", partService.listExpertAnswerService());
+	
+		 }
+	
 
-	@PostMapping("/listExpertInfo")
+	@PostMapping("/listExpertInfo/main")
 	public void listExpertInfo(@RequestParam("q_Seq") String[] question, @RequestParam("a_Seq") int[] answer,
 			@RequestParam("sido") String[] sido, @RequestParam("sigungu") String[] sigungu,
 			@RequestParam("large") String p_L_Word, @RequestParam("medium") String p_M_Word,
-			@RequestParam("small") String p_S_Word) {
+			@RequestParam("small") String p_S_Word, ExpertInfoVO expert_Info) {
 
 		/*
 		 * for(int i = 0; i < sido.length; i++){ log.info(sido[i]); }
@@ -265,16 +300,15 @@ public class ExpertController {
 		log.info(ei_Start);
 		log.info(ei_Gender);
 
-		ExpertInfoVO e_Info = new ExpertInfoVO();
-		e_Info.setE_Id("nano");
-		e_Info.setEi_Time(ei_Time);
-		e_Info.setEi_Start(ei_Start);
-		e_Info.setEi_District(ei_District);
-		e_Info.setP_Seq(p_Seq);
-		e_Info.setEi_Gender(ei_Gender);
+		expert_Info.setE_Id("nano");
+		expert_Info.setEi_Time(ei_Time);
+		expert_Info.setEi_Start(ei_Start);
+		expert_Info.setEi_District(ei_District);
+		expert_Info.setP_Seq(p_Seq);
+		expert_Info.setEi_Gender(ei_Gender);
 
-		log.info(e_Info);
-		service.insertExpertInfo(e_Info);
+		
+		service.insertExpertInfo(expert_Info, p_Seq);
 
 	}
 }

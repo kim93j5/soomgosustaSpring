@@ -52,5 +52,3 @@
 	<tx:annotation-driven/>
 	
 </beans>
-	
-

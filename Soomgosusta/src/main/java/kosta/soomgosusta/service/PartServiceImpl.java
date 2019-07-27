@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kosta.soomgosusta.domain.AnswerVO;
+import kosta.soomgosusta.domain.BestDTO;
 import kosta.soomgosusta.domain.PartVO;
 import kosta.soomgosusta.domain.QuestionVO;
 import kosta.soomgosusta.mapper.PartMapper;
@@ -101,6 +102,10 @@ public class PartServiceImpl implements PartService {
 		return mapper.listPSeq(p_L_Word, p_M_Word, p_S_Word);
 	}
 
-	
+	@Override
+	public List<BestDTO> listBestService() {
+		
+		return mapper.listBest();
+	}
 
 }
