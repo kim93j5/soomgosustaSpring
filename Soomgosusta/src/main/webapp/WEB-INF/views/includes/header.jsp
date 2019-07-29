@@ -80,7 +80,32 @@
 					</div>
 				</div>
 			</c:when>
+			<c:otherwise>
+				<div class="left_">
+					<div>
+						<a href="/part/main"> <img
+							src="https://dmmj3ljielax6.cloudfront.net/static/img/home/index_soomgo_logo.svg"
+							alt="숨고, 숨은고수">
+						</a>
+					</div>
+				</div>
+				<div class="right_">
+					<div>
+						<a href="/main/regist">회원가입</a>
+					</div>
+					<div>
+						<div class="select">
+							<select name="" id="loginState">
+								<option value="member">회원</option>
+								<option value="expert">고수</option>
+							</select> <a id="login" href="#">로그인</a> <a id="loginteg"></a>
+						</div>
+					</div>
+				</div>
+			</c:otherwise>
 		</c:choose>
+
+	</div>
 	</div>
 </body>
 
