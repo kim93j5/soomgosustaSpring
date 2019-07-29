@@ -113,5 +113,12 @@
 		<result column="r_status" property="r_Status"/>
 		
 	</resultMap>
+	<insert id="insertMatch" parameterType="kosta.soomgosusta.domain.MatchVO">
+	  insert into match values(match_Seq.nextval, #{m_Status}, sysdate, sysdate+1, #{e_Id}, #{m_Id})
+	</insert>
+	
+	<update id="countMatch" parameterType="int">
+	  update part_log SET pl_match = pl_match+1, pl_employment = pl_employment+1 WHERE P_SEQ = #{p_Seq}
+	</update>
 	
 </mapper>

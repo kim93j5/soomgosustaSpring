@@ -10,6 +10,8 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import kosta.soomgosusta.domain.ChatVO;
+
 public class ChatHandler extends TextWebSocketHandler {
 		private static Logger logger = LoggerFactory.getLogger(ChatHandler.class);
 		private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
@@ -35,8 +37,12 @@ public class ChatHandler extends TextWebSocketHandler {
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		//메세지 ㄱㄱ
 		logger.info("{}로 부터 {} 받음", session.getId(),message.getPayload());
+		
+		ChatVO cvo = ChatVO.convertMessage(message.getPayload());
+		
 		for(WebSocketSession sess : sessionList){
-				sess.sendMessage(new TextMessage(session.getId() + " : " + message.getPayload()));
+				sess.sendMessage(new TextMessage(cvo.getCh_Contents()));
+				sess.sendMessage(new TextMessage(cvo.getCh_Sender()));
 		}
 	}
 

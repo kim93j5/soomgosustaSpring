@@ -38,8 +38,12 @@
 	</update>
 	
    <insert id="insertExpertInfo" parameterType="kosta.soomgosusta.domain.ExpertInfoVO">
-        insert into e_info values (#{e_Id}, #{ei_Time}, #{ei_District}, #{ei_Start}, #{p_Seq}, #{ei_Gender})
+        insert into e_info values (#{e_Id}, #{ei_Time}, #{ei_District}, #{ei_Start}, #{ei_Gender}, #{p_Seq})
         
    </insert>
+   
+	<update id="countRegister" parameterType="int">
+	    update part_log SET pl_register = pl_register + 1 WHERE p_Seq = #{p_Seq}
+	</update>
 	
 </mapper>

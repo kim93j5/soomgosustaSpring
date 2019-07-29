@@ -21,5 +21,6 @@ public interface ExpertService {
 
 	public int updateProfile(E_ProfileVO vo);
 	
-	public int insertExpertInfo(ExpertInfoVO expert_Info);
+	public void insertExpertInfo(ExpertInfoVO expert_Info, int p_Seq);
+	
 }
