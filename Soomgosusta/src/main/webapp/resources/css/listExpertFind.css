@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 #container{
-	margin-left: 35%;
+	margin-left: 33%;
 }
 
 #info{
@@ -21,18 +21,33 @@
 	margin-bottom: 80px;
 }
 
-.expertInfo img{
+.star{
+	width: 15px;
+	height: 15px;
+	margin-right: 3px;
+}
+.profile{
 	float: left;
-	width: 110px;
-	height: 110px;
+	width: 90px;
+	height: 90px;
 	margin-right: 20px;
 	margin-left: 20px;
-	margin-top: 20px;
+	margin-top: 15px;
 }
 
 .expertInfo{
-	margin-bottom: 50px;
-	height: 150px;
-	width: 600px;
-	border-style: outset;
+	height: 130px;
+	width: 650px;
+	border-bottom: 1px solid;
+	border-color: #e8e7e6;
+	padding-top: 5px;
+}
+
+.expertInfo:hover{
+	background: #e8e7e6;
+}
+
+.info{
+	padding-top: 15px;
+	padding-left: 10px;
 }

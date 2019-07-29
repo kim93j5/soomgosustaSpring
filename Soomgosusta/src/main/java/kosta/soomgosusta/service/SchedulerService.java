@@ -1,5 +1,6 @@
 package kosta.soomgosusta.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import kosta.soomgosusta.domain.ExpertInfoVO;
@@ -23,6 +24,7 @@ public interface SchedulerService {
 	List<FaqDTO> listFaq(int s_Seq);
 	List<SC_ReplyVO> listReply(int f_Seq);
 	public int insertReplyService(SC_ReplyVO reply);
+	public int updateMatchService(HashMap<String, Object> map);
 	
 	//이용자 일정페이지
 	public MScheduleInfoDTO listMSchedule(String e_Id);

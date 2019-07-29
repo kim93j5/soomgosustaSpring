@@ -17,6 +17,25 @@
 		SELECT * FROM E_INFO WHERE E_ID = #{e_Id}
 	</select>
 	
+	<resultMap type="kosta.soomgosusta.domain.MatchListDTO" id="listMatch">
+		<result column="M_ID" property="m_Id"/>
+		<result column="M_NAME" property="m_Name" />
+		<result column="E_ID" property="e_Id" />
+		<result column="M_SD" property="m_Sd" />
+		<result column="M_ED" property="m_Ed" />
+		<result column="M_PHOTO" property="m_Photo" />
+
+	</resultMap>
+	
+	<select id="listMatch" parameterType="String" resultMap="listMatch">
+		SELECT m.M_ID, m.M_NAME, mc.E_ID, mc.M_SD, mc.M_ED, m.M_PHOTO
+		FROM MEMBER m
+		JOIN MATCH mc
+		ON m.M_ID = mc.M_ID
+		WHERE mc.E_ID = #{e_Id}
+		AND mc.M_STATUS = 'ING'
+	</select>
+	
 	<resultMap type="kosta.soomgosusta.domain.SchedulerMatchDTO" id="listMatchInfo">
 		<result column="S_SEQ" property="s_Seq"/>
 		<result column="S_CONTENTS" property="s_Contents" />
@@ -45,8 +64,8 @@
 		INSERT INTO SCHEDULE VALUES(SCHEDULE_SEQ.CURRVAL, #{s_Contents}, #{s_Sd}, #{s_Ed}, #{s_Place}, #{s_Color}, #{s_Memo}, #{m_Seq})
 	</insert>
 	
-	<select id="detailPart" parameterType="String" resultType="String">
-		SELECT p.P_S_WORD
+	<select id="detailPart" parameterType="String" resultType="kosta.soomgosusta.domain.PartVO">
+		SELECT *
 		FROM PART p
 		JOIN E_INFO e
 		ON p.P_SEQ = e.P_SEQ
@@ -121,4 +140,21 @@
 	<insert id="insertReply" parameterType="kosta.soomgosusta.domain.SC_ReplyVO">
 		INSERT INTO SC_REPLY VALUES(SC_REPLY_SEQ.NEXTVAL, #{sr_Contents}, sysdate, #{f_Seq})
 	</insert>
+	
+	<update id="updateMatch" parameterType="hashmap">
+		UPDATE MATCH SET M_STATUS = 'END', M_ED = sysdate
+		WHERE E_ID = #{e_Id} AND M_ID = #{m_Id} 
+	</update>
+	
+	<update id="updateRequest" parameterType="hashmap">
+		UPDATE REQUEST SET R_STATUS = 'END'
+		WHERE M_ID = #{m_Id} AND P_SEQ= #{p_Seq}
+	</update>
+	
+<!-- 	<delete id="removeSchedule">
+		DELETE FROM SCHEDULE s
+		JOIN MATCH mc
+		ON s.M_SEQ = mc.M_SEQ
+		WHERE mc.M_ID = #{m_Id}
+	</delete> -->
 </mapper>

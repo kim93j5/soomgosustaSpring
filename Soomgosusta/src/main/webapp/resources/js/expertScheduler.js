@@ -151,6 +151,29 @@ var scheduleService = (function(){
 		});  		
 	}
 	
+	function modifyMatch(data, callback, error){
+		console.log("modify Match..........");
+		console.log(data);
+		console.log("==========================");
+		
+		$.ajax({
+			type: 'put',
+			url: '/manageSchedule/modifyMatch/'+data.e_Id+'/'+data.m_Id+'/'+data.p_Seq,
+			data: JSON.stringify(data),
+			contentType: "application/json; charset=utf-8",
+			success: function(result, status, xhr){
+				if(callback){
+					callback(result);
+				}
+			},
+			error: function(xhr, status, er){
+				if(error){
+					error(er);
+				}
+			}
+		});
+	}
+	
 	return{
 		insert:insert,
 		getList:getList,
@@ -159,7 +182,8 @@ var scheduleService = (function(){
 		getCount:getCount,
 		modify:modify,
 		getFaq:getFaq,
-		insertReply:insertReply
+		insertReply:insertReply,
+		modifyMatch:modifyMatch
 	};
 })();
 

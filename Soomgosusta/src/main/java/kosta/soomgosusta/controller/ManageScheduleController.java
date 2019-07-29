@@ -103,4 +103,18 @@ public class ManageScheduleController {
 		return insertCount == 1 ? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
+	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH}, value="/modifyMatch/{e_Id}/{m_Id}/{p_Seq}", consumes="application/json", produces={MediaType.TEXT_PLAIN_VALUE})
+	public ResponseEntity<String> modify(@PathVariable("e_Id") String e_Id, @PathVariable("m_Id") String m_Id, @PathVariable("p_Seq") int p_Seq){
+		HashMap<String, Object> map = new HashMap<>();
+		log.info(m_Id + '/' + e_Id + '/' + p_Seq);
+		map.put("m_Id", m_Id);
+		map.put("e_Id", e_Id);
+		map.put("p_Seq", p_Seq);
+		
+		int updatecount = service.updateMatchService(map);
+		log.info(updatecount);
+		return service.updateMatchService(map) == 0? new ResponseEntity<>("success", HttpStatus.OK)
+				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 }

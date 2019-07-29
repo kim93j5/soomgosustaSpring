@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%-- <header>
+<header>
 	<jsp:include page="../includes/header.jsp"></jsp:include>
-</header> --%>
+</header>
 <html>
 <head>
 <link href='/resources/fullcalendar-4.2.0/packages/core/main.css'
@@ -17,10 +17,6 @@
 <script src='/resources/fullcalendar-4.2.0/packages/interaction/main.js'></script>
 <script src='/resources/fullcalendar-4.2.0/packages/daygrid/main.js'></script>
 <script src='/resources/fullcalendar-4.2.0/packages/timegrid/main.js'></script>
-<link rel="stylesheet"
-	href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
-<script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
-<script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/resources/js/memberScheduler.js"></script>
 <link rel="stylesheet" href="/resources/css/memberScheduler.css">
 <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/moment.min.js'></script>
@@ -32,12 +28,12 @@ var e_Id = 'nano124@gmail.com';
 scheduleService.getList(e_Id, function(list){
 	console.log(list);
 
-	var profile = "";
-	 profile += '<img src="/resources/images/' + list.expert.e_Photo + '">';
-	 profile += '<div id="info"><h4>'+ list.part + ' 서비스</h4>';
-	 profile += '<strong>' + list.expert.e_Name + '</strong> 고수<br>';	 
-	 profile += list.exInfo.ei_District + '<br>';
-	 profile += list.expert.e_Rc + '회 고용</div>';
+	 var profile = "";
+	 profile += '<div id="photo"><img src="/resources/images/' + list.expert.e_Photo + '"></div>';
+	 profile += '<div id="info"><p><strong>' + list.expert.e_Name + '</strong> 고수<p>';	 
+	 profile += '<p>'+ list.part.p_S_Word + ' 서비스</p>';
+	 profile += '<p>'+list.exInfo.ei_District + '<p>';
+	 profile += '<p>'+list.expert.e_Rc + '회 고용</p></div>';
 	 
 	 $('#profile').append(profile);
 	 	
@@ -239,11 +235,16 @@ var calendar = $('#calendar').fullCalendar({
 <title>Insert title here</title>
 </head>
 <body>
-	<div id='profile'></div>
-
-	<div id='calendar'></div>
+	<div id="container">	
+		<div class="profbody col-auto open">
+			<div id='profile'></div>
 	
-	<div id="menu">
+			<div id='link'></div>
+		</div>
+	
+		<div class="calbody">
+			<div id='calendar'></div>
+		</div>
 	</div>
 	<div class="modal fade" id="modal">
 		<div class="modal-dialog">

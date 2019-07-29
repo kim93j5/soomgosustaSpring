@@ -1,6 +1,7 @@
 
 package kosta.soomgosusta.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,7 @@ public class SchedulerServiceImpl implements SchedulerService {
 		schedule.setExInfo(mapper.detailExInfo(e_Id));
 		schedule.setListSchedule(mapper.listSchedule(e_Id));
 		schedule.setPart(mapper.detailPart(e_Id));
+		schedule.setListMatch(mapper.listMatch(e_Id));
 		
 		return schedule;
 	}
@@ -116,6 +118,14 @@ public class SchedulerServiceImpl implements SchedulerService {
 	public int insertReplyService(SC_ReplyVO reply) {
 
 		return mapper.insertReply(reply);
+	}
+
+	@Transactional
+	@Override
+	public int updateMatchService(HashMap<String, Object> map) {
+		log.info("service..............");
+		mapper.updateMatch(map);
+		return mapper.updateRequest(map);
 	}
 	
 	

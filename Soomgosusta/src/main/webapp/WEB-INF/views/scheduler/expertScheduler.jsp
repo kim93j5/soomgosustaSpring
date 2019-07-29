@@ -2,15 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%-- <header>
+<header>
 	<jsp:include page="../includes/header.jsp"></jsp:include>
-</header> --%>
+</header>
 <html>
 <head>
-<link rel="stylesheet"
-	href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
-<script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
-<script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <link href='/resources/fullcalendar-4.2.0/packages/core/main.css'
 	rel='stylesheet' />
 <link href='/resources/fullcalendar-4.2.0/packages/daygrid/main.css'
@@ -28,6 +24,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript">
 var e_Id = '<c:out value="${loginUser.e_Id}"/>';
+$(document).ready(function(){
+	 $('.member').hover(function(){
+			$(this).find('.btn').show();	 
+		  }, function(){
+			$(this).find('.btn').hide();	 
+		 });	
+});
 scheduleService.getList(e_Id, function(list){
 	console.log(list);
  	for(var i=0, len=list.listSchedule.length||0; i<len; i++){
@@ -36,13 +39,63 @@ scheduleService.getList(e_Id, function(list){
  	 
 	 var profile = "";
 	 profile += '<div id="photo"><img src="/resources/images/' + list.expert.e_Photo + '"></div>';
-	 profile += '<div id="info"><h4>'+ list.part + ' 서비스</h4>';
-	 profile += '<strong>' + list.expert.e_Name + '</strong> 고수<br>';	 
-	 profile += list.exInfo.ei_District + '<br>';
-	 profile += list.expert.e_Rc + '회 고용</div>';
+	 profile += '<div id="info"><p><strong>' + list.expert.e_Name + '</strong> 고수<p>';	 
+	 profile += '<p>'+ list.part.p_S_Word + ' 서비스</p>';
+	 profile += '<p>'+list.exInfo.ei_District + '<p>';
+	 profile += '<p>'+list.expert.e_Rc + '회 고용</p></div>';
 	  
 	 $('#profile').append(profile);
 
+	 var match = "<p>매칭 회원 목록</p>";
+	 for(var i=0, len= list.listMatch.length||0; i<len; i++){
+		 match += '<div class="member"><div class="m_photo"><img src="/resources/images/' + list.listMatch[i].m_Photo + '"></div>';
+		 match += '<div class="m_name">'+list.listMatch[i].m_Name+'</div>';
+		 match += '<div class="btn" style="display:none;"><button class="chat" type="button">채팅</button>';
+		 match += '<button class="done" type="button" data-id="'+ list.listMatch[i].m_Id+'">매칭끊기</button></div></div>';
+	 }
+	 	 
+	 $('#match').append(match);
+	 
+	 $('.member').hover(function(){
+		$(this).find('.btn').show();	 
+	  }, function(){
+		$(this).find('.btn').hide();	 
+	 });	
+	 
+	 $('.chat').click(function(){
+		 location.href="";
+	 });
+	 
+	 $(document).on("click", ".done", function(){
+		 var e_Id = '<c:out value="${loginUser.e_Id}"/>';
+		 var m_Id = $(this).data("id");
+		 var p_Seq = list.part.p_Seq;
+		 console.log(e_Id + '/' + m_Id + '/' + p_Seq);
+		 
+		 scheduleService.modifyMatch({e_Id:e_Id, m_Id:m_Id, p_Seq:p_Seq}, function(){
+			 scheduleService.getList(e_Id, function(list){
+				 $('#match').empty();
+				 var match = "<p>매칭 회원 목록</p>";
+				 for(var i=0, len= list.listMatch.length||0; i<len; i++){
+					 match += '<div class="member"><div class="m_photo"><img src="/resources/images/' + list.listMatch[i].m_Photo + '"></div>';
+					 match += '<div class="m_name">'+list.listMatch[i].m_Name+'</div>';
+					 match += '<div class="btn" style="display:none;"><button class="chat" type="button">채팅</button>';
+					 match += '<button class="done" type="button" data-id="'+ list.listMatch[i].m_Id+'">매칭끊기</button></div></div>';
+				 }
+				 	 
+				 $('#match').append(match);
+				 $('.member').hover(function(){
+						$(this).find('.btn').show();	 
+					  }, function(){
+						$(this).find('.btn').hide();	 
+					 });	
+					 
+					 $('.chat').click(function(){
+						 location.href="";
+					 });
+			 });
+		 });
+	 });
 	 
 	var dataset=[];
 	 for(var i=0, len=list.listSchedule.length||0; i<len; i++){
@@ -333,7 +386,7 @@ scheduleService.getList(e_Id, function(list){
 		<div class="profbody col-auto open">
 			<div id='profile'></div>
 	
-			<div id='link'></div>
+			<div id='match'></div>
 		</div>
 	
 		<div class="calbody">

@@ -9,5 +9,6 @@ public class ScheduleInfoDTO {
 	private List<SchedulerMatchDTO> listSchedule;
 	private ExpertVO expert;
 	private ExpertInfoVO exInfo;
-	private String part;
+	private PartVO part;
+	private List<MatchListDTO> listMatch;
 }
