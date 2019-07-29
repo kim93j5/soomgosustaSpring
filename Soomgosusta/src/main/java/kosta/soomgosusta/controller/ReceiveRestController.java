@@ -3,22 +3,28 @@ package kosta.soomgosusta.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 import javax.xml.stream.events.DTD;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import kosta.soomgosusta.domain.ChatRoomVO;
+import kosta.soomgosusta.domain.E_ProfileVO;
 import kosta.soomgosusta.domain.LinkDTO;
 import kosta.soomgosusta.domain.LinkVO;
 import kosta.soomgosusta.service.ChatRoomService;
@@ -47,21 +53,24 @@ public class ReceiveRestController {
 	
 	
 	
-	@GetMapping(value = "/chatlist", produces = { MediaType.APPLICATION_XML_VALUE,
+	@GetMapping(value = "/chatlist/{name}", produces = { MediaType.APPLICATION_XML_VALUE,
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
-	public List<ChatRoomVO> chatlist() {
-
-		return crService.getList();
+	public ResponseEntity<List<ChatRoomVO>> chatlist(@PathVariable("name") String e_Name){
+		
+		return new ResponseEntity<> (crService.getList(e_Name), HttpStatus.OK);
 	}
 	
 	
 
-	@GetMapping(value = "/receive", produces = { MediaType.APPLICATION_XML_VALUE,
-			MediaType.APPLICATION_JSON_UTF8_VALUE })
-	public List<LinkVO> list() {
-
-		return lService.getList();
+	@GetMapping(value = "/receivename/{name}",
+			produces ={MediaType.APPLICATION_JSON_UTF8_VALUE,
+						MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<LinkVO>> list(@PathVariable("name") String e_Name){
+		
+		return new ResponseEntity<> (lService.getListName(e_Name), HttpStatus.OK);
 	}
+
+	
 
 	@DeleteMapping(value = "/receive/{seq}", produces = { MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<String> remove(@PathVariable("seq") int seq) {

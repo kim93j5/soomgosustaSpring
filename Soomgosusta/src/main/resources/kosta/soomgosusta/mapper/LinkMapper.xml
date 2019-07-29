@@ -16,7 +16,25 @@
 		ON d.p_seq = c.p_seq
 		JOIN member b
 		ON d.m_id = b.m_id
-		WHERE a.e_id = 'sjun346@naver.com'
+		WHERE a.e_id = #{e_Id}
+	</select>
+	
+	<select id="getListName" resultMap="LinkMap" parameterType="String">
+		select 
+		a.l_percent,a.l_date,a.l_seq,a.r_seq,a.l_enter,a.l_status,a.e_id,
+		b.m_name,b.m_photo,
+		c.p_l_word,c.p_m_word,c.p_s_word,
+		d.r_status,d.r_date,
+		f.e_name
+		FROM link a join request d
+		ON a.r_seq = d.r_seq
+		JOIN part c
+		ON d.p_seq = c.p_seq
+		JOIN member b
+		ON d.m_id = b.m_id
+		JOIN expert f
+		ON f.e_id = a.e_id
+		WHERE f.e_name= #{name}
 	</select>
 	
 	<select id="read" resultMap="LinkMap">
@@ -71,6 +89,7 @@
 		<collection property="member" resultMap="Member"/>
 		<collection property="part" resultMap="Part"/>
 		<collection property="request" resultMap="Request"/>
+		<collection property="expert" resultMap="Expert"/>
 	</resultMap>
 	
 	<resultMap type="kosta.soomgosusta.domain.MemberVO" id="Member">
@@ -112,6 +131,17 @@
 		<result column="r_status" property="r_Status"/>
 		
 	</resultMap>
+	
+	<resultMap type="kosta.soomgosusta.domain.ExpertVO" id="Expert">
+		<result column="e_id" property="e_Id"/>
+		<result column="e_password" property="e_Password"/>
+		<result column="e_name" property="e_Name"/>
+		<result column="user_divide" property="user_Divide"/>
+		<result column="e_photo" property="e_Photo"/>
+		
+	</resultMap>
+	
+	
 	
 	
 	

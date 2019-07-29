@@ -32,9 +32,9 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 
 
 	@Override
-	public List<ChatRoomVO> getList() {
+	public List<ChatRoomVO> getList(String name) {
 		
-		return mapper.getList();
+		return mapper.getList(name);
 	}
 
 }

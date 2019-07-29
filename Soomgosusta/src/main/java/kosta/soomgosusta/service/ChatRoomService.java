@@ -8,7 +8,7 @@ import kosta.soomgosusta.domain.ChatRoomVO;
 
 public interface ChatRoomService {
 
-	public List<ChatRoomVO> getList();
+	public List<ChatRoomVO> getList(String name);
 	
 	public void insert(ChatRoomVO chatroom);
 }

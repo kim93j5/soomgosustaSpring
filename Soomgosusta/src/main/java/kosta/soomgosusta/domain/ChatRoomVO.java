@@ -14,6 +14,7 @@ public class ChatRoomVO {
 	private RequestVO request;
 	private LinkVO link;
 	private EstimateVO estimate;
+	private ExpertVO expert;
 	
 	
 }

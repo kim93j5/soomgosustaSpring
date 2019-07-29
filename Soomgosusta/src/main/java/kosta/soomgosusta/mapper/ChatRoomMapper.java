@@ -11,6 +11,6 @@ public interface ChatRoomMapper {
 
 	public void insert(ChatRoomVO chatroom);
 	
-	public List<ChatRoomVO> getList();
+	public List<ChatRoomVO> getList(String name);
 
 }

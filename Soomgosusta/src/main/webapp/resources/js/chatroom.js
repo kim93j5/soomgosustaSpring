@@ -2,9 +2,9 @@ console.log("chatroom Module");
 
 var chatroomService = (function() {
 
-	function getList(callback, error) {
+	function getList(name, callback, error) {
 
-		$.getJSON("/requests/chatlist" + ".json", function(data) {
+		$.getJSON("/requests/chatlist/" + name + ".json", function(data) {
 			if (callback) {
 				callback(data);
 			}
@@ -14,6 +14,9 @@ var chatroomService = (function() {
 			}
 		});
 	}
+	
+
+	
 
 	function get(seq, callback, error) {
 

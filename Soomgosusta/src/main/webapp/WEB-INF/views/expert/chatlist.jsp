@@ -41,7 +41,7 @@
 
 #app-body #chatlist-area {
 	min-height: -webkit-fill-available;
-	background-color: #EEEEEE;
+	background-color: #F7F7F7;
 	padding: 2.25rem 0 9.6875rem;
 }
 
@@ -155,7 +155,7 @@
 }
 
 #app-body #chatlist-area .chat-list .chatlist-item .divider {
-	height: .1625rem;
+	height: .1rem;
 	background-color: black;
 	margin: .75rem 0;
 }
@@ -180,7 +180,9 @@
 							var _pageHeader = $(".page-header");
 							var _chatlistUL = $(".chat-list");
 							var _notchatlist = $(".not-chat-list");
-
+	
+							var _name = '${loginUser.e_Name}';
+							
 							var header = "";
 
 							header += "<div class='page-header-container'>"
@@ -194,8 +196,9 @@
 							_pageHeader.html(header);
 
 							chatroomService
-									.getList(function(list) {
+									.getList(_name , function(list) {
 
+								
 										var str = "";
 
 										if (list == null || list.length == 0) {
