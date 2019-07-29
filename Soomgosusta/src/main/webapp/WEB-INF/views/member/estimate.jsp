@@ -2,6 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<header>
+   <jsp:include page="../includes/header.jsp"></jsp:include>
+</header>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -18,11 +23,13 @@ h3{
  font-weight: bold;
 }
 
-
 </style>
 <title>Insert title here</title>
 </head>
 <body>
+
+<%-- var m_Id = '<c:out value="${loginUser.m_Id}"/>'; --%>
+
 <div class="h2"><h2>받은 견적서 내역</h2></div>
 	<c:forEach var="list" items="${listEstimate }">
 
@@ -38,6 +45,13 @@ h3{
 			</div>
 		</div>
 	</c:forEach>
+	
+	
+	
+<!--  <form action="/member/estimate" method="post">
+    <input type="submit" value="매칭완료" id="match"></button>
+</form> -->
+<button type="button" onclick="location.href='/member/estimate/match'">매칭완료</button>
 
 </body>
 </html>

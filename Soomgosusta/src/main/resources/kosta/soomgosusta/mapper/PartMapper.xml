@@ -70,13 +70,25 @@
 	</select>
 	
 	
-	<select id="listPSeq" resultType="Int">
+	<select id="listPSeq" resultType="int">
 	    select p_seq from part where p_L_Word = #{p_L_Word} and
 	                                 p_M_Word = #{p_M_Word} and
 	                                 p_S_Word = #{p_S_Word}
 	</select>
 	
-		
+	<select id="listBest" resultMap="BestMap">
+	select pl.p_seq, p.p_s_word, p.p_image, pl.pl_request from part p 
+	JOIN part_log pl
+    ON pl.p_seq = p.p_seq 
+    order by pl.pl_request desc
+	</select>
+	
+	<resultMap type="kosta.soomgosusta.domain.BestDTO" id="BestMap">
+	   <result column="p_seq" property="p_Seq"/>
+	   <result column="p_s_word" property="p_S_Word"/>
+	   <result column="p_image" property="p_Image"/>
+	   <result column="pl_request" property="pl_Request"/>
+	</resultMap>	
 	
 	
 </mapper>

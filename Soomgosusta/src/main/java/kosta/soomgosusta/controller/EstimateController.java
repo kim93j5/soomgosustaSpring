@@ -10,9 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kosta.soomgosusta.domain.EstimateDTO;
+import kosta.soomgosusta.domain.MatchVO;
 import kosta.soomgosusta.service.EstimateService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -28,10 +31,20 @@ public class EstimateController {
 	@GetMapping("/estimate/{r_Seq}")
 	public String estimate(Model model, @PathVariable("r_Seq") int r_Seq){
 		List<EstimateDTO> listEstimate = service.listEstimateService(r_Seq);
-		
 		model.addAttribute("listEstimate", listEstimate);
 		log.info(listEstimate);
 		
 		return "member/estimate";
+	}
+	
+	@GetMapping("/estimate/match/{p_Seq}")
+	public void insertMatch(/* @RequestParam("m_Status") String m_Status,*/
+			/*, @RequestParam("e_Id") String e_Id, @RequestParam("m_Id") String m_Id*/ @PathVariable("p_Seq") int p_Seq, MatchVO matchVO){
+		matchVO.setM_Status("ING");
+		matchVO.setE_Id("nano");
+		matchVO.setM_Id("nano124");
+		
+		service.insertMatchService(matchVO, p_Seq);
+
 	}
 }
