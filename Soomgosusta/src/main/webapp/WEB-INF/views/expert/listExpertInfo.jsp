@@ -1,30 +1,63 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<header>
+   <jsp:include page="../includes/header.jsp"></jsp:include>
+</header>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <script type="text/javascript" src="../resources/js/jquery.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">   
+<script type="text/javascript" src="/resources/js/expertInfo.js"></script>
+<link rel="stylesheet" href="/resources/css/expertInfo.css" target="text/css">
+<link rel="stylesheet" href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
+<script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
+<script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">    -->
 <title>Insert title here</title>
-</head>
-<body>
+<style type="text/css">
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
 
-	<!-- <script type="text/javascript">
-var checkedLarge = $('input:radio[name=large]:checked').val();
-if(checkedLarge == undefined){
-	alert('옵션을 선택하세요.')
-}else{
-	alert(checkedLarge + "를 선택하셨습니다.");
+p{
+    margin-bottom: 30px;
+    line-height: 1.7;
 }
-</script> -->
 
-	<!----------------------- 활동가능 지역 ------------------------>
-	<script type="text/javascript">
-$('document').ready(function() {
+h1 {
+    display: block;
+    font-size: 24px;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    font-family: 'Nanum Gothic Coding', monospace;
+}
+
+label{
+  height: 21px;
+  font-size: 16px;
+  font-family: 'Nanum Gothic Coding', monospace;
+  margin: 0px, 0px, -6px;
+  margin-left: 2px;
+}
+
+
+li {
+    text-align: -webkit-match-parent;
+}
+
+
+</style>
+</head>
+<body style="background-color: PowderBlue">
+
+   <!----------------------- 활동가능 지역 ------------------------>
+   <script type="text/javascript">
+$(document).ready(function() {
    var area0 = ["시/도 선택","서울특별시","인천광역시","대전광역시","광주광역시","대구광역시","울산광역시","부산광역시","경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"];
    var area1 = ["강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구","동작구","마포구","서대문구","서초구","성동구","성북구","송파구","양천구","영등포구","용산구","은평구","종로구","중구","중랑구"];
    var area2 = ["계양구","남구","남동구","동구","부평구","서구","연수구","중구","강화군","옹진군"];
@@ -71,87 +104,159 @@ $('document').ready(function() {
 
 });
 
+
+$(document).on("click", ".next1", function getMWordsList(){
+   
+       var LWord = $('input:radio[id="large"]:checked').val();
+       console.log(LWord);
+       expertInfoService.getMWords(LWord, function(list){
+             console.log(LWord);
+             var str = "";
+                 for(var i = 0, len = list.length||0;i<len;i++){
+                       str +="<div id='first_select_MWord'>"
+                       str += "<ul><li class = 'listpart'><div class = 'radio_btn'><label><input name='medium' id='medium' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br></label></div></li></ul>";
+     
+                   
+                                 console.log(list[i]);
+                 }
+                     str += "<br><button type='button' id='prev1'>< 이전</button>&nbsp;";
+                     str += "<button type='button' id='next2'>다음 ></button>";
+                     str += "</div>"
+                 $("#first_select_LWord").css('display','none');
+                 $(".part").css('display','none'); 
+                 $("#detailPart1").css('display','block'); 
+                 $(".detailPart1").css('display','block'); 
+                 $("#part_select1").append(str);
+        });       
+
+    $("#part_select1").on("click","#next2" ,function getSWordsList(){
+       var MWord = $('input:radio[id="medium"]:checked').val();
+       var LWord = $('input:radio[id="large"]:checked').val();
+       console.log(MWord);
+       console.log(LWord);
+       expertInfoService.getSWords(LWord,MWord, function(list){
+             console.log(MWord);
+             console.log(LWord);
+             var str = "";
+                 for(var i = 0, len = list.length||0;i<len;i++){
+                      str+="<div id='first_select_SWord'>"
+                      str += "<ul><li class = 'listpart'><div class = 'radio_btn'><label><input name='small' id='small' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br></label></div></li></ul>";
+                   
+                              console.log(list[i]);
+                 }
+                 str += "<br><button type='button' id='prev2'>< 이전</button>&nbsp;";
+                 str += "<button type='button' id='next3'>다음 ></button>";
+                 str +="</div>";
+                 $("#first_select_MWord").css('display','none');
+                 $("#first_select_MWord").after(str);
+                 $("#detailPart1").css('display','none'); 
+                 $("#detailPart2").css('display','block'); 
+                 $(".detailPart1").css('display','none'); 
+                 $(".detailPart2").css('display','block'); 
+                 
+        });
+    });
+
+    $("#part_select1").on("click","#next3" ,function getSecondSelect(){
+        $("#first_select_SWord").css('display','none');     
+        $(".part").css('display','none');
+        $('#select_Question').css('display', 'block');
+        $('#select_Answer').css('display', 'block');
+        $("#detailPart2").css('display','none'); 
+        $(".detailPart2").css('display','none'); 
+        $('#hidden').css('display', 'none');
+     
+       var MWord = $('input:radio[id="medium"]:checked').val();
+       var LWord = $('input:radio[id="large"]:checked').val();
+       var SWord = $('input:radio[id="small"]:checked').val();
+    
+    });
+});
+
 </script>
+<div id="container">
+<form name=form method="post" id="form" action="/expert/listExpertInfo/main">
 
-<form name=form method="post" action="/expert/listExpertInfo/main">
-	<!----------------------- 대분류 ------------------------>
-	<div id="first_select">
-		<h3>고수님! 분야를 선택해주세요</h3>
-		<c:forEach var="large" items="${large}">
-			<input id="large" name="large" type="radio" value="${large}">${large}<br>
-		</c:forEach>
-		<br>
-		<button type="button" id="next1">다음</button>
-	</div>
+   <!----------------------- 분야 대/중/소 ------------------------>
+   <div id="part_select1">
+      <h1 class="part">전문가로 활동하시는 분야를 선택해주세요.</h1>
+      
+      <div id="detailPart1"><h1 class="detailPart1">고수님 반갑습니다.<p>어떤 서비스를 제공하실 수 있나요?</p></h1>
+      <p class="detailPart1">전문적으로 하시는 일을 알려주시면 서비스를 필요로 하는 고객을 연결시켜 드립니다.</p>
+      </div>
+      
+      <div id="detailPart2"><h1 class="detailPart2">구체적으로 어떤 서비스를 제공할 수 있나요?</h1>
+      <p class="detailPart2">진행하고자 하는 서비스에 대해 알려주세요. 딱!맞는 분을 연결시켜 드릴게요.</p>
+      </div>
+     
+     <div id="first_select_LWord">
+      <c:forEach var="large" items="${large}">
+        <ul>        
+          <li class="listpart">
+            <div class="radio_btn">
+              <label><input id="large" name="large" type="radio" value="${large}">${large}<br></label>
+            </div>
+          </li> 
+        </ul>
+      </c:forEach>
+      <br>
+      <div id="next1">
+      <button type="button" class="next1">다음 ></button>
+      </div>
+     </div>
+   </div>
 
-	<!----------------------- 중분류 ------------------------>
-	<div id="second_select">
-		<h3>고수님! 분야를 선택해주세요</h3>
-		<c:forEach var="medium" items="${medium}">
-			<%-- <c:if test="${checkedLarge =='레슨'}">
-               <input name="medium" type="radio" value="${medium }">${medium}<br>
-             </c:if> --%>
-			<input name="medium" type="radio" value="${medium }">${medium}<br>
-		</c:forEach>
-		<br>
-		<button type="button" id="next2">다음</button>
-	</div>
+   <!-------------------- 시간대/시작날짜/성별 -------------------->
+   <div id="select_Question">
+       <c:forEach var="listQuestion" items="${listQuestion}">
+            <input type="hidden" name="q_Seq" value="${listQuestion.q_Seq}">
+         <div id="select_Answer" style="display: block;">
+            <h1 class="question">${listQuestion.q_Contents}</h1>
+            <ul class="addInfo">
+               <c:forEach var="listAnswer" items="${listAnswer}">
+                    <c:if test="${listAnswer.q_Seq == listQuestion.q_Seq}">
+                     <li class="answer">
+                          <div class="radio_btn">
+                             <label><input type="checkbox" name="a_Seq" value="${listAnswer.a_Seq}">
+                                   ${listAnswer.a_Contents }</label>
+                         </div>
+                     </li>
+                  </c:if>
+               </c:forEach>
+            </ul>
+         </div>
 
-	<!----------------------- 소분류 ------------------------>
-	<div id="third_select">
-		<h3>고수님! 분야를 선택해주세요</h3>
-		<c:forEach var="small" items="${small }">
-			<input name="small" type="radio" value="${small }">${small}<br>
-		</c:forEach>
-		<br>
-		<button type="button" id="next3">다음</button>
-	</div>
+      </c:forEach>
+           <button type="button" id="prev4"> < 이전  </button>         
+           <button type="button" id="next4"> 다음 > </button>
+      
+   </div>
 
-	<!-------------------- 시간대/시작날짜/성별 -------------------->
-	<div id="select_Question">
-		<c:forEach var="listQuestion" items="${listQuestion}">
-			<input type="hidden" name="q_Seq" value="${listQuestion.q_Seq}">
-			<div id="select_Answer" style="display: block;">
-				<h3>${listQuestion.q_Contents }</h3>
-				<ul>
-					<c:forEach var="listAnswer" items="${listAnswer}">
- 					   <c:if test="${listAnswer.q_Seq == listQuestion.q_Seq}">
-							<li class="answer">
-							  <input type="checkbox" name="a_Seq" value="${listAnswer.a_Seq}"> 
-							    ${listAnswer.a_Contents }
-							</li>
-						</c:if>
-					</c:forEach>
-				</ul>
-			</div>
-			  <button type="button" id="next4">다음</button>
-		</c:forEach>
-		
-	</div>
+   <!----------------------- 활동가능 지역 ------------------------>
+   <div id="select_District">
+      <div id="detailPart3"><h1 class="detailPart3">활동 가능한 지역을 선택해주세요(최대3개)</h1>
+      <p>위치를 알려주세요. 근처의 고객을 찾는데 도움이 됩니다.</p></div>
+      <div id="district_select1">
+         <select name="sido" id="sido"></select> 
+         <select name="sigungu" id="sigungu"></select> <br>
+         <button type="button" id="addDistrict1"> + </button>
+      </div>
 
-	<!----------------------- 활동가능 지역 ------------------------>
-	<div id="select_District">
-		<h3>고수님! 활동가능한 지역을 선택해주세요(최대3개)</h3>
-		<div id="district_select1">
-			<select name="sido" id="sido"></select> 
-			<select name="sigungu" id="sigungu"></select> <br>
-			<button type="button" id="addDistrict1">지역 선택 추가</button>
-		</div>
+      <div id="district_select2">
+         <select name="sido" id="sido"></select> 
+         <select name="sigungu" id="sigungu"></select> <br>
+         <button type="button" id="addDistrict2"> + </button>
+      </div>
 
-		<div id="district_select2">
-			<select name="sido" id="sido"></select> 
-			<select name="sigungu" id="sigungu"></select> <br>
-			<button type="button" id="addDistrict2">지역 선택 추가</button>
-		</div>
-
-		<div id="district_select3">
-			<select name="sido" id="sido"></select> 
-			<select name="sigungu"id="sigungu"></select> <br>
-		</div>
-
-		<input type="submit" value="고수 회원가입완료" id="hidden">
-	</div>
+      <div id="district_select3">
+         <select name="sido" id="sido"></select> 
+         <select name="sigungu"id="sigungu"></select> <br>
+      </div>
+      
+      <button type="button" id="prev5"> < 이전 </button>
+      <input type="submit" value="회원가입완료" id="hidden">
+   </div>
 </form>
-
+</div>
 </body>
 </html>

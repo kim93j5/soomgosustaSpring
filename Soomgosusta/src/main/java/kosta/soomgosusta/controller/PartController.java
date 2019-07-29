@@ -35,36 +35,7 @@ public class PartController {
 		return "/part/listQNA";
 	}
 
-/*	@GetMapping("/listExpertInfo")
-	 public void listExpertInfo(Model model) {
-		
-		List<PartVO> listExpertInfo = service.listPartService();
-		List<String> lWord = new ArrayList<>();
-        List<String> mWord = new ArrayList<>();
-	    List<String> sWord = new ArrayList<>();
-		    for(int i = 0; i < listExpertInfo.size(); i++){
-		       
-		       PartVO part = listExpertInfo.get(i);
-		       if(!lWord.contains(part.getP_L_Word())){
-		          lWord.add(part.getP_L_Word());
-		       }
-		       if(!mWord.contains(part.getP_M_Word())){
-		          mWord.add(part.getP_M_Word());
-		       }
-		       if(!sWord.contains(part.getP_S_Word())){
-		          sWord.add(part.getP_S_Word());
-		       }
-		    }
-		    
-		    model.addAttribute("large", lWord);
-		    model.addAttribute("medium", mWord);
-		    model.addAttribute("small", sWord);
-			
-		    
-		    model.addAttribute("listQuestion", service.listExpertQusetionService());
-		    model.addAttribute("listAnswer", service.listExpertAnswerService());
-	
-		 }*/
+
 	
 
 }

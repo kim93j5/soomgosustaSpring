@@ -208,7 +208,7 @@ public class ExpertController {
 		
 		List<PartVO> listExpertInfo = partService.listPartService();
 		List<String> lWord = new ArrayList<>();
-       List<String> mWord = new ArrayList<>();
+        List<String> mWord = new ArrayList<>();
 	    List<String> sWord = new ArrayList<>();
 		    for(int i = 0; i < listExpertInfo.size(); i++){
 		       
