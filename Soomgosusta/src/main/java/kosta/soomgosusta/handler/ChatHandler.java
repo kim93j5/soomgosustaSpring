@@ -39,9 +39,9 @@ public class ChatHandler extends TextWebSocketHandler {
 		logger.info("{}로 부터 {} 받음", session.getId(),message.getPayload());
 		
 		ChatVO cvo = ChatVO.convertMessage(message.getPayload());
+		
 		for(WebSocketSession sess : sessionList){
 				sess.sendMessage(new TextMessage(cvo.getCh_Contents()));
-				sess.sendMessage(new TextMessage(cvo.getCh_Receiver()));
 				sess.sendMessage(new TextMessage(cvo.getCh_Sender()));
 		}
 	}

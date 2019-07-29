@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kosta.soomgosusta.domain.LoginDTO;
+import kosta.soomgosusta.domain.MemberInfoVO;
+import kosta.soomgosusta.domain.MemberMypageDTO;
 import kosta.soomgosusta.domain.MemberVO;
 import kosta.soomgosusta.mapper.MemberMapper;
 import lombok.Setter;
@@ -82,6 +84,41 @@ public class MemberServiceImpl implements MemberService {
 		
 		MemberVO memberVO = mapper.findMember(login_Id);
 		return memberVO;
+	}
+
+
+	@Override
+	public String getMemberPart(int pSeq) {
+		return mapper.getMemberPart(pSeq);
+	}
+
+
+	@Override
+	public int getPSeq(String p_L_Word, String p_M_Word, String p_S_Word) {
+		return mapper.getPSeq(p_L_Word, p_M_Word, p_S_Word);
+	}
+
+
+	@Override
+	public void insertMemberAddInfo(MemberInfoVO memberAddInfo) {
+		
+		mapper.insertMemberAddInfo(memberAddInfo);
+		
+	}
+
+
+	@Override
+	public MemberMypageDTO getMemberMypageInfo(String m_Id) {
+		return mapper.getMemberMypageInfo(m_Id);
+	}
+
+
+	@Override
+	public int memberImageUpdate(String m_Id, String m_Photo) {
+		log.info(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,");
+		log.info(m_Id);
+		log.info(m_Photo);
+		return mapper.memberImageUpdate(m_Id, m_Photo);
 	}
 	
 	

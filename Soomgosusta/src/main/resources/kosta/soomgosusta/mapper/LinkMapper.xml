@@ -66,7 +66,18 @@
 		update link set l_status = 'write' where l_seq = #{l_Seq}
 	</update>
 	
+	<select id="getExpertAddInfo" resultType="kosta.soomgosusta.domain.ExpertInfoVO">
+		select * from e_info where p_Seq = #{p_Seq}
+	</select>
+	
+	<select id="getRequestInfo" resultMap="Request">
+		select * from request where m_id = #{m_Id} 
+	</select>
 
+	<insert id="insertLink">
+		insert into link values(link_seq.nextval,'NOT',sysdate,#{r_seq},#{e_Id},#{l_Percent},'NOT')
+	</insert>
+	
 	<resultMap type="kosta.soomgosusta.domain.LinkVO" id="LinkMap">
 		<result column="l_seq" property="l_Seq"/>
 		<result column="r_seq" property="r_Seq"/>
