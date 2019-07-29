@@ -159,6 +159,112 @@ $('document').ready(function() {
    });
  
 });
+
+
+
+$("#category").on('click', '#id_path_category1', function () {
+    $("#id_list_category1").show();
+    $("#id_list_category2").hide();
+    $("#id_list_service").hide();
+
+    $("#id_path_category1").hide();
+    $("#id_path_category2").hide();
+    $("#id_path_service").hide();
+
+});
+$("#category").on('click', '#id_path_category2', function () {
+    $("#id_list_category1").hide();
+    $("#id_list_category2").show();
+    $("#id_list_service").hide();
+
+    $("#id_path_category1").show();
+    $("#id_path_category2").hide();
+    $("#id_path_service").hide();
+
+});
+$("#category").on('click', '#id_path_service', function () {
+    $("#id_list_category1").hide();
+    $("#id_list_category2").hide();
+    $("#id_list_service").show();
+
+    $("#id_path_category1").show();
+    $("#id_path_category2").show();
+    $("#id_path_service").hide();
+});
+
+$("#category").on('click', '.category1', function() {
+    var categoryUrl = "/api/category2/id".replace('id', $(this).data('category1'));
+    var category1Label = $(this).data('category1-label');
+
+    $.get(categoryUrl, {}).done(function (data) {
+        var liElement = "";
+        $("#id_list_category2").empty();
+
+        for (key in data) {
+            liElement += '<li class="list-group-item list-group-item-category2" data-category2="' + data[key].id + '" data-category2-label="' + data[key].title + '">'
+                    + data[key].title
+                    + '</li>';
+        }
+        $("#id_list_category2").append(liElement).removeClass("hide").show();
+        $("#id_list_category1").hide();
+
+        var menuRightHtml = ' <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> ';
+
+        $("#id_path_category1").html(category1Label + menuRightHtml).removeClass("hide").show();
+
+    });
+
+});
+$("#category").on('click', '.list-group-item-category2', function() {
+    var category2 = $(this).data('category2');
+    var category2Label = $(this).data('category2-label');
+
+    $.get("/api/service-category/", {
+        'category2': [category2]
+
+    }).done(function (data) {
+        var liElement = "";
+        $("#id_list_service").empty();
+
+        for (key in data) {
+            var checkedStatus = "";
+            if (data[key].service.id in serviceDict) {
+                checkedStatus = " checked ";
+
+            }
+
+            liElement += '<li class="list-group-item"><div class="checkbox"><label>'
+                    + '<input class="service" id="service-' + data[key].service.id  + '" name="service[]" type="checkbox" value="' + data[key].service.id + '" data-service-label="' +data[key].service.title + '" ' +checkedStatus+ '>'
+                    + data[key].service.title
+                    + '</label></div></li>';
+
+        }
+        $("#id_list_service").append(liElement).removeClass("hide").show();
+        $("#id_list_category2").hide();
+
+        var menuRightHtml = ' <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> ';
+        $("#id_path_category2").html(category2Label + menuRightHtml).removeClass("hide").show();
+
+    });
+
+});
+
+$("#category").on('change', 'input.service', function() {
+
+    $("#id_list_service input[type='checkbox']").each(function () {
+        var thisVal = $(this).val();
+
+        if ($(this).prop("checked")) {
+            serviceDict[$(this).val()] = $(this).data('service-label');
+        } else {
+            delete serviceDict[$(this).val()];
+
+        }
+
+    });
+    showServiceTags();
+
+});
  
       
        </script>
@@ -192,9 +298,48 @@ $('document').ready(function() {
                     <button type="button" id="3_btn">다음</button>
              <br><br><br>
              </div>
-       </div>
-      
-       <br><br><br>
+       </div>		
+       
+       <div role="tabpanel" class="tab-pane" id="category">
+			<h3>서비스 카테고리</h3>
+			<div class="tag-container">
+
+			</div>
+			<p class="strong">관심있는 분야를 선택해주세요!</p>
+			<div class="path">
+				<span id="id_path_category1" class="hide"></span> <span
+					id="id_path_category2" class="hide"></span> <span
+					id="id_path_service" class="hide"></span>
+			</div>
+			<div id="id_list_category1">
+
+				<div class="category1" data-category1="29" data-category1-label="레슨">
+					레슨</div>
+
+				<div class="category1" data-category1="30"
+					data-category1-label="홈 리빙">홈/리빙</div>
+
+				<div class="category1" data-category1="31"
+					data-category1-label="이벤트">이벤트</div>
+
+
+
+				<div class="category1" data-category1="33"
+					data-category1-label="디자인/개발">디자인/개발</div>
+
+				<div class="category1" data-category1="34"
+					data-category1-label="건강/미용">건강/미용</div>
+
+				<div class="category1" data-category1="36" data-category1-label="알바">
+					알바</div>
+
+				<div class="category1" data-category1="35" data-category1-label="기타">
+					기타</div>
+
+			</div>
+			<ul id="id_list_category2" class="list-group hide"></ul>
+			<ul id="id_list_service" class="list-group hide"></ul>
+		</div><br><br><br>
        
        </form>
 </body>

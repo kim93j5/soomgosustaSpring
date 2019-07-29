@@ -52,15 +52,27 @@
    </interceptors>
    
    	<!-- websocket Handlers -->
-	<beans:bean id="chatHandler" class="kosta.soomgosusta.handler.ChatHandler"/>
-	
+	<beans:bean id="chatHandler" class="kosta.soomgosusta.handler.ChatHandler" />
 	<websocket:handlers>
 		<websocket:mapping handler="chatHandler" path="/chating" />
 		<websocket:handshake-interceptors>
-			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+			<beans:bean
+				class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
 		</websocket:handshake-interceptors>
-			<websocket:sockjs/>
+		<websocket:sockjs />
 	</websocket:handlers>
+	
+	<beans:bean id="alarmHandler" class="kosta.soomgosusta.handler.AlarmHandler" />
+	<websocket:handlers>
+	<websocket:mapping handler="alarmHandler" path="/alarm" />
+		<websocket:handshake-interceptors>
+			<beans:bean
+				class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
+		</websocket:handshake-interceptors>
+		<websocket:sockjs />
+	</websocket:handlers>
+	
+	
 	
    <!-- <interceptors> <interceptor> <mapping path="/expert/profile"/> <beans:ref 
       bean="authInterceptor"/> </interceptor> </interceptors> -->
