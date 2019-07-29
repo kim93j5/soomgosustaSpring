@@ -19,6 +19,8 @@ public interface ExpertMapper {
 
 	int updateProfile(E_ProfileVO vo);
 
-	int insertExpertInfo(ExpertInfoVO expert_Info);
+	void insertExpertInfo(ExpertInfoVO expert_Info);
+	
+	int countRegister(int p_Seq);
 
 }

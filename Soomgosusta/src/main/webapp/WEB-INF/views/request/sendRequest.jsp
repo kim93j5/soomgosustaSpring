@@ -2,29 +2,36 @@
    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<header>
+   <jsp:include page="../includes/header.jsp"></jsp:include>
+</header>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="/resources/js/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/sendRequest.js"></script>
-<link rel="stylesheet" href="/resources/css/memberMain.css"
-   target="text/css">
-<link rel="stylesheet"
-   href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/css/memberMain.css" target="text/css">
+<link rel="stylesheet" href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
 <script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
 <script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 
 
 <style type="text/css">
-h3 {
+h3{
    margin-top: 0px;
    text-align: center;
 }
 
-h5 {
+h5{
    font-weight: bold;
-   font-size: 13px;
+   font-size: 10px;
    color: blue;
+}
+
+p{
+   font-size: 13px;
+
 }
 </style>
 
@@ -53,8 +60,8 @@ h5 {
 
                             str += '<div class="sendOneRequest">';
                             str += '<div id = "sendPart"><br>';
-                            str += '<h3>' + list.requestDTO[i].p_S_Word
-                                  + '</h3>';
+                            str += '<h5>' + list.requestDTO[i].p_S_Word
+                                  + '</h5>';
                             str += '<p>요청시간<br><' + list.requestDTO[i].requestTime +'></p></div>';
                             str += '<div id = "sendTime"><br>';
                             
@@ -73,12 +80,9 @@ h5 {
                                str += '<button class="btn-btn-default" data-num="'+i+'"'+ 'data-value="'+list.requestDTO[i].p_S_Word+'"' + 'id="detailButton' + i + '">요청서 보기</button>';    
                            
                             }else if(list.request[i].r_Status == 'Cancel'){
-                            	str += '<p>취소된 요청서입니다.</p>'
+                            	str += '<div class = "cancelContents"><p>취소된 요청서입니다.</p></div>'
                             }
 
-
-
-     
                           $(document).on("click", "#detailButton" + i, function(){
                           var word = $(this).data("value");  
                           var num = $(this).data("num");
@@ -329,8 +333,8 @@ h5 {
 </script>
 
 <body>
-   <div class="h1">
-      <h1>보낸 요청</h1>
+   <div class="send">
+      <h4>보낸 요청</h4>
    </div>
    <div id="sendRequestForm"></div>
    <div class="modal fade" id="modal">
@@ -348,6 +352,42 @@ h5 {
       <!-- /.modal-dialog -->
    </div>
    <!-- /.modal -->
+   
+  <div class="recommendInfo">
+   <h4>추천서비스<br></h4>
+   </div> 
+   
+   <div id="recommend">
+     <c:forEach var="list" begin="1" end="8" items="${listRandom}">
+        <div id="recommendService">
+        
+        
+        <a href="#">
+           <img class="img" src="/resources/images/${list.p_Image }">
+            <p>${list.p_S_Word }</p>          
+        </a>     
+        
+        </div>
+     </c:forEach>
+    </div> 
+    
+    <div id="best">
+    <h4>인기서비스</h4>
+    </div>
+    <div id="bestPopular">
+      <c:forEach var="listBest" begin="1" end="8" items="${listBest }">
+        <div id="recommendService">
+        
+        
+        <a href="#">
+           <img class="img" src="/resources/images/${listBest.p_Image }">
+            <p>${listBest.p_S_Word }</p>          
+        </a>     
+        
+        </div>
 
+
+      </c:forEach>
+    </div>
 </body>
 </html>

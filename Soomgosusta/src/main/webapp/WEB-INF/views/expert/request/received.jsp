@@ -203,7 +203,7 @@
 							var _modalNoDelBtn = $("#modalNoDelBtn");
 
 							//var sessionId = 
-							//	${loginUser.e_id};
+							//	${loginUser.e_Id};
 
 							//console.log(sessionId);	
 

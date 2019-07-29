@@ -5,8 +5,7 @@
 
 <html>
 <head>
-<link rel="stylesheet"
-	href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
 <script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
 <script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="/resources/css/header.css">
@@ -14,8 +13,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:set var='expert' value="${expert}" scope="request" />
-	<c:set var='member' value="${member}" scope="request" />
+   <c:set var='expert' value="${expert}" scope="request" />
+   <c:set var='member' value="${member}" scope="request" />
 
 	<div class="banner">
 		<c:choose>
@@ -80,44 +79,7 @@
 						</a>
 					</div>
 				</div>
-				<div class="right_">
-					<div>
-						<span>"${loginUser.m_Name}"고객님</span>
-					</div>
-					<div>
-						<a id="logout" href="/main/logout"><span>로그아웃</span></a>
-					</div>
-				</div>
-<%-- 				<form action="memberAddInfo.do?member_Id=${id}" method="get">
-					<input type="hidden" name="member_Id" value="${id}" /> <input
-						type="submit" value="이용자 부가 정보 입력" />
-				</form> --%>
 			</c:when>
-
-
-			<c:otherwise>
-				<div class="left_">
-					<div>
-						<a href="/part/main"> <img
-							src="https://dmmj3ljielax6.cloudfront.net/static/img/home/index_soomgo_logo.svg"
-							alt="숨고, 숨은고수">
-						</a>
-					</div>
-				</div>
-				<div class="right_">
-					<div>
-						<a href="/main/regist">회원가입</a>
-					</div>
-					<div>
-						<div class="select">
-							<select name="" id="loginState">
-								<option value="member">회원</option>
-								<option value="expert">고수</option>
-							</select> <a id="login" href="#">로그인</a> <a id="loginteg"></a>
-						</div>
-					</div>
-				</div>
-			</c:otherwise>
 		</c:choose>
 	</div>
 </body>

@@ -1,5 +1,7 @@
 package kosta.soomgosusta.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,7 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kosta.soomgosusta.domain.AnswerVO;
+import kosta.soomgosusta.domain.BestDTO;
+import kosta.soomgosusta.domain.MemberInfoVO;
+import kosta.soomgosusta.domain.PartVO;
 import kosta.soomgosusta.domain.QuestionVO;
+import kosta.soomgosusta.mapper.RecommendMapper;
+import kosta.soomgosusta.service.PartService;
+import kosta.soomgosusta.service.RecommendService;
 import kosta.soomgosusta.service.RequestService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -22,6 +30,8 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class RequestController {
 	private RequestService service;
+	private RecommendService recommendService;
+	private PartService partService;
 
 	@PostMapping("/detailRequest")
 	public void detailRequest(@RequestParam("p_Seq") String p_Seq, @RequestParam("p_S_Word") String p_S_Word,
@@ -89,8 +99,59 @@ public class RequestController {
 	}
 
 	@GetMapping("/sendRequest")
-	public void sendRequest() {
+	public void sendRequest(Model model) {
+		//추천서비스
+		String m_Id = "nano124";
+		MemberInfoVO interestPart = recommendService.recommendInfoService(m_Id);
+		int interest_P1 = interestPart.getM_Ip1();  //첫번째 관심분야 번호 
+		int interest_P2 = interestPart.getM_Ip2();  
+		int interest_P3 = interestPart.getM_Ip3();  
+		
+		List<PartVO> list_LMS = partService.listPartService();
+		List<String> list_M_Word = new ArrayList<>();
+		List<PartVO> listRandom = new ArrayList<>();
+		
+		for(int i = 0; i < list_LMS.size(); i++){
+			if(list_LMS.get(i).getP_Seq() == interest_P1){
+				String M1 = list_LMS.get(i).getP_M_Word();  
+				list_M_Word.add(M1);
+				
+			}else if(list_LMS.get(i).getP_Seq() == interest_P2){
+				String M2 = list_LMS.get(i).getP_M_Word();
+				list_M_Word.add(M2);
 
+			}else if(list_LMS.get(i).getP_Seq() == interest_P3){
+				String M3 = list_LMS.get(i).getP_M_Word();
+				list_M_Word.add(M3);
+			}
+		}
+		
+		for(int i = 0; i < list_LMS.size(); i++){
+			for(int j = 0; j < list_M_Word.size(); j++){
+				if(list_LMS.get(i).getP_M_Word().equals(list_M_Word.get(j))){
+					listRandom.add(list_LMS.get(i));
+				}
+			}
+		}
+		
+		Collections.shuffle(listRandom);
+		
+		model.addAttribute("listRandom", listRandom);
+		
+		//인기서비스
+		List<BestDTO> listBest = partService.listBestService();
+		model.addAttribute("listBest", listBest);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
-	
 }

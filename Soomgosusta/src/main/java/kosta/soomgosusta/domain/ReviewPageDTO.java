@@ -1,13 +1,21 @@
 package kosta.soomgosusta.domain;
 
+import java.util.List;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.ToString;
 
+@Data
+@AllArgsConstructor
 @Getter
-@ToString
 public class ReviewPageDTO {
-
-	private int startPage;
+		
+	private int reviewCnt;
+	private List<ReviewVO> list;
+	
+	/*private int startPage;
 	private int endPage;
 	private boolean prev, next;
 	
@@ -28,5 +36,5 @@ public class ReviewPageDTO {
 		}
 		this.prev = this.startPage > 1;
 		this.next = this.endPage < realEnd;
-	}
+	}*/
 }

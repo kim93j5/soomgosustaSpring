@@ -73,7 +73,7 @@ $('document').ready(function() {
 
 </script>
 
-<form name=form method="post" action="/expert/listExpertInfo">
+<form name=form method="post" action="/expert/listExpertInfo/main">
 	<!----------------------- 대분류 ------------------------>
 	<div id="first_select">
 		<h3>고수님! 분야를 선택해주세요</h3>

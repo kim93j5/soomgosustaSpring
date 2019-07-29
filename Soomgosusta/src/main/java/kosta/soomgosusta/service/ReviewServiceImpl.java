@@ -1,6 +1,7 @@
 package kosta.soomgosusta.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import kosta.soomgosusta.domain.Criteria;
+import kosta.soomgosusta.domain.MatchDTO;
+import kosta.soomgosusta.domain.MemberVO;
+import kosta.soomgosusta.domain.ReviewPageDTO;
 import kosta.soomgosusta.domain.ReviewVO;
 import kosta.soomgosusta.mapper.ReviewMapper;
 import lombok.AllArgsConstructor;
@@ -31,9 +35,9 @@ public class ReviewServiceImpl implements ReviewService {
 
 
 	@Override
-	public ReviewVO get(int re_seq) {
+	public ReviewVO get(int re_Seq) {
 		// TODO Auto-generated method stub
-		return mapper.get(re_seq);
+		return mapper.get(re_Seq);
 	}
 
 
@@ -45,15 +49,35 @@ public class ReviewServiceImpl implements ReviewService {
 
 
 	@Override
-	public int remove(int re_seq) {
+	public int remove(int re_Seq) {
 		// TODO Auto-generated method stub
-		return mapper.delete(re_seq);
+		return mapper.delete(re_Seq);
 	}
 
 
 	@Override
 	public List<ReviewVO> getList(Criteria cri, String e_Id) {
 		return mapper.getListWithPaging(cri, e_Id);
+	}
+
+
+	@Override
+	public int findMatch(Map<String, String> param) {
+		
+		return mapper.findMatch(param);
+	}
+
+
+	@Override
+	public MemberVO getMember(String m_Id) {
+		return mapper.getMember(m_Id);
+	}
+
+
+	@Override
+	public ReviewPageDTO getListPage(Criteria cri, String e_Id) {
+		
+		return new ReviewPageDTO(mapper.getCountByEid(e_Id), mapper.getListWithPaging(cri, e_Id));
 	}
 
 }

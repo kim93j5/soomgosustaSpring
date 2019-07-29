@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kosta.soomgosusta.domain.PartVO;
 import kosta.soomgosusta.service.PartService;
+//import kosta.soomgosusta.service.RecommendService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
@@ -20,6 +21,7 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class PartController {
 	private PartService service;
+	//private RecommendService recommnedService;
 
 	@GetMapping("/listQNA/{searchKey}")
 	public String listQNA(@PathVariable("searchKey") String searchKey, Model model) {
@@ -28,7 +30,7 @@ public class PartController {
 		return "/part/listQNA";
 	}
 
-	@GetMapping("/listExpertInfo")
+/*	@GetMapping("/listExpertInfo")
 	 public void listExpertInfo(Model model) {
 		
 		List<PartVO> listExpertInfo = service.listPartService();
@@ -57,6 +59,7 @@ public class PartController {
 		    model.addAttribute("listQuestion", service.listExpertQusetionService());
 		    model.addAttribute("listAnswer", service.listExpertAnswerService());
 	
-		 }
+		 }*/
+	
 
 }

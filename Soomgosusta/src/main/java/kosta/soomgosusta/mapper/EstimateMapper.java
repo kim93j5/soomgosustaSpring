@@ -6,6 +6,7 @@ import java.util.List;
 
 import kosta.soomgosusta.domain.EstimateDTO;
 import kosta.soomgosusta.domain.EstimateVO;
+import kosta.soomgosusta.domain.MatchVO;
 
 public interface EstimateMapper {
 
@@ -14,4 +15,9 @@ public interface EstimateMapper {
 	public void register(EstimateVO estimate);
 
 	public EstimateVO read(int seq);
+	
+	void insertMatch(MatchVO matchVO);
+	
+	int countMatch(int p_Seq);
+	
 }
