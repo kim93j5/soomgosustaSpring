@@ -1,24 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<header>
+	<jsp:include page="../includes/header.jsp"></jsp:include>
+</header>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="/resources/js/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/listQNA.js"></script>
 <link rel="stylesheet" href="/resources/css/listQNA.css">
-<link rel="stylesheet"
-	href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
-<script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
-<script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	$(document).on("click", ".prev", function(event){
 		event.preventDefault();
 		
 		$('.slide').animate({
-			marginLeft : parseInt($('.slide').css('marginLeft'))  + 500
+			marginLeft : parseInt($('.slide').css('marginLeft'))  + 460
 		}, 'slow');
 
 	});
@@ -27,7 +25,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		
 		$('.slide').animate({
-			marginLeft : parseInt($('.slide').css('marginLeft'))  - 500
+			marginLeft : parseInt($('.slide').css('marginLeft'))  - 460
 		}, 'slow');
 	});
 })
@@ -39,17 +37,21 @@ partService.getQNA(data, function(list){
 		$('#container').empty();
 		$('#container').append("검색 결과가 없습니다.");
 	}else{
+		$('#dimmed').css({'background': 'url(/resources/images/eventbn.JPG)'});
+		var dim="";
+		dim += '<h1>' + list.searchPart.p_S_Word + '</h1>';
+		dim += '<p>요청서 작성에 단 1분! 지금 바로 고수님을 찾아드려요.</p>';
+		$('#dimmed').append(dim);
+		
 		var str="";
 
 		str += '<input type="hidden" name="p_Seq" value="'+ list.searchPart.p_Seq + '">';
 		str += '<input type="hidden" name="p_S_Word" value="'+ list.searchPart.p_S_Word +'">';
-		str += '<div class="requestList"><h1>"'+ list.searchPart.p_S_Word + '"<br>고수를 소개받기 위한<br>몇가지 질문에 답해주세요!</h1>';
-		str += '<div class="btn"><a href="#" class="next">다음</a></div></div>';
-		
+
 		for(var i=0, len=list.listQ.length||0; i<len; i++){
 			str += '<input type=hidden name="listQ_seq" value="'+ list.listQ[i].q_Seq+'">';
 			str += '<div class="requestList">';
-			str += '<h3>'+ list.listQ[i].q_Contents + '</h3>';
+			str += '<h4>'+ list.listQ[i].q_Contents + '</h4>';
 			str += '<ul>';
 			for(var j=0, len2=list.listA.length||0; j<len2; j++){
 				if(list.listQ[i].q_Seq == list.listA[j].q_Seq){
@@ -74,6 +76,7 @@ partService.getQNA(data, function(list){
 <body>
 
 		<div id="container">
+			<div id="dimmed"></div>
 			<div id="listForm">
 				<form id="form" action="/request/detailRequest" method="post">
 					<div class="slide">
@@ -165,44 +168,38 @@ partService.getQNA(data, function(list){
 						<div class="requestList">
 							마지막 질문입니다!
 							<h3>전화번호를 입력하세요</h3>
-<%-- 														<c:if test="${id == null}">
-							로그인 후 요청 가능합니다.<br> <input type="text" id="telForm"
-								name="phoneNum" size="50" disabled>
-														</c:if>
-
-														<c:if test="${id != null}">
-							<input type="text" id="telForm" name="phoneNum" size="50">
-														</c:if>
-
-															<c:choose>
-																<c:when test="${id != null }">
-										<c:if test="${login_state == 'expert' }">
-							<div id="submit_btn">
-								<h5>회원으로 로그인 시 요청 가능합니다!</h5>
-								<input type="submit" id="go" value="매칭요청" disabled>
-							</div>
-																	</c:if>
-
-																	<c:if test="${login_state == 'member' }"> --%>
-							<div id="submit_btn">
-								<input type="text" id="telForm" name="phoneNum" size="30" style="padding:5px;"><br>
-								<a href="#" class="prev">이전</a>&nbsp;&nbsp; 
-								<input type="submit" id="submitbtn" value="매칭요청">
-							</div>
-<%-- 																	</c:if>
-
-																</c:when>
-																<c:otherwise>
+							<c:choose>
+								<c:when test="${loginUser.user_Divide != null }">
+									<c:if test="${loginUser.user_Divide =='expert'}">
+										<div id="submit_btn">
+											<h5>회원으로 로그인 시 요청 가능합니다!</h5>
+											<input type="submit" id="go" value="매칭요청" disabled>
+										</div>
+									</c:if>
+												
+									<c:if test="${loginUser.user_Divide =='member'}">
+										<div id="submit_btn">
+											<input type="text" id="telForm" name="phoneNum" size="30" style="padding:5px;"><br>
+											<a href="#" class="prev">이전</a>&nbsp;&nbsp; 
+											<input type="submit" id="submitbtn" value="매칭요청">
+										</div>
+ 									</c:if>
+								</c:when>
+								<c:otherwise>
 										<h5>로그인 시 요청 가능합니다!</h5>
-									</c:otherwise>
-															</c:choose>
-						</div> --%>
+								</c:otherwise>	
+							</c:choose>
+						</div>
 					</div> 
 				</div>
 
 			</form>		
 			</div>
-
+			<div id="notice">
+				<h4>숨고 사용 팁</h4>
+				<p>다음 몇가지 질문에 답변해주시면, 고수님이 요청에 적합한 맞춤 견적서를 보내드려요.</p>
+				<p>견적서에는 가격은 물론 프로필, 자격증, 연락처, 사진, 이용 후기를 볼 수 있어요. 견적을 비교하고 본인과 가장 적합한 분을 선택하시면 돼요.</p>
+			</div>
 		</div>
 
 </body>

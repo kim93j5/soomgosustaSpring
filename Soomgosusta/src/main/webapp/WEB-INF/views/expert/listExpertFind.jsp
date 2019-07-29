@@ -1,17 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<header>
+	<jsp:include page="../includes/header.jsp"></jsp:include>
+</header>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="/resources/js/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/listExpertFind.js"></script>
 <link rel="stylesheet" href="/resources/css/listExpertFind.css">
-<link rel="stylesheet"
-	href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
-<script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
-<script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 function clickBtn(){
 	console.log($(this).data("id"));
@@ -19,20 +17,25 @@ function clickBtn(){
 
 $('document').ready(function(){
 	
-	function checkList(result){
+	function checkList(list){
 		$('#exlist').empty();
 		
 		var str="";
-		
-		$(result).each(function(i, list){
-			str += 	'<div class="expertInfo" data-id = "' + list.ef_Id +'">';
-			str += '<img src="/resources/images/' + list.ef_Photo + '">';
-			str += '<h3><a href="/part/main" data-id="'+list.ef_Id+'">'+ list.ef_OL + '</a></h3>';
-			str += '<div>'+list.ef_RC+'회 고용<strong>*</strong>'+ list.ef_District+'</div>';
-			str +=	'<div>'+list.ef_AvgStarpoint+'('+list.ef_CntReview+'개)</div><br><br><br><br>';
+		console.log(list);
+		for(var i=0, len=list.length||0; i<len; i++){
+			str += 	'<div class="expertInfo" data-id = "' + list[i].ef_Id +'">';
+			str += '<img class="profile" src="/resources/images/' + list[i].ef_Photo + '">';
+			str += '<div class="info"><h4>'+ list[i].ef_OL + '</a></h4>';
+			str += '<div>'+list[i].ef_RC+'회 고용<strong>*</strong>'+ list[i].ef_District+'</div></div>';
+			str +=	'<div><img class="star" src="/resources/images/starpoint.JPG">'+list[i].ef_AvgStarpoint+'('+list[i].ef_CntReview+'개)</div></div>';			
+		}
 				
-		})
 		$('#exlist').append(str);
+		
+		$('.expertInfo').on("click", function(){
+			alert($(this).data("id"));
+		});
+		
 	}
 	
 	

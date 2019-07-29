@@ -33,6 +33,7 @@ import org.springframework.web.util.WebUtils;
 import kosta.soomgosusta.domain.AnswerVO;
 import kosta.soomgosusta.domain.E_FilesVO;
 import kosta.soomgosusta.domain.E_ProfileVO;
+import kosta.soomgosusta.domain.ExpertFindInfo;
 import kosta.soomgosusta.domain.ExpertInfoVO;
 import kosta.soomgosusta.domain.ExpertVO;
 import kosta.soomgosusta.domain.LoginDTO;
@@ -310,5 +311,10 @@ public class ExpertController {
 		
 		service.insertExpertInfo(expert_Info, p_Seq);
 
+	}
+	
+	@GetMapping("/listExpertFind")
+	public void listExpertFind(ExpertFindInfo info){
+	
 	}
 }

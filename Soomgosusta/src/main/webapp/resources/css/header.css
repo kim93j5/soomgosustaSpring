@@ -1,5 +1,31 @@
 @CHARSET "UTF-8";
-
+/* 
 .navbar-nav ui{
 	display: inline;
+}
+ */
+.left_{
+	float: left;
+}
+
+.right_{
+	float: right;
+}
+.left_ div{
+	float: left;
+	padding-right: 20px;
+	padding-left: 20px;
+}
+
+.right_ div{
+	float: right;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.banner{
+	padding-top: 20px;
+	padding-bottom: 40px;
+	border-bottom: 1px solid;
+	border-color: #e8e7e6;
 }
