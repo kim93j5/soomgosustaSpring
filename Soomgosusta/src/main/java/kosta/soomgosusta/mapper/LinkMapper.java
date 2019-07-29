@@ -11,8 +11,9 @@ import kosta.soomgosusta.domain.RequestVO;
 
 public interface LinkMapper {
 
+	public List<LinkVO> getListName(String name);
 	
-	public List<LinkVO> getList();
+	public List<LinkVO> getList(String id);
 	
 	public LinkVO read(int seq);
 	

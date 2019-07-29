@@ -54,13 +54,32 @@
 	sock.onmessage = onMessage;
 	sock.onclose = onClose;
 	
+
+
 	function sendMessage(){
-		sock.send($("#message").val());
-	}
+		  var msg = $("#message").val();
+		  if(msg != ""){
+			 chat = {};
+				chat.ch_Contents = $("#message").val()
+				chat.ch_Sender =  "아오시벌"
+				chat.ch_Receiver = "아무개"
+		  }
+		  
+		
+		  
+		  sock.send(JSON.stringify(chat));
+		  $("#message").val("");
+		 }
+	
+	
+	
+	
+
 	
 	function onMessage(msg){
+		
 			var data = msg.data;
-			$("#data").append(data + "<br/>");
+			$("#data").append( data + "<br/>");
 	}
 	
 	function onClose(evt){
