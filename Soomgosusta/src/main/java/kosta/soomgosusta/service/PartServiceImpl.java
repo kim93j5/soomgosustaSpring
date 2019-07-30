@@ -25,7 +25,7 @@ public class PartServiceImpl implements PartService {
 	
 	@Override
 	public List<PartVO> detailPartService(String data){
-		
+		log.info(mapper.detailPart(data));
 		return mapper.detailPart(data);
 	}
 	
@@ -102,7 +102,8 @@ public class PartServiceImpl implements PartService {
 
 	@Override
 	public List<String> listPopularService() {
-
+		List<String> list = mapper.listPopular();
+		log.info(list);
 		return mapper.listPopular();
 	}
 

@@ -39,7 +39,7 @@ p{
 </head>
 
 <script type="text/javascript">
-
+var m_Id = '<c:out value="${loginUser.m_Id}"/>';
    $(document).on("click", ".cancelRequest", function(){
       //e.preventDefault();
 
@@ -48,9 +48,8 @@ p{
       //console.log(r_Seq);
       requestService.cancel(r_Seq, function(result){
     	console.log(result);  
-    	
     	$('#sendRequestForm').empty();
-    	   requestService.getList("nano124",
+    	   requestService.getList(m_Id,
                    function(list) {
 
                       var str = "";
@@ -190,7 +189,7 @@ p{
       });
    });
 
-   requestService.getList("nano124",
+   requestService.getList(m_Id,
                function(list) {
 
                   var str = "";

@@ -5,7 +5,8 @@
 
 <html>
 <head>
-<link rel="stylesheet" href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
 <script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
 <script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="/resources/css/header.css">
@@ -13,8 +14,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-   <c:set var='expert' value="${expert}" scope="request" />
-   <c:set var='member' value="${member}" scope="request" />
+	<c:set var='expert' value="${expert}" scope="request" />
+	<c:set var='member' value="${member}" scope="request" />
 
 	<div class="banner">
 		<c:choose>
@@ -52,8 +53,8 @@
 					</div>
 				</div>
 			</c:when>
-			
-			
+
+
 			<c:when test="${loginUser.user_Divide =='member'}">
 				<div class="left_">
 					<div>
@@ -63,7 +64,7 @@
 						</a>
 					</div>
 					<div>
-						<a href="requestInfoForm.do?member_Id=${id }"> <span>보낸
+						<a href="/request/sendRequest/${loginUser.m_Id}"> <span>보낸
 								요청</span>
 						</a>
 					</div>
@@ -79,11 +80,19 @@
 						</a>
 					</div>
 				</div>
+				<div class="right_">
+					<div>
+						<span>"${loginUser.m_Name}"고객님</span>
+					</div>
+					<div>
+						<a id="logout" href="/main/logout"><span>로그아웃</span></a>
+					</div>
+				</div>
 			</c:when>
 			<c:otherwise>
 				<div class="left_">
 					<div>
-						<a href="/part/main"> <img
+						<a href="/main/mainPage"> <img
 							src="https://dmmj3ljielax6.cloudfront.net/static/img/home/index_soomgo_logo.svg"
 							alt="숨고, 숨은고수">
 						</a>
@@ -105,7 +114,6 @@
 			</c:otherwise>
 		</c:choose>
 
-	</div>
 	</div>
 </body>
 

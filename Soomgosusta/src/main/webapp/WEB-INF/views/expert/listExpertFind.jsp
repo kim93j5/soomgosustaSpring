@@ -118,10 +118,10 @@ $('document').ready(function(){
 <body>
 	<div id="container">
 		<div id="info">
-			<h2>고수 찾기</h2>
+			<h3>고수 찾기</h3>
 
 			<div id="district_select">
-					<h3>우리 지역의 숨은 고수는 누구일까요?</h3>
+					<h4>우리 지역의 숨은 고수는 누구일까요?</h4>
 					<div id="sel_d">
 						지역 선택<br> 
 						<select name="sido" id="sido"></select> 
