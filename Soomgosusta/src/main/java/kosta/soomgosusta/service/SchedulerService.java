@@ -14,7 +14,6 @@ public interface SchedulerService {
 	//고수 일정페이지
 	public ScheduleInfoDTO listSchedule(String e_Id);
 	public int insertSchedule(ScheduleVO schedule);
-	public List<ScheduleVO> mySchedule(String e_Id);
 	public int deleteSchedule(int s_Seq);
 	public ScheduleVO detailSchedule(int s_Seq);
 	public int updateSchedule(ScheduleVO schedule);

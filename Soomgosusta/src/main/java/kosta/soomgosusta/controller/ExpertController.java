@@ -95,7 +95,7 @@ public class ExpertController {
 
 		if (success == 0) {
 			model.addAttribute("expertVO", expertVO);
-			return "./main";
+			return "/expert/request/received";
 		} else if (success == 1) {
 			model.addAttribute("loginResult", "login fail");
 			System.out.println("비밀번호 ");
@@ -124,7 +124,7 @@ public class ExpertController {
 
 		}
 
-		return "../home";
+		return "/main/mainPage";
 
 	}
 
@@ -175,15 +175,15 @@ public class ExpertController {
 				File savaFile = new File(uploadPath, updateFileName);
 				multipartFile.transferTo(savaFile);
 
-				fileVO.setE_Uuid(uuid.toString());
-				fileVO.setE_Path(uploadFolderPath);
+				fileVO.setEf_Uuid(uuid.toString());
+				fileVO.setEf_Path(uploadFolderPath);
 
 				if (checkIamgeType(savaFile)) {
 
-					fileVO.setE_Type(true);
-					fileVO.setE_From("profile");
+					fileVO.setEf_Type(true);
+					fileVO.setEf_From("profile");
 					fileVO.setE_Id(e_Id);
-					fileVO.setE_Photo(updateFileName);
+					fileVO.setEf_Photo(updateFileName);
 					FileOutputStream thumnail = new FileOutputStream(new File(uploadPath, "s_" + updateFileName));
 					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumnail, 200, 200);
 					thumnail.close();

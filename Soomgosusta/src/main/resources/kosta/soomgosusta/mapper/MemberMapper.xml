@@ -5,9 +5,8 @@
 <mapper namespace="kosta.soomgosusta.mapper.MemberMapper">
 
 	<insert id="register">
-		insert into member values(#{m_Id},#{m_Password},
-		#{m_Name},'Member',
-		' ' ,'default_userImg')
+		insert into member values(#{m_Id},#{m_Password},'member',
+		'default_userImg','address',#{m_Name})
 	</insert>
 	
 	<select id="login" parameterType="String" resultType="kosta.soomgosusta.domain.MemberVO">
@@ -22,5 +21,27 @@
 		where m_Id=#{login_Id}
 	</select>
 	
+	<select id="getMemberMypageInfo" resultType="kosta.soomgosusta.domain.MemberMypageDTO">
+		select m.m_id, m.m_password,m.m_name,m.m_photo,mi.m_ip1,mi.m_ip2,mi.m_ip3,m.m_address
+            from member m, m_info mi
+            where m.m_id = mi.m_id
+            and m.m_id = #{m_Id}
+	</select>
+	<select id="getMemberPart" resultType="String">
+		select p_S_Word from part where p_Seq = #{p_Seq}
+	</select>
+	<update id="memberImageUpdate">
+	update member set m_Photo = #{m_Photo} where m_Id = #{m_Id}
+	</update>
+	
+	<insert id="insertMemberAddInfo">
+	insert into m_info values(#{m_Id},#{m_Ip1},#{m_Ip2},#{m_Ip3})
+	</insert>
+	
+	<select id="getPSeq" resultType="Int">
+	    select p_seq from part where p_L_Word = #{p_L_Word} and
+	                                 p_M_Word = #{p_M_Word} and
+	                                 p_S_Word = #{p_S_Word}
+	</select>
 	
 </mapper>

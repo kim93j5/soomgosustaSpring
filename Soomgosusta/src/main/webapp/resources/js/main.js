@@ -13,8 +13,32 @@ var partService = (function(){
 		});
 	}
 		
+	function getPopular(callback, error){
+		console.log("getPopular..........");
+		
+		$.getJSON("/partAJAX/listPopular", function(result){
+			if(callback){
+				callback(result);
+			}
+		}).fail(function(xhr, status, err){
+			if(error){
+				error();
+			}
+		});
+	}
 	return{
-		getPart:getPart
+		getPart:getPart,
+		getPopular:getPopular
 	};
 })();
+
+$(document).ready(function(){
+	$('#searchKey').on('focus', function(){
+		$('#searchresults').show();
+	})
+	
+	$('#divclose').on('click', function(){
+		$('#searchresults').hide();
+	})
+})
 

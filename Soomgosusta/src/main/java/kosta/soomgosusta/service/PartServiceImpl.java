@@ -26,8 +26,6 @@ public class PartServiceImpl implements PartService {
 	@Override
 	public List<PartVO> detailPartService(String data){
 		
-/*		mapper.listPart().forEach(part -> log.info(part));*/
-		
 		return mapper.detailPart(data);
 	}
 	
@@ -103,6 +101,12 @@ public class PartServiceImpl implements PartService {
 	}
 
 	@Override
+	public List<String> listPopularService() {
+
+		return mapper.listPopular();
+	}
+
+	
 	public List<BestDTO> listBestService() {
 		
 		return mapper.listBest();

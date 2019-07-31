@@ -11,6 +11,5 @@ public class ScheduleVO {
 	private String s_Place;
 	private String s_Color;
 	private String s_Memo;
-	private String m_Id;
-	private String e_Id;
+	private int m_Seq;
 }

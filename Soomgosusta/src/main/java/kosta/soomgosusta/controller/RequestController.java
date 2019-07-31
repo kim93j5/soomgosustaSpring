@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -98,10 +99,9 @@ public class RequestController {
 		return requestMap;
 	}
 
-	@GetMapping("/sendRequest")
-	public void sendRequest(Model model) {
+	@GetMapping("/sendRequest/{m_Id:.+}")
+	public String sendRequest(Model model, @PathVariable("m_Id") String m_Id) {
 		//추천서비스
-		String m_Id = "nano124";
 		MemberInfoVO interestPart = recommendService.recommendInfoService(m_Id);
 		int interest_P1 = interestPart.getM_Ip1();  //첫번째 관심분야 번호 
 		int interest_P2 = interestPart.getM_Ip2();  
@@ -142,16 +142,7 @@ public class RequestController {
 		List<BestDTO> listBest = partService.listBestService();
 		model.addAttribute("listBest", listBest);
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		return "/request/sendRequest";
 		
 	}
 }

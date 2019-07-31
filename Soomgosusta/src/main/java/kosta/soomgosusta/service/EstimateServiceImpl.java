@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kosta.soomgosusta.domain.EstimateDTO;
+import kosta.soomgosusta.domain.EstimateVO;
 import kosta.soomgosusta.domain.MatchVO;
 import kosta.soomgosusta.mapper.EstimateMapper;
 import lombok.Setter;
@@ -25,6 +26,12 @@ public class EstimateServiceImpl implements EstimateService {
 		return mapper.listEstimate(r_Seq);
 	}
 	
+	@Override
+	public void register(EstimateVO estimate) {
+		// TODO Auto-generated method stub
+	
+	mapper.register(estimate);
+	}
     @Transactional
 	@Override
 	public void insertMatchService(MatchVO matchVO, int p_Seq) {
@@ -36,5 +43,12 @@ public class EstimateServiceImpl implements EstimateService {
 
 
 
+	
 
+	@Override
+	public EstimateVO read(int seq) {
+		
+		return mapper.read(seq);
+	}
+	
 }

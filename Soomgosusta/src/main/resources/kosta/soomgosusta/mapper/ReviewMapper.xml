@@ -6,11 +6,11 @@
 
 	<insert id="register">
 		insert into Review values(review_seq.nextval,sysdate,#{re_StarPoint},
-		#{re_Contents},1,'hj123@naver.com',#{e_Id})
+		#{re_Contents},1,#{m_Id},#{e_Id})
 	</insert>
 	
 	<select id="get" resultType="kosta.soomgosusta.domain.ReviewVO">
-		select * from Review where re_seq =#{re_seq}
+		select * from Review where re_Seq =#{re_Seq}
 	</select>
 	
 	<delete id="delete">
@@ -46,5 +46,12 @@
 	</select>
 	
 	
+	<select id="findMatch" parameterType="HashMap" resultType="int">
+		select count(*) from Match where m_Id=#{m_Id} and e_Id=#{e_Id}
+	</select>
+	
+	<select id="getMember" resultType="kosta.soomgosusta.domain.MemberVO">
+		select * from member where m_Id =#{m_Id}
+	</select>
 	
 </mapper>

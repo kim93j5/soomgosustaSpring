@@ -27,7 +27,7 @@ var reviewService = (function(){
 	
 	
 	function getList(param, callback, error){
-		
+		console.log("getList...............")
 		var e_Id = param.e_Id;
 		var page = param.page || 1;
 		alert("getList e_Id "+ e_Id);
@@ -35,7 +35,7 @@ var reviewService = (function(){
 		$.getJSON("/review/pages/"+e_Id+"/"+page+".json",
 				function(data){
 			if(callback){
-				callback(data);
+				callback(data.reviewCnt, data.list);
 			}
 		}).fail(function(xhr, status,err){
 			if(error){
@@ -44,6 +44,19 @@ var reviewService = (function(){
 		});
 	}
 	
+	function get(re_Seq, callback, error){
+		alert(re_Seq);
+		$.get("/review/"+re_Seq+ ".json",function(result){
+			if(callback){
+				callback(result);
+			}
+		}).fail(function(xhr,status, err){
+			if(error){
+				error();
+			}
+		});
+		
+	}
 	
 	function remove(re_seq, callback, error){
 		
@@ -87,11 +100,45 @@ var reviewService = (function(){
 		});
 	}
 	
+	function findMatch(param, callback, error){
+		
+		var m_Id = param.m_Id;
+		var e_Id = param.e_Id;
+		$.getJSON("/review/match/"+m_Id+"/"+e_Id+".json",
+			function(data){
+			if(callback){
+				callback(data);
+			}
+		}).fail(function(xhr, status, err){
+			if(error){
+				error();
+			}
+		});
+	}
+	
+	function getMember(param, callback, error){
+		console.log("getMember.................................");
+		var m_Id= param.m_Id;
+		$.getJSON("/review/writer/"+m_Id+".json",
+				function (data){
+			if(callback){
+				callback(data);
+				alert(data.m_Name);
+			}
+		}).fail(function(xhr, status,err){
+			if(error){
+				error();
+			}
+		});
+	}
+	
 	return {
 		add:add,
 		getList : getList,
 		remove: remove,
-		update: update
-		
+		update: update,
+		findMatch: findMatch,
+		getMember:getMember,
+		get:get
 	};
 })();

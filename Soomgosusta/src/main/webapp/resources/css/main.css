@@ -3,7 +3,8 @@
 #search{
 	margin-left: 350px;
 	margin-top: 100px;
-	margin-bottom: 80px;
+	padding-bottom: 80px;
+	position: relative;
 }
 
 #searchKey{
@@ -37,7 +38,10 @@
 }
 
 #group{
-	margin-left: 460px;
+	margin-left: 170px;
+	margin-top: 100px;
+	margin-bottom: 300px;
+	position: relative;
 }
 
 .largelist img{
@@ -50,4 +54,24 @@
 .modal-body .part{
 	font-size: 13px;
 	font-weight: normal;
+}
+
+#searchresults{
+	width: 260px;
+	height: 300px;
+	border-style: solid;
+	border-color: #4092f1;
+	position: absolute;
+}
+
+#searchform{
+	margin-bottom: 0px;
+}
+
+
+#search-ul li{
+	float: left;
+	font-size: 12px;
+	margin-left: 5px;
+	padding : 0;
 }
