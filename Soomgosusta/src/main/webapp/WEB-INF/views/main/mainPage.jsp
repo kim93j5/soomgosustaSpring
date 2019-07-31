@@ -14,6 +14,7 @@
 <script type="text/javascript" src="/resources/js/cookie.js"></script>
 <link rel="stylesheet" href="/resources/css/main.css">
 <script type="text/javascript">
+
 partService.getPopular(function(list){
 	console.log(list);
 	
@@ -30,11 +31,12 @@ partService.getPopular(function(list){
 		e.preventDefault();
 		var data = $(this).html();
 		
-		location.href= "/part/listQNA/"+data;
+		location.href= "/request/listQNA/"+data;
 	});
 });
 
 $(document).ready(function(){
+
 	$('.largelist').hover(function(){
 		$(this).css('border-style', 'groove');
 	}, function(){
@@ -55,7 +57,7 @@ $(document).ready(function(){
 			
     	  	$('.modal-header').append('<h4><strong>'+data+'</strong></h4>');
  			for(var i=0, len=list.length||0; i<len; i++){
-		 		str += '<a href="/part/listQNA/'+list[i].p_S_Word+'">'+ list[i].p_S_Word + '</a>&nbsp;&nbsp;&nbsp;&nbsp;';
+		 		str += '<a href="/request/listQNA/'+list[i].p_S_Word+'">'+ list[i].p_S_Word + '</a>&nbsp;&nbsp;&nbsp;&nbsp;';
 		 		if(i >=4 && (i+1) % 5 ==0) str+= '<br>';
 		 	} 
 			$('.modal-body').append(str);
@@ -69,7 +71,7 @@ $(document).ready(function(){
 	$(document).on("click", ".part", function(event){
 
 		var data = $(this).html();
-		location.href= "/part/listQNA/"+data;			
+		location.href= "/request/listQNA/"+data;			
 	});
 	
 	$(document).ready(function(){
@@ -79,7 +81,7 @@ $(document).ready(function(){
 			console.log(data);
 			
  			setCookie(data, data, 3);
-			location.href= "/part/listQNA/"+data;
+			location.href= "/request/listQNA/"+data;
 		});
 
 		$('#popular').click(function(e){
@@ -100,7 +102,7 @@ $(document).ready(function(){
 					e.preventDefault();
 					var data = $(this).html();
 					
-					location.href= "/part/listQNA/"+data;
+					location.href= "/request/listQNA/"+data;
 				});
 			});
 		});
@@ -127,13 +129,10 @@ $(document).ready(function(){
 					e.preventDefault();
 					var data = $(this).html();
 					
-					location.href= "/part/listQNA/"+data;
+					location.href= "/request/listQNA/"+data;
 				});
 			}
  			
- 			$('.x').click(function(e){
- 				deleteCookie($(this).parent.find('.recentitems').val());
- 			});
 		});
 		
 		
@@ -187,7 +186,7 @@ $(document).ready(function(){
  		</div>
 	</div>
 	
-
+	<div class="input-group input-append date" id="dateRangePicker"> </div>
 
 	<div class="modal fade" id="modal">
       <div class="modal-dialog">

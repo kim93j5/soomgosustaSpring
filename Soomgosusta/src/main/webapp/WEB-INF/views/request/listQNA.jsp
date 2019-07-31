@@ -7,11 +7,35 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="/resources/js/jquery.js"></script>
+<script type="text/javascript" src="/resources/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script type="text/javascript" src="/resources/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="/resources/jquery-ui-1.12.1.custom/jquery-ui.css">
 <script type="text/javascript" src="/resources/js/listQNA.js"></script>
 <link rel="stylesheet" href="/resources/css/listQNA.css">
 <script type="text/javascript">
 $(document).ready(function(){
+	 $('#date').datepicker({
+		 dateFormat: "yy-mm-dd",
+		 language: "kr",
+		 onSelect: function(dateText, inst){
+			 $('#pick').val($(this).val());
+		 }
+	 }); 
+	
+	 
+	$("input:radio[name=date]").change(function(){
+
+		if($("input:radio[id=selectDay]").is(':checked') == true){
+			$('#pick').val("");
+			$('#date').show();
+			$('#pick').attr("disabled", false);
+		}else{
+			$('#date').hide();
+			$('#pick').val("날짜를 선택하세요");
+			$('#pick').attr("disabled", true);
+		}
+	});
+	
 	$(document).on("click", ".prev", function(event){
 		event.preventDefault();
 		
@@ -51,13 +75,12 @@ partService.getQNA(data, function(list){
 		for(var i=0, len=list.listQ.length||0; i<len; i++){
 			str += '<input type=hidden name="listQ_seq" value="'+ list.listQ[i].q_Seq+'">';
 			str += '<div class="requestList">';
-			str += '<h4>'+ list.listQ[i].q_Contents + '</h4>';
+			str += '<div class="h"><h4>'+ list.listQ[i].q_Contents + '</h4></div>';
 			str += '<ul>';
 			for(var j=0, len2=list.listA.length||0; j<len2; j++){
 				if(list.listQ[i].q_Seq == list.listA[j].q_Seq){
-					str += '<li class="answer"><input type="checkbox" name="listA_seq" value="'+ list.listA[j].a_Seq + '">';
-					str += list.listA[j].a_Contents+'</li>';
-					str += '<br>';
+					str += '<li class="answer"><div class="b"><label><input type="checkbox" name="listA_seq" value="'+ list.listA[j].a_Seq + '">';
+					str += list.listA[j].a_Contents+'</label></div></li>';
 				}
 			}
 			str += '</ul>';
@@ -72,6 +95,44 @@ partService.getQNA(data, function(list){
 
 </script>
 <title>Insert title here</title>
+<style type="text/css">
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+label{
+  height: 21px;
+  font-size: 15px;
+/*   margin: 0px, 0px, -6px; */
+  margin-left: 2px;
+  font-family: 'Nanum Gothic Coding', monospace;
+}
+
+.h h4{
+
+	font-family: 'Nanum Gothic Coding', monospace;
+}
+
+.h{
+	margin-left: 50px;
+}
+li{
+	font-family: 'Nanum Gothic Coding', monospace;
+	font-size: 15px;
+    color: #4d4d4d;
+    border-left: 0;
+    border-right: 0;
+    padding-left: 0px;
+    list-style: none;
+     width: 300px;
+    border: 1px solid #ddd;
+    position: relative;
+    display: block;
+    margin-bottom: 0px;
+    background-color: #fff;
+}
+.b{
+	width: 300px;
+	padding: 10px;
+}
+</style>
 </head>
 <body>
 
@@ -79,17 +140,20 @@ partService.getQNA(data, function(list){
 			<div id="dimmed"></div>
 			<div id="listForm">
 				<form id="form" action="/request/detailRequest" method="post">
+					<c:if test="${loginUser.user_Divide == 'member'}">
+						<input type="hidden" name="id" value="${loginUser.m_Id }">				
+					</c:if>
 					<div class="slide">
 						<div class="requestList">
 							5개 남았습니다!
-							<h3>희망하는 시간대는 언제인가요?</h3>
+							<div class="h"><h4>희망하는 시간대는 언제인가요?</h4></div>
 							<ul>
-								<li><input type="checkbox" name="time" value="아침(9시 이전)">아침 (9시 이전)</li>
-								<li><input type="checkbox" name="time" value="오전(9시-12시)">오전 (9시-12시)</li>
-								<li><input type="checkbox" name="time" value="이른 오후(12시-3시)">이른 오후 (12시-3시)</li>
-								<li><input type="checkbox" name="time" value="오후(3시-6시)">오후 (3시-6시)</li>
-								<li><input type="checkbox" name="time" value="저녁(6시-9시)">저녁 (6시-9시)</li>
-								<li><input type="checkbox" name="time" value="늦은 저녁(9시 이후)">늦은 저녁 (9시 이후)</li>
+								<li><div class="b"><label><input type="checkbox" name="time" value="아침(9시 이전)">아침 (9시 이전)</label></div></li>
+								<li><div class="b"><label><input type="checkbox" name="time" value="오전(9시-12시)">오전 (9시-12시)</label></div></li>
+								<li><div class="b"><label><input type="checkbox" name="time" value="이른 오후(12시-3시)">이른 오후 (12시-3시)</label></div></li>
+								<li><div class="b"><label><input type="checkbox" name="time" value="오후(3시-6시)">오후 (3시-6시)</label></div></li>
+								<li><div class="b"><label><input type="checkbox" name="time" value="저녁(6시-9시)">저녁 (6시-9시)</label></div></li>
+								<li><div class="b"><label><input type="checkbox" name="time" value="늦은 저녁(9시 이후)">늦은 저녁 (9시 이후)</label></div></li>
 							</ul>
 								
 							<div class="btn">
@@ -102,12 +166,15 @@ partService.getQNA(data, function(list){
 
 						<div class="requestList">
 							4개 남았습니다!
-							<h3>언제부터 시작하기 원하시나요?</h3>
+							<div class="h"><h4>언제부터 시작하기 원하시나요?</h4></div>
 							<ul>
-								<li><input type="radio" name="date" value="협의 가능해요">협의 가능해요</li>
-								<li><input type="radio" name="date" value="일주일 이내면 돼요">일주일 이내면 돼요</li>
-								<li><input type="radio" name="date" value="가능한 빨리 하고 싶어요">가능한 빨리 하고 싶어요</li>
-								<li><input type="radio" name="date" value="원하는 날짜가 있어요">원하는 날짜가 있어요</li>
+								<li><div class="b"><label><input type="radio" name="date" value="협의 가능해요">협의 가능해요</label></div></li>
+								<li><div class="b"><label><input type="radio" name="date" value="일주일 이내면 돼요">일주일 이내면 돼요</label></div></li>
+								<li><div class="b"><label><input type="radio" name="date" value="가능한 빨리 하고 싶어요">가능한 빨리 하고 싶어요</label></div></li>
+								<li><div class="b"><label><input type="radio" name="date" id="selectDay" value="원하는 날짜가 있어요">원하는 날짜가 있어요</label><br>
+									<input type="text" name="selday" id="pick" size="20" value="날짜를 선택하세요" style="margin-left: 10px; font-size: 10px;" disabled>
+									<div id="date" style="display:none;"></div></div>
+								</li>
 							</ul>
 
 							<div class="btn">
@@ -119,13 +186,11 @@ partService.getQNA(data, function(list){
 
 						<div class="requestList">
 							3개 남았습니다!
-							<h3>선호하는 고수 성별이 있나요?</h3>
+							<div class="h"><h4>선호하는 고수 성별이 있나요?</h4></div>
 							<ul>
-								<li><input type="radio" name="gen" value="남자">남자</li>
-								<br>
-								<li><input type="radio" name="gen" value="여자">여자</li>
-								<br>
-								<li><input type="radio" name="gen" value="무관">무관</li>
+								<li><div class="b"><label><input type="radio" name="gen" value="남자">남자</label></div></li>
+								<li><div class="b"><label><input type="radio" name="gen" value="여자">여자</label></div></li>
+								<li><div class="b"><label><input type="radio" name="gen" value="무관">무관</label></div></li>
 							</ul>
 
 							<div class="btn">
@@ -137,7 +202,7 @@ partService.getQNA(data, function(list){
 
 						<div class="requestList">
 							2개 남았습니다!
-							<h3>선호 지역을 선택하세요</h3>
+							<div class="h"><h4>선호 지역을 선택하세요</h4></div>
 							<div id="dist1">
 								<select name="sido" id="sido1">
 								</select> <select name="gugun" id="gugun1">
@@ -167,7 +232,7 @@ partService.getQNA(data, function(list){
 						</div>
 						<div class="requestList">
 							마지막 질문입니다!
-							<h3>전화번호를 입력하세요</h3>
+							<div class="h"><h4>전화번호를 입력하세요</h4></div>
 							<c:choose>
 								<c:when test="${loginUser.user_Divide != null }">
 									<c:if test="${loginUser.user_Divide =='expert'}">
@@ -191,8 +256,6 @@ partService.getQNA(data, function(list){
 							</c:choose>
 						</div>
 					</div> 
-				</div>
-
 			</form>		
 			</div>
 			<div id="notice">

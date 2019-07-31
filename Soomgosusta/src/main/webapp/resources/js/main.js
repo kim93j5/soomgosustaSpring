@@ -2,7 +2,7 @@ var partService = (function(){
 	function getPart(data, callback, error){
 		console.log("getPart..............");
 		
-		$.getJSON("/partAJAX/listPart/"+data+".json", function(result){
+		$.getJSON("/part/listPart/"+data+".json", function(result){
 			if(callback){
 				callback(result);
 			}
@@ -16,7 +16,7 @@ var partService = (function(){
 	function getPopular(callback, error){
 		console.log("getPopular..........");
 		
-		$.getJSON("/partAJAX/listPopular", function(result){
+		$.getJSON("/part/listPopular", function(result){
 			if(callback){
 				callback(result);
 			}

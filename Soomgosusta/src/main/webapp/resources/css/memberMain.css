@@ -1,9 +1,10 @@
 #sendRequestForm{
-	margin-left: 150px;
+   margin-left: 150px;
 }
 
 
 .sendOneRequest{
+<<<<<<< HEAD
 	border: 1px solid #e1e3e3;
 	width: 350px;
 	height: 385px;
@@ -13,23 +14,46 @@
 	margin-top: 15px;
 	background-color: white;
 	border-radius: 4px;
+=======
+   border: 1px solid #e1e3e3;
+   width: 350px;
+   height: 385px; 
+   text-align: center;
+   float: left;
+   margin-left: 30px;
+   margin-top: 15px;
+   background-color: white; 
+   border-radius: 4px;
+>>>>>>> branch 'nano124124' of https://github.com/kim93j5/soomgosustaSpring.git
 }
 
 #sendPart{
+<<<<<<< HEAD
 	border-bottom: solid 0.5px;
 	border-bottom-color: inherit;
 	padding-top : 10px;
 	padding-bottom: 10px;
+=======
+   border-bottom: solid 0.5px;
+   border-bottom-color: inherit;
+   padding-top : 10px;
+   padding-bottom: 10px;
+>>>>>>> branch 'nano124124' of https://github.com/kim93j5/soomgosustaSpring.git
 }
 
 .send{
+<<<<<<< HEAD
 	margin-top: 50px;
 	margin-left: 180px;
+=======
+   margin-top: 50px;
+   margin-left: 180px;
+>>>>>>> branch 'nano124124' of https://github.com/kim93j5/soomgosustaSpring.git
 }
 
 #detailPart{
-	height : 80px;
-	margin-top: 30px;
+   height : 80px;
+   margin-top: 30px;
 }
 
 #detail{
@@ -38,24 +62,46 @@
 }
 
 .recommendInfo{
+<<<<<<< HEAD
 	margin-top: 500px;
 	margin-bottom: 30px;
 	margin-left: 180px;
+=======
+   margin-top: 500px;
+   margin-bottom: 30px;
+   margin-left: 180px;
+>>>>>>> branch 'nano124124' of https://github.com/kim93j5/soomgosustaSpring.git
 }
 
 .img{
+<<<<<<< HEAD
 	width: 350px;
 	height: 211px;
 	border-radius: 4px;
 	margin-bottom: 7px;
+=======
+   width: 370px;
+   height: 211px;
+   border-radius: 4px;
+   margin-bottom: 0px;
+   margin-left: 17px;
+   padding-left: 24px;
+   
+>>>>>>> branch 'nano124124' of https://github.com/kim93j5/soomgosustaSpring.git
 }
 
  #recommend{
+<<<<<<< HEAD
 	margin-left: 180px;
 	margin-bottom: 100px;
+=======
+   margin-left: 150px;
+   margin-bottom: 100px;
+>>>>>>> branch 'nano124124' of https://github.com/kim93j5/soomgosustaSpring.git
 } 
 
  #recommendService{
+<<<<<<< HEAD
 	/* float: left; */
 	margin-right: 0px;
 	text-align: center;
@@ -66,24 +112,48 @@
     border-radius: 4px;
     margin-left: 12px;
     background-color: white; 
+=======
+   /* float: left; */
+   margin-right: 0px;
+   text-align: center;
+   margin-bottom: 10px;
+   border: solid 0.8px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-left: 12px;
+    /* background-color: white;  */
+>>>>>>> branch 'nano124124' of https://github.com/kim93j5/soomgosustaSpring.git
 } 
 
 #best{
+<<<<<<< HEAD
 	margin-top: -30px;
 	margin-bottom: 30px;
 	margin-left: 180px;
+=======
+   margin-top: -30px;
+   margin-bottom: 30px;
+   margin-left: 180px;
+>>>>>>> branch 'nano124124' of https://github.com/kim93j5/soomgosustaSpring.git
 }
 
 #bestPopular{
+<<<<<<< HEAD
 	margin-left: 180px;
 	margin-bottom: 800px;
+=======
+   margin-left: 180px;
+   margin-bottom: 800px;
+>>>>>>> branch 'nano124124' of https://github.com/kim93j5/soomgosustaSpring.git
 }
 
 .cancelContents{
-	color: red;
+   color: red;
 }
 
 #sendTime{
+<<<<<<< HEAD
 	margin-top: 20px;
 }
 
@@ -139,6 +209,69 @@
 #best_btn:HOVER{
 	background-color: #5986f9;
 }
+=======
+   margin-top: 20px;
+}
+
+.btn-btn-default{
+   background-color : #4a7bf8;
+   border-color: #4a7bf8;
+    color: #fff;
+    width: 150px;
+    height: 35px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.btn-btn-default:hover{
+       background-color: #5986f9;
+}
+
+.cancelRequest{
+   margin-bottom: 5px;
+    border-color: inherit;
+   border-radius: 4px;
+   opacity: 0.7;
+}
+
+#recommend_btn{
+   width: 100px;
+   height: 40px;
+   margin-left: 1400px;
+   margin-bottom: 20px;
+    background-color : #4a7bf8;
+   border-color: #4a7bf8;
+    color: #fff;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+#recommend_btn:HOVER{
+   background-color: #5986f9;
+}
+
+
+#best_btn{
+   width: 100px;
+   height: 40px;
+   margin-bottom: 20px;
+    background-color : #4a7bf8;
+   border-color: #4a7bf8;
+    color: #fff;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+#best_btn:HOVER{
+   background-color: #5986f9;
+}
+
+
+.slick-slide{
+   width: 370px;
+}
+
+>>>>>>> branch 'nano124124' of https://github.com/kim93j5/soomgosustaSpring.git
 
 
 
