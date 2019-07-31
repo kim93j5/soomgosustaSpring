@@ -32,7 +32,7 @@
 						</a>
 					</div>
 					<div>
-						<a href="memberMyPage.do?member_Id=${id }"><span>프로필</span></a>
+						<a href="/expert/profile?e_Id=${loginUser.e_Id}"><span>프로필</span></a>
 					</div>
 					<div>
 						<a href="/scheduler/expertScheduler/${id }"> <span>일정</span>

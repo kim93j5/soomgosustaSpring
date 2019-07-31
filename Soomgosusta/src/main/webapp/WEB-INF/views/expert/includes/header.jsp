@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
+
 <html>
 <head>
 <link rel="stylesheet"
@@ -86,7 +87,12 @@
 								<select name="" id="loginState">
 									<option value="member">회원</option>
 									<option value="expert">고수</option>
-								</select> <a id="login" href="loginAction.do">로그인</a> <a id="loginteg"></a>
+								</select> 
+								
+								<a id="login" href="loginAction.do">로그인</a> <a id="loginteg"></a>
+							</div>
+							<div id="login_Div">
+							
 							</div>
 						</li>
 					</ul>
@@ -95,6 +101,31 @@
 		</c:choose>
 	</div>
 </nav>
-</body>
+<script type="text/javascript">
+$('document').ready(function(){	
+	$(function(){
+		$('#loginState').click(function() {
+			alert("이벤트확인");
+			var state = $("#loginState option:selected").val();
+				alert(state);
+			if (state == "member") {
+				var str = '<a href="' + "/member/login" + '">로그인회원</a>';
+				$('#login').remove(); //login teg delete 
+				$('#login_Div').html(str); //add loginteg html source
 
+			} else if (state == "expert") {
+				var str = '<a href="' + "/expert/login" + '">로그인고수</a>';
+				$('#login').remove(); //login teg delete 
+				$('#login_Div').html(str); //add loginteg html source
+
+			}
+
+		});
+	});
+	
+
+});
+</script>
+
+</body>
 </html>

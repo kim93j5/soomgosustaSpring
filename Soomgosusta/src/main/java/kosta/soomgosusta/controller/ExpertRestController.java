@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import kosta.soomgosusta.domain.E_FilesVO;
 import kosta.soomgosusta.domain.E_ProfileVO;
 import kosta.soomgosusta.domain.ExpertFindInfo;
 import kosta.soomgosusta.domain.ExpertFindVO;
@@ -53,6 +54,14 @@ public class ExpertRestController {
 				? new ResponseEntity<>("success",HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
+	}
+	
+	@GetMapping(value= "/profile/files/{e_Id}",
+			produces = {MediaType.APPLICATION_JSON_UTF8_VALUE,
+					MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<E_FilesVO>> getFileList(@PathVariable("e_Id") String e_Id){
+		
+		return new ResponseEntity<>(service.getFileList(e_Id),HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/list/{sido}/{gugun}/{service}/{serviceInfo}", produces={MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE})

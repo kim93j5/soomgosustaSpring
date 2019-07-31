@@ -2,10 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -14,45 +15,43 @@
 <script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<header>
+	<jsp:include page="../includes/header.jsp"></jsp:include>
+	</header>
 
-
-	<section class="">
-		<div class="profile_box">
+	<div class="page-wrapper">
+	
+		<div class="profile_box" >
 			<p id="pageName"class="profile_msg">${expert.e_Name}의 페이지 </p>
 		</div>
 		
-		
-		
-	
-			<div class="form-profile">
-			
+		<div class="form-profile" >
+				<h3>고수 프로필</h3>
+				<c:if test="${loginUser.user_Divide =='expert'}">
 				<div class="profile-photo">
 					<input type="file" name="updateFile"/>
 					<input type="hidden" name="e_Id" value="${expert.e_Id}"/>
+					<button id="updateBtn">수정</button> 
 				</div>
-				
-				 <button id="updateBtn">수정</button> 
+				</c:if>
 	
 				<script type= "text/javascript" src="/resources/js/profile.js"> </script>
-			
 				
-				
-				<div id="profile-Img" class="row align-items-center">
+				<div id="profile-Img" class="effect">
 					<img class="profile-photo" src="/upload/profile/${expert.e_Photo}">
 				</div>
-				
-				<div>
-				<ul id="profile-basic">
-					<li>${expert.e_Name}</li>
-					<li>${expert.e_Id}</li>
-					<li>${expert.e_Photo}</li>
-				</ul>
+		
+				<div class="profile-basic">
+					<ul id="profile-basic">
+						<li>${expert.e_Name}</li>
+						<li>${expert.e_Id}</li>
+						<li>${expert.e_Photo}</li>
+					</ul>
 				</div>
-			</div>
-			
-			
-			
-		</section>	
+		</div>
+			<hr>
+		
+		
 		<div id="profile-Ol">
 		<section class="">
 		<h3>한 줄 소개 </h3> 
@@ -74,7 +73,7 @@
 		</section>
 		</div>
 		<hr>
-		
+		<c:if test="${loginUser.user_Divide =='expert'}">
 		<div id='profileForm' >
 
 			<input type="text" id="ep_Ol" name="ep_Ol"><br>
@@ -82,14 +81,32 @@
 		</div>
 		
 		<button id="profileBtn">수정</button> 
-		
+		</c:if>
 		<hr class="m-0">
 		
-		<section class="" id="">
+		<div id="license">
 		<h3>자격증</h3>
-			
-		</section>
+			<c:if test="${loginUser.user_Divide =='expert'}">
+				<div id="license">
+					<input type="file" name="uploadLicense" multiple="multiple">
+					<input type="hidden" name="e_Id" value="${expert.e_Id}"/>
+					<button id="uploadBtn">등록</button> 
+				</div>
+					<button id="licenseModifyBtn">수정</button>
+				</c:if>
+				
+				<div id="uploadResult" class="uploadResult">
+				  <ul>
+				  </ul>
+				</div>
+				
+				<div class="bigPictureWrapper">
+					<div class="bigPicture">
+					</div>
+				</div>
 		<hr>
+		</div>
+		
 		
 		<section class="" id="">
 		<h3>포트폴리오</h3>
@@ -100,11 +117,10 @@
 
       <span class="d-block d-lg-none">${expert.e_Name}</span>
      <span id="profile-Img2" class="d-none d-lg-block">
-       <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="/upload/profile/${expert.e_Photo}" alt="">   
      </span>
 
   <h3> 리뷰</h3>
-		<button type="button" id="review-register" class="btn btn-primary"  data-target="#myModal"> 등록하기 </button>
+		
  	
 	<script type= "text/javascript" src="/resources/js/review.js"></script>
 
@@ -116,6 +132,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<i class="fa fa-comments fa-fw"></i> Review
+				<button type="button" id="review-register" class="btn btn-outline-primary" data-target="#myModal"> 등록하기 </button>
 			</div>
 			
 			<!--/.panel-heading  -->
@@ -151,7 +168,9 @@
     	<div class="modal-dialog" role="document">
      	 <div class="modal-content">
           <div class="modal-header">
+          	
            	<h4 class = " modal-title" id="myModal"> 리뷰 </h4>
+           		
            	  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
            	  <span aria-hidden="true">&times;</span>
            	  </button>
@@ -201,11 +220,74 @@
     	<!-- /.modal-dialog -->
  	</div>
  	<!-- /.modal -->
- 	
+ </div>	
  	
  		<script>
 			
 				$(document).ready(function(){
+				
+					var e_Id = "${profile.e_Id}";
+					profileService.getFileList({e_Id:e_Id}, function(list){
+						alert("getFileList:" + list);
+						console.log(list);
+						var str = "";
+						
+						for(var i=0, len = list.length||0; i < len; i++){
+							console.log(list[i].ef_Uuid)
+							var filePath = encodeURI(list[i].ef_Path+"/s_"+list[i].ef_Uuid+"_"+list[i].ef_Photo);
+							str += "<li data-ef_Path='"+list[i].ef_Path+"' data-ef_Uuid='"+list[i].ef_Uuid+"' data-ef_Photo='"+list[i].ef_Photo+"'>";
+							str += "<img src='/upload/"+filePath+"'></li>"; //class='img-responsive img-thumbnail'
+							
+						}
+						$("#uploadResult ul").html(str);
+						
+						
+					})
+					
+					$("#uploadResult").on("click","li", function(e){
+						alert('이미지클릭');
+						console.log("view image");
+						console.log($(this).data("ef_path"));
+						var path= encodeURI($(this).data("ef_path")+"/"+$(this).data("ef_uuid")+"_"+$(this).data("ef_photo"));
+						showImage(path.replace(new RegExp(/\\/g),"/"));
+						if($(this).data("ef_type")){
+							showImage(path.replace(new RegExp(/\\/g),"/"));
+						}
+						
+					});
+					
+					$("#licenseModifyBtn").on("click", function(e){
+						profileService.getFileList({e_Id:e_Id}, function(list){
+							alert("getFileList:" + list);
+							console.log(list);
+							var str = "";
+							
+							for(var i=0, len = list.length||0; i < len; i++){
+								console.log(list[i].ef_Uuid)
+								var filePath = encodeURI(list[i].ef_Path+"/s_"+list[i].ef_Uuid+"_"+list[i].ef_Photo);
+								str += "<li data-ef_Path='"+list[i].ef_Path+"' data-ef_Uuid='"+list[i].ef_Uuid+"' data-ef_Photo='"+list[i].ef_Photo+"'>";
+								str += "<img src='/upload/"+filePath+"'></li>"; //class='img-responsive img-thumbnail'
+								str += "<button type='button' data-
+							}
+							$("#uploadResult ul").html(str);
+							
+							
+						})
+					})
+					
+					function showImage(path){
+						alert(path);
+						
+						$(".bigPictureWrapper").css("display","flex").show();
+						$(".bigPicture").html("<img src='/upload/"+path+"'>").animate({width:'100%',height:'100%'},1000);
+					}
+					
+					$(".bigPictureWrapper").on("click", function(e){
+						$(".bigPicture").animate({width:'0%',height:'0%'},1000);
+						setTimeout(function(){
+							$(".bigPictureWrapper").hide();
+						},1000);
+					});
 					
 					var regex = new RegExp("(.*?)\.(png|jpg|bmp)$");
 					var maxSize = 2242880; //
@@ -227,15 +309,17 @@
 					
 					$("#updateBtn").on("click", function(e){
 						
+						if(!"${profile.e_Id}"=="${loginUser.e_Id}"){
+							alert("권한이 없습니다.");				
+							return false;
+						}
 						var formData = new FormData();
-						
 						var inputFile=$("input[name='updateFile']");
 						var files = inputFile[0].files;
-						
 					
 						var e_Id=$("input[name='e_Id']").val();
 					
-						if(!checkExtention(files[0].name, files[0].size)){
+						if(!checkExtention(files[0].name, files[0].size) ){
 							return false;
 						}
 						
@@ -258,7 +342,60 @@
 						});
 					});
 					
+					var cloneObj = $("#license").clone();
+					var uploadResult = $("#uploadResult ul");
 					
+						function showUploadedFile(uploadResultArr){
+							
+							var str="";
+							
+							$(uploadResultArr).each(function(i,obj){
+								
+								if(!obj.ef_Type){
+								str += "<li>" + obj.ef_Photo + "</li>";
+								}else{
+								var filePath = encodeURI(obj.ef_Path+"/s_"+obj.ef_Uuid+"_"+obj.ef_Photo);
+								str += "<li><img src='/upload/"+filePath+"'><li>";
+								}
+							});
+							$("#uploadResult ul").append(str);
+						}
+					$("#uploadBtn").on("click", function(e){
+						
+						if(!"${profile.e_Id}"=="${loginUser.e_Id}"){
+							alert("권한이 없습니다.");				
+							return false;
+						}
+						var formData = new FormData();
+						var inputFile=$("input[name='uploadLicense']");
+						var files = inputFile[0].files;
+					
+						var e_Id=$("input[name='e_Id']").val();
+						
+						for(var i=0; i< files.length; i++){
+							if(!checkExtention(files[i].name, files[i].size) ) {
+								return false;
+							}
+							formData.append("uploadFile",files[i]);
+						
+						}
+						formData.append("e_Id",e_Id);
+						
+						$.ajax({
+							url: '/expert/profile_License',
+							processData:false,
+							contentType:false,
+							data: formData,
+							type:'POST',
+							dataType:'json',
+							success: function(result){
+								
+								$("#license").html(cloneObj.html());
+								showUploadedFile(result);
+								console.log(result);
+							}
+						});
+					});
 				});
 		</script>
 				
@@ -334,7 +471,6 @@ $(document).ready(function(){
 	showList(1);
 	
 	$(".chat").on("click", "li", function(e){
-  		alert("클릭클릭");
   		var re_Seq = $(this).data("re_seq");
   		
   		reviewService.get(re_Seq, function(review){
@@ -345,7 +481,7 @@ $(document).ready(function(){
   			modalInputDate.val(review.re_Date);
   			modal.data("re_Seq", review.re_Seq);
   			
-  			modal.find("button[id !='modalCloseBtn']").hide();
+  			modal.find("button[id !='modal-review-close']").hide();
   			modalModifyBtn.show();
   			modalDeleteBtn.show();
   			
@@ -353,6 +489,27 @@ $(document).ready(function(){
   		});
   		
   	});
+	
+	$(modalModifyBtn).on("click", function(e){
+  		
+  		var review = {re_Seq:modal.data("re_Seq"),
+  				re_Contents: modalInputContents.val(),
+  				re_StarPoint: modalInputStarPoint.val()};
+  		reviewService.update(review, function(result){
+  			$("#myModal").modal( "hide");
+  			showList(1);
+  		});
+  	});
+	
+	$(modalDeleteBtn).on("click",function(e){
+		var re_Seq = modal.data("re_Seq");
+		
+		alert("delete 이벤트"+re_Seq);
+		reviewService.remove(re_Seq, function(result){
+			$("#myModal").modal("hide");
+			showList(1);
+		});
+	});
 	
 	
 	
@@ -386,10 +543,7 @@ $(document).ready(function(){
 				str +="<p>"+list[i].re_Contents+"</p></div></li><hr>";
 			}
 			
-			/* var member = reviewService.getMember({m_Id:getMember_m_Id},function(result){
-				alert(result);
-				
-			}); */
+			
 			reviewUL.html(str);
 			showReviewPage(reviewCnt,list);
 	  });
@@ -487,6 +641,8 @@ $(document).ready(function(){
  		});
  
  	}); 
+  	
+  
  	
   	
   	

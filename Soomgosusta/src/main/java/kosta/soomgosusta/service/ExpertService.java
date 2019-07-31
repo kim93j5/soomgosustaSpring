@@ -1,8 +1,12 @@
 package kosta.soomgosusta.service;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.Map;
 
+import org.springframework.http.ResponseEntity;
+
+import kosta.soomgosusta.domain.E_FilesVO;
 import kosta.soomgosusta.domain.E_ProfileVO;
 import kosta.soomgosusta.domain.ExpertVO;
 import kosta.soomgosusta.domain.LoginDTO;
@@ -22,5 +26,12 @@ public interface ExpertService {
 	public int updateProfile(E_ProfileVO vo);
 	
 	public void insertExpertInfo(ExpertInfoVO expert_Info, int p_Seq);
+
+	public void uploadFile(E_FilesVO vo);
+	
+	public void licenseDelete(String ef_Uuid);
+	
+	public List<E_FilesVO> getFileList(String e_Id);
+	
 	
 }
