@@ -1,10 +1,11 @@
 #estimate{
-	margin-top: 40px;
-	margin-left: 270px;
+	margin-top: 0px;
+	margin-left: 420px;
 	text-align: left;
 	border: outset;
 	width: 970px;
-	height: 178px;
+	height: 150px;
+	background-color: white;
 }
 
 #e_Photo img{
@@ -14,20 +15,35 @@
 }
 
 #e_Photo{
-	width: 500px;
-	margin-left: 70px;
+	width: 100px;
+	margin-left: 0px;
 }
 
 #estimateInfo{
-	margin-top: 40px;
-	margin-left: 300px;
+	margin-top: 10px;
+	margin-left: 100px;
+	margin-bottom : 60px;
+	background-color: white;
 }
 
 .expectation{
 	border-top-style: outset;
-	margin-top: 50px;
+	margin-top: 15px;
+	margin-bottom: 20px;
 }
 
 .h2{
-	margin-left: 260px;
+	margin-top: -50px;
+	margin-left: 310px;
+	font-size: 24px;
+	font-family: 'Nanum Gothic Coding', monospace;
+}
+
+ul{
+	list-style: none;
+}
+
+.district{
+	margin-top: 30px;
+	margin-bottom: 5px;
 }

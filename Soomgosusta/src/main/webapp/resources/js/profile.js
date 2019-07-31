@@ -18,7 +18,21 @@ var profileService = (function(){
 			}
 		});
 	}
-	
+	function getFileList(param, callback, error){
+		var e_Id= param.e_Id;
+		alert(e_Id);
+		$.getJSON("/expert/profile/files/"+e_Id+".json",function(data){
+			if(callback){
+				callback(data);
+			}
+			
+		}).fail(function(xhr, status, err){
+			if(error){
+				error();
+			}
+		});
+		
+	}
 	function update(profile, callback, error){
 		
 		console.log("e_Id" + profile.e_Id);
@@ -50,7 +64,8 @@ var profileService = (function(){
 	
 	return {
 		getProfile : getProfile,
-		update: update
+		update: update,
+		getFileList:getFileList
 	};
 })();
 

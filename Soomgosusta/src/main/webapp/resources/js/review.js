@@ -58,11 +58,11 @@ var reviewService = (function(){
 		
 	}
 	
-	function remove(re_seq, callback, error){
+	function remove(re_Seq, callback, error){
 		
 		$.ajax({
-			type: 'delete',
-			url : '/review/'+ re_seq,
+			type: 'Delete',
+			url : '/review/'+ re_Seq,
 			success : function(deleteResult, status, xhr){
 				if(callback){
 					callback(deleteResult);
@@ -88,6 +88,7 @@ var reviewService = (function(){
 				
 				if(callback){
 					alert("review update 성공 ");	
+					callback(result);
 				}
 			},
 			error : function(xhr, status, er){
@@ -115,10 +116,10 @@ var reviewService = (function(){
 			}
 		});
 	}
-	
-	function getMember(param, callback, error){
+
+	function getMember(m_Id, callback, error){
 		console.log("getMember.................................");
-		var m_Id= param.m_Id;
+		alert(m_Id);
 		$.getJSON("/review/writer/"+m_Id+".json",
 				function (data){
 			if(callback){

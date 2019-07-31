@@ -16,11 +16,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -203,13 +205,70 @@ public class ExpertController {
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 	
+	@PostMapping(value = "/profile_License", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<E_FilesVO>> licenseFile(MultipartFile[] uploadFile, String e_Id, ExpertVO expertVO,
+			Model model) {
+
+		List<E_FilesVO> list = new ArrayList<>();
+		String uploadFolder = "C:\\upload";
+		String uploadFolderPath = "license";
+		File uploadPath = new File(uploadFolder, uploadFolderPath);
+		log.info("upload path: " + uploadPath);
+
+		if (uploadPath.exists() == false) {
+			uploadPath.mkdirs();
+		}
+
+		for (MultipartFile multipartFile : uploadFile) {
+
+			E_FilesVO fileVO = new E_FilesVO();
+
+			String uploadFileName = multipartFile.getOriginalFilename();
+			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
+			fileVO.setEf_Photo(uploadFileName);
+			UUID uuid = UUID.randomUUID();
+			uploadFileName = uuid.toString() + "_" + uploadFileName;
+
+			// File savaFile = new File(uploadFolder, updateFileName);
+
+			try {
+
+				File savaFile = new File(uploadPath, uploadFileName);
+				multipartFile.transferTo(savaFile);
+
+				fileVO.setEf_Uuid(uuid.toString());
+				fileVO.setEf_Path(uploadFolderPath);
+
+				if (checkIamgeType(savaFile)) {
+
+					fileVO.setEf_Type(true);
+					fileVO.setEf_From("license");
+					fileVO.setE_Id(e_Id);
+					
+					FileOutputStream thumnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
+					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumnail, 200, 200);
+					thumnail.close();
+				}
+				list.add(fileVO);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		
+			service.uploadFile(fileVO);
+
+		}
+		return new ResponseEntity<>(list, HttpStatus.OK);
+	}
+	
 	
 	@GetMapping("/listExpertInfo")
 	 public void listExpertInfo(Model model) {
 		
 		List<PartVO> listExpertInfo = partService.listPartService();
 		List<String> lWord = new ArrayList<>();
-       List<String> mWord = new ArrayList<>();
+        List<String> mWord = new ArrayList<>();
 	    List<String> sWord = new ArrayList<>();
 		    for(int i = 0; i < listExpertInfo.size(); i++){
 		       
@@ -317,4 +376,25 @@ public class ExpertController {
 	public void listExpertFind(ExpertFindInfo info){
 	
 	}
+	
+	@GetMapping("/display")
+	@ResponseBody
+	public ResponseEntity<byte[]> getFiles(String ef_Photo){
+		
+		File file = new File("c:\\upload\\"+ ef_Photo);
+		
+		log.info("file: " + file);
+		ResponseEntity<byte[]> result = null;
+		
+		try{
+			HttpHeaders header = new HttpHeaders();
+			
+			header.add("Content-Type",Files.probeContentType(file.toPath()));
+			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file),header,HttpStatus.OK);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+		
 }
