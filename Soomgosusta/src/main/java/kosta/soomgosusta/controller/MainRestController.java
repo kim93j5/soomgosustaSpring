@@ -38,4 +38,5 @@ public class MainRestController {
 		log.info(list);
 		return new ResponseEntity<>(service.listPopularService(), HttpStatus.OK);
 	}
+	
 }
