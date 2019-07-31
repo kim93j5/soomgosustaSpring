@@ -267,7 +267,6 @@
 								var filePath = encodeURI(list[i].ef_Path+"/s_"+list[i].ef_Uuid+"_"+list[i].ef_Photo);
 								str += "<li data-ef_Path='"+list[i].ef_Path+"' data-ef_Uuid='"+list[i].ef_Uuid+"' data-ef_Photo='"+list[i].ef_Photo+"'>";
 								str += "<img src='/upload/"+filePath+"'></li>"; //class='img-responsive img-thumbnail'
-								str += "<button type='button' data-
 							}
 							$("#uploadResult ul").html(str);
 							
