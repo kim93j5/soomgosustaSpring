@@ -43,15 +43,6 @@ public class ReviewRestController {
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-/*	@GetMapping(value = "/pages/{e_Id}/{page}", produces = { MediaType.APPLICATION_XML_VALUE,
-			MediaType.APPLICATION_JSON_UTF8_VALUE })
-	public ResponseEntity<List<ReviewVO>> getList(@PathVariable("page") int page, @PathVariable("e_Id") String e_Id) {
-
-		Criteria cri = new Criteria(page, 5);
-		log.info(cri);
-
-		return new ResponseEntity<>(service.getList(cri, e_Id), HttpStatus.OK);
-	}*/
 	
 	@GetMapping(value = "/pages/{e_Id}/{page}", produces = { MediaType.APPLICATION_XML_VALUE,
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
@@ -100,9 +91,11 @@ public class ReviewRestController {
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("m_Id", m_Id);
 		param.put("e_Id", e_Id);
+	
 		
 		return new ResponseEntity<> (service.findMatch(param),HttpStatus.OK);
 	}
+	
 
 	@GetMapping(value = "/writer/{m_Id}", produces ={ MediaType.APPLICATION_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_XML_VALUE})

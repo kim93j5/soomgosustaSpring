@@ -73,6 +73,8 @@ $('document').ready(function(){
 		
 		$('.expertInfo').on("click", function(){
 			alert($(this).data("id"));
+			location.href='/expert/profile?e_Id='+$(this).data("id");
+			
 		});
 		
 	}

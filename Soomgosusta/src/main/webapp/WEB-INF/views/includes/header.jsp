@@ -20,6 +20,7 @@
 	<div class="banner">
 		<c:choose>
 			<c:when test="${loginUser.user_Divide =='expert'}">
+
 				<div class="left_">
 					<div>
 						<a href="/main/mainPage"> <img
