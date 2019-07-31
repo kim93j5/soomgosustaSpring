@@ -16,6 +16,45 @@ function clickBtn(){
 }
 
 $('document').ready(function(){
+	$('#getfilter').click(function(){
+		$('.filter').toggle();
+	});
+	
+	$('.f').change(function(){
+		if($('input:checkbox[name=orderByEC]').is(':checked') == true){
+			$('input:checkbox[name=orderByEC]').val("checked");
+		}else{
+			$('input:checkbox[name=orderByEC]').val("not");
+		}
+
+		if($('input:checkbox[name=orderByRevC]').is(':checked') == true){
+			$('input:checkbox[name=orderByRevC]').val("checked");
+		}else{
+			$('input:checkbox[name=orderByRevC]').val("not");
+		}
+		
+		if($('input:checkbox[name=orderBySP]').is(':checked') == true){
+			$('input:checkbox[name=orderBySP]').val("checked");
+		}else{
+			$('input:checkbox[name=orderBySP]').val("not");
+		}
+		
+		var sido = $('#sido').val();
+		var gugun = $('#gugun').val();
+		var service = $('#service').val();
+		var serviceInfo = $('#serviceInfo').val();
+		var orderByEC = $('input:checkbox[name=orderByEC]').val();
+		var orderByRevC = $('input:checkbox[name=orderByRevC]').val();
+		var orderBySP = $('input:checkbox[name=orderBySP]').val();
+		
+		expertFindService.getList({sido:sido, gugun:gugun, ser: service, serviceInfo:serviceInfo, orderByEC:orderByEC, orderByRevC:orderByRevC, orderBySP:orderBySP}, function(result){
+			for(var i=0, len= result.length||0; i<len; i++){
+				console.log(result[i]);
+			}
+			
+			checkList(result);
+		});
+	});
 	
 	function checkList(list){
 		$('#exlist').empty();
@@ -41,7 +80,7 @@ $('document').ready(function(){
 	}
 	
 	
-	expertFindService.getList({sido:"지역 전체", gugun:"전체", ser: "분야 전체", serviceInfo:"전체"}, function(result){
+	expertFindService.getList({sido:"지역 전체", gugun:"전체", ser: "분야 전체", serviceInfo:"전체", orderByEC:"not", orderByRevC:"not", orderBySP:"not"}, function(result){
 		checkList(result);
 	});
 	
@@ -51,8 +90,11 @@ $('document').ready(function(){
 		var gugun = $('#gugun').val();
 		var service = $('#service').val();
 		var serviceInfo = $('#serviceInfo').val();
+		var orderByEC = $('input:checkbox[name=orderByEC]').val();
+		var orderByRevC = $('input:checkbox[name=orderByRevC]').val();
+		var orderBySP = $('input:checkbox[name=orderBySP]').val();
 		
-		expertFindService.getList({sido:sido, gugun:gugun, ser: service, serviceInfo:serviceInfo}, function(result){
+		expertFindService.getList({sido:sido, gugun:gugun, ser: service, serviceInfo:serviceInfo, orderByEC:orderByEC, orderByRevC:orderByRevC, orderBySP:orderBySP}, function(result){
 			for(var i=0, len= result.length||0; i<len; i++){
 				console.log(result[i]);
 			}
@@ -67,8 +109,11 @@ $('document').ready(function(){
 		var gugun = $('#gugun').val();
 		var service = $('#service').val();
 		var serviceInfo = $('#serviceInfo').val();
+		var orderByEC = $('input:checkbox[name=orderByEC]').val();
+		var orderByRevC = $('input:checkbox[name=orderByRevC]').val();
+		var orderBySP = $('input:checkbox[name=orderBySP]').val();
 		
-		expertFindService.getList({sido:sido, gugun:gugun, ser: service, serviceInfo:serviceInfo}, function(result){
+		expertFindService.getList({sido:sido, gugun:gugun, ser: service, serviceInfo:serviceInfo, orderByEC:orderByEC, orderByRevC:orderByRevC, orderBySP:orderBySP}, function(result){
 			for(var i=0, len= result.length||0; i<len; i++){
 				console.log(result[i]);
 			}
@@ -83,8 +128,11 @@ $('document').ready(function(){
 		var gugun = $('#gugun').val();
 		var service = $('#service').val();
 		var serviceInfo = $('#serviceInfo').val();
+		var orderByEC = $('input:checkbox[name=orderByEC]').val();
+		var orderByRevC = $('input:checkbox[name=orderByRevC]').val();
+		var orderBySP = $('input:checkbox[name=orderBySP]').val();
 		
-		expertFindService.getList({sido:sido, gugun:gugun, ser: service, serviceInfo:serviceInfo}, function(result){
+		expertFindService.getList({sido:sido, gugun:gugun, ser: service, serviceInfo:serviceInfo, orderByEC:orderByEC, orderByRevC:orderByRevC, orderBySP:orderBySP}, function(result){
 			for(var i=0, len= result.length||0; i<len; i++){
 				console.log(result[i]);
 			}
@@ -102,8 +150,11 @@ $('document').ready(function(){
 		var gugun = $('#gugun').val();
 		var service = $('#service').val();
 		var serviceInfo = $('#serviceInfo').val();
+		var orderByEC = $('input:checkbox[name=orderByEC]').val();
+		var orderByRevC = $('input:checkbox[name=orderByRevC]').val();
+		var orderBySP = $('input:checkbox[name=orderBySP]').val();
 		
-		expertFindService.getList({sido:sido, gugun:gugun, ser: service, serviceInfo:serviceInfo}, function(result){
+		expertFindService.getList({sido:sido, gugun:gugun, ser: service, serviceInfo:serviceInfo, orderByEC:orderByEC, orderByRevC:orderByRevC, orderBySP:orderBySP}, function(result){
 			for(var i=0, len= result.length||0; i<len; i++){
 				console.log(result[i]);
 			}
@@ -134,6 +185,15 @@ $('document').ready(function(){
 						서비스 선택<br> 
 						<select name="service" id="service"></select> 
 						<select	name="serviceInfo" id="serviceInfo" style="display: none"></select>
+					</div>
+					
+					<div id="sel_orderby">
+						<div id="getfilter">필터</div>
+						<ul class="filter" style="position: absolute; display: none;">
+							<li class="sort-item"><input type="checkbox" class="f" name="orderByEC" value="not">고용순</li>
+							<li class="sort-item"><input type="checkbox" class="f" name="orderByRevC" value="not">리뷰순</li>
+							<li class="sort-item"><input type="checkbox" class="f" name="orderBySP" value="not">별점순</li>
+						</ul>
 					</div>
 			</div>
 		</div>

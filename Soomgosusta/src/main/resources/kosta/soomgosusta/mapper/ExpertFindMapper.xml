@@ -43,9 +43,13 @@
 							ei.EI_DISTRICT LIKE '%'||#{sido}||'%'
 						</if>
 					</if>
-			</trim>
+			</trim>			
 		</trim>
-
+		<trim>
+				<if test="orderByEC == 'checked'">
+					ORDER BY e.E_RC DESC
+				</if>
+		</trim>
 	</sql>
 
 	<select id="listExpertFind" parameterType="hashmap" resultMap="listExInfo">
