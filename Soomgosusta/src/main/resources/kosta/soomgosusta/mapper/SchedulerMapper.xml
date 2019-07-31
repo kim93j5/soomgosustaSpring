@@ -130,11 +130,13 @@
 		JOIN EXPERT e
 		ON mc.E_ID = e.E_ID
 		WHERE s.S_SEQ = #{s_Seq}
+		ORDER BY f.F_SEQ
 	</select>
 	
 	<select id="listReply" parameterType="hashmap" resultType="kosta.soomgosusta.domain.SC_ReplyVO">
 		SELECT * FROM SC_REPLY
 		WHERE F_SEQ = #{f_Seq}
+		ORDER BY SR_SEQ
 	</select>
 	
 	<insert id="insertReply" parameterType="kosta.soomgosusta.domain.SC_ReplyVO">

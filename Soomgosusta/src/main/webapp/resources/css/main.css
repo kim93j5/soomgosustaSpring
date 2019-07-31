@@ -1,8 +1,9 @@
 @CHARSET "UTF-8";
 
 #search{
+	width: 800px;
 	margin-left: 350px;
-	margin-top: 100px;
+	margin-top: 30px;
 	padding-bottom: 80px;
 	position: relative;
 }
@@ -30,6 +31,7 @@
 	height: 80px;
 	text-align: center;
 	border-style: outset;
+	background: white;
 }
 
 .part{
@@ -41,7 +43,7 @@
 	margin-left: 170px;
 	margin-top: 100px;
 	margin-bottom: 300px;
-	position: relative;
+
 }
 
 .largelist img{
@@ -62,16 +64,29 @@
 	border-style: solid;
 	border-color: #4092f1;
 	position: absolute;
+	background: white;
 }
 
 #searchform{
 	margin-bottom: 0px;
+	display: inline-block;
 }
 
-
+#semi{
+	display: inline-block;
+}
 #search-ul li{
 	float: left;
 	font-size: 12px;
 	margin-left: 5px;
 	padding : 0;
+}
+
+#mainImage img{
+	width: 500px;
+	height: 550px;
+	filter:blendTrans(duration=1); 
+	overflow: hidden;
+	position: absolute;
+	margin-left: 400px;
 }
