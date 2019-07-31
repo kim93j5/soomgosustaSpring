@@ -143,7 +143,7 @@ $(document).ready(function(){
 </script>
 
 
-<title>Insert title here</title>
+<title>Main Page</title>
 </head>
 <body>
 
