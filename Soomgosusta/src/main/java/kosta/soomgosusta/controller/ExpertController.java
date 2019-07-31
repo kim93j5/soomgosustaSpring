@@ -88,7 +88,7 @@ public class ExpertController {
 	}
 
 	@PostMapping("/login")
-	public String login(LoginDTO loginDTO, Model model) throws UnsupportedEncodingException {
+	public String login(LoginDTO loginDTO, Model model, HttpSession session) throws UnsupportedEncodingException {
 
 		String login_Id = loginDTO.getId();
 
@@ -98,12 +98,14 @@ public class ExpertController {
 
 		if (success == 0) {
 			model.addAttribute("expertVO", expertVO);
+			model.addAttribute("loginDTO", loginDTO);
 			return "/expert/request/received";
 		} else if (success == 1) {
 			model.addAttribute("loginResult", "login fail");
 			System.out.println("비밀번호 ");
 			return "/expert/login";
 		} else {
+			model.addAttribute("loginResult", "login fail");
 			System.out.println("아이디가 존재하지 않습니다.");
 			return "/expert/login";
 		}
@@ -139,7 +141,6 @@ public class ExpertController {
 		E_ProfileVO profile = service.getProfile(e_Id);
 
 		ExpertVO expert = service.findExpert(e_Id);
-
 		model.addAttribute("profile", profile);
 		model.addAttribute("expert", expert);
 

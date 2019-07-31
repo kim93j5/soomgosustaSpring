@@ -204,6 +204,6 @@ $(document).ready(function(){
    </div>
    <!-- /.modal -->
 
-
+ 	${loginUser.user_Divide}
 </body>
 </html>

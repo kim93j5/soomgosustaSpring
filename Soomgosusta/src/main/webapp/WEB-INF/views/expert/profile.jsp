@@ -11,6 +11,7 @@
 <title>Insert title here</title>
 <link href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="/resources/css/profile.css" rel="stylesheet">
+
 <script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
 <script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 </head>
@@ -45,7 +46,7 @@
 					<ul id="profile-basic">
 						<li>${expert.e_Name}</li>
 						<li>${expert.e_Id}</li>
-						<li>${expert.e_Photo}</li>
+						<li>${expert.e_Rc}</li>
 					</ul>
 				</div>
 		</div>
@@ -190,15 +191,16 @@
       	  	<div class="form-group">
       	  	<div class="starRev"> 
       	  	<label>별점 </label>
-  			  <span class="starR on">별1</span>
-			  <span class="starR">별2</span>
-			  <span class="starR">별3</span>
-			  <span class="starR">별4</span>
-			  <span class="starR">별5</span>
-      	  	<input id="review-star" type="text" name="starPoint" placeholder="별점">
+  			  <span class="starR on" data-starPoint="1" >별1</span>
+			  <span class="starR" data-starPoint="2">별2</span>
+			  <span class="starR" data-starPoint="3">별3</span>
+			  <span class="starR" data-starPoint="4">별4</span>
+			  <span class="starR" data-starPoint="5">별5</span>
+      	  	<input id="review-star" type="hidden" name="starPoint" placeholder="별점">
+      	  
       	   	</div>
       	   	</div>
-      	   	
+      	   	 
       	  	<div class="form-group">
           	<label>내용</label>
           	<textarea id="review-contents" name="contents" rows="10" cols="70" placeholder="내용"></textarea>
@@ -266,7 +268,8 @@
 								console.log(list[i].ef_Uuid)
 								var filePath = encodeURI(list[i].ef_Path+"/s_"+list[i].ef_Uuid+"_"+list[i].ef_Photo);
 								str += "<li data-ef_Path='"+list[i].ef_Path+"' data-ef_Uuid='"+list[i].ef_Uuid+"' data-ef_Photo='"+list[i].ef_Photo+"'>";
-								str += "<img src='/upload/"+filePath+"'></li>"; //class='img-responsive img-thumbnail'
+								str += "<img src='/upload/"+filePath+"'></li>";
+								str += "<button type='button'>x</button>"; //class='img-responsive img-thumbnail'
 							}
 							$("#uploadResult ul").html(str);
 							
@@ -282,7 +285,7 @@
 					}
 					
 					$(".bigPictureWrapper").on("click", function(e){
-						$(".bigPicture").animate({width:'0%',height:'0%'},1000);
+						$(".bigPicture").animate({width:'0%',height:'0%'},0);
 						setTimeout(function(){
 							$(".bigPictureWrapper").hide();
 						},1000);
@@ -307,11 +310,7 @@
 					
 					
 					$("#updateBtn").on("click", function(e){
-						
-						if(!"${profile.e_Id}"=="${loginUser.e_Id}"){
-							alert("권한이 없습니다.");				
-							return false;
-						}
+				
 						var formData = new FormData();
 						var inputFile=$("input[name='updateFile']");
 						var files = inputFile[0].files;
@@ -361,10 +360,7 @@
 						}
 					$("#uploadBtn").on("click", function(e){
 						
-						if(!"${profile.e_Id}"=="${loginUser.e_Id}"){
-							alert("권한이 없습니다.");				
-							return false;
-						}
+				
 						var formData = new FormData();
 						var inputFile=$("input[name='uploadLicense']");
 						var files = inputFile[0].files;
@@ -505,9 +501,11 @@ $(document).ready(function(){
 		
 		alert("delete 이벤트"+re_Seq);
 		reviewService.remove(re_Seq, function(result){
-			$("#myModal").modal("hide");
 			showList(1);
+			
 		});
+		$("#myModal").modal("hide");
+		
 	});
 	
 	
@@ -604,8 +602,11 @@ $(document).ready(function(){
 	 modalInputDate.closest("div").hide();
 	 modal.find("button[id != 'modal-review-close']").hide();
 	 modalRegisterBtn.show();
+	 var divide= "${loginUser.user_Divide}";
 	 
-	 var m_Id = e_Id;
+	 if(divide=='member'){
+		 
+	 var m_Id = "${loginUser.m_Id}";
 	 /* $("#myModal").modal('show'); */
 	 reviewService.findMatch({m_Id:m_Id , e_Id:e_Id},function(count){
 		 	console.log("Match.........."  + count);
@@ -615,48 +616,57 @@ $(document).ready(function(){
 	 			$("#myModal").modal('show');
 	 		}
  	});
- 	
-  	$(modalRegisterBtn).on("click",function(e){
+	}else{
+		 alert("권한이 없습니다.");
+	 }
+	 
+	}); 
+ 	$("#modal-review-register").on("click",function(e){
  		
  		var e_Id = "${profile.e_Id}";
- 		
+ 		var m_Id = "${loginUser.m_Id}";
  		var modalInputStarPoint = $("#review-star").val();
  		var modalInputContents = $("#review-contents").val();
  		alert(" star 입력값 "+ modalInputStarPoint);
+ 		
  	
  		var review={
- 				m_Id: 'kim93j5@naver.com',
+ 				m_Id: m_Id,
  				re_StarPoint: modalInputStarPoint,
  				re_Contents: modalInputContents,
  				e_Id: e_Id,
  		};
- 		reviewService.add(review, function(result){
- 			
- 			alert("review 등록 성공"+result);
- 			
- 			modal.find("input").val(""); 
- 			modal.modal("hide");
+ 		console.log("여기"+review);
+		reviewService.add(review, function(result){
+			
+			
  			showList(-1);
  		});
+		$("#modal-review-register").find("input").val(""); 
+		$("#myModal").modal("hide");
  
  	}); 
   	
-  
+  	
+
  	
   	
   	
   
   	
   	//------------별점 UI----------------------------
- 	$('.starRev span').click(function(){
- 		  $(this).parent().children('span').removeClass('on');
- 		   $(this).addClass('on').prevAll('span').addClass('on');
- 		  var starPoint =$(this).val();
- 		  alert(starPoint);
- 		  return starPoint;
- 	});
-	
- 	});
+	$('.starR').on("click",function(){
+		  $(this).parent().children('span').removeClass('on');
+		   $(this).addClass('on').prevAll('span').addClass('on');
+		  var starPoint =$(this).data("starpoint");
+		  alert(starPoint);
+		  console.log(starPoint);
+		  $("#review-star").val(starPoint);
+		  console.log($("#review-star").val());
+		  return starPoint;
+	});
+  	
+  	
 });
 
 </script>

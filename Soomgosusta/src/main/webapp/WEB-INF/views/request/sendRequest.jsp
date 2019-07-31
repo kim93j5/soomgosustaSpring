@@ -2,9 +2,9 @@
    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%-- <header>
+<header>
    <jsp:include page="../includes/header.jsp"></jsp:include>
-</header> --%>
+</header>
 
 <html>
 <head>
@@ -13,14 +13,11 @@
 <script type="text/javascript" src="/resources/js/sendRequest.js"></script>
 <link rel="stylesheet" href="/resources/css/memberMain.css" target="text/css">
 <link rel="stylesheet" type="text/css" href="/resources/plugin/slick/slick.css"/>
-<link rel="stylesheet" type="text/css" href="/resources/plugin/slick/slick-theme.css"/>
-
+<link rel="stylesheet" type="text/css" href="/resources/plugin/slick/slick-theme.css"/> 
 <link rel="stylesheet" href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
 <script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
 <script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="/resources/plugin/slick/slick.min.js"></script>
+<script type="text/javascript" src="/resources/plugin/slick/slick.min.js"></script> 
 
 <style type="text/css">
 @import url(//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
@@ -48,6 +45,10 @@ p{
    background-color: white;
  
 }
+
+b{
+   margin-bottom: 10px;
+}
 </style>
 
 <title>Insert title here</title>
@@ -64,7 +65,11 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
       requestService.cancel(r_Seq, function(result){
     	console.log(result);  
     	$('#sendRequestForm').empty();
+<<<<<<< HEAD
     	   requestService.getList(m_Id,
+=======
+    	   requestService.getList("m_Id",
+>>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
                    function(list) {
 
                       var str = "";
@@ -204,7 +209,11 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
       });
    });
 
+<<<<<<< HEAD
    requestService.getList(m_Id,
+=======
+   requestService.getList("m_Id",
+>>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
                function(list) {
 
                   var str = "";
@@ -335,7 +344,7 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
                   }
                   
                 }else if(list.size == 0){
-                     str += '<h3 style = "margin-top:40px; margin-left:-1240px; font-size:16px;">아직 요청서를 작성하지 않으셨습니다. <a href ="/part/main">요청 보내기</a></h3>';
+                     str += '<h3 style = "margin-top:40px; margin-left:-1240px; font-size:16px;">아직 요청서를 작성하지 않으셨습니다. <a href ="/main/mainPage">요청 보내기</a></h3>';
                      }
                    
                   
@@ -374,24 +383,25 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
    <h1 style="font-size: 30px; font-weight: bold;">추천서비스<br></h1>
    </div> 
    
+   
 <!--    <div id="button">
    <button type="button" id="recommend_btn">관심분야순</button>
    <button type="button" id="best_btn">인기순</button>
    </div> -->
    
    
-   <div id="recommend">
+    <div id="recommend">
      <c:forEach var="list" begin="1" end="8" items="${listRandom}">
         <div id="recommendService">
         
              <a href="#">
-                <img class="img" src="/resources/images/${list.p_Image }">
-                <p style= "color: #4d4d4d; font-weight: 500;">${list.p_S_Word }</p>          
+                <img class="img" src="/resources/images/${list.p_Image }"><br>
+                <b>${list.p_S_Word }</b>          
              </a>     
 
        </div>
      </c:forEach>
-    </div> 
+    </div>  
     
     <div id="best">
     <h4 style="font-size: 30px; font-weight: bold;">인기서비스</h4>
@@ -401,7 +411,7 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
         <div id="recommendService">
           <a href="#">
               <img class="img" src="/resources/images/${listBest.p_Image }">
-                <p style= "color: #4d4d4d; font-weight: 500;">${listBest.p_S_Word }</p>          
+                <b style= "color: #4d4d4d; font-weight: 500;">${listBest.p_S_Word }</b>          
           </a>     
         </div>
       </c:forEach>
