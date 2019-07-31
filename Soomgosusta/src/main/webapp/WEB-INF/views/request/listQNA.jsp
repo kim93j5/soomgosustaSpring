@@ -71,7 +71,8 @@ partService.getQNA(data, function(list){
 
 		str += '<input type="hidden" name="p_Seq" value="'+ list.searchPart.p_Seq + '">';
 		str += '<input type="hidden" name="p_S_Word" value="'+ list.searchPart.p_S_Word +'">';
-
+		str += '<div class="requestList"><h1>"'+ list.searchPart.p_S_Word + '"<br>고수를 소개받기 위한<br>몇가지 질문에 답해주세요!</h1>';
+	      str += '<div class="btn"><a href="#" class="next">다음</a></div></div>';
 		for(var i=0, len=list.listQ.length||0; i<len; i++){
 			str += '<input type=hidden name="listQ_seq" value="'+ list.listQ[i].q_Seq+'">';
 			str += '<div class="requestList">';
@@ -266,4 +267,5 @@ li{
 		</div>
 
 </body>
+
 </html>

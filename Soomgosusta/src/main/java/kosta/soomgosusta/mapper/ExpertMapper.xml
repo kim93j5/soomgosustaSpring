@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kosta.soomgosusta.mapper.ExpertMapper">
+
+	<insert id="register">
+		insert into Expert values(#{e_Id},#{e_Password},
+		'expert','default_userImg','address',0,#{e_Name})
+	</insert>
+	
+	<select id="login" parameterType="String" resultType="kosta.soomgosusta.domain.ExpertVO">
+		select * 
+		from Expert
+		where e_Id=#{login_Id}
+	</select>
+	
+	<select id="findExpert" parameterType="String" resultType="kosta.soomgosusta.domain.ExpertVO">
+		select * 
+		from Expert
+		where e_Id=#{login_Id}
+	</select>
+	
+	<select id="getProfile" parameterType="String" resultType="kosta.soomgosusta.domain.E_ProfileVO">
+		select *
+		from E_Profile
+		where e_Id=#{e_Id}
+	</select>
+	
+	<update id="updateEPhoto" parameterType="HashMap">
+	 	update expert set e_Photo =#{e_Photo}
+	 	where e_Id=#{e_Id}
+	</update>
+	
+	<update id="updateProfile">
+		update E_Profile set ep_Ol = #{ep_Ol}, ep_Dl= #{ep_Dl} 
+		where e_Id=#{e_Id}
+	</update>
+	
+	<insert id="uploadLicense">
+		insert into E_Files values(#{ef_Uuid},#{ef_Photo} , #{ef_Path}, #{ef_Type},#{ef_From} , #{e_Id})
+	</insert>
+	
+	<delete id="licenseDelete">
+		delete from E_Files where ef_Uuid=#{ef_Uuid}
+	</delete>
+	
+	<select id="findLicense">
+	select * from E_Files where e_Id = #{e_Id} and ef_From ='license'
+	</select>
+	
+	<select id="getFileList" parameterType="String" resultType="kosta.soomgosusta.domain.E_FilesVO">
+	 select * from E_Files where e_Id= #{e_Id} and ef_From = 'license'
+	</select>
+	
+   <insert id="insertExpertInfo" parameterType="kosta.soomgosusta.domain.ExpertInfoVO">
+        insert into e_info values (#{e_Id}, #{ei_Time}, #{ei_District}, #{ei_Start}, #{ei_Gender}, #{p_Seq})
+        
+   </insert>
+   
+	<update id="countRegister" parameterType="int">
+	    update part_log SET pl_register = pl_register + 1 WHERE p_Seq = #{p_Seq}
+	</update>
+	
+</mapper>

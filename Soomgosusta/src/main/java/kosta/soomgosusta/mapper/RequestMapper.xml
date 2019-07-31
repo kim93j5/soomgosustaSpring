@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kosta.soomgosusta.mapper.RequestMapper">
+
+	<insert id="insertRequest" parameterType="hashmap">
+		INSERT INTO REQUEST
+		VALUES(REQUEST_SEQ.NEXTVAL, #{m_Id}, #{p_Seq}, #{qna0},#{qna1},#{qna2},#{qna3},#{qna4},
+		#{qna5},#{qna6},#{qna7},#{qna8},#{qna9},#{qna10},#{qna11},#{qna12},#{qna13},#{qna14},
+		sysdate, 'ING')
+	</insert>
+	
+	<select id="listQuestion" parameterType="hashmap" resultType="kosta.soomgosusta.domain.QuestionVO">
+		SELECT * FROM QUESTION
+		WHERE 
+		<foreach collection="listQ" item="list" index="index" open="(" close=")" separator="OR">
+			Q_SEQ = #{list}
+		</foreach>
+	</select>
+	
+	<select id="listAnswer" parameterType="hashmap" resultType="kosta.soomgosusta.domain.AnswerVO">
+		SELECT * FROM ANSWER
+		WHERE
+		<foreach collection="listA" item="list" index="index" open="(" close=")" separator="OR">
+			A_SEQ = #{list}
+		</foreach>
+	</select>
+	
+	<select id="listmyRequest" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) FROM REQUEST
+		WHERE M_ID = #{m_Id}
+		AND P_SEQ = #{p_Seq} 
+	</select>
+	
+	<update id="updateRequestLog" parameterType="int" >
+		UPDATE PART_LOG SET PL_REQUEST = PL_REQUEST+1 WHERE P_SEQ = #{p_Seq}
+	</update>
+	
+	<select id="sendRequestInfo" resultType="kosta.soomgosusta.domain.RequestVO" parameterType="String">		
+		 select * from request where m_Id = #{m_Id}
+	</select>
+	
+	<select id="partInfo" resultType="String" parameterType="int">
+	      select p_s_word from part where p_Seq = #{p_Seq}
+	</select>
+	
+	<update id="cancelRequest" parameterType="int">
+	       update request set r_Status = 'Cancel' where r_seq = #{r_Seq}
+	</update>
+
+	
+</mapper>

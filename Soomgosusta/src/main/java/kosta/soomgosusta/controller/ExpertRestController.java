@@ -3,9 +3,12 @@ package kosta.soomgosusta.controller;
 import java.util.List;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.parsing.EmptyReaderEventListener;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +41,7 @@ public class ExpertRestController {
 	private ExpertService service;
 	private ExpertFindService ef_service;
 	private PartService partService;
-
+	
 	@GetMapping(value = "/profile/{e_Id}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<E_ProfileVO> get(@PathVariable("e_Id") String e_Id) {
@@ -64,18 +67,21 @@ public class ExpertRestController {
 		return new ResponseEntity<>(service.getFileList(e_Id), HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/list/{sido}/{gugun}/{service}/{serviceInfo}", produces = { MediaType.APPLICATION_XML_VALUE,
+	@GetMapping(value = "/list/{sido}/{gugun}/{ser}/{serviceInfo}/{orderByEC}/{orderByRevC}/{orderBySP}", produces = { MediaType.APPLICATION_XML_VALUE,
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
-	public ResponseEntity<List<ExpertFindVO>> get(@PathVariable("sido") String sido,
-			@PathVariable("gugun") String gugun, @PathVariable("service") String ser,
-			@PathVariable("serviceInfo") String serviceInfo) {
+	public ResponseEntity<List<ExpertFindVO>> get(@PathVariable("sido") String sido, @PathVariable("gugun") String gugun, 
+			@PathVariable("ser") String ser, @PathVariable("serviceInfo") String serviceInfo, @PathVariable("orderByEC") String orderByEC,
+			@PathVariable("orderByRevC")String orderByRevC, @PathVariable("orderBySP") String orderBySP) {
 
 		ExpertFindInfo info = new ExpertFindInfo();
 		info.setSido(sido);
 		info.setGugun(gugun);
 		info.setService(ser);
 		info.setServiceInfo(serviceInfo);
-
+		info.setOrderByEC(orderByEC);
+		info.setOrderByRevC(orderByRevC);
+		info.setOrderBySP(orderBySP);
+		
 		List<ExpertFindVO> eList = ef_service.listExpertFind(info);
 
 		for (int i = 0; i < eList.size(); i++) {
@@ -94,9 +100,42 @@ public class ExpertRestController {
 				eList.get(i).setEf_AvgStarpoint(arp / rList.size());
 			}
 		}
+
+		//리뷰순 정렬
+		Comparator<ExpertFindVO> reviewCntComparator = new Comparator<ExpertFindVO>() {
+			
+			@Override
+			public int compare(ExpertFindVO o1, ExpertFindVO o2) {
+
+				return o2.getEf_CntReview() - o1.getEf_CntReview();
+			}
+		};
+		
+		//별점순 정렬
+		Comparator<ExpertFindVO> starPointComparator = new Comparator<ExpertFindVO>() {
+
+			@Override
+			public int compare(ExpertFindVO o1, ExpertFindVO o2) {
+				final int comp = Double.compare(o2.getEf_AvgStarpoint(), o1.getEf_AvgStarpoint());
+				
+				return comp;
+			}
+		};
+		
+		if(info.getOrderByRevC().equals("checked")){
+			Collections.sort(eList, reviewCntComparator);
+		}
+		
+		if(info.getOrderBySP().equals("checked")){
+			Collections.sort(eList, starPointComparator);
+		}
+		
 		return new ResponseEntity<>(eList, HttpStatus.OK);
 	}
 
+
+
+	
 	@GetMapping(value = "/listExpertInfo/{large}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_ATOM_XML_VALUE })
 	public List<String> getMWord(@PathVariable("large") String LWord) {

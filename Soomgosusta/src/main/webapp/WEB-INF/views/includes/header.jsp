@@ -20,7 +20,6 @@
 	<div class="banner">
 		<c:choose>
 			<c:when test="${loginUser.user_Divide =='expert'}">
-
 				<div class="left_">
 					<div>
 						<a href="/main/mainPage"> <img
@@ -29,7 +28,7 @@
 						</a>
 					</div>
 					<div>
-						<a href="requestInfoForm.do?member_Id=${id }"> <span>받은
+						<a href="/expert/request/received"> <span>받은
 								요청</span>
 						</a>
 					</div>
@@ -37,11 +36,11 @@
 						<a href="/expert/profile?e_Id=${loginUser.e_Id}"><span>프로필</span></a>
 					</div>
 					<div>
-						<a href="/scheduler/expertScheduler/${id }"> <span>일정</span>
+						<a href="/scheduler/expertScheduler"> <span>일정</span>
 						</a>
 					</div>
 					<div>
-						<a href=""> <span>채팅</span>
+						<a href="/expert/chatlist"> <span>채팅</span>
 						</a>
 					</div>
 				</div>
@@ -96,6 +95,10 @@
 						<a href="/main/mainPage"> <img
 							src="https://dmmj3ljielax6.cloudfront.net/static/img/home/index_soomgo_logo.svg"
 							alt="숨고, 숨은고수">
+						</a>
+					</div>
+					<div>
+						<a href="/expert/listExpertFind"> <span>고수 찾기</span>
 						</a>
 					</div>
 				</div>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kosta.soomgosusta.mapper.EstimateMapper">
+
+   <select id="listEstimate" resultMap="EstimateMap" parameterType="int">
+      select e.e_name, p.p_s_word, p.p_l_word, ei.ei_district, e.e_amount, e.e_amountpart, e.e_photo 
+      from estimate e JOIN link l
+      ON e.l_seq = l.l_seq
+      JOIN request r
+      ON r.r_seq = l.r_seq
+      JOIN part p 
+      ON p.p_seq = r.p_seq
+      JOIN expert e
+      ON l.e_id = e.e_id
+      JOIN e_info ei
+      ON ei.e_id = e.e_id
+      where l.r_seq = #{r_Seq}
+   </select>
+   
+   
+   <insert id="register">
+		insert into estimate
+		values
+		(estimate_seq.nextval,#{l_Seq},sysdate,#{e_Amount},#{e_AmountPart},#{e_Contents},'비확인')
+	</insert>
+
+	<select id="read" resultMap="EstimateMap2">
+		select
+		e_seq
+		from estimate 
+		Where l_seq = #{l_Seq}
+	
+	</select>
+  
+	<resultMap type="kosta.soomgosusta.domain.EstimateDTO" id="EstimateMap">
+		<result column="e_name" property="e_Name"/>
+		<result column="p_s_word" property="p_S_Word"/>
+		<result column="p_l_word" property="p_L_Word"/>
+		<result column="ei_district" property="ei_District"/>
+		<result column="e_amountpart" property="e_AmountPart"/>
+		<result column="e_amount" property="e_Amount"/>
+		<result column="e_photo" property="e_Photo"/>
+	</resultMap>
+	
+	<resultMap type="kosta.soomgosusta.domain.EstimateVO" id="EstimateMap2">
+		<result column="e_seq" property="e_Seq" />
+		<result column="e_amount" property="e_Amount" />
+		<result column="e_amountpart" property="e_AmountPart" />
+		<result column="l_seq" property="l_Seq" />
+		<result column="e_status" property="e_Status" />
+		<result column="e_date" property="e_Date" />
+		<result column="e_contents" property="e_Contents" />
+		<collection property="member" resultMap="Member" />
+		<collection property="part" resultMap="Part" />
+		<collection property="request" resultMap="Request" />
+		<collection property="link" resultMap="Link"/>
+	</resultMap>
+
+
+	<resultMap type="kosta.soomgosusta.domain.LinkVO" id="Link">
+		<result column="l_seq" property="l_Seq"/>
+		<result column="r_seq" property="r_Seq"/>
+		<result column="l_date" property="l_Date"/>
+		<result column="l_percent" property="l_Percent"/>
+		<result column="e_id" property="e_Id"/>
+		<result column="l_enter" property="l_Enter"/>
+		<result column="l_status" property="l_Status"/>
+	</resultMap>
+	
+	
+	
+	
+	
+	
+	<resultMap type="kosta.soomgosusta.domain.MemberVO" id="Member">
+		<result column="m_id" property="m_Id"/>
+		<result column="m_password" property="m_Password"/>
+		<result column="m_name" property="m_Name"/>
+		<result column="user_divide" property="user_Divide"/>
+		<result column="m_photo" property="m_Photo"/>
+	</resultMap>
+	
+	<resultMap type="kosta.soomgosusta.domain.PartVO" id="Part">
+		<result column="p_seq" property="p_Seq"/>
+		<result column="p_image" property="p_Image"/>
+		<result column="p_l_word" property="p_L_Word"/>
+		<result column="p_m_word" property="p_M_Word"/>
+		<result column="p_s_word" property="p_S_Word"/>
+	</resultMap>
+	
+	<resultMap type="kosta.soomgosusta.domain.RequestVO" id="Request">
+		<result column="r_seq" property="r_Seq"/>
+		<result column="m_id" property="m_Id"/>
+		<result column="p_seq" property="p_Seq"/>
+		<result column="r_qa_01" property="r_QA_01"/>
+		<result column="r_qa_02" property="r_QA_02"/>
+		<result column="r_qa_03" property="r_QA_03"/>
+		<result column="r_qa_04" property="r_QA_04"/>
+		<result column="r_qa_05" property="r_QA_05"/>
+		<result column="r_qa_06" property="r_QA_06"/>
+		<result column="r_qa_07" property="r_QA_07"/>
+		<result column="r_qa_08" property="r_QA_08"/>
+		<result column="r_qa_09" property="r_QA_09"/>
+		<result column="r_qa_10" property="r_QA_10"/>
+		<result column="r_qa_11" property="r_QA_11"/>
+		<result column="r_qa_12" property="r_QA_12"/>
+		<result column="r_qa_13" property="r_QA_13"/>
+		<result column="r_qa_14" property="r_QA_14"/>
+		<result column="r_qa_15" property="r_QA_15"/>
+		<result column="r_date" property="r_Date"/>
+		<result column="r_status" property="r_Status"/>
+		
+	</resultMap>
+	<insert id="insertMatch" parameterType="kosta.soomgosusta.domain.MatchVO">
+	  insert into match values(match_Seq.nextval, #{m_Status}, sysdate, sysdate+1, #{e_Id}, #{m_Id})
+	</insert>
+	
+	<update id="countMatch" parameterType="int">
+	  update part_log SET pl_match = pl_match+1, pl_employment = pl_employment+1 WHERE P_SEQ = #{p_Seq}
+	</update>
+	
+</mapper>

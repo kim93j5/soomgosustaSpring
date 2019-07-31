@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kosta.soomgosusta.mapper.PartMapper">
+
+	<select id="detailPart" resultType="kosta.soomgosusta.domain.PartVO">
+		<![CDATA[
+			SELECT * FROM PART WHERE P_L_WORD = #{data} OR P_M_WORD = #{data} OR P_S_WORD = #{data}
+		]]>
+	</select>
+
+
+	<select id="listPart" resultType="kosta.soomgosusta.domain.PartVO">
+	    select * from part
+	</select>
+
+	<select id="listLWord" resultType="String">
+		SELECT DISTINCT P_L_WORD FROM
+		PART
+	</select>
+
+	<select id="listMWord" resultType="String">
+		SELECT DISTINCT P_M_WORD FROM
+		PART
+	</select>
+
+	<select id="listSWord" resultType="String">
+		SELECT DISTINCT P_S_WORD FROM
+		PART
+	</select>
+	
+	<select id="listSearchInfo" parameterType="String" resultType="kosta.soomgosusta.domain.PartVO">
+		SELECT * FROM PART WHERE P_S_WORD = #{searchKey}
+	</select>
+
+	<select id="listQuestion" parameterType="hashmap" resultType="kosta.soomgosusta.domain.QuestionVO">
+		SELECT * FROM QUESTION
+		WHERE Q_DIVIDE LIKE #{large}
+		OR Q_DIVIDE LIKE #{middle}
+		OR Q_DIVIDE LIKE #{small}
+	</select>
+	
+	<select id="listAnswer" parameterType="hashmap" resultType="kosta.soomgosusta.domain.AnswerVO">
+		SELECT * FROM ANSWER
+		WHERE
+		<foreach collection="listQ" item="list" open="(" close=")" separator="OR">
+			Q_SEQ = #{list.q_Seq}
+		</foreach>
+	</select>
+	
+	<select id="listExpertQuestion" resultType="kosta.soomgosusta.domain.QuestionVO">
+	    select * from question where q_divide = '고수' 
+	</select>
+
+	<select id="listExpertAnswer" resultType="kosta.soomgosusta.domain.AnswerVO">
+	    select * from answer where q_seq in(1, 2, 3)
+	</select>
+	
+	<update id="updateSearchLog" parameterType="int">
+		UPDATE PART_LOG SET PL_SEARCH = PL_SEARCH+1 WHERE P_SEQ = #{p_Seq}
+	</update>
+
+	<select id="listPopular" resultType="String">
+		SELECT p.P_S_WORD
+		FROM PART p
+		JOIN PART_LOG pl
+		ON p.P_SEQ = pl.P_SEQ
+		ORDER BY pl.PL_SEARCH DESC
+	</select>
+	
+	
+	<select id="listPSeq" resultType="int">
+	    select p_seq from part where p_L_Word = #{p_L_Word} and
+	                                 p_M_Word = #{p_M_Word} and
+	                                 p_S_Word = #{p_S_Word}
+	</select>
+	
+	<select id="listBest" resultMap="BestMap">
+	select pl.p_seq, p.p_s_word, p.p_image, pl.pl_request from part p 
+	JOIN part_log pl
+    ON pl.p_seq = p.p_seq 
+    order by pl.pl_request desc
+	</select>
+	
+	<resultMap type="kosta.soomgosusta.domain.BestDTO" id="BestMap">
+	   <result column="p_seq" property="p_Seq"/>
+	   <result column="p_s_word" property="p_S_Word"/>
+	   <result column="p_image" property="p_Image"/>
+	   <result column="pl_request" property="pl_Request"/>
+	</resultMap>	
+	
+	
+</mapper>

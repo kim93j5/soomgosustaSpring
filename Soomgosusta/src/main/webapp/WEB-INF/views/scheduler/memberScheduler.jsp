@@ -22,7 +22,6 @@
 <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/moment.min.js'></script>
 <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/fullcalendar.min.js'></script>
 <script type="text/javascript">
-
 var m_Id = '<c:out value="${loginUser.m_Id}"/>';
 var e_Id = 'nano124@gmail.com';
 scheduleService.getList(e_Id, function(list){
@@ -170,7 +169,7 @@ var calendar = $('#calendar').fullCalendar({
 			    $('.modal-footer').append('<button id="close" type="button" class="btn btn-default" data-dismiss="modal">닫기</button>');
 			    $('#modal').modal();
 				
-				$(document).on("click", '.faq-register', function(){
+				$('.faq-register').on("click", function(){
 
 					var text = $('#textarea').val();
 					
