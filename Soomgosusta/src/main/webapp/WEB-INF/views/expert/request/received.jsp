@@ -364,7 +364,7 @@
 								var _status = $(this).find('.status').data(
 										"status");
 
-								if (_status == "not") {
+								if (_status == "NOT") {
 									
 									var _seq = $(this).data("seq");
 

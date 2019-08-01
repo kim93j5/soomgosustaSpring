@@ -59,7 +59,7 @@ public class MemberController {
 		service.register(memberVO);
 		
 		
-		return "redirect:/member/addInfo";
+		return "redirect:/member/addInfo/"+memberVO.getM_Id();
 	}
 	@GetMapping("/login")
 	public String login(){
@@ -78,7 +78,7 @@ public class MemberController {
 		if(success==0){
 			model.addAttribute("member", memberVO);
 			session.setAttribute("login", login_Id);
-			return "./main";
+			return "/main/mainPage";
 		}else if(success==1){
 			System.out.println("비밀번호 ");
 			model.addAttribute("loginResult","login fail");

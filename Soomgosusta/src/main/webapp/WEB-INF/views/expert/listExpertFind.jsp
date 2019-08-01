@@ -27,8 +27,7 @@ $('document').ready(function(){
          $('input:checkbox[name=orderByEC]').val("not");
       }
 
-<<<<<<< HEAD
-		if($('input:checkbox[name=orderByRevC]').is(':checked') == true){
+		 if($('input:checkbox[name=orderByRevC]').is(':checked') == true){
 			$('input:checkbox[name=orderByRevC]').val("checked");
 		}else{
 			$('input:checkbox[name=orderByRevC]').val("not");
@@ -123,7 +122,7 @@ $('document').ready(function(){
 	});
 	
 	$('#gugun').change(function(){
-=======
+
       if($('input:checkbox[name=orderByRevC]').is(':checked') == true){
          $('input:checkbox[name=orderByRevC]').val("checked");
       }else{
@@ -217,30 +216,7 @@ $('document').ready(function(){
          checkList(result);
       });
    });
-   
-   $('#gugun').change(function(){
->>>>>>> branch 'nano124124' of https://github.com/kim93j5/soomgosustaSpring.git
-
-      var sido = $('#sido').val();
-      var gugun = $('#gugun').val();
-      var service = $('#service').val();
-      var serviceInfo = $('#serviceInfo').val();
-      var orderByEC = $('input:checkbox[name=orderByEC]').val();
-      var orderByRevC = $('input:checkbox[name=orderByRevC]').val();
-      var orderBySP = $('input:checkbox[name=orderBySP]').val();
       
-      expertFindService.getList({sido:sido, gugun:gugun, ser: service, serviceInfo:serviceInfo, orderByEC:orderByEC, orderByRevC:orderByRevC, orderBySP:orderBySP}, function(result){
-         for(var i=0, len= result.length||0; i<len; i++){
-            console.log(result[i]);
-         }
-         
-         checkList(result);
-
-      });
-      
-
-   });
-   
    $('#sido').change(function(){
       
       var sido = $('#sido').val();
