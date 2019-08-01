@@ -275,7 +275,6 @@
 									data : _crno,
 									success : function() {
 
-										alert("성공");
 
 										location.href = "chats/" + _crno;
 

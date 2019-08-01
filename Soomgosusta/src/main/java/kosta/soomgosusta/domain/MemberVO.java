@@ -12,5 +12,6 @@ public class MemberVO {
 	private String m_Photo;
 	private String m_Address;
 	private String e_Id;
+	private String e_Name;
 	
 }
