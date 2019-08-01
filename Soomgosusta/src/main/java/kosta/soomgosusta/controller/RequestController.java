@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,7 @@ import kosta.soomgosusta.domain.MemberInfoVO;
 import kosta.soomgosusta.domain.PartVO;
 import kosta.soomgosusta.domain.QuestionVO;
 import kosta.soomgosusta.mapper.RecommendMapper;
+import kosta.soomgosusta.service.MemberService;
 import kosta.soomgosusta.service.PartService;
 import kosta.soomgosusta.service.RecommendService;
 import kosta.soomgosusta.service.RequestService;
@@ -32,9 +34,10 @@ public class RequestController {
 	private RequestService service;
 	private RecommendService recommendService;
 	private PartService partService;
-
+	private MemberService memberService;
+	
 	@PostMapping("/detailRequest")
-	public void detailRequest(@RequestParam("p_Seq") String p_Seq, @RequestParam("p_S_Word") String p_S_Word,
+	public String detailRequest(@RequestParam("p_Seq") String p_Seq, @RequestParam("p_S_Word") String p_S_Word,
 			@RequestParam("listQ_seq") List<String> listQ, @RequestParam("listA_seq") List<String> listA,
 			@RequestParam("sido") List<String> sido, @RequestParam("gugun") List<String> gugun,
 			@RequestParam("date") String date, @RequestParam("time") List<String> time, @RequestParam("gen") String gen,
@@ -42,7 +45,7 @@ public class RequestController {
 
 		List<QuestionVO> listQuestion = service.listQuestionService(listQ);
 		List<AnswerVO> listAnswer = service.listAnswerService(listA);
-
+		String m_Id = "yena2@naver.com";
 		HashMap<String, String> requestMap = getRequest(listQuestion, listAnswer, date, time, gen, sido, gugun,
 				phoneNum);
 		requestMap.put("p_Seq", p_Seq);
@@ -55,9 +58,26 @@ public class RequestController {
 		}
 
 		model.addAttribute("size", size);
+		return "redirect : /match/"+m_Id;
 
 	}
 
+	@PostMapping("/sendRequest/{m_Id:.+}")
+	public void getMemberAddInfo(@PathVariable("m_Id") String m_Id,@RequestParam("large1") String p_L_Word1,@RequestParam("medium1") String p_M_Word1,
+			@RequestParam("small1") String p_S_Word1, @RequestParam("large2") String p_L_Word2,@RequestParam("medium2") String p_M_Word2,
+			@RequestParam("small2") String p_S_Word2, @RequestParam("large3") String p_L_Word3,@RequestParam("medium3") String p_M_Word3,
+			@RequestParam("small3") String p_S_Word3, MemberInfoVO memberAddInfo){
+			int seq1 = memberService.getPSeq(p_L_Word1, p_M_Word1, p_S_Word1);
+			int seq2 = memberService.getPSeq(p_L_Word2, p_M_Word2, p_S_Word2);
+			int seq3 = memberService.getPSeq(p_L_Word3, p_M_Word3, p_S_Word3);
+		
+		memberAddInfo.setM_Id(m_Id);
+		memberAddInfo.setM_Ip1(seq1);
+		memberAddInfo.setM_Ip2(seq2);
+		memberAddInfo.setM_Ip3(seq3);
+		memberService.insertMemberAddInfo(memberAddInfo);
+	}
+	
 	public HashMap<String, String> getRequest(List<QuestionVO> question, List<AnswerVO> answer, String date,
 			List<String> time, String gen, List<String> sido, List<String> gugun, String phoneNum) {
 		HashMap<String, String> requestMap = new HashMap<>();
@@ -101,7 +121,7 @@ public class RequestController {
 	@GetMapping("/sendRequest")
 	public void sendRequest(Model model) {
 		//추천서비스
-		String m_Id = "nano124";
+		String m_Id = "yena2@naver.com";
 		MemberInfoVO interestPart = recommendService.recommendInfoService(m_Id);
 		int interest_P1 = interestPart.getM_Ip1();  //첫번째 관심분야 번호 
 		int interest_P2 = interestPart.getM_Ip2();  

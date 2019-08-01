@@ -2,15 +2,20 @@
        pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<header>
+	<jsp:include page="../includes/header.jsp"></jsp:include>
+</header>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="/resources/js/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/memberAddInfo.js"></script>
+<link rel="stylesheet" href="/resources/css/addInfo.css">
 <title>Insert title here</title>
 </head>
 <body>
+
 <script type="text/javascript">
 $('document').ready(function() {
        $('#part_select2').css('display', 'none');
@@ -24,7 +29,7 @@ $('document').ready(function() {
              var str = "";
                  for(var i = 0, len = list.length||0;i<len;i++){
                        str+="<div id='first_select_MWord'>"
-                       str += "<input name='medium1' id='medium1' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br>";
+                       str += "<ul><li class ='listpart'><div class = 'radio_btn'><label><input name='medium1' id='medium1' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br></label></div></li></ul>";
                       
                                  console.log(list[i]);
                  }
@@ -49,7 +54,7 @@ $('document').ready(function() {
              var str = "";
                  for(var i = 0, len = list.length||0;i<len;i++){
                       str+="<div id='first_select_SWord'>"
-                       str += "<input name='small1' id='small1' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br>";
+                       str += "<ul><li class ='listpart'><div class = 'radio_btn'><label><input name='small1' id='small1' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br></label></div></li></ul>";
                       
                                  console.log(list[i]);
                  }
@@ -77,7 +82,7 @@ $('document').ready(function() {
              var str = "";
                  for(var i = 0, len = list.length||0;i<len;i++){
                        str+="<div id='second_select_MWord'>"
-                       str += "<input name='medium2' id='medium2' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br>";
+                       str += "<ul><li class ='listpart'><div class = 'radio_btn'><label><input name='medium2' id='medium2' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br></label></div></li></ul>";
                       
                                  console.log(list[i]);
                  }
@@ -100,7 +105,7 @@ $('document').ready(function() {
              var str = "";
                  for(var i = 0, len = list.length||0;i<len;i++){
                       str+="<div id='second_select_SWord'>"
-                       str += "<input name='small2' id='small2' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br>";
+                       str += "<ul><li class ='listpart'><div class = 'radio_btn'><label><input name='small2' id='small2' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br></label></div></li></ul>";
                       
                                  console.log(list[i]);
                  }
@@ -123,7 +128,7 @@ $('document').ready(function() {
              var str = "";
                  for(var i = 0, len = list.length||0;i<len;i++){
                        str+="<div id='third_select_MWord'>"
-                       str += "<input name='medium3' id='medium3' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br>";
+                       str += "<ul><li class ='listpart'><div class = 'radio_btn'><label><input name='medium3' id='medium3' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br></label></div></li></ul>";
                       
                                  console.log(list[i]);
                  }
@@ -146,7 +151,7 @@ $('document').ready(function() {
              var str = "";
                  for(var i = 0, len = list.length||0;i<len;i++){
                       str+="<div id='third_select_SWord'>"
-                       str += "<input name='small3' id='small3' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br>";
+                       str += "<ul><li class ='listpart'><div class = 'radio_btn'><label><input name='small3' id='small3' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br></label></div></li></ul>";
                       
                                  console.log(list[i]);
                  }
@@ -160,115 +165,10 @@ $('document').ready(function() {
  
 });
 
-
-
-$("#category").on('click', '#id_path_category1', function () {
-    $("#id_list_category1").show();
-    $("#id_list_category2").hide();
-    $("#id_list_service").hide();
-
-    $("#id_path_category1").hide();
-    $("#id_path_category2").hide();
-    $("#id_path_service").hide();
-
-});
-$("#category").on('click', '#id_path_category2', function () {
-    $("#id_list_category1").hide();
-    $("#id_list_category2").show();
-    $("#id_list_service").hide();
-
-    $("#id_path_category1").show();
-    $("#id_path_category2").hide();
-    $("#id_path_service").hide();
-
-});
-$("#category").on('click', '#id_path_service', function () {
-    $("#id_list_category1").hide();
-    $("#id_list_category2").hide();
-    $("#id_list_service").show();
-
-    $("#id_path_category1").show();
-    $("#id_path_category2").show();
-    $("#id_path_service").hide();
-});
-
-$("#category").on('click', '.category1', function() {
-    var categoryUrl = "/api/category2/id".replace('id', $(this).data('category1'));
-    var category1Label = $(this).data('category1-label');
-
-    $.get(categoryUrl, {}).done(function (data) {
-        var liElement = "";
-        $("#id_list_category2").empty();
-
-        for (key in data) {
-            liElement += '<li class="list-group-item list-group-item-category2" data-category2="' + data[key].id + '" data-category2-label="' + data[key].title + '">'
-                    + data[key].title
-                    + '</li>';
-        }
-        $("#id_list_category2").append(liElement).removeClass("hide").show();
-        $("#id_list_category1").hide();
-
-        var menuRightHtml = ' <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> ';
-
-        $("#id_path_category1").html(category1Label + menuRightHtml).removeClass("hide").show();
-
-    });
-
-});
-$("#category").on('click', '.list-group-item-category2', function() {
-    var category2 = $(this).data('category2');
-    var category2Label = $(this).data('category2-label');
-
-    $.get("/api/service-category/", {
-        'category2': [category2]
-
-    }).done(function (data) {
-        var liElement = "";
-        $("#id_list_service").empty();
-
-        for (key in data) {
-            var checkedStatus = "";
-            if (data[key].service.id in serviceDict) {
-                checkedStatus = " checked ";
-
-            }
-
-            liElement += '<li class="list-group-item"><div class="checkbox"><label>'
-                    + '<input class="service" id="service-' + data[key].service.id  + '" name="service[]" type="checkbox" value="' + data[key].service.id + '" data-service-label="' +data[key].service.title + '" ' +checkedStatus+ '>'
-                    + data[key].service.title
-                    + '</label></div></li>';
-
-        }
-        $("#id_list_service").append(liElement).removeClass("hide").show();
-        $("#id_list_category2").hide();
-
-        var menuRightHtml = ' <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> ';
-        $("#id_path_category2").html(category2Label + menuRightHtml).removeClass("hide").show();
-
-    });
-
-});
-
-$("#category").on('change', 'input.service', function() {
-
-    $("#id_list_service input[type='checkbox']").each(function () {
-        var thisVal = $(this).val();
-
-        if ($(this).prop("checked")) {
-            serviceDict[$(this).val()] = $(this).data('service-label');
-        } else {
-            delete serviceDict[$(this).val()];
-
-        }
-
-    });
-    showServiceTags();
-
-});
  
       
        </script>
-       <form id="AddInfoForm" name="AddInfoForm" action="/member/sendRequest" method="post">
+       <form id="AddInfoForm" name="AddInfoForm" action="/request/sendRequest/${m_Id}" method="post">
              <div id="part_select1">
              <h2>관심있는 분야를 선택해주세요(최대 3개)</h2>
              <div id="first_select_LWord">
@@ -300,7 +200,7 @@ $("#category").on('change', 'input.service', function() {
              </div>
        </div>		
        
-       <div role="tabpanel" class="tab-pane" id="category">
+       <!-- <div role="tabpanel" class="tab-pane" id="category">
 			<h3>서비스 카테고리</h3>
 			<div class="tag-container">
 
@@ -339,7 +239,7 @@ $("#category").on('change', 'input.service', function() {
 			</div>
 			<ul id="id_list_category2" class="list-group hide"></ul>
 			<ul id="id_list_service" class="list-group hide"></ul>
-		</div><br><br><br>
+		</div><br><br><br> -->
        
        </form>
 </body>

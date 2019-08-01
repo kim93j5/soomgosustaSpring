@@ -16,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -76,6 +77,7 @@ public class MemberController {
 		
 		if(success==0){
 			model.addAttribute("member", memberVO);
+			session.setAttribute("login", login_Id);
 			return "./main";
 		}else if(success==1){
 			System.out.println("비밀번호 ");
@@ -90,8 +92,8 @@ public class MemberController {
 		
 	}
 	
-	@GetMapping("/addInfo")
-	public void getMemberAddInfo(Model model){
+	@GetMapping("/addInfo/{m_Id:@+}")
+	public void getMemberAddInfo(@PathVariable("m_Id") String m_Id,Model model){
 		List<PartVO> partList = partService.listPartService();
 		List<String> lWord = new ArrayList<>();
 		for(int i=0;i<partList.size();i++){
@@ -100,13 +102,15 @@ public class MemberController {
 			if(!lWord.contains(part.getP_L_Word())){
 				lWord.add(part.getP_L_Word());
 			}
+
 		}
+		
 		model.addAttribute("large", lWord);
+		model.addAttribute("m_Id",m_Id);
 	}
 	
-	@GetMapping("/mypage")
-	public void mypage(/*@RequestParam("m_Id") String m_Id,*/ Model model){
-		String m_Id = "yena@naver.com";
+	@GetMapping("/mypage/{m_Id:@+}")
+	public void mypage(@PathVariable("m_Id") String m_Id, Model model){
 		MemberMypageDTO myInfo = service.getMemberMypageInfo(m_Id);
 		
 		int ip1 = myInfo.getM_Ip1();
@@ -126,21 +130,7 @@ public class MemberController {
 		
 	}
 	
-	@PostMapping("/sendRequest")
-	public void getMemberAddInfo(@RequestParam("large1") String p_L_Word1,@RequestParam("medium1") String p_M_Word1,
-			@RequestParam("small1") String p_S_Word1, @RequestParam("large2") String p_L_Word2,@RequestParam("medium2") String p_M_Word2,
-			@RequestParam("small2") String p_S_Word2, @RequestParam("large3") String p_L_Word3,@RequestParam("medium3") String p_M_Word3,
-			@RequestParam("small3") String p_S_Word3, MemberInfoVO memberAddInfo){
-			int seq1 = service.getPSeq(p_L_Word1, p_M_Word1, p_S_Word1);
-			int seq2 = service.getPSeq(p_L_Word2, p_M_Word2, p_S_Word2);
-			int seq3 = service.getPSeq(p_L_Word3, p_M_Word3, p_S_Word3);
-		
-		memberAddInfo.setM_Id("yenano124");
-		memberAddInfo.setM_Ip1(seq1);
-		memberAddInfo.setM_Ip2(seq2);
-		memberAddInfo.setM_Ip3(seq3);
-		service.insertMemberAddInfo(memberAddInfo);
-	}
+	
 	
 	@PostMapping(value="/mypage", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
@@ -178,7 +168,7 @@ public class MemberController {
     }
 	
 	@PutMapping("/mypage")
-	public void changePW(@RequestParam("large1") String p_L_Word1,@RequestParam("medium1") String p_M_Word1,
+	public void changePW(@PathVariable("m_Id") String m_Id,@RequestParam("large1") String p_L_Word1,@RequestParam("medium1") String p_M_Word1,
 			@RequestParam("small1") String p_S_Word1, @RequestParam("large2") String p_L_Word2,@RequestParam("medium2") String p_M_Word2,
 			@RequestParam("small2") String p_S_Word2, @RequestParam("large3") String p_L_Word3,@RequestParam("medium3") String p_M_Word3,
 			@RequestParam("small3") String p_S_Word3, MemberInfoVO memberAddInfo){
@@ -186,7 +176,7 @@ public class MemberController {
 			int seq2 = service.getPSeq(p_L_Word2, p_M_Word2, p_S_Word2);
 			int seq3 = service.getPSeq(p_L_Word3, p_M_Word3, p_S_Word3);
 		
-		memberAddInfo.setM_Id("yenano124");
+		memberAddInfo.setM_Id(m_Id);
 		memberAddInfo.setM_Ip1(seq1);
 		memberAddInfo.setM_Ip2(seq2);
 		memberAddInfo.setM_Ip3(seq3);

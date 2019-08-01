@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="/resources/css/header.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-	
+
 </head>
 <body>
 	<c:set var='expert' value="${expert}" scope="request" />
@@ -31,6 +31,7 @@
 						<li><a href="memberMyPage.do?member_Id=${id }"><span>프로필</span></a>
 						<li><a href="findExpertForm.do"> <span>고수 찾기</span>
 						</a></li>
+
 						<li><a href=""> <span>채팅</span>
 						</a></li>
 					</ul>
