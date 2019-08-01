@@ -61,6 +61,8 @@ public class ReceiveRestController {
 	}
 	
 	
+	
+	
 
 	@GetMapping(value = "/receivename/{name}",
 			produces ={MediaType.APPLICATION_JSON_UTF8_VALUE,
@@ -269,11 +271,11 @@ public class ReceiveRestController {
 		dto.setR_Daterecord(date);
 
 		String pf = vo.getPart().getP_L_Word();
-		dto.setP_F_Word(pf);
+		dto.setP_L_Word(pf);
 		String ps = vo.getPart().getP_M_Word();
-		dto.setP_S_Word(ps);
+		dto.setP_M_Word(ps);
 		String pt = vo.getPart().getP_S_Word();
-		dto.setP_T_Word(pt);
+		dto.setP_S_Word(pt);
 
 		int se = vo.getL_Seq();
 		dto.setL_Seq(se);

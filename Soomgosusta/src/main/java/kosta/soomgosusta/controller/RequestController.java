@@ -33,6 +33,8 @@ public class RequestController {
 	private RequestService service;
 	private RecommendService recommendService;
 	private PartService partService;
+	
+
 
 	@GetMapping("/listQNA/{searchKey}")
 	public String listQNA(@PathVariable("searchKey") String searchKey, Model model) {

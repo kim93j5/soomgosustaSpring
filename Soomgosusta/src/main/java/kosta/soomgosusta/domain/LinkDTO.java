@@ -15,9 +15,9 @@ public class LinkDTO {
 	private String m_Name;
 	private String m_Address;
 	private String m_Photo;
-	private String p_F_Word;
+	private String p_L_Word;
+	private String p_M_Word;
 	private String p_S_Word;
-	private String p_T_Word;
 	private String r_Q_01;
 	private String r_A_01;
 	private String r_Q_02;

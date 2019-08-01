@@ -13,7 +13,52 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>Insert title here</title>
+   <script type="text/javascript">
+   
+   var ws = new WebSocket("ws://localhost:8081/alarm/websocket");
+   
+   $(document).ready(function(){
+      
+      send_message();
+      //$('#count').css('display','none');
+      
+       $("#alarm").on("click","#count" ,function getAlarmList(){
+          
+          $('#getAlarmList').toggle();
+       });
 
+   });
+   
+   function send_message() {
+      
+      ws.onopen = function(evt) {
+           onOpen(evt);
+       };
+       ws.onmessage = function(evt) {
+           onMessage(evt);
+       };
+       ws.onerror = function(evt) {
+           onError(evt);
+       };
+       ws.onclose = function(evt) {
+          onClose(evt);
+       };
+   }
+   function onOpen(evt) 
+   {
+      console.log("아아");
+      ws.send("안녕하세요........");
+   }
+   function onMessage(msg){
+      var data = msg.data;
+      $("#alarm").append( msg.data);
+}
+
+function onClose(evt){
+   console.log("안녕");
+}
+
+    </script>
 
 <title>Insert title here</title>
    <script type="text/javascript">
@@ -132,7 +177,7 @@ function onClose(evt){
                   </a>
                </div>
                <div>
-                  <a href="/member/chatlist"> <span>채팅</span>
+                  <a href=""> <span>채팅</span>
                   </a>
                </div>
             </div>

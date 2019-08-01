@@ -16,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,6 +49,22 @@ public class MemberController {
 	public String register() {
 		return "/member/register";
 	}
+	
+	
+	
+	@GetMapping("/chatlist")
+	public void chatList(){
+		
+	}
+	
+	@GetMapping("chats/{crno}")
+	public String chatroomMove(@PathVariable("crno") int crno,Model model){
+	
+		
+		model.addAttribute("crno", crno);
+		return "member/chat";
+	}
+	
 	
 	@PostMapping("/register")
 	public String register(MemberVO memberVO) throws UnsupportedEncodingException{

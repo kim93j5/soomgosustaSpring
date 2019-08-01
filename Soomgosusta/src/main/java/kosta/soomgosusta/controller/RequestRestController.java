@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import kosta.soomgosusta.domain.AnswerVO;
+import kosta.soomgosusta.domain.ChatRoomVO;
 import kosta.soomgosusta.domain.MemberMainDTO;
 import kosta.soomgosusta.domain.PartVO;
 import kosta.soomgosusta.domain.QnaDTO;
@@ -26,6 +27,7 @@ import kosta.soomgosusta.domain.QuestionVO;
 import kosta.soomgosusta.domain.RequestDTO;
 import kosta.soomgosusta.domain.RequestDetailDTO;
 import kosta.soomgosusta.domain.RequestVO;
+import kosta.soomgosusta.service.ChatRoomService;
 import kosta.soomgosusta.service.PartService;
 import kosta.soomgosusta.service.RequestService;
 import lombok.extern.log4j.Log4j;
@@ -38,6 +40,28 @@ public class RequestRestController {
 	private RequestService service;
 	@Autowired
 	private PartService partservice;
+	@Autowired
+	private ChatRoomService crService;
+	
+	
+	@GetMapping(value="/chat/{crno}",produces = { MediaType.APPLICATION_XML_VALUE,
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
+	public ChatRoomVO chats(@PathVariable("crno") int crno){
+		
+		return null;
+	}
+	
+	
+	
+	
+	@GetMapping(value = "/chatlist/{name}", produces = { MediaType.APPLICATION_XML_VALUE,
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
+	public ResponseEntity<List<ChatRoomVO>> chatlist(@PathVariable("name") String m_Name){
+		
+		return new ResponseEntity<> (crService.memberList(m_Name), HttpStatus.OK);
+	}
+	
+	
 	
 	@GetMapping(value="/listQNA/{data}", produces= {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public QnaDTO getQNA(@PathVariable("data") String data){
