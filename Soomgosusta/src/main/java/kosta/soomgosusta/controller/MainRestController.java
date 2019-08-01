@@ -12,6 +12,8 @@ import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
 import org.apache.mahout.cf.taste.impl.recommender.GenericItemBasedRecommender;
 import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;
 import org.apache.mahout.cf.taste.impl.similarity.LogLikelihoodSimilarity;
+import org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;
+import org.apache.mahout.cf.taste.impl.similarity.TanimotoCoefficientSimilarity;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
@@ -107,19 +109,22 @@ public class MainRestController {
 		DataModel dm = new FileDataModel(new File("C:\\data\\member_rcm.csv"));
 		
 		//유사도		
-		UserSimilarity sim = new LogLikelihoodSimilarity(dm);
-		UserNeighborhood neighborhood = new NearestNUserNeighborhood(1, sim, dm);
+		//UserSimilarity sim = new PearsonCorrelationSimilarity(dm);
+		TanimotoCoefficientSimilarity sim = new TanimotoCoefficientSimilarity(dm);
+				
+		UserNeighborhood neighborhood = new NearestNUserNeighborhood(2, sim, dm);
 
 		//User Based Recommender
 		GenericUserBasedRecommender recommender = new GenericUserBasedRecommender(dm, neighborhood, sim);
 		
 		long num = m_no;
 		log.info(num);
-		List<RecommendedItem> recommendations = recommender.recommend(num, 5);
+		List<RecommendedItem> recommendations = recommender.recommend(num, 4);
 		
 		List<Integer> list = new ArrayList<>();
 		
 		for(RecommendedItem items: recommendations){
+			log.info(items.getItemID() + "    " + items.getValue());
 			list.add((int)items.getItemID());
 		}
 		log.info(list);
