@@ -100,10 +100,11 @@ public class ExpertController {
 			model.addAttribute("expertVO", expertVO);
 			return "/expert/request/received";
 		} else if (success == 1) {
-			model.addAttribute("loginResult", "login fail");
+			model.addAttribute("loginResult", success);
 			System.out.println("비밀번호 ");
 			return "/expert/login";
 		} else {
+			model.addAttribute("loginResult", success);
 			System.out.println("아이디가 존재하지 않습니다.");
 			return "/expert/login";
 		}

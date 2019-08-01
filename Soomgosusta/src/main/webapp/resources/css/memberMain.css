@@ -38,7 +38,7 @@
 }
 
 .recommendInfo{
-   margin-top: 400px;
+   margin-top: 500px;
    margin-bottom: 30px;
    margin-left: 360px;
 }
@@ -62,7 +62,7 @@
 } 
 
  #recommendService{
-   /* float: left; */
+
    margin-right: 0px;
    text-align: center;
    margin-bottom: 10px;
@@ -72,7 +72,7 @@
     border-radius: 4px;
     margin-left: 12px;
     width: 280px;
-    /* background-color: white;  */
+   
 } 
 
 #best{
@@ -82,7 +82,7 @@
 
 #bestPopular{
     margin-left: 350px;
-   margin-bottom: 800px; 
+   margin-bottom: 160px; 
    width:    65%;
    display: inline-block;
    text-align: center;
