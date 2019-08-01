@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="/resources/css/header.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 	<c:set var='expert' value="${expert}" scope="request" />
@@ -111,14 +112,34 @@
 							<select name="" id="loginState">
 								<option value="member">회원</option>
 								<option value="expert">고수</option>
-							</select> <a id="login" href="#">로그인</a> <a id="loginteg"></a>
+							</select> <a id="loginteg" >로그인</a>
 						</div>
 					</div>
 				</div>
 			</c:otherwise>
 		</c:choose>
-
+						
 	</div>
 </body>
+ <script>
+ $(document).ready(function(){
+	$("#loginState").click(function(){
+	         var state = $("#loginState option:selected").val();
+	         if (state == "member") {
+	            var str = '<a href="' + "/member/login" + '">로그인</a>';
+	            $('#loginteg').html(str); 
 
+	         } else if (state == "expert") {
+	            var str = '<a href="' + "/expert/login" + '">로그인</a>';
+	            $('#loginteg').html(str); //add loginteg html source
+
+	         }
+
+	      });
+	   });
+	   
+
+
+ 
+ </script>
 </html>

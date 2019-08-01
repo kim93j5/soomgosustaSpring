@@ -63,7 +63,7 @@ $('document').ready(function(){
 		console.log(list);
 		for(var i=0, len=list.length||0; i<len; i++){
 			str += 	'<div class="expertInfo" data-id = "' + list[i].ef_Id +'">';
-			str += '<img class="profile" src="/resources/images/' + list[i].ef_Photo + '">';
+			str += '<img class="profile" src="/upload/profile/' + list[i].ef_Photo + '">';
 			str += '<div class="info"><h4>'+ list[i].ef_OL + '</a></h4>';
 			str += '<div>'+list[i].ef_RC+'회 고용<strong>*</strong>'+ list[i].ef_District+'</div></div>';
 			str +=	'<div><img class="star" src="/resources/images/starpoint.JPG">'+list[i].ef_AvgStarpoint+'('+list[i].ef_CntReview+'개)</div></div>';			
@@ -73,6 +73,7 @@ $('document').ready(function(){
 		
 		$('.expertInfo').on("click", function(){
 			alert($(this).data("id"));
+			location.href='/expert/profile?e_Id='+$(this).data("id") ;
 		});
 		
 	}
