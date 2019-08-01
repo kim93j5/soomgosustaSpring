@@ -59,7 +59,7 @@ public class MemberController {
 		service.register(memberVO);
 		
 		
-		return "redirect:/member/login";
+		return "redirect:/member/addInfo";
 	}
 	@GetMapping("/login")
 	public String login(){
@@ -128,7 +128,6 @@ public class MemberController {
 		model.addAttribute("mypageInfo",service.getMemberMypageInfo(m_Id));
 		return "/member/mypage";
 	}
-	
 	
 	
 	@PostMapping(value="/mypage", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
