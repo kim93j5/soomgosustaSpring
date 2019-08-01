@@ -72,4 +72,11 @@ public class RequestServiceImpl implements RequestService {
 		return mapper.cancelRequest(r_Seq);
 	}
 
+	@Override
+	public List<RequestVO> listAllRequestService() {
+
+		log.info("service---------------");
+		return mapper.listAllRequest();
+	}
+
 }

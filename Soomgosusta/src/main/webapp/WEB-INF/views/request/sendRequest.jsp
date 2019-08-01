@@ -2,21 +2,18 @@
    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<header>
+ <header>
    <jsp:include page="../includes/header.jsp"></jsp:include>
-</header>
+</header> 
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="/resources/js/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/sendRequest.js"></script>
 <link rel="stylesheet" href="/resources/css/memberMain.css" target="text/css">
 <link rel="stylesheet" type="text/css" href="/resources/plugin/slick/slick.css"/>
-<link rel="stylesheet" type="text/css" href="/resources/plugin/slick/slick-theme.css"/> 
-<link rel="stylesheet" href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
-<script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
-<script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/resources/plugin/slick/slick-theme.css"/>
+
 <script type="text/javascript" src="/resources/plugin/slick/slick.js"></script> 
 
 <style type="text/css">
@@ -45,10 +42,6 @@ p{
    background-color: white;
  
 }
-
-b{
-   margin-bottom: 10px;
-}
 </style>
 
 <title>Insert title here</title>
@@ -63,11 +56,12 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
 
       //console.log(r_Seq);
       requestService.cancel(r_Seq, function(result){
+
+
     	console.log(result);  
     	$('#sendRequestForm').empty();
 
     	   requestService.getList(m_Id,
-
                    function(list) {
 
                       var str = "";
@@ -97,7 +91,7 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
                                str += '<button class="btn-btn-default" data-num="'+i+'"'+ 'data-value="'+list.requestDTO[i].p_S_Word+'"' + 'id="detailButton' + i + '">요청서 보기</button>';    
                            
                             }else if(list.request[i].r_Status == 'Cancel'){
-                            	str += '<div class = "cancelContents"><p>취소된 요청서입니다.</p></div>'
+                               str += '<div class = "cancelContents"><p>취소된 요청서입니다.</p></div>'
                             }
 
                           $(document).on("click", "#detailButton" + i, function(){
@@ -203,7 +197,7 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
                       $('#sendRequestForm').append(str);
 
                    });
-    	  
+         
       });
    });
 
@@ -240,7 +234,7 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
                            
                         }else if(list.request[i].r_Status == 'Cancel'){
                         
-                        	str += '<p>취소된 요청서입니다.</p>'
+                           str += '<p>취소된 요청서입니다.</p>'
                         }
 
  
@@ -339,7 +333,9 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
                   }
                   
                 }else if(list.size == 0){
+
                      str += '<h3 style = "margin-top:40px; margin-left:-1080px; font-size:16px;">아직 요청서를 작성하지 않으셨습니다. <a href ="/main/mainPage">요청 보내기</a></h3>';
+
                      }
                    
                   
@@ -350,7 +346,7 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
                });
 </script>
 
-<body>
+<body style="background-color: #FAFAFA">
    <div class="send">
       <h1 style="font-size: 30px; font-weight: bold;">보낸 요청</h1>
    </div>
@@ -378,10 +374,17 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
    <h1 style="font-size: 30px; font-weight: bold;">추천서비스<br></h1>
    </div> 
    
+
     <div id="recommend">
+<!--    <div id="button">
+   <button type="button" id="recommend_btn">관심분야순</button>
+   <button type="button" id="best_btn">인기순</button>
+   </div> -->
+
      <c:forEach var="list" begin="1" end="8" items="${listRandom}">
         <div id="recommendService">
         
+
              <a href="/request/listQNA/${list.p_S_Word }">
                 <img class="img" src="/resources/images/${list.p_Image }"><br>         
              </a>     
@@ -391,7 +394,7 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
 
        </div>
      </c:forEach>
-    </div>  
+    </div> 
     
     <div id="best" style="margin-left: 360px;">
     <h1 style="font-size: 30px; font-weight: bold;">인기서비스<br></h1>
@@ -405,13 +408,16 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
              <div class="caption" style="margin-top: 14px;">
                   <p>${listBest.p_S_Word }</p>          
              </div>     
+
+
         </div>
       </c:forEach>
     </div>
     
 <%--     <footer>
 		<jsp:include page="../includes/footer.jsp"></jsp:include>
-	</footer> --%>
+	</footer> 
+ --%>
     
 </body>
 </html>

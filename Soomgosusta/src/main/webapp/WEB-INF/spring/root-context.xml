@@ -50,6 +50,5 @@
    <context:component-scan base-package="kosta.soomgosusta.aop"/>
    <aop:aspectj-autoproxy/>
    <tx:annotation-driven/>
-   
 
 </beans>

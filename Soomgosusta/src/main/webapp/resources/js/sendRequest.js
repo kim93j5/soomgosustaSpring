@@ -29,6 +29,7 @@ $(document).ready(function(){
   	  autoplay: true,
   	  pauseOnHover:true,
   	  autoplaySpeed: 3000,
+
   });
    
    $('#bestPopular').slick({
@@ -38,11 +39,14 @@ $(document).ready(function(){
 	  	  autoplaySpeed: 3000,
 	      pauseOnHover:true,
 	  });
-
-   
 	
 			
 });
+
+
+
+	
+
 
 
 var requestService = (function(){

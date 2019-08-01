@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.WebUtils;
 
+import kosta.soomgosusta.domain.AlarmVO;
 import kosta.soomgosusta.domain.AnswerVO;
 import kosta.soomgosusta.domain.E_FilesVO;
 import kosta.soomgosusta.domain.E_ProfileVO;
@@ -41,6 +42,7 @@ import kosta.soomgosusta.domain.ExpertVO;
 import kosta.soomgosusta.domain.LoginDTO;
 import kosta.soomgosusta.domain.PartVO;
 import kosta.soomgosusta.interceptor.SessionNames;
+import kosta.soomgosusta.service.AlarmService;
 import kosta.soomgosusta.service.ExpertService;
 import kosta.soomgosusta.service.PartService;
 import lombok.AllArgsConstructor;
@@ -72,13 +74,13 @@ public class ExpertController {
 	}
 
 	@PostMapping("/register")
-	public String register(ExpertVO expertVO) throws UnsupportedEncodingException {
+	public String register(ExpertVO expertVO, Model model) throws UnsupportedEncodingException {
 
 		log.info("=======Member resgister========");
 		log.info("expertVO: " + expertVO);
 
 		service.register(expertVO);
-
+		
 		return "redirect:/expert/login";
 	}
 
@@ -101,10 +103,11 @@ public class ExpertController {
 			session.setAttribute("login", login_Id);
 			return "/expert/request/received";
 		} else if (success == 1) {
-			model.addAttribute("loginResult", "login fail");
+			model.addAttribute("loginResult", success);
 			System.out.println("비밀번호 ");
 			return "/expert/login";
 		} else {
+			model.addAttribute("loginResult", success);
 			System.out.println("아이디가 존재하지 않습니다.");
 			return "/expert/login";
 		}
@@ -256,7 +259,7 @@ public class ExpertController {
 				e.printStackTrace();
 			}
 
-		
+			log.info(fileVO);
 			service.uploadFile(fileVO);
 
 		}
@@ -265,7 +268,7 @@ public class ExpertController {
 	
 	
 	@GetMapping("/listExpertInfo")
-	 public void listExpertInfo(Model model) {
+	 public String listExpertInfo(Model model) {
 		
 		List<PartVO> listExpertInfo = partService.listPartService();
 		List<String> lWord = new ArrayList<>();
@@ -284,7 +287,7 @@ public class ExpertController {
 		          sWord.add(part.getP_S_Word());
 		       }
 		    }
-		    
+		    		    
 		    model.addAttribute("large", lWord);
 		    model.addAttribute("medium", mWord);
 		    model.addAttribute("small", sWord);
@@ -292,15 +295,16 @@ public class ExpertController {
 		    
 		    model.addAttribute("listQuestion", partService.listExpertQusetionService());
 		    model.addAttribute("listAnswer", partService.listExpertAnswerService());
-	
+		    
+		    return "expert/listExpertInfo";
 		 }
 	
 
-	@PostMapping("/listExpertInfo/main")
-	public void listExpertInfo(@RequestParam("q_Seq") String[] question, @RequestParam("a_Seq") int[] answer,
+	@PostMapping("/request/received/{e_Id:.+}")
+	public String listExpertInfo(@RequestParam("q_Seq") String[] question, @RequestParam("a_Seq") int[] answer,
 			@RequestParam("sido") String[] sido, @RequestParam("sigungu") String[] sigungu,
 			@RequestParam("large") String p_L_Word, @RequestParam("medium") String p_M_Word,
-			@RequestParam("small") String p_S_Word, ExpertInfoVO expert_Info) {
+			@RequestParam("small") String p_S_Word, ExpertInfoVO expert_Info, @PathVariable("e_Id") String e_Id) {
 
 		/*
 		 * for(int i = 0; i < sido.length; i++){ log.info(sido[i]); }
@@ -354,6 +358,9 @@ public class ExpertController {
 
 		}
 
+		log.info(ei_Time);
+		log.info(ei_Start);
+		
 		ei_Time = ei_Time.substring(0, ei_Time.length() - 1);
 		ei_Start = ei_Start.substring(0, ei_Start.length() - 1);
 
@@ -361,16 +368,20 @@ public class ExpertController {
 		log.info(ei_Start);
 		log.info(ei_Gender);
 
-		expert_Info.setE_Id("nano");
+		expert_Info.setE_Id(e_Id);
 		expert_Info.setEi_Time(ei_Time);
 		expert_Info.setEi_Start(ei_Start);
 		expert_Info.setEi_District(ei_District);
 		expert_Info.setP_Seq(p_Seq);
 		expert_Info.setEi_Gender(ei_Gender);
+		
+		
 
 		
 		service.insertExpertInfo(expert_Info, p_Seq);
+		
 
+		return "/expert/request/received";
 	}
 	
 	@GetMapping("/listExpertFind")

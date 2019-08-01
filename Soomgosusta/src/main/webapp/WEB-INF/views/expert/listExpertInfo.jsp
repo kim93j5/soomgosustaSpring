@@ -3,9 +3,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<header>
+ <header>
    <jsp:include page="../includes/header.jsp"></jsp:include>
-</header>
+</header> 
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -52,7 +53,7 @@ li {
 
 </style>
 </head>
-<body>
+<body style="background-color: #FAFAFA">
 
    <!----------------------- 활동가능 지역 ------------------------>
    <script type="text/javascript">
@@ -174,7 +175,7 @@ $(document).on("click", ".next1", function getMWordsList(){
 
 </script>
 <div id="container">
-<form name=form method="post" id="form" action="/expert/listExpertInfo/main">
+<form name=form method="post" id="form" action="/expert/request/received/${loginUser.e_Id }">
 
    <!----------------------- 분야 대/중/소 ------------------------>
    <div id="part_select1">

@@ -46,7 +46,7 @@ $(document).ready(function(){
 	$('.largelist').click(function(e){
 		e.preventDefault();
 
-		var data= $(this).find("a").html();
+		var data= $(this).find(".img").data("alt");
 		
 		partService.getPart(data, function(list){
 			var str="";
@@ -143,19 +143,23 @@ $(document).ready(function(){
 </script>
 
 
-<title>Insert title here</title>
+<title>Main Page</title>
 </head>
 <body>
 
-
 	<div id="search">
-		<h2>딱! 맞는 고수를<br>소개해드립니다</h2>
-		<div id="semi">
+	 		<div id="mainImage" style="position: absolute; z-index: 1;">
+				<img alt="메인1" src="/resources/images/photographer.jpg">
+				<img alt="메인2" src="/resources/images/vocal.jpg">
+				<img alt="메인3" src="/resources/images/teacher.jpg">
+			</div>
+	
+		<div id="semi" style="padding-top: 60px;"><h2>딱! 맞는 고수를<br>소개해드립니다</h2>
  			<form id="searchform" method="get">
 				<input id="searchKey" type="text" name="searchKey" size="30">
 				<input id="searchBtn" type="button" value="고수 검색">
  			</form>
- 			<div id="searchresults" style="display: none; z-index: 2;">
+ 			<div id="searchresults" style="display: none; z-index: 3;">
  				<div>
  					<ul role="tablist" class="nav nav-tabs" id="search-ul">
  						<li role="presentation" class="nav-item">
@@ -176,17 +180,19 @@ $(document).ready(function(){
  				</div>
  			</div>
  			
- 			<div id="group" style="z-index: 1;">
-				<div class="largelist"><img class="img" alt="레슨" src="/resources/images/lesson.JPG"><a class="part">레슨</a></div>
-				<div class="largelist"><img class="img" alt="홈 리빙" src="/resources/images/homeliving.JPG"><a class="part">홈/리빙</a></div>
-				<div class="largelist"><img class="img" alt="이벤트" src="/resources/images/event.JPG"><a class="part">이벤트</a></div>
-				<div class="largelist"><img class="img" alt="디자인 개발" src="/resources/images/design.JPG"><a class="part">디자인/개발</a></div>
-				<div class="largelist"><img class="img" alt="건강 미용" src="/resources/images/health.JPG"><a class="part">건강/미용</a></div>
-			</div>
+
+ 			
  		</div>
+ 		
+ 		<div id="group" style="z-index: 2; position: absolute;">
+				<div class="largelist"><img class="img" data-alt="레슨" src="/resources/images/lesson.JPG"><a class="part">레슨</a></div>
+				<div class="largelist"><img class="img" data-alt="홈 리빙" src="/resources/images/homeliving.JPG"><a class="part">홈/리빙</a></div>
+				<div class="largelist"><img class="img" data-alt="이벤트" src="/resources/images/event.JPG"><a class="part">이벤트</a></div>
+				<div class="largelist"><img class="img" data-alt="디자인 개발" src="/resources/images/design.JPG"><a class="part">디자인/개발</a></div>
+				<div class="largelist"><img class="img" data-alt="건강 미용" src="/resources/images/health.JPG"><a class="part">건강/미용</a></div>
+			</div>
 	</div>
 	
-	<div class="input-group input-append date" id="dateRangePicker"> </div>
 
 	<div class="modal fade" id="modal">
       <div class="modal-dialog">
@@ -206,4 +212,8 @@ $(document).ready(function(){
 
 
 </body>
+<%-- <footer>
+	<jsp:include page="../includes/footer.jsp"></jsp:include>
+</footer> --%>
+
 </html>

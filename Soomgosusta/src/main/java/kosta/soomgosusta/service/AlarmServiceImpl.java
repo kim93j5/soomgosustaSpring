@@ -14,20 +14,19 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AlarmServiceImpl implements AlarmService {
 
-	@Setter(onMethod_ = {@Autowired})
+	@Setter(onMethod_ = @Autowired)
 	private AlarmMapper mapper;
-	
-
 	@Override
 	public List<AlarmVO> getAlarmList(String m_Id) {
-		
-		return mapper.memberAlarm(m_Id);
+		return mapper.getAlarmList(m_Id);
 	}
-
-
+	@Override
+	public void alarmLinkInsert(AlarmVO alarmVo) {
+		mapper.alarmLinkInsert(alarmVo);
+		
+	}
 	@Override
 	public int alarmCount(String m_Id) {
-		
 		return mapper.alarmCount(m_Id);
 	}
 

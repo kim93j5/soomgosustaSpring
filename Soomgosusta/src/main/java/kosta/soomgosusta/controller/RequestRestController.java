@@ -95,13 +95,13 @@ public class RequestRestController {
 			RequestDTO requestDTO = new RequestDTO();
 
 			String requestTime = dt.toString(fmt);
-			log.info(requestTime);
+			// log.info(requestTime);
 			requestDTO.setRequestTime(requestTime);
 
 			// 48시간 지난 후
 			dt = dt.plusDays(2);
 			String endTime = dt.toString(fmt);
-			log.info(endTime);
+			// log.info(endTime);
 			requestDTO.setEndTime(endTime);
 
 			requestDTO.setP_S_Word(service.listPartWordService(listSendRequest.get(i).getP_Seq()));

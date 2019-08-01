@@ -45,7 +45,7 @@ public class ReceiveRestController {
 	
 	@GetMapping(value="/chat/{crno}",produces = { MediaType.APPLICATION_XML_VALUE,
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
-	public String chatroom(){
+	public ChatRoomVO chats(@PathVariable("crno") int crno){
 		
 		return null;
 	}

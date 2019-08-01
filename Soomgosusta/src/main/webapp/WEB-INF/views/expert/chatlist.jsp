@@ -128,7 +128,7 @@
 
 #app-body #chatlist-area .chat-list .chatlist-item .price-area span {
 	margin-left: 0px;
-	border: .06rem solid #e1e1e1;
+	border: .06rem solid black;
 	color: #737373;
 	height: 1.5rem;
 	padding: .125rem .25rem;

@@ -19,7 +19,11 @@
 .slick-prev,
 .slick-next
 {
+<<<<<<< HEAD
     font-size: 100px;
+=======
+    font-size: 0;
+>>>>>>> branch 'master' of https://github.com/kim93j5/soomgosustaSpring.git
     line-height: 0;
 
     position: absolute;

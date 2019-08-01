@@ -1,39 +1,20 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kosta.soomgosusta.mapper.AlarmMapper">
 
-<!-- <select id="expertAlarm" parameterType="String">
-   
-   select a.al_type, a.al_check, a.al_time, a.al_message, l.e_id, r.m_id 
-   from alarm a 
-   join link l 
-   on a.e_id = l.e_id
-   join request r
-   on l.r_seq = r.r_seq;
-   where a.al_type LIKE 'E%'
-   AND l.e_id = #{e_Id};    
-
-</select> -->
-
-<select id="memberAlarm" parameterType="String">
-   
-   select a.al_type, a.al_check, a.al_time, a.al_message, l.e_id, r.m_id 
-   from alarm a 
-   join link l 
-   on a.e_id = l.e_id
-   join request r
-   on l.r_seq = r.r_seq;
-   where a.al_type LIKE 'M%'
-   AND r.m_id = #{m_Id};    
-
-</select>
-
-<select id="alarmCount" parameterType="String">
-
-  select count(receiver) from alarm where receiver = #{receiver}
-  
-</select>
+	<select id="getAlarmList" resultType="kosta.soomgosusta.domain.AlarmVO">
+		select * from alarm where m_Id = #{m_Id}
+	</select>
+	
+	<insert id="alarmLinkInsert">
+		INSERT INTO alarm VALUES(alarm_seq.nextval,'요청서','NOT',sysdate,'가나다라',#{e_Id},#{m_Id})
+	</insert>
+	
+	<select id="alarmCount" resultType="int">
+		select count(*) from alarm where m_Id=#{m_Id}
+	</select>
 	
 </mapper>
+

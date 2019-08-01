@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <header>
+   <jsp:include page="../includes/header.jsp"></jsp:include>
+</header> 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -165,8 +168,7 @@
 
 </head>
 <body>
-	세션 테스트
-	----------------------------------${loginUser.user_Divide},${loginUser.e_Id},${loginUser.e_Name}
+	
 	<div id="app-body">
 		<div class="page-header"></div>
 		<div class="page-body">
@@ -217,9 +219,7 @@
 
 							_pageHeader.html(header);
 
-							function transferTimeToString(time) {
-
-							}
+						
 
 							function transferTime(time) {
 								var now = new Date();

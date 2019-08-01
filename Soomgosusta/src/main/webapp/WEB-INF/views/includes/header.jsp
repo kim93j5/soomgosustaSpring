@@ -1,16 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+   pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> -->
 <html>
 <head>
-<link rel="stylesheet" href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+   href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
 <script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
 <script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <!-- <script type="text/javascript" src="/resources/js/socket.js"></script> -->
 <link rel="stylesheet" href="/resources/css/header.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>Insert title here</title>
    <script type="text/javascript">
    
@@ -25,6 +27,7 @@
           
           $('#getAlarmList').toggle();
        });
+
    });
    
    function send_message() {
@@ -49,17 +52,18 @@
    }
    function onMessage(msg){
       var data = msg.data;
+      $("#alarm").empty();
       $("#alarm").append( msg.data);
 }
 
 function onClose(evt){
    console.log("안녕");
-   $('#getAlarm').append("연결 끊김");
 }
 
 
 
     </script>
+
 </head>
 <body>
    <c:set var='expert' value="${expert}" scope="request" />
@@ -76,26 +80,28 @@ function onClose(evt){
                   </a>
                </div>
                <div>
-                  <a href="requestInfoForm.do?member_Id=${id }"> <span>받은
+                  <a href="/expert/request/received"> <span>받은
                         요청</span>
                   </a>
                </div>
                <div>
-                  <a href="memberMyPage.do?member_Id=${id }"><span>프로필</span></a>
+                  <a href="/expert/profile?e_Id=${loginUser.e_Id}"><span>프로필</span></a>
                </div>
                <div>
-                  <a href="/scheduler/expertScheduler/${id }"> <span>일정</span>
+                  <a href="/expert/listExpertInfo"><span>부가정보 입력</span></a>
+               </div>
+               <div>
+                  <a href="/scheduler/expertScheduler"> <span>일정</span>
                   </a>
                </div>
                <div>
-                  <a href=""> <span>채팅</span>
+                  <a href="/expert/chatlist"> <span>채팅</span>
                   </a>
                </div>
-
             </div>
             <div class="right_">
                <div id="alarm">
-                    알림
+                   <img src="/resources/images/alarmicon.png" style="margin-top: -5px; margin-left: -20px">
                </div>
                <div>
                   <span>"${loginUser.e_Name}"고수님</span>
@@ -120,8 +126,11 @@ function onClose(evt){
                         요청</span>
                   </a>
                </div>
-               <div>
+                <div>
                   <a href="/member/mypage/${loginUser.m_Id }"><span>프로필</span></a>
+               </div>
+               <div>
+                  <a href="/member/addInfo"><span>부가정보 입력</span></a>
                </div>
                <div>
                   <a href="/expert/listExpertFind"> <span>고수 찾기</span>
@@ -133,9 +142,9 @@ function onClose(evt){
                </div>
             </div>
             <div class="right_">
-            <div id="alarm">
-                    알림
-               </div>
+               <div id="alarm">
+                   <img src="/resources/images/alarmicon.png" style="margin-top: -5px; margin-left: -20px">
+               </div>	 
                <div>
                   <span>"${loginUser.m_Name}"고객님</span>
                </div>
@@ -146,10 +155,15 @@ function onClose(evt){
          </c:when>
          <c:otherwise>
             <div class="left_">
+            
                <div>
                   <a href="/main/mainPage"> <img
                      src="https://dmmj3ljielax6.cloudfront.net/static/img/home/index_soomgo_logo.svg"
                      alt="숨고, 숨은고수">
+                  </a>
+               </div>
+               <div>
+                  <a href="/expert/listExpertFind"> <span>고수 찾기</span>
                   </a>
                </div>
             </div>
@@ -162,13 +176,33 @@ function onClose(evt){
                      <select name="" id="loginState">
                         <option value="member">회원</option>
                         <option value="expert">고수</option>
-                     </select> <a id="login" href="#">로그인</a> <a id="loginteg"></a>
+                     </select> <a id="loginteg" >로그인</a>
                   </div>
                </div>
             </div>
          </c:otherwise>
       </c:choose>
-
    </div>
 </body>
+ <script>
+ $(document).ready(function(){
+   $("#loginState").click(function(){
+            var state = $("#loginState option:selected").val();
+            if (state == "member") {
+               var str = '<a href="' + "/member/login" + '">로그인</a>';
+               $('#loginteg').html(str); 
+
+            } else if (state == "expert") {
+               var str = '<a href="' + "/expert/login" + '">로그인</a>';
+               $('#loginteg').html(str); 
+
+            }
+
+         });
+      });
+      
+
+
+ 
+ </script>
 </html>
