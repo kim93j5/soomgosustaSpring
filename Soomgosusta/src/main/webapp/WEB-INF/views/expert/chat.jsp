@@ -300,11 +300,11 @@ html, #app-body {
 }
 
 .chat-profile-sender {
-	display: inline-block;
 	vertical-align: top;
 }
 
 .chat-user-profile-sender {
+	display:inline-block;
 	width: 4.5rem;
 	height: 4.5rem;
 }
