@@ -11,7 +11,6 @@
 <!-- <script type="text/javascript" src="/resources/js/socket.js"></script> -->
 <link rel="stylesheet" href="/resources/css/header.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<<<<<<< HEAD
 
 <title>Insert title here</title>
    <script type="text/javascript">
@@ -59,11 +58,8 @@ function onClose(evt){
 	console.log("안녕");
 }
 
-
-
     </script>
 
-=======
 <title>Insert title here</title>
    <script type="text/javascript">
    
@@ -110,13 +106,9 @@ function onClose(evt){
    $('#getAlarm').append("연결 끊김");
 }
 
-
-
     </script>
->>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
 </head>
 <body>
-<<<<<<< HEAD
 	<c:set var='expert' value="${expert}" scope="request" />
 	<c:set var='member' value="${member}" scope="request" />
 
@@ -231,118 +223,8 @@ function onClose(evt){
 			</c:otherwise>
 		</c:choose>
 	</div>
-=======
-   <c:set var='expert' value="${expert}" scope="request" />
-   <c:set var='member' value="${member}" scope="request" />
 
-   <div class="banner">
-      <c:choose>
-         <c:when test="${loginUser.user_Divide =='expert'}">
-            <div class="left_">
-               <div>
-                  <a href="/main/mainPage"> <img
-                     src="https://dmmj3ljielax6.cloudfront.net/static/img/home/index_soomgo_logo.svg"
-                     alt="숨고, 숨은고수">
-                  </a>
-               </div>
-               <div>
-                  <a href="requestInfoForm.do?member_Id=${id }"> <span>받은
-                        요청</span>
-                  </a>
-               </div>
-               <div>
-                  <a href="memberMyPage.do?member_Id=${id }"><span>프로필</span></a>
-               </div>
-               <div>
-                  <a href="/scheduler/expertScheduler/${id }"> <span>일정</span>
-                  </a>
-               </div>
-               <div>
-                  <a href=""> <span>채팅</span>
-                  </a>
-               </div>
-
-            </div>
-            <div class="right_">
-               <div id="alarm">
-                    알림
-               </div>
-               <div>
-                  <span>"${loginUser.e_Name}"고수님</span>
-               </div>
-               <div>
-                  <a id="logout" href="/main/logout"><span>로그아웃</span></a>
-               </div>
-            </div>
-         </c:when>
-
-
-         <c:when test="${loginUser.user_Divide =='member'}">
-            <div class="left_">
-               <div>
-                  <a href="/main/mainPage"> <img
-                     src="https://dmmj3ljielax6.cloudfront.net/static/img/home/index_soomgo_logo.svg"
-                     alt="숨고, 숨은고수">
-                  </a>
-               </div>
-               <div>
-                  <a href="/request/sendRequest/${loginUser.m_Id}"> <span>보낸
-                        요청</span>
-                  </a>
-               </div>
-               <div>
-                  <a href="/member/mypage/${loginUser.m_Id }"><span>프로필</span></a>
-               </div>
-               <div>
-                  <a href="/expert/listExpertFind"> <span>고수 찾기</span>
-                  </a>
-               </div>
-               <div>
-                  <a href=""> <span>채팅</span>
-                  </a>
-               </div>
-            </div>
-            <div class="right_">
-            <div id="alarm">
-                    알림
-               </div>
-               <div>
-                  <span>"${loginUser.m_Name}"고객님</span>
-               </div>
-               <div>
-                  <a id="logout" href="/main/logout"><span>로그아웃</span></a>
-               </div>
-            </div>
-         </c:when>
-         <c:otherwise>
-            <div class="left_">
-               <div>
-                  <a href="/main/mainPage"> <img
-                     src="https://dmmj3ljielax6.cloudfront.net/static/img/home/index_soomgo_logo.svg"
-                     alt="숨고, 숨은고수">
-                  </a>
-               </div>
-            </div>
-            <div class="right_">
-               <div>
-                  <a href="/main/regist">회원가입</a>
-               </div>
-               <div>
-                  <div class="select">
-                     <select name="" id="loginState">
-                        <option value="member">회원</option>
-                        <option value="expert">고수</option>
-                     </select> <a id="login" href="#">로그인</a> <a id="loginteg"></a>
-                  </div>
-               </div>
-            </div>
-         </c:otherwise>
-      </c:choose>
-
-   </div>
->>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
 </body>
-<<<<<<< HEAD
  <script>
  $(document).ready(function(){
 	$("#loginState").click(function(){
@@ -364,6 +246,4 @@ function onClose(evt){
 
  
  </script>
-=======
->>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
 </html>

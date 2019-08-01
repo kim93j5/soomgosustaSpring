@@ -13,7 +13,8 @@ public class ExpertVO {
 	private String user_Divide;
 	private String e_Photo;
 	private int e_Rc;
-
+	private String m_Id;
+	private String m_Name;
 	
 }
 
