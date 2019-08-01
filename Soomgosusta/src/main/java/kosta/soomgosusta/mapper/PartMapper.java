@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import kosta.soomgosusta.domain.AnswerVO;
 import kosta.soomgosusta.domain.BestDTO;
+import kosta.soomgosusta.domain.MatchVO;
 import kosta.soomgosusta.domain.PartVO;
 import kosta.soomgosusta.domain.QuestionVO;
 
@@ -39,4 +40,6 @@ public interface PartMapper {
 			@Param("p_S_Word") String p_S_Word);
 
 	List<BestDTO> listBest();
+	
+	List<MatchVO> listMExpert(String m_Id);
 }

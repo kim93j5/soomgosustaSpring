@@ -23,6 +23,4 @@ public interface RequestMapper {
 	String partInfo(int p_Seq);
 
 	int cancelRequest(int r_Seq);
-
-	List<RequestVO> listAllRequest();
 }

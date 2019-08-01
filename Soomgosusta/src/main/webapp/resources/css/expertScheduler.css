@@ -4,35 +4,40 @@
     padding: 0;
     font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
     font-size: 14px;
+    background-color: #fafafa;
   }
 
   #calendar {
   	margin-top: 40px;
    	margin-left: 50px;
-    width: 1000px;
-    height: 600px;
+    width: 1200px;
+    height: 1000px;
+  	padding-right: 50px;
+  	float: right;
   }
   
   #profile img{
-  	margin-left: 58%;
-	width: 100px;
-	height: 100px;
+  	margin-left: 20%;
+	width: 250px;
+	height: 250px;
+	border-radius: 50%;
   }
   
   div #info{
   	width: 300px;
   	margin-bottom: 70px;
   	margin-top: 30px;
+  	margin-left: 20px;
   } 
   
   #photo{
-  	margin-left: 50px;
+  	margin-left: 35px;
   	display: inline-block;
   }
   
   #profile{
   	margin-top: 40px;
-  	margin-left: 40px;
+  	margin-left: 80px;
   }
   
    .m_info img{
@@ -63,7 +68,6 @@
   }
   
   .profbody{
-  	margin-left: 40px;
 	float: left;
   	width: 300px;
   }
@@ -71,11 +75,13 @@
   .calbody{
    	border-left: solid 1px;
 	border-color: #e8e7e6;
-  	width: 1050px;
-  	height: 690px;
+  	width: 1250px;
+  	height: 800px;
   	float: right;
-  	padding-top: 10px;
+  	padding-top: 50px;
   	margin-right: 60px;
+  	padding-left: 50px;
+  	background-color: #ffffff;
   }
 
   .faq-photo img{
@@ -147,7 +153,12 @@
 }
 
 #match{
-	margin-left: 40px;
+	width: 600px;
+	padding-top: 30px;
+	padding-padding: 50px;
+	padding-left: 90px;
+	border-top: 1px solid;
+	border-color: #e8e7e6;
 }
 
 .btn{

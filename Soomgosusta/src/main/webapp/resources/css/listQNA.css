@@ -1,5 +1,6 @@
 @CHARSET "UTF-8";
 
+
 #container{
 	background-color: #e7e7e7;
 }
@@ -29,9 +30,9 @@
 
 #listForm{
 	margin-top: 50px;
-	margin-left: 350px;
+	margin-left: 450px;
 	margin-bottom: 50px;
-	width: 460px;
+	width: 500px;
 	height: 600px;
 	float: left;
    	overflow : hidden;
@@ -40,6 +41,7 @@
    	border-radius: 5px;
    	padding-top: 30px;
    	padding-left: 30px;
+   	background-color: #ffffff;
 }
 
 #listForm .slide{
@@ -51,11 +53,13 @@
 	width: 460px;
 	height: 650px;
 	float: left;
+	padding-left: 10px;
+   	padding-right: 10px;
 }
 
 .btn{
 	position: static;
-	margin-left: 65%;	
+	margin-left: 55%;	
 }
 
 .requestList ul{

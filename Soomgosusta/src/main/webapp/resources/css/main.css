@@ -2,7 +2,7 @@
 
 #search{
 	width: 800px;
-	margin-left: 350px;
+	margin-left: 500px;
 	margin-top: 30px;
 	padding-bottom: 80px;
 	position: relative;
@@ -10,15 +10,15 @@
 
 #searchKey{
 	border-color: #4092f1;
-	padding: 5px;
+	padding: 10px;
 }
 
 #searchBtn{
-	padding: 10px;
+	padding: 15px;
 	border-radius: 10px;
 	background: #4092f1;
 	color: white;
-	font-size: 10px;
+	font-size: 12px;
 }
 
 .largelist{
@@ -27,29 +27,29 @@
 	float: left;
 	padding: 10px;
 	margin-right: 40px;
-	width: 80px;
-	height: 80px;
+	width: 100px;
+	height: 100px;
 	text-align: center;
 	border-style: outset;
 	background: white;
 }
 
 .part{
-	font-size: 10px;
+	font-size: 12px;
 	font-weight: bold;
 }
 
 #group{
-	margin-left: 170px;
+	margin-left: 130px;
 	margin-top: 100px;
 	margin-bottom: 300px;
-
+	width: 700px;
 }
 
 .largelist img{
 	float: none;
-	width: 50px;
-	height: 40px;
+	width: 65px;
+	height: 50px;
 	margin-bottom: 5px;
 }
 
@@ -83,10 +83,10 @@
 }
 
 #mainImage img{
-	width: 500px;
-	height: 550px;
+	width: 550px;
+	height: 600px;
 	filter:blendTrans(duration=1); 
 	overflow: hidden;
 	position: absolute;
-	margin-left: 400px;
+	margin-left: 530px;
 }

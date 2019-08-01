@@ -39,14 +39,14 @@ scheduleService.getList(e_Id, function(list){
  	 
 	 var profile = "";
 	 profile += '<div id="photo"><img src="/upload/profile/' + list.expert.e_Photo + '"></div>';
-	 profile += '<div id="info"><p><strong>' + list.expert.e_Name + '</strong> 고수<p>';	 
+	 profile += '<div id="info"><h4><strong>' + list.expert.e_Name + '</strong> 고수</h4>';	 
 	 profile += '<p>'+ list.part.p_S_Word + ' 서비스</p>';
 	 profile += '<p>'+list.exInfo.ei_District + '<p>';
 	 profile += '<p>'+list.expert.e_Rc + '회 고용</p></div>';
 	  
 	 $('#profile').append(profile);
 
-	 var match = "<p>매칭 회원 목록</p>";
+	 var match = "<h4><b>매칭 회원 목록</b></h4><br>";
 	 for(var i=0, len= list.listMatch.length||0; i<len; i++){
 		 match += '<div class="member"><div class="m_photo"><img src="/resources/images/' + list.listMatch[i].m_Photo + '"></div>';
 		 match += '<div class="m_name">'+list.listMatch[i].m_Name+'</div>';
@@ -75,7 +75,7 @@ scheduleService.getList(e_Id, function(list){
 		 scheduleService.modifyMatch({e_Id:e_Id, m_Id:m_Id, p_Seq:p_Seq}, function(){
 			 scheduleService.getList(e_Id, function(list){
 				 $('#match').empty();
-				 var match = "<p>매칭 회원 목록</p>";
+				 var match = "<h4><b>매칭된 회원 목록입니다!</b></h4><br>";
 				 for(var i=0, len= list.listMatch.length||0; i<len; i++){
 					 match += '<div class="member"><div class="m_photo"><img src="/resources/images/' + list.listMatch[i].m_Photo + '"></div>';
 					 match += '<div class="m_name">'+list.listMatch[i].m_Name+'</div>';

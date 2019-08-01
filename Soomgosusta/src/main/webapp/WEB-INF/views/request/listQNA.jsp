@@ -71,7 +71,7 @@ partService.getQNA(data, function(list){
 
 		str += '<input type="hidden" name="p_Seq" value="'+ list.searchPart.p_Seq + '">';
 		str += '<input type="hidden" name="p_S_Word" value="'+ list.searchPart.p_S_Word +'">';
-		str += '<div class="requestList"><h1>"'+ list.searchPart.p_S_Word + '"<br>고수를 소개받기 위한<br>몇가지 질문에 답해주세요!</h1>';
+		str += '<div class="requestList"><h2>"'+ list.searchPart.p_S_Word + '"<br>고수를 소개받기 위한<br>몇가지 질문에 답해주세요!</h2>';
 	      str += '<div class="btn"><a href="#" class="next">다음</a></div></div>';
 		for(var i=0, len=list.listQ.length||0; i<len; i++){
 			str += '<input type=hidden name="listQ_seq" value="'+ list.listQ[i].q_Seq+'">';
@@ -106,8 +106,9 @@ label{
   font-family: 'Nanum Gothic Coding', monospace;
 }
 
-.h h4{
 
+.h h4{
+	padding-bottom: 10px;
 	font-family: 'Nanum Gothic Coding', monospace;
 }
 
@@ -135,7 +136,7 @@ li{
 }
 </style>
 </head>
-<body>
+<body style="background-color: #fafafa;">
 
 		<div id="container">
 			<div id="dimmed"></div>
@@ -146,7 +147,7 @@ li{
 					</c:if>
 					<div class="slide">
 						<div class="requestList">
-							5개 남았습니다!
+							&nbsp;&nbsp;5개 남았습니다!
 							<div class="h"><h4>희망하는 시간대는 언제인가요?</h4></div>
 							<ul>
 								<li><div class="b"><label><input type="checkbox" name="time" value="아침(9시 이전)">아침 (9시 이전)</label></div></li>
@@ -166,7 +167,7 @@ li{
 
 
 						<div class="requestList">
-							4개 남았습니다!
+							&nbsp;&nbsp;4개 남았습니다!
 							<div class="h"><h4>언제부터 시작하기 원하시나요?</h4></div>
 							<ul>
 								<li><div class="b"><label><input type="radio" name="date" value="협의 가능해요">협의 가능해요</label></div></li>
@@ -186,7 +187,7 @@ li{
 						</div>
 
 						<div class="requestList">
-							3개 남았습니다!
+							&nbsp;&nbsp;3개 남았습니다!
 							<div class="h"><h4>선호하는 고수 성별이 있나요?</h4></div>
 							<ul>
 								<li><div class="b"><label><input type="radio" name="gen" value="남자">남자</label></div></li>
@@ -202,10 +203,10 @@ li{
 						</div>
 
 						<div class="requestList">
-							2개 남았습니다!
+							&nbsp;&nbsp;2개 남았습니다!
 							<div class="h"><h4>선호 지역을 선택하세요</h4></div>
 							<div id="dist1">
-								<select name="sido" id="sido1">
+								&nbsp;&nbsp;<select name="sido" id="sido1">
 								</select> <select name="gugun" id="gugun1">
 									<option>군/구 선택</option>
 								</select> <br>
@@ -232,13 +233,14 @@ li{
 
 						</div>
 						<div class="requestList">
-							마지막 질문입니다!
-							<div class="h"><h4>전화번호를 입력하세요</h4></div>
+							&nbsp;&nbsp;마지막 질문입니다!
+							<div class="h"><h4>전화번호를 입력하세요<br></h4></div>
 							<c:choose>
 								<c:when test="${loginUser.user_Divide != null }">
 									<c:if test="${loginUser.user_Divide =='expert'}">
 										<div id="submit_btn">
 											<h5>회원으로 로그인 시 요청 가능합니다!</h5>
+											<a href="#" class="prev">이전</a>&nbsp;&nbsp; 
 											<input type="submit" id="go" value="매칭요청" disabled>
 										</div>
 									</c:if>
@@ -253,6 +255,7 @@ li{
 								</c:when>
 								<c:otherwise>
 										<h5>로그인 시 요청 가능합니다!</h5>
+										<a href="#" class="prev">이전</a>&nbsp;&nbsp; 
 								</c:otherwise>	
 							</c:choose>
 						</div>
@@ -260,9 +263,9 @@ li{
 			</form>		
 			</div>
 			<div id="notice">
-				<h4>숨고 사용 팁</h4>
-				<p>다음 몇가지 질문에 답변해주시면, 고수님이 요청에 적합한 맞춤 견적서를 보내드려요.</p>
-				<p>견적서에는 가격은 물론 프로필, 자격증, 연락처, 사진, 이용 후기를 볼 수 있어요. 견적을 비교하고 본인과 가장 적합한 분을 선택하시면 돼요.</p>
+				<h3>숨고 사용 팁</h3>
+				<p style="font-size: 15px;">다음 몇가지 질문에 답변해주시면, 고수님이 요청에 적합한 맞춤 견적서를 보내드려요.</p>
+				<p style="font-size: 15px;">견적서에는 가격은 물론 프로필, 자격증, 연락처, 사진, 이용 후기를 볼 수 있어요. 견적을 비교하고 본인과 가장 적합한 분을 선택하시면 돼요.</p>
 			</div>
 		</div>
 

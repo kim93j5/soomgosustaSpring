@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
 <script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
 <script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/resources/js/header.js"></script>
 <!-- <script type="text/javascript" src="/resources/js/socket.js"></script> -->
 <link rel="stylesheet" href="/resources/css/header.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -58,6 +59,7 @@ function onClose(evt){
 	console.log("안녕");
 }
 
+
     </script>
 
 <title>Insert title here</title>
@@ -105,6 +107,29 @@ function onClose(evt){
    console.log("안녕");
    $('#getAlarm').append("연결 끊김");
 }
+$(document).ready(function(){
+	$('#my').click(function(e){
+		e.preventDefault();
+		var divide = "${loginUser.user_Divide}";
+		$('#myexpert').empty();
+		if(divide == 'member'){
+			var id= "${loginUser.m_Id}";
+			console.log(id);
+			headerService.getList({id:id}, function(list){
+				console.log(list);
+				var str = "";
+				
+				var str = "<ul class='nav nav-pills nav-stacked'>";
+				for(var i=0, len=list.length||0; i<len; i++){
+					str += '<li class="nav-item"><a href="/scheduler/memberScheduler/'+ list[i].e_Id +'">'+list[i].e_Id+'</a></li>';				
+				}
+				str += '</ul>';
+				$('#myexpert').append(str);
+			});
+			$('#myexpert').toggle();
+		}
+	});	
+})
 
     </script>
 </head>
@@ -191,6 +216,8 @@ function onClose(evt){
 					<div>
 						<a id="logout" href="/main/logout"><span>로그아웃</span></a>
 					</div>
+					<a id="my" href="#"><span>My 고수</span></a>
+					<div id="myexpert" style="overflow-y: scroll; display:none;"></div>
 				</div>
 			</c:when>
 			<c:otherwise>

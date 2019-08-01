@@ -90,4 +90,8 @@
 	   <result column="pl_request" property="pl_Request"/>
 	</resultMap>	
 	
+	
+	<select id="listMExpert" parameterType="String" resultType="kosta.soomgosusta.domain.MatchVO">
+		SELECT * FROM MATCH WHERE M_ID = #{m_Id} AND M_STATUS = 'ING'
+	</select>
 </mapper>

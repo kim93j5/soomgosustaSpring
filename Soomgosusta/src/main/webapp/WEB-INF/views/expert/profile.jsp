@@ -94,12 +94,14 @@
 				</div>
 					<button id="licenseModifyBtn">수정</button>
 				</c:if>
-				
+
 				<div id="uploadResult" class="uploadResult">
 				  <ul>
 				  </ul>
 				</div>
-				
+
+				<a id="prevbtn" href="#" style="float: left; margin-left: 80px;">이전</a>
+				<a id="nextbtn" href="#" style="float: right; margin-right: 80px;">다음</a>
 				<div class="bigPictureWrapper">
 					<div class="bigPicture">
 					</div>
@@ -226,6 +228,22 @@
 			
 				$(document).ready(function(){
 				
+					$('#prevbtn').on("click", function(e){
+						e.preventDefault();
+						
+						$('.uploadResult ul').animate({
+							marginLeft : parseInt($('.uploadResult ul').css('marginLeft'))  + 250
+						}, 'slow');
+					});
+					
+					$('#nextbtn').on("click", function(e){
+						e.preventDefault();
+					
+					$('.uploadResult ul').animate({
+							marginLeft : parseInt($('.uploadResult ul').css('marginLeft'))  - 250
+						}, 'slow');
+					})
+					
 					var e_Id = "${profile.e_Id}";
 					profileService.getFileList({e_Id:e_Id}, function(list){
 						alert("getFileList:" + list);

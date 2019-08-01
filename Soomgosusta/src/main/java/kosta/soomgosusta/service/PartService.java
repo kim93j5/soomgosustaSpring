@@ -5,6 +5,7 @@ import java.util.List;
 
 import kosta.soomgosusta.domain.AnswerVO;
 import kosta.soomgosusta.domain.BestDTO;
+import kosta.soomgosusta.domain.MatchVO;
 import kosta.soomgosusta.domain.PartVO;
 import kosta.soomgosusta.domain.QuestionVO;
 import kosta.soomgosusta.domain.RequestVO;
@@ -35,4 +36,6 @@ public interface PartService {
 	public List<String> listPopularService();
 
 	public List<BestDTO> listBestService();
+	
+	public List<MatchVO> listMExpertService(String m_Id);
 }

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <header>
@@ -10,6 +10,24 @@
 <script type="text/javascript" src="/resources/js/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/listExpertFind.js"></script>
 <link rel="stylesheet" href="/resources/css/listExpertFind.css">
+<style type="text/css">
+.expertInfo{
+	cursor: pointer;
+}
+
+#getfilter{
+	cursor: pointer;
+	padding: 6px;
+	border-radius: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.hover{
+	border: 1px solid;
+	border-color: #e8e7e6;
+}
+</style>
 <script type="text/javascript">
 function clickBtn(){
    console.log($(this).data("id"));
@@ -19,6 +37,8 @@ $('document').ready(function(){
    $('#getfilter').click(function(){
       $('.filter').toggle();
    });
+   
+   $('#getfilter').addClass("hover");
    
    $('.f').change(function(){
       if($('input:checkbox[name=orderByEC]').is(':checked') == true){

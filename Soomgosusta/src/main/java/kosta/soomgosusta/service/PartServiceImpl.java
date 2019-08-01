@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kosta.soomgosusta.domain.AnswerVO;
 import kosta.soomgosusta.domain.BestDTO;
+import kosta.soomgosusta.domain.MatchVO;
 import kosta.soomgosusta.domain.PartVO;
 import kosta.soomgosusta.domain.QuestionVO;
 import kosta.soomgosusta.domain.RequestVO;
@@ -114,6 +115,12 @@ public class PartServiceImpl implements PartService {
 	public List<BestDTO> listBestService() {
 		
 		return mapper.listBest();
+	}
+
+	@Override
+	public List<MatchVO> listMExpertService(String m_Id) {
+		
+		return mapper.listMExpert(m_Id);
 	}
 
 
