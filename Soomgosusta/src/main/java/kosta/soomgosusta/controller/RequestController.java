@@ -31,10 +31,10 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/request/*")
 @AllArgsConstructor
 public class RequestController {
-	private RequestService service;
-	private RecommendService recommendService;
-	private PartService partService;
-	private MemberService memberService;
+   private RequestService service;
+   private RecommendService recommendService;
+   private PartService partService;
+   private MemberService memberService;
 
    @GetMapping("/listQNA/{searchKey}")
    public String listQNA(@PathVariable("searchKey") String searchKey, Model model) {
@@ -171,7 +171,11 @@ public class RequestController {
             int seq1 = memberService.getPSeq(p_L_Word1, p_M_Word1, p_S_Word1);
             int seq2 = memberService.getPSeq(p_L_Word2, p_M_Word2, p_S_Word2);
             int seq3 = memberService.getPSeq(p_L_Word3, p_M_Word3, p_S_Word3);
-         
+         log.info("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
+            log.info(seq1);
+            log.info(m_Id);
+            log.info(m_Id);
+            
          memberAddInfo.setM_Id(m_Id);
          memberAddInfo.setM_Ip1(seq1);
          memberAddInfo.setM_Ip2(seq2);

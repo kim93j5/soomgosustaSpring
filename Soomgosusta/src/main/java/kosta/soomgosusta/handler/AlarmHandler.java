@@ -94,24 +94,24 @@ public class AlarmHandler extends TextWebSocketHandler{
       }*/
    }
    
-	@Override
-	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		// 연결 종료
-		Map<String, Object> map = session.getAttributes();
-		logger.info("DddddDDDDDDDDDDDDDddddd2");
-		String userId = (String) map.get("login");
-		mapList.remove(session);
-		sessionList.remove(session);
-		
-		logger.info("바보야 왜 연결 안돼");
-		System.out.println("End Session");
-		/*
-		 * mapList.remove(session); sessionList.remove(session);
-		 */
-		sessions.remove(session.getId());
-		sessionList.remove(session);
-		logger.info("{} 연결 끊킴", session.getId());
-	}
+   @Override
+   public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+      // 연결 종료
+      Map<String, Object> map = session.getAttributes();
+      logger.info("DddddDDDDDDDDDDDDDddddd2");
+      String userId = (String) map.get("login");
+      mapList.remove(session);
+      sessionList.remove(session);
+      
+      logger.info("바보야 왜 연결 안돼");
+      System.out.println("End Session");
+      /*
+       * mapList.remove(session); sessionList.remove(session);
+       */
+      sessions.remove(session.getId());
+      sessionList.remove(session);
+      logger.info("{} 연결 끊킴", session.getId());
+   }
    
    public String JsonAlarmList(String m_Id){
       List<AlarmVO> alarmList = service.getAlarmList(m_Id);

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -47,22 +48,8 @@ public class ReceiveController {
 		return "expert/request/estimate";
 	}
 	
-	@GetMapping("request/detail/{seq}")
-	public String detail(@PathVariable("seq") int seq,Model model){
-			
-		model.addAttribute("seq",seq);
-		return "expert/request/detail";
-	}
 	
-	@GetMapping("request/register/{seq}")
-	public String register(@PathVariable("seq") int seq,Model model){
-	
-		model.addAttribute("seq",seq);
-		return "expert/request/register";
-	}
-	
-	
-	@PostMapping("/register/{seq}")
+	@RequestMapping(value="/register/{seq}" , method = {RequestMethod.GET, RequestMethod.POST})
 	public String estimateRegister(EstimateVO estimate,ChatRoomVO chatroom,
 			@RequestParam("l_Seq") int l_seq){
 		

@@ -11,7 +11,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="/resources/js/jquery.js"></script>
-<script type="text/javascript" src="/resources/js/estimate.js"></script>
+<!-- <script type="text/javascript" src="/resources/js/estimate.js"></script> -->
 <link rel="stylesheet" href="/resources/css/estimateList.css"
 	target="text/css">
 <link rel="stylesheet"
@@ -33,7 +33,7 @@ h5{
 </style>
 <title>Insert title here</title>
 </head>
-<body style="background-color: PowderBlue">
+<body>
 
 <%-- var m_Id = '<c:out value="${loginUser.m_Id}"/>'; --%>
 
@@ -44,7 +44,7 @@ h5{
 		      <div id="estimate">
 			      <div id="e_Photo">
 				     <img src="/resources/images/${list.e_Photo }">
-			      </div>
+			      </div>	
 			      <div id="estimateInfo">
 				      <h5 style="font-weight: bold; font-size: 17px;">${list.e_Name } 고수의 
 				          ${list.p_S_Word }&nbsp;${list.p_L_Word }</h5>
