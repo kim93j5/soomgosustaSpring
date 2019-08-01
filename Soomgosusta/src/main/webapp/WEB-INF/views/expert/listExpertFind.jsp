@@ -27,6 +27,103 @@ $('document').ready(function(){
          $('input:checkbox[name=orderByEC]').val("not");
       }
 
+<<<<<<< HEAD
+		if($('input:checkbox[name=orderByRevC]').is(':checked') == true){
+			$('input:checkbox[name=orderByRevC]').val("checked");
+		}else{
+			$('input:checkbox[name=orderByRevC]').val("not");
+		}
+		
+		if($('input:checkbox[name=orderBySP]').is(':checked') == true){
+			$('input:checkbox[name=orderBySP]').val("checked");
+		}else{
+			$('input:checkbox[name=orderBySP]').val("not");
+		}
+		
+		var sido = $('#sido').val();
+		var gugun = $('#gugun').val();
+		var service = $('#service').val();
+		var serviceInfo = $('#serviceInfo').val();
+		var orderByEC = $('input:checkbox[name=orderByEC]').val();
+		var orderByRevC = $('input:checkbox[name=orderByRevC]').val();
+		var orderBySP = $('input:checkbox[name=orderBySP]').val();
+		
+		expertFindService.getList({sido:sido, gugun:gugun, ser: service, serviceInfo:serviceInfo, orderByEC:orderByEC, orderByRevC:orderByRevC, orderBySP:orderBySP}, function(result){
+			for(var i=0, len= result.length||0; i<len; i++){
+				console.log(result[i]);
+			}
+			
+			checkList(result);
+		});
+	});
+	
+	function checkList(list){
+		$('#exlist').empty();
+		
+		var str="";
+		console.log(list);
+		for(var i=0, len=list.length||0; i<len; i++){
+			str += 	'<div class="expertInfo" data-id = "' + list[i].ef_Id +'">';
+			str += '<img class="profile" src="/upload/profile/' + list[i].ef_Photo + '">';
+			str += '<div class="info"><h4>'+ list[i].ef_OL + '</a></h4>';
+			str += '<div>'+list[i].ef_RC+'회 고용<strong>*</strong>'+ list[i].ef_District+'</div></div>';
+			str +=	'<div><img class="star" src="/resources/images/starpoint.JPG">'+list[i].ef_AvgStarpoint+'('+list[i].ef_CntReview+'개)</div></div>';			
+		}
+				
+		$('#exlist').append(str);
+		
+		$('.expertInfo').on("click", function(){
+			alert($(this).data("id"));
+			location.href='/expert/profile?e_Id='+$(this).data("id") ;
+		});
+		
+	}
+	
+	
+	expertFindService.getList({sido:"지역 전체", gugun:"전체", ser: "분야 전체", serviceInfo:"전체", orderByEC:"not", orderByRevC:"not", orderBySP:"not"}, function(result){
+		checkList(result);
+	});
+	
+	$('#service').change(function(){
+		
+		var sido = $('#sido').val();
+		var gugun = $('#gugun').val();
+		var service = $('#service').val();
+		var serviceInfo = $('#serviceInfo').val();
+		var orderByEC = $('input:checkbox[name=orderByEC]').val();
+		var orderByRevC = $('input:checkbox[name=orderByRevC]').val();
+		var orderBySP = $('input:checkbox[name=orderBySP]').val();
+		
+		expertFindService.getList({sido:sido, gugun:gugun, ser: service, serviceInfo:serviceInfo, orderByEC:orderByEC, orderByRevC:orderByRevC, orderBySP:orderBySP}, function(result){
+			for(var i=0, len= result.length||0; i<len; i++){
+				console.log(result[i]);
+			}
+			
+			checkList(result);
+		});
+	})
+	
+	$('#serviceInfo').change(function(){
+		
+		var sido = $('#sido').val();
+		var gugun = $('#gugun').val();
+		var service = $('#service').val();
+		var serviceInfo = $('#serviceInfo').val();
+		var orderByEC = $('input:checkbox[name=orderByEC]').val();
+		var orderByRevC = $('input:checkbox[name=orderByRevC]').val();
+		var orderBySP = $('input:checkbox[name=orderBySP]').val();
+		
+		expertFindService.getList({sido:sido, gugun:gugun, ser: service, serviceInfo:serviceInfo, orderByEC:orderByEC, orderByRevC:orderByRevC, orderBySP:orderBySP}, function(result){
+			for(var i=0, len= result.length||0; i<len; i++){
+				console.log(result[i]);
+			}
+			
+			checkList(result);
+		});
+	});
+	
+	$('#gugun').change(function(){
+=======
       if($('input:checkbox[name=orderByRevC]').is(':checked') == true){
          $('input:checkbox[name=orderByRevC]').val("checked");
       }else{
@@ -122,6 +219,7 @@ $('document').ready(function(){
    });
    
    $('#gugun').change(function(){
+>>>>>>> branch 'nano124124' of https://github.com/kim93j5/soomgosustaSpring.git
 
       var sido = $('#sido').val();
       var gugun = $('#gugun').val();
