@@ -19,14 +19,18 @@
 .slick-prev,
 .slick-next
 {
+<<<<<<< HEAD
     font-size: 0;
+=======
+    font-size: 100px;
+>>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
     line-height: 0;
 
     position: absolute;
-    top: 50%;
-
+    top: 40%;
+    margin-left: 20px;
     display: block;
-
+    margin-right:10px;
     width: 30px;
     height: 30px;
     padding: -50px;;

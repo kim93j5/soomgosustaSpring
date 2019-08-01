@@ -110,6 +110,7 @@ public class MemberController {
 	
 	@GetMapping("/mypage/{m_Id:.+}")
 	public String mypage(@PathVariable("m_Id") String m_Id, Model model){
+		//String m_Id = "yena@naver.com";
 		MemberMypageDTO myInfo = service.getMemberMypageInfo(m_Id);
 		
 		int ip1 = myInfo.getM_Ip1();

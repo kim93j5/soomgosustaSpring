@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.joda.time.DateTime;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import kosta.soomgosusta.domain.AnswerVO;
+import kosta.soomgosusta.domain.LoginDTO;
 import kosta.soomgosusta.domain.MemberMainDTO;
 import kosta.soomgosusta.domain.PartVO;
 import kosta.soomgosusta.domain.QnaDTO;
@@ -78,17 +81,17 @@ public class RequestRestController {
 	@GetMapping(value = "/getList/{m_Id}", produces = { MediaType.APPLICATION_XML_VALUE,
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public MemberMainDTO getList(@PathVariable("m_Id") String m_Id) {
-
 		MemberMainDTO memberMain = new MemberMainDTO();
 		
-		String nowTime = LocalDateTime.now().toString("yyyy-MM-dd HH:mm:ss");
+		String nowTime = LocalDateTime.now().toString("yyyy-MM-dd");
+		//log.info("현재시간" +nowTime);
 	    List<RequestVO> listSendRequest = service.listRequestService(m_Id);
 		List<RequestDTO> listPartRequest = new ArrayList<RequestDTO>();
 		
 
 		for (int i = 0; i < listSendRequest.size(); i++) {
 			DateTime dt = new DateTime(listSendRequest.get(i).getR_Date());
-			DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+			DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd");
 			RequestDTO requestDTO = new RequestDTO();
 
 			String requestTime = dt.toString(fmt);

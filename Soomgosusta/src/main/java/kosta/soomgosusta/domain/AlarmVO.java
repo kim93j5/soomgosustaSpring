@@ -23,4 +23,5 @@ public class AlarmVO {
       
       return message;
    }*/
+
 }

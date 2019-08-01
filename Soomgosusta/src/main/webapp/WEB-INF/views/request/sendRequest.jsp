@@ -19,9 +19,12 @@
 <script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
 <script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/resources/plugin/slick/slick.js"></script> 
+<<<<<<< HEAD
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="/resources/plugin/slick/slick.min.js"></script>
+=======
+>>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
 
 <style type="text/css">
 @import url(//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
@@ -72,8 +75,16 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
 =======
     	console.log(result);  
     	$('#sendRequestForm').empty();
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
     	   requestService.getList(m_Id,
+<<<<<<< HEAD
 >>>>>>> branch 'nano124124' of https://github.com/kim93j5/soomgosustaSpring.git
+=======
+
+>>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
                    function(list) {
 
                       var str = "";
@@ -85,7 +96,7 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
                             str += '<div id = "sendPart"><br>';
                             str += '<h5>' + list.requestDTO[i].p_S_Word
                                   + '</h5>';
-                            str += '<p style = "font-size : 16px">요청시간<br><' + list.requestDTO[i].requestTime +'></p></div>';
+                            str += '<p style = "font-size : 16px">요청날짜<br><' + list.requestDTO[i].requestTime +'></p></div>';
                             str += '<div id = "sendTime"><br>';
                             
                             if(list.requestDTO[i].nowTime > list.requestDTO[i].endTime && list.request[i].r_Status == 'ING') {
@@ -212,12 +223,20 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
          
       });
    });
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
    requestService.getList(m_Id,
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 =======
 >>>>>>> branch 'nano124124' of https://github.com/kim93j5/soomgosustaSpring.git
+=======
+
+>>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
                function(list) {
 
                   var str = "";
@@ -349,10 +368,14 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
                   
                 }else if(list.size == 0){
 <<<<<<< HEAD
+<<<<<<< HEAD
                      str += '<h3 style = "margin-top:40px; margin-left:-1080px; font-size:16px;">아직 요청서를 작성하지 않으셨습니다. <a href ="/main/mainPage">요청 보내기</a></h3>';
 =======
                      str += '<h3 style = "margin-top:40px; margin-left:-1240px; font-size:16px;">아직 요청서를 작성하지 않으셨습니다. <a href ="/part/main">요청 보내기</a></h3>';
 >>>>>>> branch 'nano124124' of https://github.com/kim93j5/soomgosustaSpring.git
+=======
+                     str += '<h3 style = "margin-top:40px; margin-left:-1080px; font-size:16px;">아직 요청서를 작성하지 않으셨습니다. <a href ="/main/mainPage">요청 보내기</a></h3>';
+>>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
                      }
                    
                   
@@ -392,6 +415,7 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
    </div> 
    
 <<<<<<< HEAD
+<<<<<<< HEAD
     <div id="recommend">
 =======
 <!--    <div id="button">
@@ -402,9 +426,13 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
    
    <div id="recommend">
 >>>>>>> branch 'nano124124' of https://github.com/kim93j5/soomgosustaSpring.git
+=======
+    <div id="recommend">
+>>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
      <c:forEach var="list" begin="1" end="8" items="${listRandom}">
         <div id="recommendService">
         
+<<<<<<< HEAD
 <<<<<<< HEAD
              <a href="/request/listQNA/${list.p_S_Word }">
                 <img class="img" src="/resources/images/${list.p_Image }"><br>         
@@ -413,6 +441,10 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
                 <img class="img" src="/resources/images/${list.p_Image }">
                 <p style= "color: #4d4d4d; font-weight: 500;">${list.p_S_Word }</p>          
 >>>>>>> branch 'nano124124' of https://github.com/kim93j5/soomgosustaSpring.git
+=======
+             <a href="/request/listQNA/${list.p_S_Word }">
+                <img class="img" src="/resources/images/${list.p_Image }"><br>         
+>>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
              </a>     
              <div class="caption" style="margin-top: -5px;">            
                     <p>${list.p_S_Word }</p>          
@@ -429,6 +461,7 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
       <c:forEach var="listBest" begin="1" end="8" items="${listBest }">
         <div id="recommendService">
 <<<<<<< HEAD
+<<<<<<< HEAD
               <a href="/request/listQNA/${listBest.p_S_Word }">
                  <img class="img" src="/resources/images/${listBest.p_Image }"> 
               </a>
@@ -441,13 +474,26 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
                 <p style= "color: #4d4d4d; font-weight: 500;">${listBest.p_S_Word }</p>          
           </a>     
 >>>>>>> branch 'nano124124' of https://github.com/kim93j5/soomgosustaSpring.git
+=======
+              <a href="/request/listQNA/${listBest.p_S_Word }">
+                 <img class="img" src="/resources/images/${listBest.p_Image }"> 
+              </a>
+             <div class="caption" style="margin-top: 14px;">
+                  <p>${listBest.p_S_Word }</p>          
+             </div>     
+>>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
         </div>
       </c:forEach>
     </div>
     
 <%--     <footer>
+<<<<<<< HEAD
       <jsp:include page="../includes/footer.jsp"></jsp:include>
    </footer> --%>
+=======
+		<jsp:include page="../includes/footer.jsp"></jsp:include>
+	</footer> --%>
+>>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
     
 </body>
 </html>

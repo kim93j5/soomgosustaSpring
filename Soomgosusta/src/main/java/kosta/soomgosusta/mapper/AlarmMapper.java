@@ -9,3 +9,5 @@ public interface AlarmMapper {
 	public void alarmLinkInsert(AlarmVO alarmVo);
 	public int alarmCount(String m_Id);
 }
+	
+	
