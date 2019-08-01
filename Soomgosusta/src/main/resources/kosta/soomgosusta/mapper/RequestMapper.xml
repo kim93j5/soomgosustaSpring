@@ -38,7 +38,7 @@
 	</update>
 	
 	<select id="sendRequestInfo" resultType="kosta.soomgosusta.domain.RequestVO" parameterType="String">		
-		 select * from request where m_Id = #{m_Id}
+		 select * from request where m_Id = #{m_Id} order by r_date desc
 	</select>
 	
 	<select id="partInfo" resultType="String" parameterType="int">
@@ -49,5 +49,7 @@
 	       update request set r_Status = 'Cancel' where r_seq = #{r_Seq}
 	</update>
 
-	
+	<select id="listAllRequest" resultType="kosta.soomgosusta.domain.RequestVO">
+		SELECT * FROM REQUEST
+	</select>
 </mapper>
