@@ -26,23 +26,26 @@ $(document).ready(function(){
    $('#recommend').slick({
   	  slidesToShow: 4,
   	  slidesToScroll: 1,
-  	  //autoplay: true,
+/*  	  autoplay: true,*/
   	  pauseOnHover:true,
-  	  //autoplaySpeed: 2000,
+  /*	  autoplaySpeed: 2000,*/
   });
    
    $('#bestPopular').slick({
 	  	  slidesToShow: 4,
 	  	  slidesToScroll: 1,
-	  	  //autoplay: true,
-	  	  //autoplaySpeed: 2000,
+/*	  	  autoplay: true,
+	  	  autoplaySpeed: 2000,*/
 	      pauseOnHover:true,
 	  });
-
-   
 	
 			
 });
+
+
+
+	
+
 
 
 var requestService = (function(){

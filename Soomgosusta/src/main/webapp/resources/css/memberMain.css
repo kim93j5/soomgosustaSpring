@@ -1,10 +1,9 @@
 #sendRequestForm{
-   margin-left: 150px;
+   margin-left: 360px;
 }
 
 
 .sendOneRequest{
-
    border: 1px solid #e1e3e3;
    width: 350px;
    height: 385px; 
@@ -17,7 +16,6 @@
 }
 
 #sendPart{
-
    border-bottom: solid 0.5px;
    border-bottom-color: inherit;
    padding-top : 10px;
@@ -26,7 +24,7 @@
 
 .send{
    margin-top: 50px;
-   margin-left: 180px;
+   margin-left: 360px;
 }
 
 #detailPart{
@@ -42,26 +40,29 @@
 .recommendInfo{
    margin-top: 500px;
    margin-bottom: 30px;
-   margin-left: 180px;
+   margin-left: 360px;
 }
 
 .img{
-   width: 370px;
-   height: 211px;
+   width: 280px;
+   height: 170px;
    border-radius: 4px;
    margin-bottom: 0px;
-   margin-left: 17px;
-   padding-left: 24px;
+   /* margin-left: 17px; */
+   /* padding-left: 24px; */
+   
 }
 
  #recommend{
-   margin-left: 150px;
+   margin-left: 350px;
    margin-bottom: 100px;
+    width:    65%;
+   display: inline-block;
+   text-align: center;
 } 
 
  #recommendService{
-    background-color: white; 
-   /* float: left; */
+
    margin-right: 0px;
    text-align: center;
    margin-bottom: 10px;
@@ -70,17 +71,21 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     margin-left: 12px;
+    width: 280px;
+   
 } 
 
 #best{
-   margin-top: -30px;
+   margin-top: -80px; 
    margin-bottom: 30px;
-   margin-left: 180px;
 }
 
 #bestPopular{
-   margin-left: 180px;
-   margin-bottom: 800px;
+    margin-left: 350px;
+   margin-bottom: 160px; 
+   width:    65%;
+   display: inline-block;
+   text-align: center;
 }
 
 .cancelContents{
@@ -88,60 +93,6 @@
 }
 
 #sendTime{
-	margin-top: 20px;
-}
-
-.btn-btn-default{
-	background-color : #4a7bf8;
-	border-color: #4a7bf8;
-    color: #fff;
-    width: 150px;
-    height: 35px;
-    border-radius: 4px;
-    font-weight: bold;
-}
-
-.btn-btn-default:hover{
-	    background-color: #5986f9;
-}
-
-.cancelRequest{
-	margin-bottom: 5px;
-    border-color: inherit;
-	border-radius: 4px;
-	opacity: 0.7;
-}
-
-#recommend_btn{
-	width: 100px;
-	height: 40px;
-	margin-left: 1400px;
-	margin-bottom: 20px;
-    background-color : #4a7bf8;
-	border-color: #4a7bf8;
-    color: #fff;
-    border-radius: 4px;
-    font-weight: bold;
-}
-
-#recommend_btn:HOVER{
-	background-color: #5986f9;
-}
-
-
-#best_btn{
-	width: 100px;
-	height: 40px;
-	margin-bottom: 20px;
-    background-color : #4a7bf8;
-	border-color: #4a7bf8;
-    color: #fff;
-    border-radius: 4px;
-    font-weight: bold;
-}
-
-#best_btn:HOVER{
-	background-color: #5986f9;
    margin-top: 20px;
 }
 
@@ -202,13 +153,6 @@
 .slick-slide{
    width: 370px;
 }
-
-
-.slick-slide{
-	width: 370px;
-}
-
-
 
 
 

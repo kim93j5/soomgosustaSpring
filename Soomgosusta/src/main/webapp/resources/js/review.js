@@ -4,35 +4,17 @@ var reviewService = (function(){
 	
 	
 	
-	
 	function add(review, callback, error){
 		console.log("add review.................................");
-		console.log(review);
+		
 		$.ajax({
 			type : 'post',
 			url : '/review/new',
 			data : JSON.stringify(review),
 			contentType: "application/json; charset=utf-8",
-			success: function(result, status, xhr){
+			seccess: function(result, status, xht){
 				if(callback){
 					callback(result);
-				}
-			},
-			error : function(result, status, er){
-				if(error){
-					error(er);
-				}
-			}
-		});
-	}
-	function remove(re_Seq, callback, error){
-		
-		$.ajax({
-			type: 'Delete',
-			url : '/review/'+ re_Seq,
-			success : function(deleteResult, status, xhr){
-				if(callback){
-					callback(deleteResult);
 				}
 			},
 			error : function(xhr, status, er){
@@ -76,7 +58,23 @@ var reviewService = (function(){
 		
 	}
 	
-	
+	function remove(re_Seq, callback, error){
+		
+		$.ajax({
+			type: 'Delete',
+			url : '/review/'+ re_Seq,
+			success : function(deleteResult, status, xhr){
+				if(callback){
+					callback(deleteResult);
+				}
+			},
+			error : function(xhr, status, er){
+				if(error){
+					error(er);
+				}
+			}
+		});
+	}
 	
 	function update(review, callback, error){
 		

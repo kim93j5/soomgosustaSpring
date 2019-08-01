@@ -24,4 +24,5 @@ public interface RequestMapper {
 
 	int cancelRequest(int r_Seq);
 
+	List<RequestVO> listAllRequest();
 }

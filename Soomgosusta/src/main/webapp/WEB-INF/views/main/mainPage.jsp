@@ -143,7 +143,7 @@ $(document).ready(function(){
 </script>
 
 
-<title>Insert title here</title>
+<title>Main Page</title>
 </head>
 <body>
 
@@ -210,7 +210,7 @@ $(document).ready(function(){
    </div>
    <!-- /.modal -->
 
- 	${loginUser.user_Divide}
+
 </body>
 <%-- <footer>
 	<jsp:include page="../includes/footer.jsp"></jsp:include>
