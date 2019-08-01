@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,10 +23,16 @@ import lombok.extern.log4j.Log4j;
 public class LinkController {
 	private LinkService service;
 	private AlarmService alarmService;
-	@RequestMapping("/match/{m_Id}")
-	public String getMatchPercent(@PathVariable("m_Id") String m_Id) {
-		RequestVO requestInfo = service.getRequestInfoService(m_Id);
-		int p_Seq = requestInfo.getP_Seq();
+	@RequestMapping("/match/{m_Id}/{size}/{p_Seq}")
+	public String getMatchPercent(@PathVariable("m_Id") String m_Id,@PathVariable("size") int size,@PathVariable("p_Seq") int p_Seq,Model model) {
+		RequestVO requestInfo = new RequestVO();
+		List<RequestVO> requestInfoList = service.getRequestInfoService(m_Id);
+		for(int i = 0;i<requestInfoList.size();i++){
+			if(requestInfoList.get(i).getP_Seq() == p_Seq){
+				requestInfo = requestInfoList.get(i);
+			}
+			
+		}
 		String r_Time = requestInfo.getR_QA_12();
 		String r_Start = requestInfo.getR_QA_13();
 		String r_Gender = requestInfo.getR_QA_14();
@@ -50,6 +57,8 @@ public class LinkController {
 		alarmLinkInsert.setM_Id(m_Id);
 		alarmService.alarmLinkInsert(alarmLinkInsert);
 		}
+		model.addAttribute("size",size);
+		
 		return "/request/detailRequest";
 	}
 

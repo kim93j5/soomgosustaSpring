@@ -18,7 +18,6 @@ import kosta.soomgosusta.domain.BestDTO;
 import kosta.soomgosusta.domain.MemberInfoVO;
 import kosta.soomgosusta.domain.PartVO;
 import kosta.soomgosusta.domain.QuestionVO;
-import kosta.soomgosusta.mapper.RecommendMapper;
 import kosta.soomgosusta.service.MemberService;
 import kosta.soomgosusta.service.PartService;
 import kosta.soomgosusta.service.RecommendService;
@@ -165,35 +164,24 @@ public class RequestController {
       
    
    @PostMapping("/sendRequest/{m_Id:.+}")
-      public void getMemberAddInfo(@PathVariable("m_Id") String m_Id,@RequestParam("large1") String p_L_Word1,@RequestParam("medium1") String p_M_Word1,
+      public String getMemberAddInfo(@PathVariable("m_Id") String m_Id,@RequestParam("large1") String p_L_Word1,@RequestParam("medium1") String p_M_Word1,
             @RequestParam("small1") String p_S_Word1, @RequestParam("large2") String p_L_Word2,@RequestParam("medium2") String p_M_Word2,
             @RequestParam("small2") String p_S_Word2, @RequestParam("large3") String p_L_Word3,@RequestParam("medium3") String p_M_Word3,
             @RequestParam("small3") String p_S_Word3, MemberInfoVO memberAddInfo){
             int seq1 = memberService.getPSeq(p_L_Word1, p_M_Word1, p_S_Word1);
             int seq2 = memberService.getPSeq(p_L_Word2, p_M_Word2, p_S_Word2);
             int seq3 = memberService.getPSeq(p_L_Word3, p_M_Word3, p_S_Word3);
-         
+         log.info("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
+            log.info(seq1);
+            log.info(m_Id);
+            log.info(m_Id);
+            
          memberAddInfo.setM_Id(m_Id);
          memberAddInfo.setM_Ip1(seq1);
          memberAddInfo.setM_Ip2(seq2);
          memberAddInfo.setM_Ip3(seq3);
          memberService.insertMemberAddInfo(memberAddInfo);
+         return "/request/sendRequest";
       }
 
-	
-	@PostMapping("/sendRequest")
-	public void getMemberAddInfo(@RequestParam("large1") String p_L_Word1,@RequestParam("medium1") String p_M_Word1,
-			@RequestParam("small1") String p_S_Word1, @RequestParam("large2") String p_L_Word2,@RequestParam("medium2") String p_M_Word2,
-			@RequestParam("small2") String p_S_Word2, @RequestParam("large3") String p_L_Word3,@RequestParam("medium3") String p_M_Word3,
-			@RequestParam("small3") String p_S_Word3, MemberInfoVO memberAddInfo){
-			int seq1 = memberService.getPSeq(p_L_Word1, p_M_Word1, p_S_Word1);
-			int seq2 = memberService.getPSeq(p_L_Word2, p_M_Word2, p_S_Word2);
-			int seq3 = memberService.getPSeq(p_L_Word3, p_M_Word3, p_S_Word3);
-		
-		memberAddInfo.setM_Id("yenano124");
-		memberAddInfo.setM_Ip1(seq1);
-		memberAddInfo.setM_Ip2(seq2);
-		memberAddInfo.setM_Ip3(seq3);
-		memberService.insertMemberAddInfo(memberAddInfo);
-	}
 }

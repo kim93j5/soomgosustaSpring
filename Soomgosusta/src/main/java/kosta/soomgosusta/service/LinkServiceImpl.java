@@ -65,7 +65,7 @@ public class LinkServiceImpl implements LinkService {
 	}
 
 	@Override
-	public RequestVO getRequestInfoService(String m_Id) {
+	public List<RequestVO> getRequestInfoService(String m_Id) {
 		return mapper.getRequestInfo(m_Id);
 	}
 

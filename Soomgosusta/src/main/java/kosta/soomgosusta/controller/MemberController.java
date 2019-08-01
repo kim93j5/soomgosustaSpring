@@ -51,15 +51,14 @@ public class MemberController {
 	}
 	
 	@PostMapping("/register")
-	public String register(MemberVO memberVO) throws UnsupportedEncodingException{
+	public String register(MemberVO memberVO,Model model) throws UnsupportedEncodingException{
 		
 		log.info("=======Member resgister========");
 		log.info("memberVO: "+memberVO);
 		
 		service.register(memberVO);
 		
-		
-		return "redirect:/member/addInfo";
+		return "redirect:/member/login";
 	}
 	@GetMapping("/login")
 	public String login(){
@@ -78,7 +77,7 @@ public class MemberController {
 		if(success==0){
 			model.addAttribute("member", memberVO);
 			session.setAttribute("login", login_Id);
-			return "./main";
+			return "/request/sendRequest";
 		}else if(success==1){
 			System.out.println("비밀번호 ");
 			model.addAttribute("loginResult","login fail");
@@ -87,13 +86,10 @@ public class MemberController {
 			System.out.println("아이디가 존재하지 않습니다.");
 			return "/member/login";
 		}
-			
-	
-		
 	}
 	
-	@GetMapping("/addInfo/{m_Id:.+}")
-	public String getMemberAddInfo(@PathVariable("m_Id") String m_Id,Model model){
+	@GetMapping("/addInfo")
+	public String getMemberAddInfo(Model model){
 		List<PartVO> partList = partService.listPartService();
 		List<String> lWord = new ArrayList<>();
 		for(int i=0;i<partList.size();i++){
@@ -104,7 +100,7 @@ public class MemberController {
 			}
 		}
 		model.addAttribute("large", lWord);
-		model.addAttribute("m_Id",m_Id);
+		//model.addAttribute("m_Id",m_Id);
 		return "/member/addInfo";
 	}
 	

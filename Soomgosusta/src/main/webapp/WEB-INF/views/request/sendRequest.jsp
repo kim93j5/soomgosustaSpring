@@ -2,26 +2,19 @@
    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%-- <header>
+ <header>
    <jsp:include page="../includes/header.jsp"></jsp:include>
-</header> --%>
+</header> 
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="/resources/js/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/sendRequest.js"></script>
 <link rel="stylesheet" href="/resources/css/memberMain.css" target="text/css">
 <link rel="stylesheet" type="text/css" href="/resources/plugin/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="/resources/plugin/slick/slick-theme.css"/>
 
-<link rel="stylesheet" href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
-<script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
-<script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/resources/plugin/slick/slick.js"></script> 
-<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="/resources/plugin/slick/slick.min.js"></script>
 
 <style type="text/css">
 @import url(//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
@@ -63,17 +56,12 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
 
       //console.log(r_Seq);
       requestService.cancel(r_Seq, function(result){
-<<<<<<< HEAD
+
+
        console.log(result);  
        $('#sendRequestForm').empty();
 
           requestService.getList(m_Id,
-
-=======
-    	console.log(result);  
-    	$('#sendRequestForm').empty();
-    	   requestService.getList(m_Id,
->>>>>>> branch 'nano124124' of https://github.com/kim93j5/soomgosustaSpring.git
                    function(list) {
 
                       var str = "";
@@ -85,7 +73,7 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
                             str += '<div id = "sendPart"><br>';
                             str += '<h5>' + list.requestDTO[i].p_S_Word
                                   + '</h5>';
-                            str += '<p style = "font-size : 16px">요청시간<br><' + list.requestDTO[i].requestTime +'></p></div>';
+                            str += '<p style = "font-size : 16px">요청날짜<br><' + list.requestDTO[i].requestTime +'></p></div>';
                             str += '<div id = "sendTime"><br>';
                             
                             if(list.requestDTO[i].nowTime > list.requestDTO[i].endTime && list.request[i].r_Status == 'ING') {
@@ -214,10 +202,7 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
    });
 
    requestService.getList(m_Id,
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'nano124124' of https://github.com/kim93j5/soomgosustaSpring.git
                function(list) {
 
                   var str = "";
@@ -348,11 +333,9 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
                   }
                   
                 }else if(list.size == 0){
-<<<<<<< HEAD
+
                      str += '<h3 style = "margin-top:40px; margin-left:-1080px; font-size:16px;">아직 요청서를 작성하지 않으셨습니다. <a href ="/main/mainPage">요청 보내기</a></h3>';
-=======
-                     str += '<h3 style = "margin-top:40px; margin-left:-1240px; font-size:16px;">아직 요청서를 작성하지 않으셨습니다. <a href ="/part/main">요청 보내기</a></h3>';
->>>>>>> branch 'nano124124' of https://github.com/kim93j5/soomgosustaSpring.git
+
                      }
                    
                   
@@ -363,7 +346,7 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
                });
 </script>
 
-<body>
+<body style="background-color: #FAFAFA">
    <div class="send">
       <h1 style="font-size: 30px; font-weight: bold;">보낸 요청</h1>
    </div>
@@ -391,28 +374,19 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
    <h1 style="font-size: 30px; font-weight: bold;">추천서비스<br></h1>
    </div> 
    
-<<<<<<< HEAD
+
     <div id="recommend">
-=======
 <!--    <div id="button">
    <button type="button" id="recommend_btn">관심분야순</button>
    <button type="button" id="best_btn">인기순</button>
    </div> -->
-   
-   
-   <div id="recommend">
->>>>>>> branch 'nano124124' of https://github.com/kim93j5/soomgosustaSpring.git
+
      <c:forEach var="list" begin="1" end="8" items="${listRandom}">
         <div id="recommendService">
         
-<<<<<<< HEAD
+
              <a href="/request/listQNA/${list.p_S_Word }">
                 <img class="img" src="/resources/images/${list.p_Image }"><br>         
-=======
-             <a href="#">
-                <img class="img" src="/resources/images/${list.p_Image }">
-                <p style= "color: #4d4d4d; font-weight: 500;">${list.p_S_Word }</p>          
->>>>>>> branch 'nano124124' of https://github.com/kim93j5/soomgosustaSpring.git
              </a>     
              <div class="caption" style="margin-top: -5px;">            
                     <p>${list.p_S_Word }</p>          
@@ -428,26 +402,22 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
     <div id="bestPopular">
       <c:forEach var="listBest" begin="1" end="8" items="${listBest }">
         <div id="recommendService">
-<<<<<<< HEAD
               <a href="/request/listQNA/${listBest.p_S_Word }">
                  <img class="img" src="/resources/images/${listBest.p_Image }"> 
               </a>
              <div class="caption" style="margin-top: 14px;">
                   <p>${listBest.p_S_Word }</p>          
              </div>     
-=======
-          <a href="#">
-              <img class="img" src="/resources/images/${listBest.p_Image }">
-                <p style= "color: #4d4d4d; font-weight: 500;">${listBest.p_S_Word }</p>          
-          </a>     
->>>>>>> branch 'nano124124' of https://github.com/kim93j5/soomgosustaSpring.git
+
+
         </div>
       </c:forEach>
     </div>
     
 <%--     <footer>
       <jsp:include page="../includes/footer.jsp"></jsp:include>
-   </footer> --%>
+   </footer> 
+ --%>
     
 </body>
 </html>

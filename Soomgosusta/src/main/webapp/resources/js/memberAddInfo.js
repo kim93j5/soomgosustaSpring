@@ -1,15 +1,15 @@
 var memberAddInfoService = (function(){
-	function getMWords(m_Id,LWord, callback,error){
+	function getMWords(LWord, callback,error){
 		/*$.getJSON("/member/addInfo/"+LWord+".json",function(data){
 			if(callback){
 				callback(data);
 			}
 		});*/
 		 
-		console.log(m_Id+"mmmmmmmmmmmm"+LWord);
+		console.log("mmmmmmmmmmmm"+LWord);
 		$.ajax({
 			type : 'get',
-			url : '/member/addInfo/'+m_Id+"/"+LWord,
+			url : '/member/addInfo/'+LWord,
 			data : JSON.stringify(LWord),
 			contentType : "application/json; charset=utf-8",
 			success : function(result,status,xhr){

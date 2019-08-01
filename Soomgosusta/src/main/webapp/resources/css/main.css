@@ -1,92 +1,92 @@
 @CHARSET "UTF-8";
 
 #search{
-	width: 800px;
-	margin-left: 350px;
-	margin-top: 30px;
-	padding-bottom: 80px;
-	position: relative;
+   width: 800px;
+   margin-left: 500px;
+   margin-top: 30px;
+   padding-bottom: 80px;
+   position: relative;
 }
 
 #searchKey{
-	border-color: #4092f1;
-	padding: 5px;
+   border-color: #4092f1;
+   padding: 10px;
 }
 
 #searchBtn{
-	padding: 10px;
-	border-radius: 10px;
-	background: #4092f1;
-	color: white;
-	font-size: 10px;
+   padding: 15px;
+   border-radius: 10px;
+   background: #4092f1;
+   color: white;
+   font-size: 12px;
 }
 
 .largelist{
-	border-radius: 10px;
-	border-style: solid;
-	float: left;
-	padding: 10px;
-	margin-right: 40px;
-	width: 80px;
-	height: 80px;
-	text-align: center;
-	border-style: outset;
-	background: white;
+   border-radius: 10px;
+   border-style: solid;
+   float: left;
+   padding: 10px;
+   margin-right: 40px;
+   width: 100px;
+   height: 100px;
+   text-align: center;
+   border-style: outset;
+   background: white;
 }
 
 .part{
-	font-size: 10px;
-	font-weight: bold;
+   font-size: 12px;
+   font-weight: bold;
 }
 
 #group{
-	margin-left: 170px;
-	margin-top: 100px;
-	margin-bottom: 300px;
-
+   margin-left: 130px;
+   margin-top: 100px;
+   margin-bottom: 300px;
+   width: 700px;
 }
 
 .largelist img{
-	float: none;
-	width: 50px;
-	height: 40px;
-	margin-bottom: 5px;
+   float: none;
+   width: 65px;
+   height: 50px;
+   margin-bottom: 5px;
 }
 
 .modal-body .part{
-	font-size: 13px;
-	font-weight: normal;
+   font-size: 13px;
+   font-weight: normal;
 }
 
 #searchresults{
-	width: 260px;
-	height: 300px;
-	border-style: solid;
-	border-color: #4092f1;
-	position: absolute;
-	background: white;
+   width: 260px;
+   height: 300px;
+   border-style: solid;
+   border-color: #4092f1;
+   position: absolute;
+   background: white;
 }
 
 #searchform{
-	margin-bottom: 0px;
-	display: inline-block;
+   margin-bottom: 0px;
+   display: inline-block;
 }
 
 #semi{
-	display: inline-block;
+   display: inline-block;
 }
 #search-ul li{
-	float: left;
-	font-size: 12px;
-	margin-left: 5px;
-	padding : 0;
+   float: left;
+   font-size: 12px;
+   margin-left: 5px;
+   padding : 0;
 }
 
 #mainImage img{
-	width: 500px;
-	height: 550px;
-	filter:blendTrans(duration=1); 
-	overflow: hidden;
-	position: absolute;
-	margin-left: 400px;
+   width: 550px;
+   height: 600px;
+   filter:blendTrans(duration=1); 
+   overflow: hidden;
+   position: absolute;
+   margin-left: 530px;
 }

@@ -2,9 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<header>
-	<jsp:include page="../includes/header.jsp"></jsp:include>
-</header>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,7 +9,9 @@
 
 <script type="text/javascript" src="/resources/js/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/memberMypage.js"></script>
-
+<link href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
+<script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <style type="text/css">
 #image{
 	float: left;
@@ -22,7 +21,7 @@
 	margin: 60px;
 }
 #memberInfo{
-	padding-top: 100px;
+	padding-top: 45px;
 }
 .mypage{
 	margin-top : 150px;

@@ -13,7 +13,7 @@
 }
 
 
-.next1{
+#1_btn{
   float:right;
   background-color: #4a7bf8;
   border-color: #4a7bf8;
@@ -23,11 +23,10 @@
   font-size: 16px;
 }
 
-#next1{
+#11_btn{
    margin-right: -35px; 
 }
-
-#next2, #next3{
+/* #11_btn{
    float: right;
    margin-right: -35px;
    float:right;
@@ -40,7 +39,7 @@
     height: 48px;
     margin-bottom: 20px;
 }
-
+ */
 #next4{
    background-color: #4a7bf8;
     border-color: #4a7bf8;
@@ -93,26 +92,6 @@
     margin-bottom: 20px;   
  }
 
-#addDistrict1{
-   margin-left: 150px;
-   margin-bottom: 10px;
-    background-color: #4a7bf8;
-    border-color: #4a7bf8;
-    color: #fff;
-    width: 35px;
-    height: 35px;
-   
-}
-
-#addDistrict2{
-   margin-left: 150px;
-   margin-bottom: 10px;
-    background-color: #4a7bf8;
-    border-color: #4a7bf8;
-    color: #fff;
-    width: 35px;
-    height: 35px;   
-}
 
 #large1{
    margin-top:6px;
@@ -199,7 +178,7 @@
    width: 600px;
    height: 550px;
    margin-left: 600px;
-   margin-top: 100px;
+   margin-top : -510px;
    text-align: center;
    back
 }
@@ -207,7 +186,7 @@
    width: 600px;
    height: 550px;
    margin-left: 600px;
-   margin-top: 100px;
+   margin-top: -510px;
    text-align: center;
    back
 }
@@ -227,6 +206,32 @@
 }
 
 #first_select_SWord{
+   text-align: left;
+
+}
+#second_select_LWord{
+   text-align: left;
+}
+
+#second_select_MWord{
+   text-align: left;
+}
+
+#second_select_SWord{
+	
+   text-align: left;
+
+}
+#third_select_LWord{
+	
+   text-align: left;
+}
+
+#third_select_MWord{
+   text-align: left;
+}
+
+#third_select_SWord{
    text-align: left;
 
 }

@@ -52,6 +52,7 @@
 	}
 	function onMessage(msg){
 		var data = msg.data;
+		$("#alarm").empty();
 		$("#alarm").append( msg.data);
 }
 
@@ -126,7 +127,7 @@ function onClose(evt){
                   <a href="/member/mypage/${loginUser.m_Id }"><span>프로필</span></a>
                </div>
                <div>
-                  <a href="/member/addInfo/${loginUser.m_Id }"><span>부가정보 입력</span></a>
+                  <a href="/member/addInfo"><span>부가정보 입력</span></a>
                </div>
 					<div>
 						<a href="/expert/listExpertFind"> <span>고수 찾기</span>
