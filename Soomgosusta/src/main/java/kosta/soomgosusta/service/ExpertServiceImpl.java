@@ -63,16 +63,13 @@ public class ExpertServiceImpl implements ExpertService {
 		String password = new String(decodeBytes, "UTF-8");
 	
 		System.out.println("=========login_service pass ========" + password);
-		if (loginDTO.getId().equals(expertVO.getE_Id()) && loginDTO.getPassword().equals(password)) {
+			if (loginDTO.getId().equals(expertVO.getE_Id()) && loginDTO.getPassword().equals(password)) {
 			loginDTO.setSuccess(0);
 			return loginDTO.getSuccess();
-		} else if (loginDTO.equals(expertVO.getE_Id())) {
+			} 	else {
 			loginDTO.setSuccess(1);
 			return loginDTO.getSuccess();
-		} else {
-			loginDTO.setSuccess(2);
-			return loginDTO.getSuccess();
-		}
+			} 
 
 		}else{
 			loginDTO.setSuccess(2);

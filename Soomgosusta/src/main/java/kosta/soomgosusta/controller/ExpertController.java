@@ -101,11 +101,13 @@ public class ExpertController {
 			model.addAttribute("loginDTO", loginDTO);
 			return "/expert/request/received";
 		} else if (success == 1) {
-			model.addAttribute("loginResult", "login fail");
+			model.addAttribute("expert", expertVO);
+			model.addAttribute("loginResult", success);
 			System.out.println("비밀번호 ");
 			return "/expert/login";
 		} else {
-			model.addAttribute("loginResult", "login fail");
+			model.addAttribute("expert", expertVO);
+			model.addAttribute("loginResult", success);
 			System.out.println("아이디가 존재하지 않습니다.");
 			return "/expert/login";
 		}
