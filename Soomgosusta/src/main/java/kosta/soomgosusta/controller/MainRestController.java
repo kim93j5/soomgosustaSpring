@@ -8,11 +8,15 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.mahout.cf.taste.impl.model.file.FileDataModel;
+import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
 import org.apache.mahout.cf.taste.impl.recommender.GenericItemBasedRecommender;
+import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;
 import org.apache.mahout.cf.taste.impl.similarity.LogLikelihoodSimilarity;
 import org.apache.mahout.cf.taste.model.DataModel;
+import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.similarity.ItemSimilarity;
+import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -65,23 +69,30 @@ public class MainRestController {
 
 			List<RequestVO> rlist = rservice.listAllRequestService();//전체 요청
 			List<RequestVO> list = rservice.listRequestService(id);//내 요청			
+			List<PartVO> plist = service.listPartService();
 			
 			BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\data\\member_rcm.csv"));		
-			HashMap<String, Integer> map = new HashMap<>();
 			
-			for(int i=0; i<rlist.size(); i++){
-				map.put(rlist.get(i).getM_Id(), i+1);
+			for(int i=0; i< plist.size(); i++){
+				for(int j=0; j<plist.size(); j++){
+					if(i != j){
+						if(plist.get(i).getP_L_Word().equals(plist.get(j).getP_L_Word())){
+							if(plist.get(i).getP_M_Word().equals(plist.get(j).getP_M_Word())){
+								//대,중 다 같을 때
+								bw.write(plist.get(i).getP_Seq()+","+plist.get(j).getP_Seq()+","+5+"\n");
+							}else{
+								//대만 같을 때
+								bw.write(plist.get(i).getP_Seq()+","+plist.get(j).getP_Seq()+","+3+"\n");
+							}
+						}else{
+							bw.write(plist.get(i).getP_Seq()+","+plist.get(j).getP_Seq()+","+1+"\n");
+						}
+					}
+				}
 			}
 
-			for(int i=0; i<rlist.size(); i++){
-				log.info("---");
-				
-				int id_num = map.get(rlist.get(i).getM_Id());
-				bw.write(id_num + "," + rlist.get(i).getP_Seq()+ "\n");
-			}
-			
 			bw.close();
-			List<Integer> recommendItems = recommend_service(map.get(list.get(0).getM_Id()));
+			List<Integer> recommendItems = recommend_service(list.get(0).getP_Seq());
 			
 			for(int i=0; i< recommendItems.size(); i++){
 				log.info(recommendItems.get(i));
@@ -95,20 +106,20 @@ public class MainRestController {
 		//데이터 모델
 		DataModel dm = new FileDataModel(new File("C:\\data\\member_rcm.csv"));
 		
-		//유사도
-		ItemSimilarity sim = new LogLikelihoodSimilarity(dm);
-		
-		//Item Based Recommender
-		GenericItemBasedRecommender recommender = new GenericItemBasedRecommender(dm, sim);
+		//유사도		
+		UserSimilarity sim = new LogLikelihoodSimilarity(dm);
+		UserNeighborhood neighborhood = new NearestNUserNeighborhood(1, sim, dm);
+
+		//User Based Recommender
+		GenericUserBasedRecommender recommender = new GenericUserBasedRecommender(dm, neighborhood, sim);
 		
 		long num = m_no;
+		log.info(num);
+		List<RecommendedItem> recommendations = recommender.recommend(num, 5);
 		
-		List<RecommendedItem> recommendations = recommender.mostSimilarItems(num, 1);
-		log.info("recom " + recommendations);
 		List<Integer> list = new ArrayList<>();
 		
 		for(RecommendedItem items: recommendations){
-			log.info("item " + items.getItemID());
 			list.add((int)items.getItemID());
 		}
 		log.info(list);
