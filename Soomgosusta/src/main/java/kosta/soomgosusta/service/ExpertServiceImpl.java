@@ -4,12 +4,15 @@ import java.io.UnsupportedEncodingException;
 import java.util.Base64;
 import java.util.Base64.Decoder;
 import java.util.Base64.Encoder;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kosta.soomgosusta.domain.E_FilesVO;
 import kosta.soomgosusta.domain.E_ProfileVO;
 import kosta.soomgosusta.domain.ExpertInfoVO;
 import kosta.soomgosusta.domain.ExpertVO;
@@ -57,18 +60,21 @@ public class ExpertServiceImpl implements ExpertService {
 
 		byte[] decodeBytes = decoder.decode(expertVO.getE_Password());
 		String password = new String(decodeBytes, "UTF-8");
-
+			
 		System.out.println("=========login_service pass ========" + password);
-		if (loginDTO.getId().equals(expertVO.getE_Id()) && loginDTO.getPassword().equals(password)) {
+		
+			if (loginDTO.getId().equals(expertVO.getE_Id()) && loginDTO.getPassword().equals(password)) {
 			loginDTO.setSuccess(0);
 			return loginDTO.getSuccess();
-		} else if (loginDTO.equals(expertVO.getE_Id())) {
+			}else if(loginDTO.getId().equals(expertVO.getE_Id())){
 			loginDTO.setSuccess(1);
 			return loginDTO.getSuccess();
-		} else {
+			}else{
 			loginDTO.setSuccess(2);
 			return loginDTO.getSuccess();
-		}
+			}
+		
+		
 
 	}
 
@@ -103,6 +109,24 @@ public class ExpertServiceImpl implements ExpertService {
 		// log.info("get...." + expert_Info);
 		mapper.insertExpertInfo(expert_Info);
 		mapper.countRegister(p_Seq);
+	}
+
+	@Override
+	public void uploadFile(E_FilesVO vo) {
+		mapper.uploadLicense(vo);
+		
+	}
+
+	@Override
+	public void licenseDelete(String ef_Uuid) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<E_FilesVO> getFileList(String e_Id) {
+		
+		return mapper.getFileList(e_Id);
 	}
 
 }

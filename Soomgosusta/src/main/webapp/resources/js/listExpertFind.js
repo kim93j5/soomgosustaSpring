@@ -7,9 +7,12 @@ var expertFindService = (function(){
 		var gugun = data.gugun;
 		var ser = data.ser;
 		var serviceInfo = data.serviceInfo;
+		var orderByEC= data.orderByEC;
+		var orderByRevC= data.orderByRevC;
+		var orderBySP = data.orderBySP;
 		
-		console.log(sido + " " + gugun + " " + ser + " " + serviceInfo);
-		$.getJSON("/listEF/list/"+sido+"/"+gugun+"/"+ser+"/"+serviceInfo , function(result){
+		console.log(sido + " " + gugun + " " + ser + " " + serviceInfo + " " + orderByEC + " " + orderByRevC + " " + orderBySP);
+		$.getJSON("/expert/list/"+sido+"/"+gugun+"/"+ser+"/"+serviceInfo+"/"+orderByEC+"/"+ orderByRevC+ "/" + orderBySP , function(result){
 			if(callback){
 				callback(result);
 			}

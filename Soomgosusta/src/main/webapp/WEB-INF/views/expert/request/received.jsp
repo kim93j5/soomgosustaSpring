@@ -165,8 +165,7 @@
 
 </head>
 <body>
-	세션 테스트
-	----------------------------------${loginUser.user_Divide},${loginUser.e_Id},${loginUser.e_Name}
+	
 	<div id="app-body">
 		<div class="page-header"></div>
 		<div class="page-body">
@@ -217,9 +216,7 @@
 
 							_pageHeader.html(header);
 
-							function transferTimeToString(time) {
-
-							}
+						
 
 							function transferTime(time) {
 								var now = new Date();

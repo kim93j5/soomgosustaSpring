@@ -14,13 +14,13 @@
 	</select>
 	
 	<delete id="delete">
-		delete from Review where re_seq = #{re_seq}
+		delete from Review where re_Seq = #{re_Seq}
 	</delete>
 	
 	<update id="update">
 		update Review set re_Date = sysdate, re_Contents = #{re_Contents},
 		 re_StarPoint = #{re_StarPoint}
-		 where re_Seq = #{re_seq}
+		 where re_Seq = #{re_Seq}
 	</update>
 	
 	<select id="getListWithPaging" resultType ="kosta.soomgosusta.domain.ReviewVO">

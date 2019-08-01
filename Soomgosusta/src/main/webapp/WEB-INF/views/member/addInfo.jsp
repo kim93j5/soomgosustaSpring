@@ -23,15 +23,16 @@ $('document').ready(function() {
        
     $("#1_btn").on("click", function getMWordsList(){
        var LWord = $('input:radio[id="large1"]:checked').val();
+       var m_Id = "<c:out value ='${loginUser.m_Id}'/>";
        console.log(LWord);
-       memberAddInfoService.getMWords(LWord, function(list){
+       memberAddInfoService.getMWords(m_Id,LWord, function(list){
              console.log(LWord);
              var str = "";
                  for(var i = 0, len = list.length||0;i<len;i++){
                        str+="<div id='first_select_MWord'>"
                        str += "<ul><li class ='listpart'><div class = 'radio_btn'><label><input name='medium1' id='medium1' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br></label></div></li></ul>";
                       
-                                 console.log(list[i]);
+                                // console.log(list[i]);
                  }
                 str += "<br><button type='button' id='pre1_btn'>이전</button>&nbsp;&nbsp;&nbsp;";
                         str += "<button type='button' id='next2_btn'>다음</button>";
@@ -162,8 +163,7 @@ $('document').ready(function() {
                  $("#third_select_MWord").after(str);
            });
    });
- 
-});
+}); 
 
  
       
@@ -200,47 +200,7 @@ $('document').ready(function() {
              </div>
        </div>		
        
-       <!-- <div role="tabpanel" class="tab-pane" id="category">
-			<h3>서비스 카테고리</h3>
-			<div class="tag-container">
 
-			</div>
-			<p class="strong">관심있는 분야를 선택해주세요!</p>
-			<div class="path">
-				<span id="id_path_category1" class="hide"></span> <span
-					id="id_path_category2" class="hide"></span> <span
-					id="id_path_service" class="hide"></span>
-			</div>
-			<div id="id_list_category1">
-
-				<div class="category1" data-category1="29" data-category1-label="레슨">
-					레슨</div>
-
-				<div class="category1" data-category1="30"
-					data-category1-label="홈 리빙">홈/리빙</div>
-
-				<div class="category1" data-category1="31"
-					data-category1-label="이벤트">이벤트</div>
-
-
-
-				<div class="category1" data-category1="33"
-					data-category1-label="디자인/개발">디자인/개발</div>
-
-				<div class="category1" data-category1="34"
-					data-category1-label="건강/미용">건강/미용</div>
-
-				<div class="category1" data-category1="36" data-category1-label="알바">
-					알바</div>
-
-				<div class="category1" data-category1="35" data-category1-label="기타">
-					기타</div>
-
-			</div>
-			<ul id="id_list_category2" class="list-group hide"></ul>
-			<ul id="id_list_service" class="list-group hide"></ul>
-		</div><br><br><br> -->
-       
        </form>
 </body>
 </html>

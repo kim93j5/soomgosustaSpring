@@ -90,5 +90,4 @@
 	   <result column="pl_request" property="pl_Request"/>
 	</resultMap>	
 	
-	
 </mapper>

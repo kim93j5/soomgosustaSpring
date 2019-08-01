@@ -1,6 +1,7 @@
 @CHARSET "UTF-8";
 /* 
 .navbar-nav ui{
+<<<<<<< HEAD
    display: inline;
 }
  */
@@ -28,4 +29,5 @@
    padding-bottom: 40px;
    border-bottom: 1px solid;
    border-color: #e8e7e6;
+	display: inline;
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kosta.soomgosusta.domain.AlarmVO;
@@ -21,9 +22,8 @@ import lombok.extern.log4j.Log4j;
 public class LinkController {
 	private LinkService service;
 	private AlarmService alarmService;
-	@RequestMapping("/match")
-	public String getMatchPercent() {
-		String m_Id = "yena2@naver.com";
+	@RequestMapping("/match/{m_Id}")
+	public String getMatchPercent(@PathVariable("m_Id") String m_Id) {
 		RequestVO requestInfo = service.getRequestInfoService(m_Id);
 		int p_Seq = requestInfo.getP_Seq();
 		String r_Time = requestInfo.getR_QA_12();

@@ -1,5 +1,7 @@
 package kosta.soomgosusta.service;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,6 +13,7 @@ import kosta.soomgosusta.domain.AnswerVO;
 import kosta.soomgosusta.domain.BestDTO;
 import kosta.soomgosusta.domain.PartVO;
 import kosta.soomgosusta.domain.QuestionVO;
+import kosta.soomgosusta.domain.RequestVO;
 import kosta.soomgosusta.mapper.PartMapper;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -25,7 +28,7 @@ public class PartServiceImpl implements PartService {
 	
 	@Override
 	public List<PartVO> detailPartService(String data){
-		
+		log.info(mapper.detailPart(data));
 		return mapper.detailPart(data);
 	}
 	
@@ -102,7 +105,8 @@ public class PartServiceImpl implements PartService {
 
 	@Override
 	public List<String> listPopularService() {
-
+		List<String> list = mapper.listPopular();
+		log.info(list);
 		return mapper.listPopular();
 	}
 
@@ -111,5 +115,6 @@ public class PartServiceImpl implements PartService {
 		
 		return mapper.listBest();
 	}
+
 
 }

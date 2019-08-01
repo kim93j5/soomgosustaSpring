@@ -92,8 +92,8 @@ public class MemberController {
 		
 	}
 	
-	@GetMapping("/addInfo/{m_Id:@+}")
-	public void getMemberAddInfo(@PathVariable("m_Id") String m_Id,Model model){
+	@GetMapping("/addInfo/{m_Id:.+}")
+	public String getMemberAddInfo(@PathVariable("m_Id") String m_Id,Model model){
 		List<PartVO> partList = partService.listPartService();
 		List<String> lWord = new ArrayList<>();
 		for(int i=0;i<partList.size();i++){
@@ -102,15 +102,14 @@ public class MemberController {
 			if(!lWord.contains(part.getP_L_Word())){
 				lWord.add(part.getP_L_Word());
 			}
-
 		}
-		
 		model.addAttribute("large", lWord);
 		model.addAttribute("m_Id",m_Id);
+		return "/member/addInfo";
 	}
 	
-	@GetMapping("/mypage/{m_Id:@+}")
-	public void mypage(@PathVariable("m_Id") String m_Id, Model model){
+	@GetMapping("/mypage/{m_Id:.+}")
+	public String mypage(@PathVariable("m_Id") String m_Id, Model model){
 		MemberMypageDTO myInfo = service.getMemberMypageInfo(m_Id);
 		
 		int ip1 = myInfo.getM_Ip1();
@@ -127,7 +126,7 @@ public class MemberController {
 		model.addAttribute("myPart2", ip02);
 		model.addAttribute("myPart3", ip03);
 		model.addAttribute("mypageInfo",service.getMemberMypageInfo(m_Id));
-		
+		return "/member/mypage";
 	}
 	
 	
