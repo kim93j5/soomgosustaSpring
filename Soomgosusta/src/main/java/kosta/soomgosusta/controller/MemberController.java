@@ -58,7 +58,7 @@ public class MemberController {
 		service.register(memberVO);
 		
 		
-		return "redirect:/member/login";
+		return "redirect:/member/addInfo";
 	}
 	@GetMapping("/login")
 	public String login(){
@@ -126,21 +126,6 @@ public class MemberController {
 		
 	}
 	
-	@PostMapping("/sendRequest")
-	public void getMemberAddInfo(@RequestParam("large1") String p_L_Word1,@RequestParam("medium1") String p_M_Word1,
-			@RequestParam("small1") String p_S_Word1, @RequestParam("large2") String p_L_Word2,@RequestParam("medium2") String p_M_Word2,
-			@RequestParam("small2") String p_S_Word2, @RequestParam("large3") String p_L_Word3,@RequestParam("medium3") String p_M_Word3,
-			@RequestParam("small3") String p_S_Word3, MemberInfoVO memberAddInfo){
-			int seq1 = service.getPSeq(p_L_Word1, p_M_Word1, p_S_Word1);
-			int seq2 = service.getPSeq(p_L_Word2, p_M_Word2, p_S_Word2);
-			int seq3 = service.getPSeq(p_L_Word3, p_M_Word3, p_S_Word3);
-		
-		memberAddInfo.setM_Id("yenano124");
-		memberAddInfo.setM_Ip1(seq1);
-		memberAddInfo.setM_Ip2(seq2);
-		memberAddInfo.setM_Ip3(seq3);
-		service.insertMemberAddInfo(memberAddInfo);
-	}
 	
 	@PostMapping(value="/mypage", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody

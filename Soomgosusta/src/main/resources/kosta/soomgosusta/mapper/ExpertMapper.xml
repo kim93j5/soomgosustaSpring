@@ -44,11 +44,7 @@
 	<delete id="licenseDelete">
 		delete from E_Files where ef_Uuid=#{ef_Uuid}
 	</delete>
-	
-	<select id="findLicense">
-	select * from E_Files where e_Id = #{e_Id} and ef_From ='license'
-	</select>
-	
+		
 	<select id="getFileList" parameterType="String" resultType="kosta.soomgosusta.domain.E_FilesVO">
 	 select * from E_Files where e_Id= #{e_Id} and ef_From = 'license'
 	</select>

@@ -38,7 +38,7 @@ scheduleService.getList(e_Id, function(list){
 	}
  	 
 	 var profile = "";
-	 profile += '<div id="photo"><img src="/resources/images/' + list.expert.e_Photo + '"></div>';
+	 profile += '<div id="photo"><img src="/upload/profile/' + list.expert.e_Photo + '"></div>';
 	 profile += '<div id="info"><p><strong>' + list.expert.e_Name + '</strong> 고수<p>';	 
 	 profile += '<p>'+ list.part.p_S_Word + ' 서비스</p>';
 	 profile += '<p>'+list.exInfo.ei_District + '<p>';
