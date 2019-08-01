@@ -88,7 +88,7 @@ public class ExpertController {
 	}
 
 	@PostMapping("/login")
-	public String login(LoginDTO loginDTO, Model model) throws UnsupportedEncodingException {
+	public String login(LoginDTO loginDTO, Model model, HttpSession session) throws UnsupportedEncodingException {
 
 		String login_Id = loginDTO.getId();
 
@@ -98,6 +98,7 @@ public class ExpertController {
 
 		if (success == 0) {
 			model.addAttribute("expertVO", expertVO);
+			session.setAttribute("login", login_Id);
 			return "/expert/request/received";
 		} else if (success == 1) {
 			model.addAttribute("loginResult", success);

@@ -9,9 +9,59 @@
 	href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
 <script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
 <script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+<!-- <script type="text/javascript" src="/resources/js/socket.js"></script> -->
 <link rel="stylesheet" href="/resources/css/header.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>Insert title here</title>
+   <script type="text/javascript">
+	
+   var ws = new WebSocket("ws://localhost:8081/alarm/websocket");
+	
+	$(document).ready(function(){
+		
+		send_message();
+		//$('#count').css('display','none');
+		
+		 $("#alarm").on("click","#count" ,function getAlarmList(){
+			 
+			 $('#getAlarmList').toggle();
+		 });
+
+	});
+	
+	function send_message() {
+		
+		ws.onopen = function(evt) {
+	        onOpen(evt);
+	    };
+	    ws.onmessage = function(evt) {
+	        onMessage(evt);
+	    };
+	    ws.onerror = function(evt) {
+	        onError(evt);
+	    };
+	    ws.onclose = function(evt) {
+	    	onClose(evt);
+	    };
+	}
+	function onOpen(evt) 
+	{
+		console.log("아아");
+		ws.send("안녕하세요........");
+	}
+	function onMessage(msg){
+		var data = msg.data;
+		$("#alarm").append( msg.data);
+}
+
+function onClose(evt){
+	console.log("안녕");
+}
+
+
+
+    </script>
 
 </head>
 <body>
@@ -46,6 +96,9 @@
 					</div>
 				</div>
 				<div class="right_">
+				<div id="alarm">
+                 	알림
+               </div>
 					<div>
 						<span>"${loginUser.e_Name}"고수님</span>
 					</div>
@@ -69,9 +122,12 @@
 								요청</span>
 						</a>
 					</div>
-					<div>
-						<a href="memberMyPage.do?member_Id=${id }"><span>프로필</span></a>
-					</div>
+					 <div>
+                  <a href="/member/mypage/${loginUser.m_Id }"><span>프로필</span></a>
+               </div>
+               <div>
+                  <a href="/member/addInfo/${loginUser.m_Id }"><span>부가정보 입력</span></a>
+               </div>
 					<div>
 						<a href="/expert/listExpertFind"> <span>고수 찾기</span>
 						</a>
@@ -82,6 +138,9 @@
 					</div>
 				</div>
 				<div class="right_">
+				<div id="alarm">
+                 	알림
+               </div>
 					<div>
 						<span>"${loginUser.m_Name}"고객님</span>
 					</div>
@@ -92,6 +151,7 @@
 			</c:when>
 			<c:otherwise>
 				<div class="left_">
+				
 					<div>
 						<a href="/main/mainPage"> <img
 							src="https://dmmj3ljielax6.cloudfront.net/static/img/home/index_soomgo_logo.svg"
@@ -118,7 +178,6 @@
 				</div>
 			</c:otherwise>
 		</c:choose>
-						
 	</div>
 </body>
  <script>
@@ -131,7 +190,7 @@
 
 	         } else if (state == "expert") {
 	            var str = '<a href="' + "/expert/login" + '">로그인</a>';
-	            $('#loginteg').html(str); //add loginteg html source
+	            $('#loginteg').html(str); 
 
 	         }
 
