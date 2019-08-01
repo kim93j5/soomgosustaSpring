@@ -16,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -104,9 +105,9 @@ public class MemberController {
 		model.addAttribute("large", lWord);
 	}
 	
-	@GetMapping("/mypage")
-	public void mypage(/*@RequestParam("m_Id") String m_Id,*/ Model model){
-		String m_Id = "yena@naver.com";
+	@GetMapping("/mypage/{m_Id}")
+	public void mypage(@PathVariable("m_Id") String m_Id, Model model){
+		//String m_Id = "yena@naver.com";
 		MemberMypageDTO myInfo = service.getMemberMypageInfo(m_Id);
 		
 		int ip1 = myInfo.getM_Ip1();

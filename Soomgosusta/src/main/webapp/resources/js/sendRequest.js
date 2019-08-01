@@ -26,16 +26,16 @@ $(document).ready(function(){
    $('#recommend').slick({
   	  slidesToShow: 4,
   	  slidesToScroll: 1,
-  	  //autoplay: true,
+  	  autoplay: true,
   	  pauseOnHover:true,
-  	  //autoplaySpeed: 2000,
+  	  autoplaySpeed: 3000,
   });
    
    $('#bestPopular').slick({
 	  	  slidesToShow: 4,
 	  	  slidesToScroll: 1,
-	  	  //autoplay: true,
-	  	  //autoplaySpeed: 2000,
+	  	  autoplay: true,
+	  	  autoplaySpeed: 3000,
 	      pauseOnHover:true,
 	  });
 
@@ -63,7 +63,9 @@ var requestService = (function(){
 		});
 	}
 	
+	
 	function getList(m_Id, callback, error){
+		console.log(m_Id);
 		$.getJSON("/requestStatus/getList/" + m_Id + ".json", function(data){
 			if(callback){
 				callback(data);

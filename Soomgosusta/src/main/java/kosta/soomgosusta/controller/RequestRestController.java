@@ -1,7 +1,10 @@
 package kosta.soomgosusta.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDateTime;
@@ -17,10 +20,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import kosta.soomgosusta.domain.AnswerVO;
+import kosta.soomgosusta.domain.LoginDTO;
 import kosta.soomgosusta.domain.MemberMainDTO;
+import kosta.soomgosusta.domain.PartVO;
+import kosta.soomgosusta.domain.QnaDTO;
+import kosta.soomgosusta.domain.QuestionVO;
 import kosta.soomgosusta.domain.RequestDTO;
 import kosta.soomgosusta.domain.RequestDetailDTO;
 import kosta.soomgosusta.domain.RequestVO;
+import kosta.soomgosusta.service.PartService;
 import kosta.soomgosusta.service.RequestService;
 import lombok.extern.log4j.Log4j;
 
@@ -30,7 +39,38 @@ import lombok.extern.log4j.Log4j;
 public class RequestRestController {
 	@Autowired
 	private RequestService service;
+	@Autowired
+	private PartService partservice;
+	
+	@GetMapping(value="/listQNA/{data}", produces= {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public QnaDTO getQNA(@PathVariable("data") String data){
 
+		QnaDTO qnaList = new QnaDTO();
+		
+		HashMap<String, String> searchMap = new HashMap<>();
+
+		PartVO searchPart = partservice.listSearchInfoService(data);
+
+		if (searchPart != null) {
+			qnaList.setSearchPart(searchPart);
+			
+			searchMap.put("large", "%" + searchPart.getP_L_Word() + "%");
+			searchMap.put("middle", "%" + searchPart.getP_M_Word() + "%");
+			searchMap.put("small", "%" + searchPart.getP_S_Word() + "%");
+
+			List<QuestionVO> listQ = partservice.listQuestionService(searchMap, searchPart.getP_Seq());
+			List<AnswerVO> listA = partservice.listAnswerService(listQ);
+
+			qnaList.setListQ(listQ);
+			qnaList.setListA(listA);
+			qnaList.setSize(1);
+
+		} else {
+			qnaList.setSize(0);
+		}
+		return qnaList;
+	}
+	
 	@GetMapping(value = "/cancel/{r_Seq}")
 	public int cancel(@PathVariable("r_Seq") int r_Seq) {
 
@@ -41,10 +81,9 @@ public class RequestRestController {
 	@GetMapping(value = "/getList/{m_Id}", produces = { MediaType.APPLICATION_XML_VALUE,
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public MemberMainDTO getList(@PathVariable("m_Id") String m_Id) {
-
 		MemberMainDTO memberMain = new MemberMainDTO();
 		
-		String nowTime = LocalDateTime.now().toString("yyyy-MM-dd HH:mm:ss");
+		String nowTime = LocalDateTime.now().toString("yyyy-MM-dd");
 		//log.info("현재시간" +nowTime);
 	    List<RequestVO> listSendRequest = service.listRequestService(m_Id);
 		List<RequestDTO> listPartRequest = new ArrayList<RequestDTO>();
@@ -52,7 +91,7 @@ public class RequestRestController {
 
 		for (int i = 0; i < listSendRequest.size(); i++) {
 			DateTime dt = new DateTime(listSendRequest.get(i).getR_Date());
-			DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+			DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd");
 			RequestDTO requestDTO = new RequestDTO();
 
 			String requestTime = dt.toString(fmt);

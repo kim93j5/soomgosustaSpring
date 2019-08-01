@@ -8,15 +8,14 @@
 </header>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<script type="text/javascript" src="../resources/js/jquery.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="/resources/js/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/expertInfo.js"></script>
 <link rel="stylesheet" href="/resources/css/expertInfo.css" target="text/css">
 <link rel="stylesheet" href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
 <script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
 <script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">    -->
+
 <title>Insert title here</title>
 <style type="text/css">
 @import url(//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
@@ -53,7 +52,7 @@ li {
 
 </style>
 </head>
-<body style="background-color: PowderBlue">
+<body>
 
    <!----------------------- 활동가능 지역 ------------------------>
    <script type="text/javascript">

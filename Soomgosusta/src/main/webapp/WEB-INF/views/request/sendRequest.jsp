@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
 <script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
 <script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/resources/plugin/slick/slick.min.js"></script> 
+<script type="text/javascript" src="/resources/plugin/slick/slick.js"></script> 
 
 <style type="text/css">
 @import url(//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
@@ -64,9 +64,10 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
       //console.log(r_Seq);
       requestService.cancel(r_Seq, function(result){
     	console.log(result);  
-    	
     	$('#sendRequestForm').empty();
-    	   requestService.getList("m_Id",
+
+    	   requestService.getList(m_Id,
+
                    function(list) {
 
                       var str = "";
@@ -78,7 +79,7 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
                             str += '<div id = "sendPart"><br>';
                             str += '<h5>' + list.requestDTO[i].p_S_Word
                                   + '</h5>';
-                            str += '<p style = "font-size : 16px">요청시간<br><' + list.requestDTO[i].requestTime +'></p></div>';
+                            str += '<p style = "font-size : 16px">요청날짜<br><' + list.requestDTO[i].requestTime +'></p></div>';
                             str += '<div id = "sendTime"><br>';
                             
                             if(list.requestDTO[i].nowTime > list.requestDTO[i].endTime && list.request[i].r_Status == 'ING') {
@@ -206,7 +207,8 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
       });
    });
 
-   requestService.getList("m_Id",
+   requestService.getList(m_Id,
+
                function(list) {
 
                   var str = "";
@@ -337,7 +339,7 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
                   }
                   
                 }else if(list.size == 0){
-                     str += '<h3 style = "margin-top:40px; margin-left:-1240px; font-size:16px;">아직 요청서를 작성하지 않으셨습니다. <a href ="/main/mainPage">요청 보내기</a></h3>';
+                     str += '<h3 style = "margin-top:40px; margin-left:-1080px; font-size:16px;">아직 요청서를 작성하지 않으셨습니다. <a href ="/main/mainPage">요청 보내기</a></h3>';
                      }
                    
                   
@@ -348,7 +350,7 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
                });
 </script>
 
-<body style="background-color: PowderBlue">
+<body>
    <div class="send">
       <h1 style="font-size: 30px; font-weight: bold;">보낸 요청</h1>
    </div>
@@ -376,39 +378,40 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
    <h1 style="font-size: 30px; font-weight: bold;">추천서비스<br></h1>
    </div> 
    
-   
-<!--    <div id="button">
-   <button type="button" id="recommend_btn">관심분야순</button>
-   <button type="button" id="best_btn">인기순</button>
-   </div> -->
-   
-   
     <div id="recommend">
      <c:forEach var="list" begin="1" end="8" items="${listRandom}">
         <div id="recommendService">
         
-             <a href="#">
-                <img class="img" src="/resources/images/${list.p_Image }"><br>
-                <b>${list.p_S_Word }</b>          
+             <a href="/request/listQNA/${list.p_S_Word }">
+                <img class="img" src="/resources/images/${list.p_Image }"><br>         
              </a>     
+             <div class="caption" style="margin-top: -5px;">            
+                    <p>${list.p_S_Word }</p>          
+             </div>
 
        </div>
      </c:forEach>
     </div>  
     
-    <div id="best">
-    <h4 style="font-size: 30px; font-weight: bold;">인기서비스</h4>
+    <div id="best" style="margin-left: 360px;">
+    <h1 style="font-size: 30px; font-weight: bold;">인기서비스<br></h1>
     </div> 
     <div id="bestPopular">
       <c:forEach var="listBest" begin="1" end="8" items="${listBest }">
         <div id="recommendService">
-          <a href="#">
-              <img class="img" src="/resources/images/${listBest.p_Image }">
-                <b style= "color: #4d4d4d; font-weight: 500;">${listBest.p_S_Word }</b>          
-          </a>     
+              <a href="/request/listQNA/${listBest.p_S_Word }">
+                 <img class="img" src="/resources/images/${listBest.p_Image }"> 
+              </a>
+             <div class="caption" style="margin-top: 14px;">
+                  <p>${listBest.p_S_Word }</p>          
+             </div>     
         </div>
       </c:forEach>
     </div>
+    
+<%--     <footer>
+		<jsp:include page="../includes/footer.jsp"></jsp:include>
+	</footer> --%>
     
 </body>
 </html>

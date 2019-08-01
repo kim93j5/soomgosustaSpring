@@ -82,11 +82,11 @@ public class ReviewRestController {
 	}
 
 	@RequestMapping(method = { RequestMethod.PUT,
-			RequestMethod.PATCH }, value = "/{rno}", consumes = "application/json", produces = {
+			RequestMethod.PATCH }, value = "/{re_Seq}", consumes = "application/json", produces = {
 					MediaType.TEXT_PLAIN_VALUE })
-	public ResponseEntity<String> modify(@RequestBody ReviewVO vo, @PathVariable("re_seq") int re_seq) {
-		vo.setRe_Seq(re_seq);
-		log.info("수정할 re_seq:" + re_seq);
+	public ResponseEntity<String> modify(@RequestBody ReviewVO vo, @PathVariable("re_Seq") int re_Seq) {
+		vo.setRe_Seq(re_Seq);
+		log.info("수정할 re_seq:" + re_Seq);
 		return service.modify(vo) == 1 ? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}

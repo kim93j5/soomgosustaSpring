@@ -19,14 +19,14 @@
 .slick-prev,
 .slick-next
 {
-    font-size: 20px;
+    font-size: 100px;
     line-height: 0;
 
     position: absolute;
-    top: 50%;
-
+    top: 40%;
+    margin-left: 20px;
     display: block;
-
+    margin-right:10px;
     width: 30px;
     height: 30px;
     padding: -50px;;
