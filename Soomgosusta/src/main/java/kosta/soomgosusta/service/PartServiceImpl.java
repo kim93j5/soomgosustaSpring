@@ -1,7 +1,5 @@
 package kosta.soomgosusta.service;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.List;
 
@@ -62,12 +60,11 @@ public class PartServiceImpl implements PartService {
 		return mapper.listSearchInfo(searchKey);
 	}
 
-	@Transactional
 	@Override
 	public List<QuestionVO> listQuestionService(HashMap<String, String> searchMap, int p_Seq) {
-
-		mapper.updateSearchLog(p_Seq);
-		
+		log.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		//mapper.updateSearchLog(p_Seq);
+		log.info("map: " + searchMap);
 		return mapper.listQuestion(searchMap);
 	}
 

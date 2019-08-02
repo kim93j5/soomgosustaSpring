@@ -173,6 +173,10 @@ $(document).ready(function(){
                <div>
                   <a id="logout" href="/main/logout"><span>로그아웃</span></a>
                </div>
+               <div>
+               	<a id="my" href="#">My 고수</a>
+               	<div id="myexpert" style="display: none;"></div>
+               </div>
             </div>
          </c:when>
          <c:otherwise>

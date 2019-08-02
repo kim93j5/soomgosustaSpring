@@ -3,7 +3,7 @@ var partService = (function(){
 	function getQNA(data, callback, error){
 		console.log("getPart..............");
 		
-		$.getJSON("/requestStatus/listQNA/"+data+".json", function(result){
+		$.getJSON("/requestStatus/listQNA2/"+data+".json", function(result){
 			if(callback){
 				callback(result);
 			}

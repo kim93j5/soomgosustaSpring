@@ -38,7 +38,7 @@ public class RequestController {
 
    @GetMapping("/listQNA/{searchKey}")
    public String listQNA(@PathVariable("searchKey") String searchKey, Model model) {
-      
+      log.info(searchKey);
       model.addAttribute("searchKey", searchKey);
       return "/request/listQNA";
    }
@@ -49,6 +49,7 @@ public class RequestController {
          @RequestParam("sido") List<String> sido, @RequestParam("gugun") List<String> gugun,
          @RequestParam("date") String date, @RequestParam("time") List<String> time, @RequestParam("gen") String gen,
          @RequestParam("phoneNum") String phoneNum, @RequestParam("id") String m_Id, @RequestParam(value="selday", required=false, defaultValue="none") String selday) {
+
 
       List<QuestionVO> listQuestion = service.listQuestionService(listQ);
       List<AnswerVO> listAnswer = service.listAnswerService(listA);
