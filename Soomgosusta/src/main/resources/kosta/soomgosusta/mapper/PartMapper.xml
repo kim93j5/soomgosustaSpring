@@ -36,9 +36,9 @@
 
 	<select id="listQuestion" parameterType="hashmap" resultType="kosta.soomgosusta.domain.QuestionVO">
 		SELECT * FROM QUESTION
-		WHERE Q_DIVIDE = #{large}
-		OR Q_DIVIDE = #{middle}
-		OR Q_DIVIDE = #{small}
+		WHERE Q_DIVIDE LIKE #{large}
+		OR Q_DIVIDE LIKE #{middle}
+		OR Q_DIVIDE LIKE #{small}
 	</select>
 	
 	<select id="listAnswer" parameterType="hashmap" resultType="kosta.soomgosusta.domain.AnswerVO">

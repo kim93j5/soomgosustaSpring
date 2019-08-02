@@ -61,7 +61,7 @@
 	</select>
 	
 	<insert id="insertSchedule" parameterType="kosta.soomgosusta.domain.ScheduleVO">
-		INSERT INTO SCHEDULE VALUES(SCHEDULE_SEQ.CURRVAL, #{s_Contents}, #{s_Sd}, #{s_Ed}, #{s_Place}, #{s_Color}, #{s_Memo}, #{m_Seq})
+		INSERT INTO SCHEDULE VALUES(#{s_Seq}, #{s_Contents}, #{s_Sd}, #{s_Ed}, #{s_Place}, #{s_Color}, #{s_Memo}, #{m_Seq})
 	</insert>
 	
 	<select id="detailPart" parameterType="String" resultType="kosta.soomgosusta.domain.PartVO">
@@ -153,14 +153,14 @@
 		WHERE M_ID = #{m_Id} AND P_SEQ= #{p_Seq}
 	</update>
 	
-	<select id="detailFaqAlarm">
+	<select id="detailFaqAlarm" resultType="kosta.soomgosusta.domain.MatchVO">
 		SELECT * FROM MATCH m
 		JOIN SCHEDULE s
 		ON s.S_SEQ = m.M_SEQ
 		WHERE s.S_SEQ = #{s_Seq}
 	</select>
 	
-	<select id="detailRPAlarm">
+	<select id="detailRPAlarm" resultType="kosta.soomgosusta.domain.MatchVO">
 		SELECT * FROM MATCH m
 		JOIN SCHEDULE S
 		ON s.S_SEQ = m.M_SEQ

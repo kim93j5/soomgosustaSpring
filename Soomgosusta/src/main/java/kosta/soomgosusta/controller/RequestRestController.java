@@ -67,25 +67,33 @@ public class RequestRestController {
 	
 	
 	
-	@GetMapping(value="/listQNA/{data}", produces= {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE})
+	@GetMapping(value="/listQNA2/{data}", produces= {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public QnaDTO getQNA(@PathVariable("data") String data){
-
+		log.info("data : " + data);
+		
 		QnaDTO qnaList = new QnaDTO();
 		
 		HashMap<String, String> searchMap = new HashMap<>();
 
 		PartVO searchPart = partservice.listSearchInfoService(data);
-
+		log.info("searchPart: " +searchPart);
 		if (searchPart != null) {
+			log.info("----------");
 			qnaList.setSearchPart(searchPart);
 			
 			searchMap.put("large", "%" + searchPart.getP_L_Word() + "%");
 			searchMap.put("middle", "%" + searchPart.getP_M_Word() + "%");
 			searchMap.put("small", "%" + searchPart.getP_S_Word() + "%");
 
+			log.info(searchMap);
+			log.info("p_seq: " +searchPart.getP_Seq());
 			List<QuestionVO> listQ = partservice.listQuestionService(searchMap, searchPart.getP_Seq());
+			log.info(listQ);
+			
 			List<AnswerVO> listA = partservice.listAnswerService(listQ);
 
+			log.info(listQ);
+			log.info(listA);
 			qnaList.setListQ(listQ);
 			qnaList.setListA(listA);
 			qnaList.setSize(1);

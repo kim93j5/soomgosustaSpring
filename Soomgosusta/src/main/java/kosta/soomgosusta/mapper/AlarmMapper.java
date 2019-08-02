@@ -14,4 +14,5 @@ public interface AlarmMapper {
 	public int insertIQAlarm(@Param("m_Id") String m_Id, @Param("e_Id") String e_Id);
 	public int insertRPAlarm(@Param("m_Id") String m_Id, @Param("e_Id") String e_Id);
 	public int alarmCheckUpdate(int al_Seq);
+
 }

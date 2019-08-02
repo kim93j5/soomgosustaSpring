@@ -6,7 +6,7 @@
 
 	<insert id="register">
 		insert into Expert values(#{e_Id},#{e_Password},
-		'expert','default_userImg','address',0,#{e_Name})
+		'expert','default_userImg.png','address',0,#{e_Name})
 	</insert>
 	
 	<select id="login" parameterType="String" resultType="kosta.soomgosusta.domain.ExpertVO">
