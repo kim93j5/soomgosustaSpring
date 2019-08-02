@@ -147,14 +147,14 @@ var calendar = $('#calendar').fullCalendar({
 					var content = list[i].f_Contents.split('<br>').join("\r\n");
     				
 					str += '<div class="faq">';
-					str += '<div class="faq-photo"><img src="/resources/images/'+ list[i].m_Photo +'"></div>';
+					str += '<div class="faq-photo"><img src="/upload/profile/'+ list[i].m_Photo +'"></div>';
 					str += '<div class="faq-name">'+list[i].m_Name+'</div>';
 					str += '<div class="faq-date">'+list[i].f_Date+'</div>';
 					str += '<div class="faq-contents">'+ content + '</div>';
 					
 					for(var j=0, len2 = list[i].listReply.length||0; j<len2; j++){
 						str += '<div class="reply" style="margin-left: 50px;">';
-						str += '<div class="reply-photo"><img src="/resources/images/'+ list[i].e_Photo + '"></div>';
+						str += '<div class="reply-photo"><img src="/upload/profile/'+ list[i].e_Photo + '"></div>';
 						str += '<div class="reply-name">'+ list[i].e_Name + '</div>';
 						str += '<div class="reply-date">'+ list[i].listReply[j].sr_Date + '</div>';
 						str += '<div class="reply-contents">'+ list[i].listReply[j].sr_Contents + '</div></div>';

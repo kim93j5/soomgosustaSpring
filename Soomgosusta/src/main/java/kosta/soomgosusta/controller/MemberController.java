@@ -94,7 +94,7 @@ public class MemberController {
 		if(success==0){
 			model.addAttribute("member", memberVO);
 			session.setAttribute("login", login_Id);
-			return "/main/mainPage";
+			return "/request/sendRequest";
 		}else if(success==1){
 			System.out.println("비밀번호 ");
 			model.addAttribute("loginResult","login fail");
