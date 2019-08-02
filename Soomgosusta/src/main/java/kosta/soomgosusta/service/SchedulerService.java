@@ -8,6 +8,7 @@ import kosta.soomgosusta.domain.ExpertVO;
 import kosta.soomgosusta.domain.FaqDTO;
 import kosta.soomgosusta.domain.FaqVO;
 import kosta.soomgosusta.domain.MScheduleInfoDTO;
+import kosta.soomgosusta.domain.MatchVO;
 import kosta.soomgosusta.domain.SC_ReplyVO;
 import kosta.soomgosusta.domain.ScheduleInfoDTO;
 import kosta.soomgosusta.domain.ScheduleVO;
@@ -25,9 +26,11 @@ public interface SchedulerService {
 	List<SC_ReplyVO> listReply(int f_Seq);
 	public int insertReplyService(SC_ReplyVO reply);
 	public int updateMatchService(HashMap<String, Object> map);
+	public MatchVO detailFaqAlarmService(int s_Seq);
 	
 	//이용자 일정페이지
 	public MScheduleInfoDTO listMSchedule(String e_Id);
 	public List<String> listExpert(String m_Id);
 	public int insertFaq(FaqVO faq);
+	public MatchVO detailRPAlarmService(int sr_Seq);
 }

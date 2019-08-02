@@ -10,6 +10,7 @@ import kosta.soomgosusta.domain.ExpertVO;
 import kosta.soomgosusta.domain.FaqDTO;
 import kosta.soomgosusta.domain.FaqVO;
 import kosta.soomgosusta.domain.MatchListDTO;
+import kosta.soomgosusta.domain.MatchVO;
 import kosta.soomgosusta.domain.PartVO;
 import kosta.soomgosusta.domain.SC_ReplyVO;
 import kosta.soomgosusta.domain.ScheduleVO;
@@ -34,4 +35,6 @@ public interface SchedulerMapper {
 	List<MatchListDTO> listMatch(String e_Id);
 	int updateMatch(HashMap<String, Object> map);
 	int updateRequest(HashMap<String, Object> map);
+	MatchVO detailFaqAlarm(int s_Seq);
+	MatchVO detailRPAlarm(int sr_Seq);
 }

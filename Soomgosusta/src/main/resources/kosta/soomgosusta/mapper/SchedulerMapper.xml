@@ -153,5 +153,21 @@
 		WHERE M_ID = #{m_Id} AND P_SEQ= #{p_Seq}
 	</update>
 	
-
+	<select id="detailFaqAlarm">
+		SELECT * FROM MATCH m
+		JOIN SCHEDULE s
+		ON s.S_SEQ = m.M_SEQ
+		WHERE s.S_SEQ = #{s_Seq}
+	</select>
+	
+	<select id="detailRPAlarm">
+		SELECT * FROM MATCH m
+		JOIN SCHEDULE S
+		ON s.S_SEQ = m.M_SEQ
+		JOIN FAQ f
+		ON s.S_SEQ = f.S_SEQ
+		JOIN SC_REPLY sc
+		ON f.F_SEQ = sc.SR_SEQ
+		WHERE sc.SR_SEQ = #{sr_Seq}
+	</select>
 </mapper>

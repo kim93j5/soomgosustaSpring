@@ -65,18 +65,17 @@ var partService = (function(){
 $(document).ready(function(){
 	$('#searchKey').on('focus', function(){
 		$('#searchresults').show();
-	})
+	});
 	
 	$('#divclose').on('click', function(){
 		$('#searchresults').hide();
-	})
-	
-	$('.recommend').slick({
-		slidesToShow: 4,
-		slidesToScroll: 1,
-		autoplay: true,
-		pauseOnHover: true,
-		autoplaySpeed: 3000,
 	});
+	
+	$('#p2').slick({
+		slidesToShow:1,
+		slidesToScroll: 1,
+		dots: true,
+	})
+
 })
 

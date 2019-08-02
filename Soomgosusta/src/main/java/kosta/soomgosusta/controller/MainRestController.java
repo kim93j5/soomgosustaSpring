@@ -157,6 +157,22 @@ public class MainRestController {
 		}else if(divide.equals("null")){
 			ExpertFindInfo info = new ExpertFindInfo();
 			expert = ef_service.listExpertFind(info);
+			for (int i = 0; i < expert.size(); i++) {
+				List<ReviewVO> rList = ef_service.listReview(expert.get(i).getEf_Id());
+				double arp = 0;
+
+				if (rList.size() == 0) {
+					expert.get(i).setEf_CntReview(0);
+					expert.get(i).setEf_AvgStarpoint(0);
+				} else {
+					for (int j = 0; j < rList.size(); j++) {
+						arp += rList.get(j).getRe_StarPoint();
+					}
+
+					expert.get(i).setEf_CntReview(rList.size());
+					expert.get(i).setEf_AvgStarpoint(arp / rList.size());
+				}
+			}		
 		}
 		return new ResponseEntity<>(expert, HttpStatus.OK);
 	}
