@@ -24,7 +24,7 @@ public interface LinkService {
 	
 	public List<ExpertInfoVO> getExpertInfoService(int p_Seq);
 	
-	public RequestVO getRequestInfoService(String m_Id);
+	public List<RequestVO> getRequestInfoService(String m_Id);
 	
 	public void insertLinkService(LinkVO link);
 }

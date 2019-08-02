@@ -21,9 +21,7 @@
 	height: 15px;
 	margin-right: 3px;
 }
-.profile-basic ul li{
-	font-size: 30px;
-}
+
 
 .page-wrapper {
  position:relative;
@@ -67,18 +65,25 @@
 .profile-basic ul li{
 	list-style: none;   
 	line-height: 60px;
+	font-size: 30px;
 }
-.uploadResult ul{
+ .uploadResult ul{
 	display:flex;
 	flex-flow: row;
-	justify-content:center;
-	align-items:center;
-}
+/* 	justify-content:center;
+	align-items:center; */
+	padding: 0px;
+} 
 
-.uploadResult ul li{
-	
+.uploadResult li{
 	list-style: none;
-	padding: 10px;
+	 padding: 10px;
+ 	padding-right: 40px;
+}
+.uploadResult li img{
+	width: 200px;
+	height: 200px;
+
 	
 }
 
@@ -109,4 +114,7 @@
 	padding: 1px;
 }
 
+#uploadResult{
+	overflow: hidden;
+}
 

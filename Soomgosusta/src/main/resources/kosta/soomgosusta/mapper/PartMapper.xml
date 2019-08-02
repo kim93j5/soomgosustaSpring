@@ -36,9 +36,9 @@
 
 	<select id="listQuestion" parameterType="hashmap" resultType="kosta.soomgosusta.domain.QuestionVO">
 		SELECT * FROM QUESTION
-		WHERE Q_DIVIDE LIKE #{large}
-		OR Q_DIVIDE LIKE #{middle}
-		OR Q_DIVIDE LIKE #{small}
+		WHERE Q_DIVIDE = #{large}
+		OR Q_DIVIDE = #{middle}
+		OR Q_DIVIDE = #{small}
 	</select>
 	
 	<select id="listAnswer" parameterType="hashmap" resultType="kosta.soomgosusta.domain.AnswerVO">
@@ -69,6 +69,9 @@
 		ORDER BY pl.PL_SEARCH DESC
 	</select>
 	
+	<select id="getPartInfo" parameterType="int" resultType="kosta.soomgosusta.domain.PartVO">
+		SELECT * FROM PART WHERE P_SEQ = #{p_Seq}
+	</select>
 	
 	<select id="listPSeq" resultType="int">
 	    select p_seq from part where p_L_Word = #{p_L_Word} and
@@ -90,4 +93,56 @@
 	   <result column="pl_request" property="pl_Request"/>
 	</resultMap>	
 	
+	
+	<select id="listMExpert" parameterType="String" resultType="kosta.soomgosusta.domain.MatchVO">
+		SELECT * FROM MATCH WHERE M_ID = #{m_Id} AND M_STATUS = 'ING'
+	</select>
+	
+	<select id="detailRecommend" parameterType="String" resultType="kosta.soomgosusta.domain.PartVO">
+		SELECT p.P_SEQ, p.P_L_WORD, p.P_M_WORD, p.P_S_WORD, p.P_IMAGE, pl.PL_REGISTER FROM PART p 
+		JOIN PART_LOG pl
+		ON p.P_SEQ = pl.P_SEQ
+		WHERE p.P_M_WORD = #{p_M_Word} OR p.P_S_WORD LIKE #{p_S_Word}
+		ORDER BY PL_REQUEST
+	</select>
+	
+	<select id="getExPartInfo" parameterType="String" resultType="kosta.soomgosusta.domain.PartVO">
+		SELECT p.P_SEQ, p.P_L_WORD, p.P_M_WORD, p.P_S_WORD, p.P_IMAGE, pl.PL_REGISTER
+		FROM PART p
+		JOIN E_INFO ei
+		ON p.P_SEQ = ei.P_SEQ
+		JOIN PART_LOG pl
+		ON p.P_SEQ = pl.P_SEQ
+		WHERE ei.E_ID = #{e_Id}
+	</select>
+	
+	<select id="listRandom" resultType="kosta.soomgosusta.domain.PartVO">
+		SELECT p.P_SEQ, p.P_L_WORD, p.P_M_WORD, p.P_S_WORD, p.P_IMAGE, pl.PL_REGISTER FROM PART p
+		JOIN PART_LOG pl
+		ON p.P_SEQ = pl.P_SEQ
+		ORDER BY DBMS_RANDOM.RANDOM
+	</select>
+	
+		<resultMap type="kosta.soomgosusta.domain.ExpertFindVO" id="listExInfo">
+		<result column="E_ID" property="ef_Id" />
+		<result column="EI_DISTRICT" property="ef_District" />
+		<result column="P_S_Word" property="ef_p_S_Word" />
+		<result column="E_PHOTO" property="ef_Photo" />
+		<result column="EP_OL" property="ef_OL" />
+		<result column="E_RC" property="ef_RC" />
+
+	</resultMap>
+	
+	<select id="listMyDistrict" parameterType="String" resultMap="listExInfo">
+		SELECT DISTINCT e.E_ID, ei.EI_DISTRICT, p.P_S_Word, e.E_PHOTO,
+		ep.EP_OL, e.E_RC
+		FROM EXPERT e JOIN E_INFO ei
+		ON e.E_ID = ei.E_ID
+		JOIN
+		PART p
+		ON ei.P_SEQ = p.P_SEQ
+		JOIN E_PROFILE ep
+		ON e.E_ID = ep.E_ID
+		WHERE ei.EI_DISTRICT LIKE #{dist}
+	</select>
 </mapper>

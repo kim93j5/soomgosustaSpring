@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,37 +23,45 @@ import lombok.extern.log4j.Log4j;
 public class LinkController {
 	private LinkService service;
 	private AlarmService alarmService;
-	@RequestMapping("/match/{m_Id}")
-	public String getMatchPercent(@PathVariable("m_Id") String m_Id) {
-		RequestVO requestInfo = service.getRequestInfoService(m_Id);
-		int p_Seq = requestInfo.getP_Seq();
-		String r_Time = requestInfo.getR_QA_12();
-		String r_Start = requestInfo.getR_QA_13();
-		String r_Gender = requestInfo.getR_QA_14();
-		String r_District = requestInfo.getR_QA_15();
-		
-		List<ExpertInfoVO> expertList = service.getExpertInfoService(p_Seq);
-		for (int i = 0; i < expertList.size(); i++) {
-		ExpertInfoVO expertAddInfoVO = expertList.get(i);
-		String expertAddInfo = expertAddInfoVO.getEi_District() + expertAddInfoVO.getEi_Gender()
-					+ expertAddInfoVO.getEi_Start() + expertAddInfoVO.getEi_Time();
-		float total = matchCal(r_Time, expertAddInfo, 20) + matchCal(r_District, expertAddInfo, 35)
-				+ matchCal(r_Start, expertAddInfo, 15) + matchCal(r_Gender, expertAddInfo, 30);
+	   @RequestMapping("/match/{m_Id}/{size}/{p_Seq}")
+	   public String getMatchPercent(@PathVariable("m_Id") String m_Id, @PathVariable("size") int size, @PathVariable("p_Seq") int p_Seq,Model model) {
+	      RequestVO requestInfo = new RequestVO();
+	      List<RequestVO> requestInfoList = service.getRequestInfoService(m_Id);
+	      for(int i = 0;i<requestInfoList.size();i++){
+	         if(requestInfoList.get(i).getP_Seq() == p_Seq){
+	            requestInfo = requestInfoList.get(i);
+	         }
+	         
+	      }
+	      String r_Time = requestInfo.getR_QA_12();
+	      String r_Start = requestInfo.getR_QA_13();
+	      String r_Gender = requestInfo.getR_QA_14();
+	      String r_District = requestInfo.getR_QA_15();
+	      
+	      List<ExpertInfoVO> expertList = service.getExpertInfoService(p_Seq);
+	      for (int i = 0; i < expertList.size(); i++) {
+	      ExpertInfoVO expertAddInfoVO = expertList.get(i);
+	      String expertAddInfo = expertAddInfoVO.getEi_District() + expertAddInfoVO.getEi_Gender()
+	               + expertAddInfoVO.getEi_Start() + expertAddInfoVO.getEi_Time();
+	      float total = matchCal(r_Time, expertAddInfo, 20) + matchCal(r_District, expertAddInfo, 35)
+	            + matchCal(r_Start, expertAddInfo, 15) + matchCal(r_Gender, expertAddInfo, 30);
 
-		LinkVO linkInsert = new LinkVO();
-		linkInsert.setE_Id(expertList.get(i).getE_Id());
-		linkInsert.setL_Percent(total);
-		linkInsert.setR_Seq(requestInfo.getR_Seq());
-			
-		service.insertLinkService(linkInsert);
-		AlarmVO alarmLinkInsert = new AlarmVO();
-		alarmLinkInsert.setE_Id(expertList.get(i).getE_Id());
-		alarmLinkInsert.setM_Id(m_Id);
-		alarmService.alarmLinkInsert(alarmLinkInsert);
-		}
-		return "/request/detailRequest";
-	}
-
+	      LinkVO linkInsert = new LinkVO();
+	      linkInsert.setE_Id(expertList.get(i).getE_Id());
+	      linkInsert.setL_Percent(total);
+	      linkInsert.setR_Seq(requestInfo.getR_Seq());
+	         
+	      service.insertLinkService(linkInsert);
+	      AlarmVO alarmLinkInsert = new AlarmVO();
+	      alarmLinkInsert.setE_Id(expertList.get(i).getE_Id());
+	      alarmLinkInsert.setM_Id(m_Id);
+	      alarmService.alarmLinkInsert(alarmLinkInsert);
+	      }
+	      model.addAttribute("size",size);
+	      
+	      return "/request/detailRequest";
+	   }
+	   
 	public float matchCal(String requestInfo, String expertAddInfo, float score) {
 		List<String> compareMember = new ArrayList();
 		String groupArr[] = requestInfo.split("[/,]");

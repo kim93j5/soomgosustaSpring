@@ -1,22 +1,10 @@
 package kosta.soomgosusta.controller;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.mahout.cf.taste.impl.model.file.FileDataModel;
-import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
-import org.apache.mahout.cf.taste.impl.recommender.GenericItemBasedRecommender;
-import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;
-import org.apache.mahout.cf.taste.impl.similarity.LogLikelihoodSimilarity;
-import org.apache.mahout.cf.taste.model.DataModel;
-import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
-import org.apache.mahout.cf.taste.recommender.RecommendedItem;
-import org.apache.mahout.cf.taste.similarity.ItemSimilarity;
-import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,8 +14,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import kosta.soomgosusta.domain.ExpertFindInfo;
+import kosta.soomgosusta.domain.ExpertFindVO;
+import kosta.soomgosusta.domain.ExpertInfoVO;
+import kosta.soomgosusta.domain.ExpertVO;
+import kosta.soomgosusta.domain.MatchVO;
+import kosta.soomgosusta.domain.MemberVO;
 import kosta.soomgosusta.domain.PartVO;
 import kosta.soomgosusta.domain.RequestVO;
+import kosta.soomgosusta.domain.ReviewVO;
+import kosta.soomgosusta.service.ExpertFindService;
+import kosta.soomgosusta.service.ExpertService;
+import kosta.soomgosusta.service.MemberService;
 import kosta.soomgosusta.service.PartService;
 import kosta.soomgosusta.service.RequestService;
 import lombok.extern.log4j.Log4j;
@@ -42,7 +40,16 @@ public class MainRestController {
 	
 	@Autowired
 	private RequestService rservice;
-
+	
+	@Autowired
+	private MemberService mservice;
+	
+	@Autowired
+	private ExpertFindService ef_service;
+	
+	@Autowired
+	private ExpertService eservice;
+	
 	@GetMapping(value = "/listPart/{data}", produces = { MediaType.APPLICATION_XML_VALUE,
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public ResponseEntity<List<PartVO>> getPart(@PathVariable("data") String data) {
@@ -59,70 +66,98 @@ public class MainRestController {
 		return new ResponseEntity<>(service.listPopularService(), HttpStatus.OK);
 	}
 	
-	@GetMapping(value= "/listRecommend/{id}/{divide}", produces = { MediaType.APPLICATION_XML_VALUE,
+	
+	@GetMapping(value = "/listMExpert/{id}", produces = { MediaType.APPLICATION_XML_VALUE,
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
-	public ResponseEntity<List<PartVO>> getRecommend(@PathVariable("id") String id, @PathVariable("divide") String divide) throws Exception{
+	public ResponseEntity<List<MatchVO>> getList(@PathVariable("id") String id){
+		log.info(id);
+		log.info("--------");
+		
+		return new ResponseEntity<>(service.listMExpertService(id), HttpStatus.OK);
+		
+	}
+	
+	@GetMapping(value = "/listMyRecommend/{id}/{divide}", produces = { MediaType.APPLICATION_XML_VALUE,
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
+	public ResponseEntity<List<PartVO>> getRecommend(@PathVariable("id") String id, @PathVariable("divide") String divide){
+		
 		log.info(id);
 		log.info(divide);
 		
+		List<PartVO> plist = new ArrayList<>();
 		if(divide.equals("member")){
-
-			List<RequestVO> rlist = rservice.listAllRequestService();//전체 요청
-			List<RequestVO> list = rservice.listRequestService(id);//내 요청			
-			List<PartVO> plist = service.listPartService();
-			
-			BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\data\\member_rcm.csv"));		
-			
-			for(int i=0; i< plist.size(); i++){
-				for(int j=0; j<plist.size(); j++){
-					if(i != j){
-						if(plist.get(i).getP_L_Word().equals(plist.get(j).getP_L_Word())){
-							if(plist.get(i).getP_M_Word().equals(plist.get(j).getP_M_Word())){
-								//대,중 다 같을 때
-								bw.write(plist.get(i).getP_Seq()+","+plist.get(j).getP_Seq()+","+5+"\n");
-							}else{
-								//대만 같을 때
-								bw.write(plist.get(i).getP_Seq()+","+plist.get(j).getP_Seq()+","+3+"\n");
-							}
-						}else{
-							bw.write(plist.get(i).getP_Seq()+","+plist.get(j).getP_Seq()+","+1+"\n");
-						}
-					}
-				}
+			List<RequestVO> list = rservice.listRequestService(id);
+			if(list.size() != 0){
+				PartVO part = service.getPartInfoService(list.get(0).getP_Seq());
+				plist = service.detailRecommendService(part.getP_M_Word(), "%"+part.getP_S_Word()+"%");
+			}else{
+				plist = service.listRandomService();
 			}
 
-			bw.close();
-			List<Integer> recommendItems = recommend_service(list.get(0).getP_Seq());
-			
-			for(int i=0; i< recommendItems.size(); i++){
-				log.info(recommendItems.get(i));
-			}
+		}else if(divide.equals("expert")){
+			PartVO part = service.getExPartInfoService(id);
+			plist = service.detailRecommendService(part.getP_M_Word(), "%"+part.getP_S_Word()+"%");
+		}else if(divide.equals("null")){
+			plist = service.listRandomService();
 		}
-		
-		return null;
+
+		return new ResponseEntity<>(plist, HttpStatus.OK);
 	}
 	
-	public List<Integer> recommend_service(int m_no) throws Exception{
-		//데이터 모델
-		DataModel dm = new FileDataModel(new File("C:\\data\\member_rcm.csv"));
+	@GetMapping(value="/listMyDistrict/{id}/{divide}", produces = { MediaType.APPLICATION_XML_VALUE,
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
+	public ResponseEntity<List<ExpertFindVO>> getMyDistrict(@PathVariable("id") String id, @PathVariable("divide") String divide){
+		List<ExpertFindVO> expert = new ArrayList<>();
 		
-		//유사도		
-		UserSimilarity sim = new LogLikelihoodSimilarity(dm);
-		UserNeighborhood neighborhood = new NearestNUserNeighborhood(1, sim, dm);
+		if(divide.equals("member")){
+			MemberVO member = mservice.findMember(id);
+			String dist = member.getM_Address().substring(0, member.getM_Address().indexOf("/"));
+			log.info(dist);
+			expert = service.listMyDistrictService("%"+dist+"%");
+					
+					for (int i = 0; i < expert.size(); i++) {
+						List<ReviewVO> rList = ef_service.listReview(expert.get(i).getEf_Id());
+						double arp = 0;
 
-		//User Based Recommender
-		GenericUserBasedRecommender recommender = new GenericUserBasedRecommender(dm, neighborhood, sim);
-		
-		long num = m_no;
-		log.info(num);
-		List<RecommendedItem> recommendations = recommender.recommend(num, 5);
-		
-		List<Integer> list = new ArrayList<>();
-		
-		for(RecommendedItem items: recommendations){
-			list.add((int)items.getItemID());
+						if (rList.size() == 0) {
+							expert.get(i).setEf_CntReview(0);
+							expert.get(i).setEf_AvgStarpoint(0);
+						} else {
+							for (int j = 0; j < rList.size(); j++) {
+								arp += rList.get(j).getRe_StarPoint();
+							}
+
+							expert.get(i).setEf_CntReview(rList.size());
+							expert.get(i).setEf_AvgStarpoint(arp / rList.size());
+						}
+					}		
+			
+		}else if(divide.equals("expert")){
+			ExpertVO ex = eservice.findExpert(id);
+			String dist = ex.getE_Address().substring(0, ex.getE_Address().indexOf("/"));
+			
+			expert = service.listMyDistrictService("%"+dist+"%");
+			
+			for (int i = 0; i < expert.size(); i++) {
+				List<ReviewVO> rList = ef_service.listReview(expert.get(i).getEf_Id());
+				double arp = 0;
+
+				if (rList.size() == 0) {
+					expert.get(i).setEf_CntReview(0);
+					expert.get(i).setEf_AvgStarpoint(0);
+				} else {
+					for (int j = 0; j < rList.size(); j++) {
+						arp += rList.get(j).getRe_StarPoint();
+					}
+
+					expert.get(i).setEf_CntReview(rList.size());
+					expert.get(i).setEf_AvgStarpoint(arp / rList.size());
+				}
+			}		
+		}else if(divide.equals("null")){
+			ExpertFindInfo info = new ExpertFindInfo();
+			expert = ef_service.listExpertFind(info);
 		}
-		log.info(list);
-		return list;
+		return new ResponseEntity<>(expert, HttpStatus.OK);
 	}
 }
