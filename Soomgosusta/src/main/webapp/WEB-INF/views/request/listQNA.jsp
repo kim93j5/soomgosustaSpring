@@ -7,9 +7,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="/resources/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-<script type="text/javascript" src="/resources/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="/resources/jquery-ui-1.12.1.custom/jquery-ui.css">
+<script type="text/javascript" src="/resources/plugin/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script type="text/javascript" src="/resources/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="/resources/plugin/jquery-ui-1.12.1.custom/jquery-ui.css">
 <script type="text/javascript" src="/resources/js/listQNA.js"></script>
 <link rel="stylesheet" href="/resources/css/listQNA.css">
 <script type="text/javascript">

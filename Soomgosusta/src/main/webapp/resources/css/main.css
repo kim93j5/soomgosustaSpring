@@ -90,3 +90,42 @@
 	position: absolute;
 	margin-left: 530px;
 }
+
+.recommendInfo{
+	margin-top: 500px;
+	margin-bottom: 30px;
+	margin-left: 360px;
+}
+
+.rcm-img{
+   width: 280px;
+   height: 170px;
+   border-radius: 4px;
+   margin-bottom: 0px;
+
+}
+.rc-img{
+	width: 15px;
+	height: 15px;
+}
+.recommend{
+  margin-left: 350px;
+   margin-bottom: 100px;
+    width:    65%;
+   display: inline-block;
+   text-align: center;
+} 
+
+.recommendService{
+
+   margin-right: 0px;
+   text-align: center;
+   margin-bottom: 10px;
+   border: solid 0.8px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-left: 12px;
+    width: 280px;
+   
+} 

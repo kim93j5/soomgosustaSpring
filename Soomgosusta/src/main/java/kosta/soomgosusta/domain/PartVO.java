@@ -9,4 +9,6 @@ public class PartVO {
 	private String p_M_Word;
 	private String p_S_Word;
 	private String p_Image;
+	
+	private int pl_Register;
 }

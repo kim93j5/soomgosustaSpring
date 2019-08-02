@@ -26,9 +26,39 @@ var partService = (function(){
 			}
 		});
 	}
+	
+	function getRecommend(data, callback, error){
+		console.log("getRecommend.........");
+		
+		$.getJSON("/part/listMyRecommend/"+ data.id + "/" + data.divide + ".json", function(result){
+			if(callback){
+				callback(result);
+			}
+		}).fail(function(xhr, status, err){
+			if(error){
+				error();
+			}
+		});
+	}
+	function getDistrict(data, callback, error){
+		console.log("getDistrict.........");
+		
+		$.getJSON("/part/listMyDistrict/"+ data.id + "/" + data.divide + ".json", function(result){
+			if(callback){
+				callback(result);
+			}
+		}).fail(function(xhr, status, err){
+			if(error){
+				error();
+			}
+		});
+	}
+	
 	return{
 		getPart:getPart,
-		getPopular:getPopular
+		getPopular:getPopular,
+		getRecommend:getRecommend,
+		getDistrict:getDistrict
 	};
 })();
 
@@ -40,5 +70,13 @@ $(document).ready(function(){
 	$('#divclose').on('click', function(){
 		$('#searchresults').hide();
 	})
+	
+	$('.recommend').slick({
+		slidesToShow: 4,
+		slidesToScroll: 1,
+		autoplay: true,
+		pauseOnHover: true,
+		autoplaySpeed: 3000,
+	});
 })
 

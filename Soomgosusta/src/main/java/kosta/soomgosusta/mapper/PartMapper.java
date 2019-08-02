@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import kosta.soomgosusta.domain.AnswerVO;
 import kosta.soomgosusta.domain.BestDTO;
+import kosta.soomgosusta.domain.ExpertFindVO;
 import kosta.soomgosusta.domain.MatchVO;
 import kosta.soomgosusta.domain.PartVO;
 import kosta.soomgosusta.domain.QuestionVO;
@@ -42,4 +43,14 @@ public interface PartMapper {
 	List<BestDTO> listBest();
 	
 	List<MatchVO> listMExpert(String m_Id);
+	
+	List<PartVO> detailRecommend(@Param("p_M_Word") String p_M_Word, @Param("p_S_Word") String p_S_Word);
+
+	PartVO getPartInfo(int p_Seq);
+	
+	PartVO getExPartInfo(String e_Id);
+	
+	List<PartVO> listRandom();
+	
+	List<ExpertFindVO> listMyDistrict(String dist);
 }

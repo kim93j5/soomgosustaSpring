@@ -7,6 +7,9 @@
     background-color: #fafafa;
   }
 
+.fc-view-container{
+	height: 600px;
+}
   #calendar {
   	margin-top: 40px;
    	margin-left: 50px;

@@ -3,7 +3,10 @@ package kosta.soomgosusta.mapper;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import kosta.soomgosusta.domain.AnswerVO;
+import kosta.soomgosusta.domain.PartVO;
 import kosta.soomgosusta.domain.QuestionVO;
 import kosta.soomgosusta.domain.RequestVO;
 
@@ -23,4 +26,5 @@ public interface RequestMapper {
 	String partInfo(int p_Seq);
 
 	int cancelRequest(int r_Seq);
+
 }

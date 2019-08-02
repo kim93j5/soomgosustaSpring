@@ -21,5 +21,5 @@ public interface RequestService {
 	public String listPartWordService(int p_Seq);
 
 	public int cancelRequestService(int r_Seq);
-	;
+	
 }

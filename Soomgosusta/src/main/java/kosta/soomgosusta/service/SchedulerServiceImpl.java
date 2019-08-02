@@ -17,6 +17,7 @@ import kosta.soomgosusta.domain.SC_ReplyVO;
 import kosta.soomgosusta.domain.ScheduleInfoDTO;
 import kosta.soomgosusta.domain.ScheduleVO;
 import kosta.soomgosusta.domain.SchedulerMatchDTO;
+import kosta.soomgosusta.mapper.AlarmMapper;
 import kosta.soomgosusta.mapper.SchedulerMapper;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
@@ -29,6 +30,7 @@ public class SchedulerServiceImpl implements SchedulerService {
 	
 	@Setter(onMethod_ = @Autowired)
 	private SchedulerMapper mapper;
+	private AlarmMapper almapper;
 
 	@Transactional
 	@Override
@@ -45,11 +47,12 @@ public class SchedulerServiceImpl implements SchedulerService {
 		return schedule;
 	}
 	
+	@Transactional
 	@Override
 	public int insertSchedule(ScheduleVO schedule, String m_Id, String e_Id) {
 
 		schedule.setM_Seq(mapper.detailMatch(e_Id, m_Id));
-		
+		almapper.insertSDAlarm(m_Id, e_Id);
 		return mapper.insertSchedule(schedule);
 	}
 
@@ -90,6 +93,7 @@ public class SchedulerServiceImpl implements SchedulerService {
 		return mapper.listExpert(m_Id);
 	}
 
+	@Transactional
 	@Override
 	public int insertFaq(FaqVO faq) {
 		

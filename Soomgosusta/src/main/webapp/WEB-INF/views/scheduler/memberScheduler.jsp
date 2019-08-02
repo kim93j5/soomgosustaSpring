@@ -7,16 +7,16 @@
 </header>
 <html>
 <head>
-<link href='/resources/fullcalendar-4.2.0/packages/core/main.css'
+<link href='/resources/plugin/fullcalendar-4.2.0/packages/core/main.css'
 	rel='stylesheet' />
-<link href='/resources/fullcalendar-4.2.0/packages/daygrid/main.css'
+<link href='/resources/plugin/fullcalendar-4.2.0/packages/daygrid/main.css'
 	rel='stylesheet' />
-<link href='/resources/fullcalendar-4.2.0/packages/timegrid/main.css'
+<link href='/resources/plugin/fullcalendar-4.2.0/packages/timegrid/main.css'
 	rel='stylesheet' />
-<script src='/resources/fullcalendar-4.2.0/packages/core/main.js'></script>
-<script src='/resources/fullcalendar-4.2.0/packages/interaction/main.js'></script>
-<script src='/resources/fullcalendar-4.2.0/packages/daygrid/main.js'></script>
-<script src='/resources/fullcalendar-4.2.0/packages/timegrid/main.js'></script>
+<script src='/resources/plugin/fullcalendar-4.2.0/packages/core/main.js'></script>
+<script src='/resources/plugin/fullcalendar-4.2.0/packages/interaction/main.js'></script>
+<script src='/resources/plugin/fullcalendar-4.2.0/packages/daygrid/main.js'></script>
+<script src='/resources/plugin/fullcalendar-4.2.0/packages/timegrid/main.js'></script>
 <script type="text/javascript" src="/resources/js/memberScheduler.js"></script>
 <link rel="stylesheet" href="/resources/css/memberScheduler.css">
 <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/moment.min.js'></script>

@@ -12,7 +12,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="/resources/js/main.js"></script>
 <script type="text/javascript" src="/resources/js/cookie.js"></script>
+<link rel="stylesheet" type="text/css" href="/resources/plugin/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="/resources/plugin/slick/slick-theme.css"/>
 <link rel="stylesheet" href="/resources/css/main.css">
+<script type="text/javascript" src="/resources/plugin/slick/slick.js"></script> 
 <script type="text/javascript">
 
 
@@ -37,6 +40,36 @@
 		});
 	});
 
+	var divide = "${loginUser.user_Divide}";
+	var id="";
+	if(divide == 'member'){
+		id = "${loginUser.m_Id}";
+	}else if(divide == 'expert'){
+		id = "${loginUser.e_Id}";
+	}else{
+		id="null";
+		divide = "null";
+	}
+	partService.getRecommend({id:id, divide:divide}, function(list){
+		console.log(list);
+		var str = "";
+		
+		for(var i=0, len = 8; i<len; i++){
+			str += '<div class="recommendService>"';
+			str += '<a href = "request/listQNA/' + list[i].p_S_Word + '">';
+			str += '<img class="rcm-img" src = "/resources/images/'+list[i].p_Image+'"><br></a>';
+			str += '<div class="caption" style="margin-top: 3px;">';
+			str += '<p>'+ list[i].p_S_Word + '</p>';
+			str += '<p><img class="rc-img" src="/resources/images/saram.JPG">'+ list[i].pl_Register+'명 고수 활동 중</p>';
+			str += '</div></div>';
+		}
+		$('.recommend').append(str);
+	});
+	
+	partService.getDistrict({id:id, divide:divide}, function(list){
+		console.log(list);
+	});
+	
 	$(document).ready(
 			function() {
 
@@ -220,7 +253,22 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	
+	<!-- 추천서비스 -->
+	
+	<div class="recommendInfo">
+		<h2>이런 서비스는 어떠세요?</h2>
+		<div class="recommend">
+		</div>
+	</div>
 
+	<div class="expertInfo">
+		<h2>우리 지역 고수를 찾아볼까요?</h2>
+		<div class="district">
+		</div>
+	</div>
 
 	<div class="modal fade" id="modal">
 		<div class="modal-dialog">
