@@ -41,6 +41,7 @@ public class ManageScheduleController {
 		log.info(schedule);
 		
 		ScheduleVO newSche = new ScheduleVO();
+		newSche.setS_Seq(schedule.getS_Seq());
 		newSche.setS_Color(schedule.getS_Color());
 		newSche.setS_Contents(schedule.getS_Contents());
 		newSche.setS_Ed(schedule.getS_Ed());
@@ -103,9 +104,7 @@ public class ManageScheduleController {
 	public ResponseEntity<String> insertReply(@RequestBody SC_ReplyVO reply){
 		log.info(reply);
 		int insertCount = service.insertReplyService(reply);
-		MatchVO match = service.detailRPAlarmService(reply.getSr_Seq());
-		
-		alservice.insertRPAlarmService(match.getM_Id(), match.getE_Id());
+
 		return insertCount == 1 ? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}

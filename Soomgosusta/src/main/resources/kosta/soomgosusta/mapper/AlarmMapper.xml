@@ -20,15 +20,15 @@
       update alarm set al_Check = 'READ' where al_Seq=#{al_Seq}
    </update>
    
-   <insert id="insertSDAlarm">
+   <insert id="insertSDAlarm" parameterType="String">
    		INSERT INTO ALARM VALUES(ALARM_SEQ.NEXTVAL, 'schedule', 'NOT', sysdate, '일정이 등록되었습니다.', #{e_Id}, #{m_Id})
    </insert>
    
-   <insert id="insertIQAlarm">
+   <insert id="insertIQAlarm" parameterType="String">
       		INSERT INTO ALARM VALUES(ALARM_SEQ.NEXTVAL, 'inquiry', 'NOT', sysdate, '문의가 들어왔습니다.', #{m_Id}, #{e_Id})
    </insert>
    
-   <insert id="insertRPAlarm">
+   <insert id="insertRPAlarm" parameterType="String">
       		INSERT INTO ALARM VALUES(ALARM_SEQ.NEXTVAL, 'reply', 'NOT', sysdate, '댓글이 달렸습니다.', #{e_Id}, #{m_Id})
    </insert>
 </mapper>

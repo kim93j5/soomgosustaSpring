@@ -185,7 +185,7 @@ scheduleService.getList(e_Id, function(list){
                         });	
 
                      	scheduleService.insert(
-                     			{s_Contents: content, s_Sd: startT, s_Ed: endT, s_Place: $('#place').val(), m_Id: $('#id').val(), s_Color: $('#color').val(), e_Id: e_Id, s_Memo: $('#memo').val()},
+                     			{s_Seq: count, s_Contents: content, s_Sd: startT, s_Ed: endT, s_Place: $('#place').val(), m_Id: $('#id').val(), s_Color: $('#color').val(), e_Id: e_Id, s_Memo: $('#memo').val()},
                      			function(result){
     								console.log("success");
                      			}
