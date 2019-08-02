@@ -30,7 +30,6 @@ var reviewService = (function(){
 		console.log("getList...............")
 		var e_Id = param.e_Id;
 		var page = param.page || 1;
-		alert("getList e_Id "+ e_Id);
 		
 		$.getJSON("/review/pages/"+e_Id+"/"+page+".json",
 				function(data){
@@ -45,7 +44,6 @@ var reviewService = (function(){
 	}
 	
 	function get(re_Seq, callback, error){
-		alert(re_Seq);
 		$.get("/review/"+re_Seq+ ".json",function(result){
 			if(callback){
 				callback(result);
@@ -87,7 +85,6 @@ var reviewService = (function(){
 			success : function(result ,status, xhr){
 				
 				if(callback){
-					alert("review update 성공 ");	
 					callback(result);
 				}
 			},
@@ -95,7 +92,6 @@ var reviewService = (function(){
 				if(error){
 					
 					error(er);
-					ALERT('review update 실패');
 				}
 			}
 		});
@@ -119,12 +115,10 @@ var reviewService = (function(){
 
 	function getMember(m_Id, callback, error){
 		console.log("getMember.................................");
-		alert(m_Id);
 		$.getJSON("/review/writer/"+m_Id+".json",
 				function (data){
 			if(callback){
 				callback(data);
-				alert(data.m_Name);
 			}
 		}).fail(function(xhr, status,err){
 			if(error){

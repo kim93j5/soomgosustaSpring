@@ -6,7 +6,6 @@ var profileService = (function(){
 	function getProfile(param, callback, error){
 		
 		var e_Id = param.e_Id;
-		alert(e_Id);
 		$.getJSON("/expert/profile/"+e_Id+".json",function(data){
 			if(callback){
 				callback(data);
@@ -20,7 +19,6 @@ var profileService = (function(){
 	}
 	function getFileList(param, callback, error){
 		var e_Id= param.e_Id;
-		alert(e_Id);
 		$.getJSON("/expert/profile/files/"+e_Id+".json",function(data){
 			if(callback){
 				callback(data);
@@ -48,15 +46,12 @@ var profileService = (function(){
 				$("#profile-Dl").load(" #profile-Dl");
 				$("#profile-Ol").load(" #profile-Ol");
 				if(callback){
-					alert("성공2");	
 				}
-				alert("성공2");
 			},
 			error : function(xhr, status, er){
 				if(error){
 					
 					error(er);
-					ALERT('실패');
 				}
 			}
 		});

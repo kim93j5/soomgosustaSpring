@@ -15,7 +15,11 @@
 .starR.on {
 	background-position: 0 0;
 }
-
+.icon{
+	width: 30px;
+	height: 30px;
+	margin-right: 10px;
+}
 .starimg{
 	width: 15px;
 	height: 15px;
@@ -63,6 +67,7 @@
     width: 50%;
 }
 .profile-basic ul li{
+	width:500px;
 	list-style: none;   
 	line-height: 60px;
 	font-size: 30px;

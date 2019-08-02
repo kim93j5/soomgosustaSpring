@@ -92,7 +92,6 @@ $('document').ready(function(){
       $('#exlist').append(str);
       
       $('.expertInfo').on("click", function(){
-         alert($(this).data("id"));
          location.href='/expert/profile?e_Id='+$(this).data("id") ;
       });
       
@@ -188,7 +187,6 @@ $('document').ready(function(){
       $('#exlist').append(str);
       
       $('.expertInfo').on("click", function(){
-         alert($(this).data("id"));
          location.href='/expert/profile?e_Id='+$(this).data("id") ;
       });
       

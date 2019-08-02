@@ -40,9 +40,9 @@
 		
 				<div class="profile-basic">
 					<ul>
-						<li>${expert.e_Name}</li>
-						<li>${expert.e_Id}</li>
-						<li>${expert.e_Rc}</li>
+						<li><img class="icon" src='/resources/images/person_icon.png'>${expert.e_Name}</li>
+						<li><img class="icon" src='/resources/images/mail_icon.png'>${expert.e_Id}</li>
+						<li><img class="icon" src='/resources/images/hire_icon.png'>${expert.e_Rc}</li>
 					</ul>
 				</div>
 		</div>
@@ -418,7 +418,7 @@
 					
 					 var str2 = "";
 					 str2 += "<section class='Ol' >"
-						 + "<h3>한 줄 소개지롱 </h3> <br>"
+						 + "<h3>한 줄 소개 </h3> <br>"
 						 + "<div class='form-profile-Ol'>"
 						 +e_profile.ep_Ol+"</div>"
 						 +"</section>";
@@ -487,22 +487,17 @@ $(document).ready(function(){
   			modalDeleteBtn.show();
   			
   				
-  				alert(review.re_StarPoint);
   				$("#star_five").parent().children('span').removeClass('on');
   				if(review.re_StarPoint==1){
   			    $("#star_one").addClass('on').prevAll('span').addClass('on');
-  			  		alert("1가 뜬다");
   			    return false;
   				}else if(review.re_StarPoint== 2){
   				$("#star_two").addClass('on').prevAll('span').addClass('on');
-  					alert("2 가 뜬다");
   				return false;
   				}else if(review.re_StarPoint == 3){
   				$("#star_three").addClass('on').prevAll('span').addClass('on');
-  				alert("3 가 뜬다");
   				return false;
   				}else if(review.re_StarPoint==4){
-  					alert("4가 뜬다");
   				$("#star_four").addClass('on').prevAll('span').addClass('on');
   				}else{
   				$("#star_five").addClass('on').prevAll('span').addClass('on');
