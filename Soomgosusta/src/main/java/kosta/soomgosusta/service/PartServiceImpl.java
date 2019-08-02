@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kosta.soomgosusta.domain.AnswerVO;
 import kosta.soomgosusta.domain.BestDTO;
+import kosta.soomgosusta.domain.ExpertFindVO;
+import kosta.soomgosusta.domain.MatchVO;
 import kosta.soomgosusta.domain.PartVO;
 import kosta.soomgosusta.domain.QuestionVO;
 import kosta.soomgosusta.domain.RequestVO;
@@ -114,6 +116,42 @@ public class PartServiceImpl implements PartService {
 	public List<BestDTO> listBestService() {
 		
 		return mapper.listBest();
+	}
+
+	@Override
+	public List<MatchVO> listMExpertService(String m_Id) {
+		
+		return mapper.listMExpert(m_Id);
+	}
+
+	@Override
+	public List<PartVO> detailRecommendService(String p_M_Word, String p_S_Word) {
+
+		return mapper.detailRecommend(p_M_Word, p_S_Word);
+	}
+
+	@Override
+	public PartVO getPartInfoService(int p_Seq) {
+
+		return mapper.getPartInfo(p_Seq);
+	}
+
+	@Override
+	public PartVO getExPartInfoService(String e_Id) {
+
+		return mapper.getExPartInfo(e_Id);
+	}
+
+	@Override
+	public List<PartVO> listRandomService() {
+
+		return mapper.listRandom();
+	}
+
+	@Override
+	public List<ExpertFindVO> listMyDistrictService(String dist) {
+
+		return mapper.listMyDistrict(dist);
 	}
 
 

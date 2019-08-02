@@ -48,8 +48,4 @@
 	<update id="cancelRequest" parameterType="int">
 	       update request set r_Status = 'Cancel' where r_seq = #{r_Seq}
 	</update>
-
-	<select id="listAllRequest" resultType="kosta.soomgosusta.domain.RequestVO">
-		SELECT * FROM REQUEST
-	</select>
 </mapper>

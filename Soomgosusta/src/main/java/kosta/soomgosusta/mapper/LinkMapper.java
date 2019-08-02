@@ -25,7 +25,7 @@ public interface LinkMapper {
 	
 	public List<ExpertInfoVO> getExpertAddInfo(int p_Seq);
 	
-	public RequestVO getRequestInfo(String m_Id);
+	public List<RequestVO> getRequestInfo(String m_Id);
 	
 	public void insertLink(LinkVO link);
 }

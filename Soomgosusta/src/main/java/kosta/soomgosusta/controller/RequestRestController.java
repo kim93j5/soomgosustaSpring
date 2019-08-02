@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kosta.soomgosusta.domain.AnswerVO;
 import kosta.soomgosusta.domain.ChatRoomVO;
 import kosta.soomgosusta.domain.LoginDTO;
+import kosta.soomgosusta.domain.ChatRoomVO;
 import kosta.soomgosusta.domain.MemberMainDTO;
 import kosta.soomgosusta.domain.PartVO;
 import kosta.soomgosusta.domain.QnaDTO;

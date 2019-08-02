@@ -22,5 +22,4 @@ public interface RequestService {
 
 	public int cancelRequestService(int r_Seq);
 	
-	public List<RequestVO> listAllRequestService();
 }

@@ -153,10 +153,5 @@
 		WHERE M_ID = #{m_Id} AND P_SEQ= #{p_Seq}
 	</update>
 	
-<!-- 	<delete id="removeSchedule">
-		DELETE FROM SCHEDULE s
-		JOIN MATCH mc
-		ON s.M_SEQ = mc.M_SEQ
-		WHERE mc.M_ID = #{m_Id}
-	</delete> -->
+
 </mapper>

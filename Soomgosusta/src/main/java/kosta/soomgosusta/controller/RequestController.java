@@ -44,11 +44,11 @@ public class RequestController {
    }
    
    @PostMapping("/detailRequest")
-   public void detailRequest(@RequestParam("p_Seq") String p_Seq, @RequestParam("p_S_Word") String p_S_Word,
+   public String detailRequest(@RequestParam("p_Seq") String p_Seq, @RequestParam("p_S_Word") String p_S_Word,
          @RequestParam("listQ_seq") List<String> listQ, @RequestParam("listA_seq") List<String> listA,
          @RequestParam("sido") List<String> sido, @RequestParam("gugun") List<String> gugun,
          @RequestParam("date") String date, @RequestParam("time") List<String> time, @RequestParam("gen") String gen,
-         @RequestParam("phoneNum") String phoneNum, @RequestParam("id") String m_Id, @RequestParam(value="selday", required=false, defaultValue="none") String selday, Model model) {
+         @RequestParam("phoneNum") String phoneNum, @RequestParam("id") String m_Id, @RequestParam(value="selday", required=false, defaultValue="none") String selday) {
 
       List<QuestionVO> listQuestion = service.listQuestionService(listQ);
       List<AnswerVO> listAnswer = service.listAnswerService(listA);
@@ -64,8 +64,7 @@ public class RequestController {
          service.insertRequestService(requestMap, Integer.parseInt(p_Seq));
       }
 
-      model.addAttribute("size", size);
-
+      return "redirect:/match/"+ m_Id + "/"+ size + "/" + p_Seq;
    }
 
    public HashMap<String, String> getRequest(List<QuestionVO> question, List<AnswerVO> answer, String date, String selday,

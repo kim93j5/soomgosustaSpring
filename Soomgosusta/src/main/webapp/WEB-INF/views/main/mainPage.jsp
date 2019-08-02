@@ -12,8 +12,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="/resources/js/main.js"></script>
 <script type="text/javascript" src="/resources/js/cookie.js"></script>
+<link rel="stylesheet" type="text/css" href="/resources/plugin/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="/resources/plugin/slick/slick-theme.css"/>
 <link rel="stylesheet" href="/resources/css/main.css">
+<script type="text/javascript" src="/resources/plugin/slick/slick.js"></script> 
 <script type="text/javascript">
+
+
 	partService.getPopular(function(list) {
 		console.log(list);
 
@@ -35,66 +40,74 @@
 		});
 	});
 
-	$(document)
-			.ready(
-					function() {
+	var divide = "${loginUser.user_Divide}";
+	var id="";
+	if(divide == 'member'){
+		id = "${loginUser.m_Id}";
+	}else if(divide == 'expert'){
+		id = "${loginUser.e_Id}";
+	}else{
+		id="null";
+		divide = "null";
+	}
+	partService.getRecommend({id:id, divide:divide}, function(list){
+		console.log(list);
+		var str = "";
+		
+		for(var i=0, len = 8; i<len; i++){
+			str += '<div class="recommendService>"';
+			str += '<a href = "request/listQNA/' + list[i].p_S_Word + '">';
+			str += '<img class="rcm-img" src = "/resources/images/'+list[i].p_Image+'"><br></a>';
+			str += '<div class="caption" style="margin-top: 3px;">';
+			str += '<p>'+ list[i].p_S_Word + '</p>';
+			str += '<p><img class="rc-img" src="/resources/images/saram.JPG">'+ list[i].pl_Register+'명 고수 활동 중</p>';
+			str += '</div></div>';
+		}
+		$('.recommend').append(str);
+	});
+	
+	partService.getDistrict({id:id, divide:divide}, function(list){
+		console.log(list);
+	});
+	
+	$(document).ready(
+			function() {
 
-						$('.largelist').hover(function() {
-							$(this).css('border-style', 'groove');
-						}, function() {
-							$(this).css('border-style', 'outset');
+				$('.largelist').hover(function() {
+				$(this).css('border-style', 'groove');
+				
+				}, function() {
+						$(this).css('border-style', 'outset');
+					});
+
+				$('.largelist').click(function(e) {
+						e.preventDefault();
+
+						var data = $(this).find(".img").data("alt");
+
+						partService.getPart(data, function(list) {
+								var str = "";
+							
+								$('.modal-header').empty();
+								$('.modal-body').empty();
+								$('.modal-footer').empty();
+
+								$('.modal-header').append('<h4><strong>'+ data+ '</strong></h4>');
+								for (var i = 0, len = list.length || 0; i < len; i++) {
+								str += '<a href="/request/listQNA/'+list[i].p_S_Word+'">'+ list[i].p_S_Word + '</a>&nbsp;&nbsp;&nbsp;&nbsp;';
+								
+								if (i >= 4	&& (i + 1) % 5 == 0)
+									str += '<br>';
+						}
+					
+							$('.modal-body').append(str);
+							$('.modal-footer').append('<button id="close" type="button" class="btn btn-default" data-dismiss="modal">닫기</button>');
+
+							$('#modal').modal();
+						
+							});
+
 						});
-
-						$('.largelist')
-								.click(
-										function(e) {
-											e.preventDefault();
-
-											var data = $(this).find(".img")
-													.data("alt");
-
-											partService
-													.getPart(
-															data,
-															function(list) {
-																var str = "";
-
-																$(
-																		'.modal-header')
-																		.empty();
-																$('.modal-body')
-																		.empty();
-																$(
-																		'.modal-footer')
-																		.empty();
-
-																$(
-																		'.modal-header')
-																		.append(
-																				'<h4><strong>'
-																						+ data
-																						+ '</strong></h4>');
-																for (var i = 0, len = list.length || 0; i < len; i++) {
-																	str += '<a href="/request/listQNA/'+list[i].p_S_Word+'">'
-																			+ list[i].p_S_Word
-																			+ '</a>&nbsp;&nbsp;&nbsp;&nbsp;';
-																	if (i >= 4
-																			&& (i + 1) % 5 == 0)
-																		str += '<br>';
-																}
-																$('.modal-body')
-																		.append(
-																				str);
-																$(
-																		'.modal-footer')
-																		.append(
-																				'<button id="close" type="button" class="btn btn-default" data-dismiss="modal">닫기</button>');
-
-																$('#modal')
-																		.modal();
-															});
-
-										});
 
 						$(document).on("click", ".part", function(event) {
 
@@ -102,123 +115,74 @@
 							location.href = "/request/listQNA/" + data;
 						});
 
-						$(document)
-								.ready(
-										function() {
-											var recent = new Array();
-											$('#searchBtn')
-													.click(
-															function() {
-																var data = $(
-																		'#searchKey')
-																		.val();
-																console
-																		.log(data);
+						$(document).ready(function() {
+							var recent = new Array();
+							$('#searchBtn').click(function() {
+								var data = $('#searchKey').val();
+								console.log(data);
 
-																setCookie(data,
-																		data, 3);
-																location.href = "/request/listQNA/"
-																		+ data;
-															});
+								setCookie(data,data, 3);
+								location.href = "/request/listQNA/"+ data;
+							});
 
-											$('#popular')
-													.click(
-															function(e) {
-																e
-																		.preventDefault();
+							$('#popular').click(function(e) {
+								e.preventDefault();
 
-																partService
-																		.getPopular(function(
-																				list) {
+								partService.getPopular(function(list) {
+								$('#searchcontents').empty();
+								
+								var str = "<ul class='nav nav-pills nav-stacked'>";
+								for (var i = 0, len = 10; i < len; i++) {
+									str += '<li class="nav-item"><a class="popularitems" href="#">'+ list[i]+ '</a></li>';
+									}
+								
+								str += '</ul>';
 
-																			$(
-																					'#searchcontents')
-																					.empty();
-																			var str = "<ul class='nav nav-pills nav-stacked'>";
-																			for (var i = 0, len = 10; i < len; i++) {
-																				str += '<li class="nav-item"><a class="popularitems" href="#">'
-																						+ list[i]
-																						+ '</a></li>';
-																			}
-																			str += '</ul>';
+								$('#searchcontents').append(str);
+								
+								$(document).on("click",".popularitems",function(e) {
+									e.preventDefault();
+									
+									var data = $(this).html();
+					
+									location.href = "/request/listQNA/"+ data;
+								});
+							});
+						});
 
-																			$(
-																					'#searchcontents')
-																					.append(
-																							str);
+						$('#recent').click(function(e) {
+							e.preventDefault();
 
-																			$(
-																					document)
-																					.on(
-																							"click",
-																							".popularitems",
-																							function(
-																									e) {
-																								e
-																										.preventDefault();
-																								var data = $(
-																										this)
-																										.html();
+							$('#searchcontents').empty();
+							var recent = displayCookieList();
+							console.log(recent);
+								
+							if (recent.length == 0) {
+									
+								$('#searchcontents').append("최근 검색한 분야가 없습니다!");
+							} else {
+								
+								var str = "<ul class='nav nav-pills nav-stacked'>";
+	
+								for (var c = recent.length - 1, clen = 0; c >= clen; c--) {
+									str += '<li class="nav-item"><a class="recentitems" href="#">'+ recent[c]+ '</a></li>';
+								}
 
-																								location.href = "/request/listQNA/"
-																										+ data;
-																							});
-																		});
-															});
+								str += '</ul>';
+								$('#searchcontents').append(str);
 
-											$('#recent')
-													.click(
-															function(e) {
-																e
-																		.preventDefault();
+								$(document).on("click",	".recentitems", function(e) {
+																						
+									e.preventDefault();
+									
+									var data = $(this).html();
 
-																$(
-																		'#searchcontents')
-																		.empty();
-																var recent = displayCookieList();
-																console
-																		.log(recent);
-																if (recent.length == 0) {
-																	$(
-																			'#searchcontents')
-																			.append(
-																					"최근 검색한 분야가 없습니다!");
-																} else {
-																	var str = "<ul class='nav nav-pills nav-stacked'>";
-
-																	for (var c = recent.length - 1, clen = 0; c >= clen; c--) {
-																		str += '<li class="nav-item"><a class="recentitems" href="#">'
-																				+ recent[c]
-																				+ '</a></li>';
-																	}
-
-																	str += '</ul>';
-																	$(
-																			'#searchcontents')
-																			.append(
-																					str);
-
-																	$(document)
-																			.on(
-																					"click",
-																					".recentitems",
-																					function(
-																							e) {
-																						e
-																								.preventDefault();
-																						var data = $(
-																								this)
-																								.html();
-
-																						location.href = "/request/listQNA/"
-																								+ data;
-																					});
-																}
-
-															});
-
-										})
-					});
+									location.href = "/request/listQNA/"+ data;		
+								});
+							}
+						});
+					})
+				});
 </script>
 
 
@@ -234,11 +198,11 @@
 		</div>
 
 		<div id="semi" style="padding-top: 60px;">
-			<h2>
+			<h1>
 				딱! 맞는 고수를<br>소개해드립니다
-			</h2>
+			</h1>
 			<form id="searchform" method="get">
-				<input id="searchKey" type="text" name="searchKey" size="30">
+				<input id="searchKey" type="text" name="searchKey" size="40">
 				<input id="searchBtn" type="button" value="고수 검색">
 			</form>
 			<div id="searchresults" style="display: none; z-index: 3;">
@@ -289,7 +253,22 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	
+	<!-- 추천서비스 -->
+	
+	<div class="recommendInfo">
+		<h2>이런 서비스는 어떠세요?</h2>
+		<div class="recommend">
+		</div>
+	</div>
 
+	<div class="expertInfo">
+		<h2>우리 지역 고수를 찾아볼까요?</h2>
+		<div class="district">
+		</div>
+	</div>
 
 	<div class="modal fade" id="modal">
 		<div class="modal-dialog">
@@ -308,8 +287,4 @@
 
 	
 </body>
-<%-- <footer>
-	<jsp:include page="../includes/footer.jsp"></jsp:include>
-</footer> --%>
-
 </html>

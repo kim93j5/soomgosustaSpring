@@ -7,16 +7,20 @@
 </header>
 <html>
 <head>
-<link href='/resources/fullcalendar-4.2.0/packages/core/main.css'
+<link href='/resources/plugin/fullcalendar-4.2.0/packages/core/main.css'
 	rel='stylesheet' />
-<link href='/resources/fullcalendar-4.2.0/packages/daygrid/main.css'
+<link href='/resources/plugin/fullcalendar-4.2.0/packages/daygrid/main.css'
 	rel='stylesheet' />
-<link href='/resources/fullcalendar-4.2.0/packages/timegrid/main.css'
+<link href='/resources/plugin/fullcalendar-4.2.0/packages/timegrid/main.css'
 	rel='stylesheet' />
-<script src='/resources/fullcalendar-4.2.0/packages/core/main.js'></script>
-<script src='/resources/fullcalendar-4.2.0/packages/interaction/main.js'></script>
-<script src='/resources/fullcalendar-4.2.0/packages/daygrid/main.js'></script>
-<script src='/resources/fullcalendar-4.2.0/packages/timegrid/main.js'></script>
+<script src='/resources/plugin/fullcalendar-4.2.0/packages/core/main.js'></script>
+<script src='/resources/plugin/fullcalendar-4.2.0/packages/interaction/main.js'></script>
+<script src='/resources/plugin/fullcalendar-4.2.0/packages/daygrid/main.js'></script>
+<script src='/resources/plugin/fullcalendar-4.2.0/packages/timegrid/main.js'></script>
+<script type="text/javascript" src="/resources/plugin/jquery-timepicker-master/jquery-timepicker-master/jquery.timepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="/resources/plugin/jquery-timepicker-master/jquery-timepicker-master/jquery.timepicker.css" />
+<script type="text/javascript" src="/resources/plugin/jquery-timepicker-master/jquery-timepicker-master/lib/bootstrap-datepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="/resources/plugin/jquery-timepicker-master/jquery-timepicker-master/lib/bootstrap-datepicker.css" />
 <script type="text/javascript" src="/resources/js/expertScheduler.js"></script>
 <link rel="stylesheet" href="/resources/css/expertScheduler.css">
 <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/moment.min.js'></script>
@@ -39,14 +43,14 @@ scheduleService.getList(e_Id, function(list){
  	 
 	 var profile = "";
 	 profile += '<div id="photo"><img src="/upload/profile/' + list.expert.e_Photo + '"></div>';
-	 profile += '<div id="info"><p><strong>' + list.expert.e_Name + '</strong> 고수<p>';	 
+	 profile += '<div id="info"><h4><strong>' + list.expert.e_Name + '</strong> 고수</h4>';	 
 	 profile += '<p>'+ list.part.p_S_Word + ' 서비스</p>';
 	 profile += '<p>'+list.exInfo.ei_District + '<p>';
 	 profile += '<p>'+list.expert.e_Rc + '회 고용</p></div>';
 	  
 	 $('#profile').append(profile);
 
-	 var match = "<p>매칭 회원 목록</p>";
+	 var match = "<h4><b>매칭 회원 목록</b></h4><br>";
 	 for(var i=0, len= list.listMatch.length||0; i<len; i++){
 		 match += '<div class="member"><div class="m_photo"><img src="/resources/images/' + list.listMatch[i].m_Photo + '"></div>';
 		 match += '<div class="m_name">'+list.listMatch[i].m_Name+'</div>';
@@ -75,7 +79,7 @@ scheduleService.getList(e_Id, function(list){
 		 scheduleService.modifyMatch({e_Id:e_Id, m_Id:m_Id, p_Seq:p_Seq}, function(){
 			 scheduleService.getList(e_Id, function(list){
 				 $('#match').empty();
-				 var match = "<p>매칭 회원 목록</p>";
+				 var match = "<h4><b>매칭된 회원 목록입니다!</b></h4><br>";
 				 for(var i=0, len= list.listMatch.length||0; i<len; i++){
 					 match += '<div class="member"><div class="m_photo"><img src="/resources/images/' + list.listMatch[i].m_Photo + '"></div>';
 					 match += '<div class="m_name">'+list.listMatch[i].m_Name+'</div>';
@@ -141,15 +145,22 @@ scheduleService.getList(e_Id, function(list){
     		  var startd = moment(start).format('YYYY년 MM월 DD일');
 
         	  $('.modal-header').append('<h4>'+startd+' 일정 등록</h4>');
-        	  $('.modal-body').append('<p>시작 시간: <input type="text" id="start"></p><p>끝 시간: <input type="text" id="end"></p><p>내용: <input type="text" id="contents"></p>');
-        	  $('.modal-body').append('<p>장소: <input type="text" id="place"></p><p>회원 아이디: <input type="text" id="id"></p>');
-        	  $('.modal-body').append('<p>색상: <input type="text" id="color"></p>');
-        	  $('.modal-body').append('<p>메모: <input type="text" id="memo"></p>');
+        	  $('.modal-body').append('<p>시작 시간: <input type="text" class="form-control" id="start" size="10"></p><p>끝 시간: <input type="text"class="form-control" id="end"></p><p>내용: <input type="text"class="form-control" id="contents"></p>');
+        	  $('.modal-body').append('<p>장소: <input type="text" class="form-control"id="place"></p><p>회원 아이디: <input type="text"class="form-control" id="id"></p>');
+        	  $('.modal-body').append('<p>색상: <input type="text"class="form-control" id="color"></p>');
+        	  $('.modal-body').append('<p>메모: <input type="text"class="form-control" id="memo"></p>');
         	  $('.modal-footer').append('<button id="insert" type="button" class="btn btn-default" data-dismiss="modal">일정 등록</button>');
         	  $('.modal-footer').append('<button id="close" type="button" class="btn btn-default" data-dismiss="modal">닫기</button>');
 
         	  $('#modal').modal();
-    			
+
+        	  $('#start').timepicker({
+        		  timeFormat: "H:i"
+        	  });
+        	  $('#end').timepicker({
+        		  timeFormat: "H:i"
+        	  });
+        	  
         	  ///////이벤트 등록//////////
         	  $("#insert").click(function(){
         		  scheduleService.getCount("count", function(count){
@@ -222,10 +233,10 @@ scheduleService.getList(e_Id, function(list){
 		    	$('.modal-footer').empty();				
 
 		    	$('.modal-header').append('내용을 수정하세요');
-	        	$('.modal-body').append('<p>시작 시간: <input type="text" id="start" value="'+startT+'"></p><p>끝 시간: <input type="text" id="end" value="'+endT+'"></p><p>내용: <input type="text" id="contents" value ="'+data.s_Contents+'"></p>');
-	        	$('.modal-body').append('<p>장소: <input type="text" id="place" value="'+data.s_Place+'"></p>');
-	        	$('.modal-body').append('<p>색상: <input type="text" id="color" value="'+data.s_Color+'"></p>');
-	        	$('.modal-body').append('<p>메모: <input type="text" id="memo" value="'+data.s_Memo+'"></p>');
+	        	$('.modal-body').append('<p>시작 시간: <input type="text"class="form-control" id="start" value="'+startT+'"></p><p>끝 시간: <input type="text"class="form-control" id="end" value="'+endT+'"></p><p>내용: <input type="text"class="form-control" id="contents" value ="'+data.s_Contents+'"></p>');
+	        	$('.modal-body').append('<p>장소: <input type="text"class="form-control" id="place" value="'+data.s_Place+'"></p>');
+	        	$('.modal-body').append('<p>색상: <input type="text"class="form-control" id="color" value="'+data.s_Color+'"></p>');
+	        	$('.modal-body').append('<p>메모: <input type="text"class="form-control" id="memo" value="'+data.s_Memo+'"></p>');
 	        	
 	        	$('.modal-footer').append('<button id="modify" type="button" class="btn btn-default" data-dismiss="modal">수정완료</button>');
 	        	$('.modal-footer').append('<button id="close" type="button" class="btn btn-default" data-dismiss="modal">닫기</button>');
