@@ -12,7 +12,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
-
+<script type="text/javascript" src="/resources/js/chatroom.js"></script>
 
 <!-- Web socket CDN -->
 
@@ -23,10 +23,8 @@
 	height: calc(920px - 71px);
 }
 
-
-html , #app-body{
-height: 100%;
-
+html, #app-body {
+	height: 100%;
 }
 
 .container-fluid {
@@ -148,14 +146,14 @@ height: 100%;
 
 .chat-message {
 	height: 100%;
-	padding: 144px 0 40px;
+	padding: 144px 0 60px;
 	overflow-x: hidden;
 }
 
 .chat-message-body {
 	overflow-y: scroll;
 	overflow-x: hidden;
-	height: 683px;
+	height: 690px;
 }
 
 .chat-message-input {
@@ -221,7 +219,7 @@ height: 100%;
 	caret-color: #00c7ae;
 	height: 34px;
 	line-height: 27px;
-	width: 1154px;
+	width: 1149px;
 	margin-right: 10px;
 	margin-top: 2px;
 }
@@ -256,83 +254,147 @@ height: 100%;
 }
 
 .chat-profile {
-
 	display: inline-block;
 	vertical-align: top;
 	margin-right: .6rem;
 }
 
 .chat-user-profile {
-
-	width: 4.5rem;
-	height: 4.5rem;
+	width: 2.5rem;
+	height: 2.5rem;
 }
+
 .chat-user-profile-img img {
-	width: 4.5rem;
-	height: 4.5rem;
+	width: 2.5rem;
+	height: 2.5rem;
 	border-radius: 50%;
 }
 
-.chat-name{
-
-	display:inline-block;
+.chat-name {
+	display: inline-block;
 }
 
-.chat-user-name{
-
-		display:inline-block;
+.chat-user-name {
+	display: inline-block;
 	vertical-align: middle;
-
 }
 
-.chat-contents-frame{
-
-	display:inline-block;
+.chat-contents-frame {
+	display: inline-block;
 	vertical-align: middle;
 	margin-left: 20px;
 	border: solid 1px white;
-    background-color: white;
-    border-radius: 10px;
-    max-width: 40%;
+	background-color: white;
+	border-radius: 10px;
+	max-width: 40%;
 }
 
-.chat-contents{
-
-	display:inline-block;
-	padding : 10px;
-	margin-bottom : 0px;
+.chat-contents-frame-ar{
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 20px;
+	border: solid 1px white;
+	background-color: white;
+	border-radius: 10px;
+	max-width: 40%;
+	text-align: left;
+	border-width: 20px;
 }
 
 
+.chat-contents {
+	display: inline-block;
+	padding: 10px;
+	margin-bottom: 0px;
+}
 
-.data-li-sender{
-text-align:right;
+.data-li-sender {
+	text-align: right;
 	list-style: none;
 }
 
 .chat-profile-sender {
-
-	display: inline-block;
 	vertical-align: top;
-	margin-right: .6rem;
 }
 
 .chat-user-profile-sender {
-
+	display:inline-block;
 	width: 4.5rem;
 	height: 4.5rem;
 }
 
-
-
 .chat-user-profile-img-sender img {
-
 	width: 4.5rem;
 	height: 4.5rem;
 	border-radius: 50%;
 }
 
-			
+
+  .user-info{
+     margin-top : 70px;
+     padding-top : 10px;
+    border-bottom: 1px solid #E0E0E0;
+    }
+    
+    h4{
+    font-weight:bold;
+        display: inline-block;
+    margin-right: .5rem;
+    margin-bottom: 0;
+    }
+    
+    h6{
+    display: inline-block;
+    margin-right: .5rem;
+    margin-bottom: 0;
+    }
+    
+   #user-pciture{
+   	padding-right: 0px;
+   	padding-top: 8px;
+   
+   }
+    
+ .user-profile-picture  {
+	display: inline-block;
+	width: 4.5rem;
+	height: 4.5rem;
+}
+
+ .user-profile-picture img
+	{
+	display: inline-block;
+	width: 4.5rem;
+	height: 4.5rem;
+	border-radius: 50%;
+}
+
+h5{
+  line-height: 2rem;
+font-size: 1.5rem;
+}
+.request-list{
+list-style: none;
+padding-top : 20px;
+padding-left : 10px;
+}
+
+.strongQ{
+	font-weight: bold;
+}
+
+#request-info{
+padding-top :45px;
+	    overflow-y: scroll;
+	height: 100%;
+	padding-bottom: 35px;
+}
+
+h2{
+margin-top: 10px;
+color :  #00c7ae;
+   
+   margin-bottom: 20px;}
 </style>
 
 </head>
@@ -351,15 +413,7 @@ text-align:right;
 							</div>
 						</div>
 						<div class="chat-user-info">
-							<div class="user-profile">
-								<div class="user-profile-picture">
-									<img src="/resources/images/default.jpg">
-								</div>
-							</div>
-							<div class="service-info">
-								<h5>신준</h5>
-								<p>레슨/악기/피아노</p>
-							</div>
+							
 							<div class="match_btn">
 								<span type="button" id="match-btn">거래하기
 									</button>
@@ -404,6 +458,69 @@ text-align:right;
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		
+		
+
+		var _crno = ${crno};
+	
+		
+		chatroomService.getInfo(_crno,function(list) {
+			console.log(list);
+			
+			var str = "";
+			
+			str += "<div class='user-profile'>"
+			str += "<div class='user-profile-picture'>"
+				if (list.expert.e_Photo == 'null') {
+					str += "<img src='/resources/images/default.jpg'/>"
+				}else{
+					str += "<img src='/upload/profile/" +list.expert.e_Photo  + "'/>";
+				} 
+			str += "</div>"
+			str += "</div>"
+			str += "<div class='service-info'>"
+			str += "<h5>" + list.expert.e_Name +"</h5>"
+			str += "<p>" + list.part.p_S_Word + " " + list.part.p_L_Word + "</p>"
+			str += "</div>"
+			
+			
+			$(".chat-user-info").html(str);
+			
+			
+			$("#data").append(
+					"<li class='data-li'><div class='chat-content'>"
+							+ "<div class='chat-profile-sender'>"
+							+ "<div class='chat-user-profile-sender'>"
+							+ "<div class='chat-user-profile-img-sender'>"
+							+ "<img src='/resources/images/soomgo.jpg'>"
+							+ "</div></div>"	
+							+ "<div class='chat-contents-frame-ar'>"
+							+ "<h2> 숨고 알리미 </h2>"
+							+ "<span class=strongQ>"
+							+ list.expert.e_Name +" 고수님의 예상금액이 도착했습니다." + "</span><br><br>"
+							+ "<span>" + "서비스 : " + list.part.p_S_Word + " " + list.part.p_L_Word   + "</span><br>"
+							+ "<span>" + "예상금액 : " + list.estimate.e_AmountPart + " " + list.estimate.e_Amount + "</span>" + "</div>"
+						    + "</div>" + "</li>");
+			
+			$("#data").append(
+					"<li class='data-li'><div class='chat-content'>"
+							+ "<div class='chat-profile-sender'>"
+							+ "<div class='chat-user-profile-sender'>"
+							+ "<div class='chat-user-profile-img-sender'>"
+							+ "<img src='/upload/profile/" +list.expert.e_Photo  + "'/>"
+							+ "</div></div>"	
+							+ "<div class='chat-contents-frame'>"
+							+ "<p class='chat-contents'>" + "<span>"
+							+ list.estimate.e_Contents + "</span></p></div>"
+							+ "<div>" + "<p>" + "<span>" + list.estimate.e_Date + "</span>"
+							+ "</p>" + "</div>" + "</div>" + "</li>");
+			
+			
+		
+		});
+		
+		
+		
 
 		$("#send-btn").click(function() {
 			
@@ -520,20 +637,12 @@ text-align:right;
 		var maxScroll = $("#data").height() - chatAreaHeight;
 		$(".chat-message-body").scrollTop(maxScroll);
 		}else {
-			
 			 var t = getTimeStamp();
-				$("#data")
-						.append(
-								"<li class='data-li'><div class='chat-content'>"
+			 $("#data").append("<li class='data-li'><div class='chat-content'>"
 										+ "<div class='chat-profile-sender'>"
 										+ "<div class='chat-user-profile-sender'>"
 										+ "<div class='chat-user-profile-img-sender'>"
 										+ "<img src='/resources/images/default.jpg'></div></div>"
-										+ "<div class='chat-name'>"
-										+ "<p class='chat-user-name'>"
-										+ "<span>" + '${loginUser.e_Name}' + "</span>"
-										+ "</p>"
-										+ "</div>"
 										+ "<div class='chat-contents-frame'>" 
 										+ "<p class='chat-contents'>" + "<span>"
 										+ msg.ch_Contents + "</span></p></div>"

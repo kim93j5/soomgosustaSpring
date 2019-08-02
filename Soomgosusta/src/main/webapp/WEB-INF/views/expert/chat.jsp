@@ -11,7 +11,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
-
+<script type="text/javascript" src="/resources/js/chatroom.js"></script>
+<script type="text/javascript" src="/resources/js/link.js"></script>
 
 <!-- Web socket CDN -->
 
@@ -145,7 +146,7 @@ html, #app-body {
 
 .chat-message {
 	height: 100%;
-	padding: 144px 0 40px;
+	padding: 144px 0 60px;
 	overflow-x: hidden;
 }
 
@@ -218,7 +219,7 @@ html, #app-body {
 	caret-color: #00c7ae;
 	height: 34px;
 	line-height: 27px;
-	width: 1154px;
+	width: 1304px;
 	margin-right: 10px;
 	margin-top: 2px;
 }
@@ -288,6 +289,19 @@ html, #app-body {
 	max-width: 40%;
 }
 
+.chat-contents-frame-ar{
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 20px;
+	border: solid 1px white;
+	background-color: white;
+	border-radius: 10px;
+	max-width: 40%;
+	text-align: left;
+	border-width: 20px;
+}
+
+
 .chat-contents {
 	display: inline-block;
 	padding: 10px;
@@ -316,6 +330,73 @@ html, #app-body {
 }
 
 
+  .user-info{
+     margin-top : 70px;
+     padding-top : 10px;
+    border-bottom: 1px solid #E0E0E0;
+    }
+    
+    h4{
+    font-weight:bold;
+        display: inline-block;
+    margin-right: .5rem;
+    margin-bottom: 0;
+    }
+    
+    h6{
+    display: inline-block;
+    margin-right: .5rem;
+    margin-bottom: 0;
+    }
+    
+   #user-pciture{
+   	padding-right: 0px;
+   	padding-top: 8px;
+   
+   }
+    
+ .user-profile-picture  {
+	display: inline-block;
+	width: 4.5rem;
+	height: 4.5rem;
+}
+
+ .user-profile-picture img
+	{
+	display: inline-block;
+	width: 4.5rem;
+	height: 4.5rem;
+	border-radius: 50%;
+}
+
+h5{
+  line-height: 2rem;
+font-size: 1.5rem;
+}
+.request-list{
+list-style: none;
+padding-top : 20px;
+padding-left : 10px;
+}
+
+.strongQ{
+	font-weight: bold;
+}
+
+#request-info{
+padding-top :45px;
+	    overflow-y: scroll;
+	height: 100%;
+	padding-bottom: 35px;
+
+
+}
+
+h2{
+margin-top: 10px;
+color :  #00c7ae;
+   
+   margin-bottom: 20px;}
 </style>
 
 </head>
@@ -323,7 +404,8 @@ html, #app-body {
 	<div id="app-body">
 		<div class="chat-room container-fluid">
 			<div class="chat-room-field">
-				<section class="col-md-8 chating">
+				<section id="request-info" class="col-md-3"> </section>
+				<section class="col-md-9 chating">
 				<div class="chat-header">
 					<div class="chat-header-container">
 						<div class="chat-header-controller">
@@ -334,19 +416,8 @@ html, #app-body {
 							</div>
 						</div>
 						<div class="chat-user-info">
-							<div class="user-profile">
-								<div class="user-profile-picture">
-									<img src="/resources/images/default.jpg">
-								</div>
-							</div>
-							<div class="service-info">
-								<h5>신준</h5>
-								<p>레슨/악기/피아노</p>
-							</div>
-							<div class="match_btn">
-								<span type="button" id="match-btn">거래하기
-									</button>
-							</div>
+							
+							
 						</div>
 					</div>
 				</div>
@@ -379,7 +450,6 @@ html, #app-body {
 					</div>
 				</div>
 				</section>
-				<section class="col-md-4 expert-info"> </section>
 			</div>
 		</div>
 	</div>
@@ -387,6 +457,172 @@ html, #app-body {
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		
+		
+		var _crno = ${crno};
+	
+		
+		chatroomService.getInfo(_crno,function(list) {
+			console.log(list);
+			
+			var str = "";
+			
+			str += "<div class='user-profile'>"
+			str += "<div class='user-profile-picture'>"
+				if (list.member.m_Photo == 'null') {
+					str += "<img src='/resources/images/default.jpg'/>"
+				}else{
+					str += "<img src='/upload/profile/" +list.member.m_Photo  + "'/>";
+				} 
+			str += "</div>"
+			str += "</div>"
+			str += "<div class='service-info'>"
+			str += "<h5>" + list.member.m_Name +"</h5>"
+			str += "<p>" + list.part.p_S_Word + " " + list.part.p_L_Word + "</p>"
+			str += "</div>"
+			
+			
+			$(".chat-user-info").html(str);
+			
+			
+			$("#data").append(
+					"<li class='data-li-sender'><div class='chat-content'>"
+							+ "<div class='chat-contents-frame-ar'>"
+							+ "<h2> 숨고 알리미 </h2>"
+							+ "<span class=strongQ>"
+							+ list.expert.e_Name +" 고수님의 예상금액이 도착했습니다." + "</span><br><br>"
+							+ "<span>" + "서비스 : " + list.part.p_S_Word + " " + list.part.p_L_Word   + "</span><br>"
+							+ "<span>" + "예상금액 : " + list.estimate.e_AmountPart + " " + list.estimate.e_Amount + "</span>" + "</div>"
+						    + "</div>" + "</li>");
+			
+			$("#data").append(
+					"<li class='data-li-sender'><div class='chat-content'>"
+							+ "<div class='chat-contents-frame-ar'>"
+							+ "<p class='chat-contents'>" + "<span>"
+							+ list.estimate.e_Contents + "</span></p></div>"
+							+ "<div>" + "<p>" + "<span>" + list.estimate.e_Date + "</span>"
+							+ "</p>" + "</div>" + "</div>" + "</li>");
+			
+			
+			
+			var _seq = list.link.l_Seq;
+			
+			
+			linkService.get(_seq, function(data) {
+				console.log(data);
+
+				
+				var sttr = "";
+				
+				
+				sttr += "<div id='user-name' class='col-md-9'>"
+				sttr += "<div >"
+				sttr += "<div>"
+				sttr += "<h4>" + data.m_Name + "</h4>"
+				sttr += "</div>"
+				sttr += "<h6 class='part'>" + data.p_S_Word +  " " +data.p_L_Word + "</h6>"
+				sttr += "</div>"
+				sttr += "</div>"
+				sttr += "<div id='user-pciture' class='col-md-3'>"
+				sttr += "<div class='user-profile'>"
+				sttr += "<div class='user-profile-picture'>"
+				if (data.m_Photo == 'null') {
+					sttr += "<img src='/resources/images/default.jpg'/>"
+				}else{
+					sttr += "<img src='/upload/profile/" +data.m_Photo  + "'/>";
+				}
+				sttr += "</div>"
+				sttr += "</div>"
+				sttr += "</div>"
+				sttr += "<div class='user-info'>"
+				sttr += "</div>"
+				sttr += "<ul class='request-list'>"
+				sttr += "<li class='request-item'>"
+				sttr += "<h5 class='strongQ'>" + "Q. " + data.r_Q_01 + "</h5>"
+				sttr += "<h5>" + data.r_A_01 + "</h5>"
+				sttr += "</li>"
+				sttr += "<li class='request-item'>"
+				sttr += "<h5 class='strongQ'>" + "Q. " +  data.r_Q_02 + "</h5>"
+				sttr += "<h5>" + data.r_A_02 + "</h5>"
+				sttr += "</li>"
+				sttr += "<li class='request-item'>"
+				sttr += "<h5 class='strongQ'>" + "Q. " +  data.r_Q_03 + "</h5>"
+				sttr += "<h5>" + data.r_A_03 + "</h5>"
+				sttr += "</li>"
+				sttr += "<li class='request-item'>"
+				sttr += "<h5 class='strongQ'>" + "Q. " +  data.r_Q_04 + "</h5>"
+				sttr += "<h5>" + data.r_A_04 + "</h5>"
+				sttr += "</li>"
+				sttr += "<li class='request-item'>"
+				sttr += "<h5 class='strongQ'>" + "Q. " +  data.r_Q_05 + "</h5>"
+				sttr += "<h5>" + data.r_A_05 + "</h5>"
+				sttr += "</li>"
+				sttr += "<li class='request-item'>"
+				sttr += "<h5 class='strongQ'>" + "Q. " +  data.r_Q_06 + "</h5>"
+				sttr += "<h5>" + data.r_A_06 + "</h5>"
+				sttr += "</li>"
+				sttr += "<li class='request-item'>"
+				sttr += "<h5 class='strongQ'>" + "Q. " +  data.r_Q_07 + "</h5>"
+				sttr += "<h5>" + data.r_A_07 + "</h5>"
+				sttr += "</li>"
+				sttr += "<li class='request-item'>"
+				sttr += "<h5 class='strongQ'>" + "Q. " +  data.r_Q_08 + "</h5>"
+				sttr += "<h5>" + data.r_A_08 + "</h5>"
+				sttr += "</li>"
+				sttr += "<li class='request-item'>"
+				sttr += "<h5 class='strongQ'>" + "Q. " +  data.r_Q_09 + "</h5>"
+				sttr += "<h5>" + data.r_A_09 + "</h5>"
+				sttr += "</li>"
+				if (data.r_Q_10 != "null") {
+					sttr += "<li class='request-item'>"
+					sttr += "<h5 class='strongQ'>" + "Q. " +  data.r_Q_10 + "</h5>"
+					sttr += "<h5>" + data.r_A_10 + "</h5>"
+					sttr += "</li>"
+				}
+				if (data.r_Q_11 != "null") {
+					sttr += "<li class='request-item'>"
+					sttr += "<h5 class='strongQ'>" + "Q. " +  data.r_Q_11 + "</h5>"
+					sttr += "<h5>" + data.r_A_11 + "</h5>"
+					sttr += "</li>"
+				}
+				if (data.r_Q_12 != "null") {
+					sttr += "<li class='request-item'>"
+					sttr += "<h5 class='strongQ'>" + "Q. " +  data.r_Q_12 + "</h5>"
+					sttr += "<h5>" + data.r_A_12 + "</h5>"
+					sttr += "</li>"
+				}
+				if (data.r_Q_13 != "null") {
+					sttr += "<li class='request-item'>"
+					sttr += "<h5 class='strongQ'>" + "Q. " +  data.r_Q_13 + "</h5>"
+					sttr += "<h5>" + data.r_A_13 + "</h5>"
+					sttr += "</li>"
+				}
+				if (data.r_Q_14 != "null") {
+					sttr += "<li class='request-item'>"
+					sttr += "<h5 class='strongQ'>" + "Q. " +  data.r_Q_14 + "</h5>"
+					sttr += "<h5>" + data.r_A_14 + "</h5>"
+					sttr += "</li>"
+				}
+				if (data.r_Q_15 != "null") {
+					sttr += "<li class='request-item'>"
+					sttr += "<h5 class='strongQ'>" + "Q. " +  data.r_Q_15 + "</h5>"
+					sttr += "<h5>" + data.r_A_15 + "</h5>"
+					sttr += "</li>"
+				}
+				sttr += "</ul>"
+				sttr += "</div>"
+				sttr += "</div>"
+
+					$("#request-info").html(sttr);
+			});
+		
+			
+			
+			
+		})
+		
+		
+		
 
 		$("#send-btn").click(function() {
 
@@ -412,57 +648,62 @@ html, #app-body {
 
 	connect();
 
+	
+  
+	
 	function getTimeStamp() {
-		var d = new Date();
-		if (leadingZeros(d.getHours(), 2) < 12) {
-			var str = '오전';
-			var s = str + leadingZeros(d.getHours(), 2) + ':'
-					+ leadingZeros(d.getMinutes(), 2);
-			return s;
+		   var d = new Date();
+			   if(leadingZeros(d.getHours(), 2) < 12){
+			    	 var str = '오전';
+			    	var s = str + leadingZeros(d.getHours(), 2) + ':' +
+				     leadingZeros(d.getMinutes(), 2);
+			    	 return s;
+			    	 
+			     } else{
+			    	 var str ='오후';
+			    	 var s = str + (leadingZeros(d.getHours(), 2)-12) + ':' +
+				     leadingZeros(d.getMinutes(), 2);
+			    	 return s;
+			     }
+		 }
 
-		} else {
-			var str = '오후';
-			var s = str + (leadingZeros(d.getHours(), 2) - 12) + ':'
-					+ leadingZeros(d.getMinutes(), 2);
-			return s;
+		 function leadingZeros(n, digits) {
+		   var zero = '';
+		   n = n.toString();
+
+		   if (n.length < digits) {
+		     for (i = 0; i < digits - n.length; i++)
+		       zero += '0';
+		   }
+		   return zero + n;
+		 }
+	
+	 function connect() {
+		    sock = new SockJS('/chating');
+		    sock.onopen = function() {
+		        console.log('open');
+		    };
+		    sock.onmessage = function(evt) {
+	    	 var data = evt.data;
+	    	   console.log(data)
+	  		   var obj = JSON.parse(data)  	   
+	    	   console.log(obj)
+	    	   appendMessage(obj);
+		    };
+		    sock.onclose = function() {
+		    	$("#data")
+				.append("연결 종료");
+		        console.log('close');
+		    };
 		}
-	}
-
-	function leadingZeros(n, digits) {
-		var zero = '';
-		n = n.toString();
-
-		if (n.length < digits) {
-			for (i = 0; i < digits - n.length; i++)
-				zero += '0';
-		}
-		return zero + n;
-	}
-
-	function connect() {
-		sock = new SockJS('/chating');
-		sock.onopen = function() {
-			console.log('open');
-		};
-		sock.onmessage = function(evt) {
-			var data = evt.data;
-			console.log(data)
-			var obj = JSON.parse(data)
-			console.log(obj)
-			appendMessage(obj);
-		};
-		sock.onclose = function() {
-			$("#data").append("연결 종료");
-			console.log('close');
-		};
-	}
-
+	
+	
 	function sendMessage() {
 		var msg = $("#textform").val();
 		if (msg != "") {
 			chat = {};
 			chat.ch_Contents = $("#textform").val()
-			chat.ch_Sender = '${loginUser.e_Name}'
+			chat.ch_Sender = '${loginUser.m_Name}'
 			chat.crno = ${crno}
 		}
 
@@ -470,53 +711,67 @@ html, #app-body {
 		$("#message").val("");
 	}
 
-	function appendMessage(msg) {
+	function  appendMessage(msg) {
 
-		if (msg == '') {
-			return false;
-		} else {
-
-			if (msg.ch_Sender == '${loginUser.e_Name}') {
-				var t = getTimeStamp();
-				$("#data").append(
+		if(msg == ''){
+			 return false;
+		 }else{
+			 
+		if(msg.ch_Sender ==  '${loginUser.m_Name}'){
+		 var t = getTimeStamp();
+		$("#data")
+				.append(
 						"<li class='data-li-sender'><div class='chat-content'>"
-								+ "<div class='chat-contents-frame'>"
-								+ "<p class='chat-contents'>" + "<span>"
-								+ msg.ch_Contents + "</span></p></div>"
-								+ "<div>" + "<p>" + "<span>" + t + "</p>"
-								+ "</span>" + "</div>" + "</div>" + "</li>");
+						+ "<div class='chat-contents-frame'>" 
+						+ "<p class='chat-contents'>" + "<span>"
+						+ msg.ch_Contents + "</span></p></div>"
+						+ "<div>" 
+						+ "<p>"
+						+ "<span>"
+						+ t 
+						+ "</p>"
+						+ "</span>"
+						+ "</div>"
+						+ "</div>"
+						+ "</li>");
 
-				var chatAreaHeight = $(".chat-message-body").height();
-				var maxScroll = $("#data").height() - chatAreaHeight;
-				$(".chat-message-body").scrollTop(maxScroll);
-			} else {
-
-				var t = getTimeStamp();
-				$("#data")
-						.append(
-								"<li class='data-li'><div class='chat-content'>"
+		var chatAreaHeight = $(".chat-message-body").height();
+		var maxScroll = $("#data").height() - chatAreaHeight;
+		$(".chat-message-body").scrollTop(maxScroll);
+		}else {
+			 var t = getTimeStamp();
+			 $("#data").append("<li class='data-li'><div class='chat-content'>"
 										+ "<div class='chat-profile-sender'>"
 										+ "<div class='chat-user-profile-sender'>"
 										+ "<div class='chat-user-profile-img-sender'>"
 										+ "<img src='/resources/images/default.jpg'></div></div>"
 										+ "<div class='chat-name'>"
 										+ "<p class='chat-user-name'>"
-										+ "<span>" + '${loginUser.e_Name}'
-										+ "</span>" + "</p>" + "</div>"
-										+ "<div class='chat-contents-frame'>"
-										+ "<p class='chat-contents'>"
-										+ "<span>" + msg.ch_Contents
-										+ "</span></p></div>" + "<div>" + "<p>"
-										+ "<span>" + t + "</p>" + "</span>"
-										+ "</div>" + "</div>" + "</li>");
+										+ "<span>" + '${loginUser.m_Name}' + "</span>"
+										+ "</p>"
+										+ "</div>"
+										+ "<div class='chat-contents-frame'>" 
+										+ "<p class='chat-contents'>" + "<span>"
+										+ msg.ch_Contents + "</span></p></div>"
+										+ "<div>" 
+										+ "<p>"
+										+ "<span>"
+										+ t 
+										+ "</p>"
+										+ "</span>"
+										+ "</div>"
+										+ "</div>"
+										+ "</li>");
 
 				var chatAreaHeight = $(".chat-message-body").height();
 				var maxScroll = $("#data").height() - chatAreaHeight;
 				$(".chat-message-body").scrollTop(maxScroll);
-
-			}
+			
 		}
 	}
+	}
+
+
 </script>
 
 

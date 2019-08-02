@@ -350,11 +350,11 @@ p{
 													str += "<div class='profile-img'>"
 													str += "<div class='user-profile-picture'>"
 													str += "<div data-name='image' class='is-square'>"
-													if (list[i].member.m_Photo == 'null') {
-														str += "<img src='/resources/images/default.jpg'/>"
-													} else {
-
-													}
+														if (list[i].member.m_Photo == 'null') {
+															str += "<img src='/resources/images/default.jpg'/>"
+														}else{
+															str += "<img src='/upload/profile/" +list[i].member.m_Photo  + "'/>";
+														}
 													str += "</div>"
 													str += "</div>"
 													str += "</div>"
