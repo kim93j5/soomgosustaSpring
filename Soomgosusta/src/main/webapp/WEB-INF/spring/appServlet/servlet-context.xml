@@ -72,6 +72,7 @@
 		<websocket:sockjs />
 	</websocket:handlers>
 
+
    <!-- <interceptors> <interceptor> <mapping path="/expert/profile"/> <beans:ref 
       bean="authInterceptor"/> </interceptor> </interceptors> -->
    

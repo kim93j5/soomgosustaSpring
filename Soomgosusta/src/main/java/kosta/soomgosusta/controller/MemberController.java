@@ -160,7 +160,7 @@ public class MemberController {
         if (uploadPath.exists() == false) {
                uploadPath.mkdirs();
         }
-    	//for (MultipartFile multipartFile : uploadFile) {
+       //for (MultipartFile multipartFile : uploadFile) {
             String updateFileName = uploadFile.getOriginalFilename();
             log.info(updateFileName);
             updateFileName = updateFileName.substring(updateFileName.lastIndexOf("\\") + 1);
@@ -181,21 +181,20 @@ public class MemberController {
             model.addAttribute("m_Id", m_Id);
             service.memberImageUpdate(m_Id, updateFileName);
     }
-	
-	@PutMapping("/mypage")
-	public void changePW(@PathVariable("m_Id") String m_Id,@RequestParam("large1") String p_L_Word1,@RequestParam("medium1") String p_M_Word1,
-			@RequestParam("small1") String p_S_Word1, @RequestParam("large2") String p_L_Word2,@RequestParam("medium2") String p_M_Word2,
-			@RequestParam("small2") String p_S_Word2, @RequestParam("large3") String p_L_Word3,@RequestParam("medium3") String p_M_Word3,
-			@RequestParam("small3") String p_S_Word3, MemberInfoVO memberAddInfo){
-			int seq1 = service.getPSeq(p_L_Word1, p_M_Word1, p_S_Word1);
-			int seq2 = service.getPSeq(p_L_Word2, p_M_Word2, p_S_Word2);
-			int seq3 = service.getPSeq(p_L_Word3, p_M_Word3, p_S_Word3);
-		
-		memberAddInfo.setM_Id(m_Id);
-		memberAddInfo.setM_Ip1(seq1);
-		memberAddInfo.setM_Ip2(seq2);
-		memberAddInfo.setM_Ip3(seq3);
-		service.insertMemberAddInfo(memberAddInfo);
-	}
+   
+   @PutMapping("/mypage")
+   public void changePW(@PathVariable("m_Id") String m_Id,@RequestParam("large1") String p_L_Word1,@RequestParam("medium1") String p_M_Word1,
+         @RequestParam("small1") String p_S_Word1, @RequestParam("large2") String p_L_Word2,@RequestParam("medium2") String p_M_Word2,
+         @RequestParam("small2") String p_S_Word2, @RequestParam("large3") String p_L_Word3,@RequestParam("medium3") String p_M_Word3,
+         @RequestParam("small3") String p_S_Word3, MemberInfoVO memberAddInfo){
+         int seq1 = service.getPSeq(p_L_Word1, p_M_Word1, p_S_Word1);
+         int seq2 = service.getPSeq(p_L_Word2, p_M_Word2, p_S_Word2);
+         int seq3 = service.getPSeq(p_L_Word3, p_M_Word3, p_S_Word3);
+      
+      memberAddInfo.setM_Id(m_Id);
+      memberAddInfo.setM_Ip1(seq1);
+      memberAddInfo.setM_Ip2(seq2);
+      memberAddInfo.setM_Ip3(seq3);
+      service.insertMemberAddInfo(memberAddInfo);
+   }
 }
-

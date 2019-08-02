@@ -1,16 +1,16 @@
 @CHARSET "UTF-8";
 
 #search{
-	width: 800px;
-	margin-left: 500px;
-	margin-top: 30px;
-	padding-bottom: 80px;
-	position: relative;
+   width: 800px;
+   margin-left: 500px;
+   margin-top: 30px;
+   padding-bottom: 80px;
+   position: relative;
 }
 
 #searchKey{
-	border-color: #4092f1;
-	padding: 10px;
+   border-color: #4092f1;
+   padding: 10px;
 }
 
 #searchBtn{
@@ -54,32 +54,32 @@
 }
 
 .modal-body .part{
-	font-size: 13px;
-	font-weight: normal;
+   font-size: 13px;
+   font-weight: normal;
 }
 
 #searchresults{
-	width: 260px;
-	height: 300px;
-	border-style: solid;
-	border-color: #4092f1;
-	position: absolute;
-	background: white;
+   width: 260px;
+   height: 300px;
+   border-style: solid;
+   border-color: #4092f1;
+   position: absolute;
+   background: white;
 }
 
 #searchform{
-	margin-bottom: 0px;
-	display: inline-block;
+   margin-bottom: 0px;
+   display: inline-block;
 }
 
 #semi{
-	display: inline-block;
+   display: inline-block;
 }
 #search-ul li{
-	float: left;
-	font-size: 12px;
-	margin-left: 5px;
-	padding : 0;
+   float: left;
+   font-size: 12px;
+   margin-left: 5px;
+   padding : 0;
 }
 
 #mainImage img{

@@ -1,18 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+   pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <!-- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> -->
 <html>
 <head>
-<link rel="stylesheet" href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+   href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
 <script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
 <script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/resources/js/header.js"></script>
 <!-- <script type="text/javascript" src="/resources/js/socket.js"></script> -->
 <link rel="stylesheet" href="/resources/css/header.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 
 <title>Insert title here</title>
    <script type="text/javascript">
@@ -53,6 +53,7 @@
    }
    function onMessage(msg){
       var data = msg.data;
+      $("#alarm").empty();
       $("#alarm").append( msg.data);
 }
 
@@ -109,6 +110,9 @@ $(document).ready(function(){
                   <a href="/expert/profile?e_Id=${loginUser.e_Id}"><span>프로필</span></a>
                </div>
                <div>
+                  <a href="/expert/listExpertInfo"><span>부가정보 입력</span></a>
+               </div>
+               <div>
                   <a href="/scheduler/expertScheduler"> <span>일정</span>
                   </a>
                </div>
@@ -118,8 +122,8 @@ $(document).ready(function(){
                </div>
             </div>
             <div class="right_">
-            <div id="alarm">
-                    알림
+               <div id="alarm">
+                   <img src="/resources/images/alarmicon.png" style="margin-top: -5px; margin-left: -20px">
                </div>
                <div>
                   <span>"${loginUser.e_Name}"고수님</span>
@@ -160,9 +164,9 @@ $(document).ready(function(){
                </div>
             </div>
             <div class="right_">
-            <div id="alarm">
-                    알림
-               </div>
+               <div id="alarm">
+                   <img src="/resources/images/alarmicon.png" style="margin-top: -5px; margin-left: -20px">
+               </div>	 
                <div>
                   <span>"${loginUser.m_Name}"고객님</span>
                </div>
@@ -201,7 +205,6 @@ $(document).ready(function(){
          </c:otherwise>
       </c:choose>
    </div>
-
 </body>
  <script>
  $(document).ready(function(){
@@ -220,7 +223,6 @@ $(document).ready(function(){
          });
       });
       
-
  
  </script>
 </html>

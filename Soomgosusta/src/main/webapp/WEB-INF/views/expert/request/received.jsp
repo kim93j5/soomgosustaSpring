@@ -5,8 +5,6 @@
 <header>
 	<jsp:include page="../include/header.jsp"></jsp:include>
 </header>
-
-
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

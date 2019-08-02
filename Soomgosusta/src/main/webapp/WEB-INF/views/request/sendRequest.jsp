@@ -2,22 +2,18 @@
    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%-- <header>
+ <header>
    <jsp:include page="../includes/header.jsp"></jsp:include>
-</header> --%>
+</header> 
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="/resources/js/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/sendRequest.js"></script>
 <link rel="stylesheet" href="/resources/css/memberMain.css" target="text/css">
 <link rel="stylesheet" type="text/css" href="/resources/plugin/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="/resources/plugin/slick/slick-theme.css"/>
 
-<link rel="stylesheet" href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
-<script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
-<script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/resources/plugin/slick/slick.js"></script> 
 
 <style type="text/css">
@@ -350,7 +346,7 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
                });
 </script>
 
-<body>
+<body style="background-color: #FAFAFA">
    <div class="send">
       <h1 style="font-size: 30px; font-weight: bold;">보낸 요청</h1>
    </div>
@@ -420,8 +416,8 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
     
 <%--     <footer>
       <jsp:include page="../includes/footer.jsp"></jsp:include>
-   </footer> --%>
-
+   </footer> 
+ --%>
     
 </body>
 </html>

@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.WebUtils;
 
+import kosta.soomgosusta.domain.AlarmVO;
 import kosta.soomgosusta.domain.AnswerVO;
 import kosta.soomgosusta.domain.E_FilesVO;
 import kosta.soomgosusta.domain.E_ProfileVO;
@@ -41,6 +42,7 @@ import kosta.soomgosusta.domain.ExpertVO;
 import kosta.soomgosusta.domain.LoginDTO;
 import kosta.soomgosusta.domain.PartVO;
 import kosta.soomgosusta.interceptor.SessionNames;
+import kosta.soomgosusta.service.AlarmService;
 import kosta.soomgosusta.service.ExpertService;
 import kosta.soomgosusta.service.PartService;
 import lombok.AllArgsConstructor;
@@ -79,8 +81,7 @@ public class ExpertController {
 
 		service.register(expertVO);
 		
-		return "redirect:/expert/listExpertInfo/";
-		//return "redirect:/expert/login";
+		return "redirect:/expert/login";
 	}
 
 	@GetMapping("/login")
@@ -299,11 +300,11 @@ public class ExpertController {
 		 }
 	
 
-	@PostMapping("/listExpertInfo/main")
+	@PostMapping("/request/received/{e_Id:.+}")
 	public String listExpertInfo(@RequestParam("q_Seq") String[] question, @RequestParam("a_Seq") int[] answer,
 			@RequestParam("sido") String[] sido, @RequestParam("sigungu") String[] sigungu,
 			@RequestParam("large") String p_L_Word, @RequestParam("medium") String p_M_Word,
-			@RequestParam("small") String p_S_Word, ExpertInfoVO expert_Info) {
+			@RequestParam("small") String p_S_Word, ExpertInfoVO expert_Info, @PathVariable("e_Id") String e_Id) {
 
 		/*
 		 * for(int i = 0; i < sido.length; i++){ log.info(sido[i]); }
@@ -345,11 +346,11 @@ public class ExpertController {
 			for (int j = 0; j < answer.length; j++) {
 				if (listAnswer.get(i).getA_Seq() == answer[j]) {
 					int qSeq = listAnswer.get(i).getQ_Seq();
-					if (qSeq == 21) {
+					if (qSeq == 1) {
 						ei_Time += listAnswer.get(i).getA_Contents() + "/";
-					} else if (qSeq == 22) {
+					} else if (qSeq == 2) {
 						ei_Start += listAnswer.get(i).getA_Contents() + "/";
-					} else if (qSeq == 23) {
+					} else if (qSeq == 3) {
 						ei_Gender = listAnswer.get(i).getA_Contents();
 					}
 				}
@@ -367,17 +368,20 @@ public class ExpertController {
 		log.info(ei_Start);
 		log.info(ei_Gender);
 
-		expert_Info.setE_Id("nano");
+		expert_Info.setE_Id(e_Id);
 		expert_Info.setEi_Time(ei_Time);
 		expert_Info.setEi_Start(ei_Start);
 		expert_Info.setEi_District(ei_District);
 		expert_Info.setP_Seq(p_Seq);
 		expert_Info.setEi_Gender(ei_Gender);
+		
+		
 
 		
 		service.insertExpertInfo(expert_Info, p_Seq);
+		
 
-		return "redirect:/expert/login";
+		return "/expert/request/received";
 	}
 	
 	@GetMapping("/listExpertFind")
