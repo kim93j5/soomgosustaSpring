@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-  pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<header>
+	<jsp:include page="../includes/header.jsp"></jsp:include>
+</header>
+<html>
+<head>
+ <link href="/resources/css/register.css" rel="stylesheet">
+</head>
+<body>
 
-<body class="member_registerPage">
- <div class="logo">
- 	<a href="${path}/">
- 		<b>SoomgoSusta</b>&nbsp
- 	</a>
- </div>
  
  <div class="register_box">
  	<p class="register_box_msg">회원가입 페이지 </p>
@@ -38,16 +42,9 @@
  	
  </div>
  
- 	<script type="text/javascript">
- 	$(function(){
- 			$('.btn-sign').click(
- 					alert("가입성공")
- 					)
- 	});
- 	
- 
- 	
- 	</script>
+
 </body>
-
-
+</html>
+<footer>
+	<jsp:include page="../includes/footer.jsp"></jsp:include>
+</footer>
