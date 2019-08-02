@@ -269,6 +269,8 @@
 													str += "<div class='user-profile-picture'>"
 													if (list[i].member.m_Photo == 'null') {
 														str += "<img src='/resources/images/default.jpg'/>"
+													}else{
+														str += "<img src='/upload/profile/" +list[i].member.m_Photo  + "'/>";
 													}
 													str += "</div>"
 													str += "</div>"

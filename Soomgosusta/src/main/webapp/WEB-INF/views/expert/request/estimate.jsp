@@ -211,11 +211,7 @@ padding-left : 10px;
 </head>
 <body>
 		<div id="detail-request" class="col-md-3">
-			<div class="request-received">
-				<div class='user-info'>
-				
-				</div>
-			</div>
+			
 		
 		</div>
 		<div id="send-estimate" class="col-md-9">
@@ -302,7 +298,11 @@ padding-left : 10px;
 						sttr += "<div id='user-pciture' class='col-md-3'>"
 						sttr += "<div class='user-profile'>"
 						sttr += "<div class='user-profile-picture'>"
-						sttr += "<img src='/resources/images/default.jpg'/>"
+						if (data.m_Photo == 'null') {
+							sttr += "<img src='/resources/images/default.jpg'/>"
+						}else{
+							sttr += "<img src='/upload/profile/" +data.m_Photo  + "'/>";
+						}
 						sttr += "</div>"
 						sttr += "</div>"
 						sttr += "</div>"

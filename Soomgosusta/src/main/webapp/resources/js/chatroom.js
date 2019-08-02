@@ -28,6 +28,19 @@ var chatroomService = (function() {
 		});
 	}
 	
+	
+	function getInfo(crno, callback, error) {
+
+		$.getJSON("/requests/chat/" + crno + ".json", function(data) {
+			if (callback) {
+				callback(data);
+			}
+		}).fail(function(xhr, status, err) {
+			if (error) {
+				error();
+			}
+		});
+	}
 
 	
 
@@ -49,6 +62,7 @@ var chatroomService = (function() {
 	return {
 		getList : getList,
 		getMemberChatList : getMemberChatList,
+		getInfo : getInfo,
 		get : get
 
 	};

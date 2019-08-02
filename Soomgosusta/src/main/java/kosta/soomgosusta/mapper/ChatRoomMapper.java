@@ -19,4 +19,6 @@ public interface ChatRoomMapper {
 	public ChatRoomVO get(int crno);
 	
 	public List<ChatRoomVO> getMemberList(String name);
+	
+	public ChatRoomVO getInfo(int crno);
 }

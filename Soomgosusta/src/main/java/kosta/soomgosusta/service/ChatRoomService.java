@@ -19,4 +19,6 @@ public interface ChatRoomService {
 	public ChatRoomVO get(int crno);
 	
 	public List<ChatRoomVO> memberList(String name);
+	
+	public ChatRoomVO getInfor(int crno);
 }

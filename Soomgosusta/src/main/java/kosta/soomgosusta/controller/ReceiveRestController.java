@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import kosta.soomgosusta.domain.ChatRoomVO;
+import kosta.soomgosusta.domain.ChatVO;
 import kosta.soomgosusta.domain.E_ProfileVO;
 import kosta.soomgosusta.domain.LinkDTO;
 import kosta.soomgosusta.domain.LinkVO;
@@ -43,11 +44,22 @@ public class ReceiveRestController {
 	private ChatRoomService crService;
 	
 	
+	@GetMapping(value="/chats/{crno}",produces = { MediaType.APPLICATION_XML_VALUE,
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
+	public List<ChatVO> chating(@PathVariable("crno") int crno){
+		
+		return null;
+	}
+	
+	
+	
+	
+	
 	@GetMapping(value="/chat/{crno}",produces = { MediaType.APPLICATION_XML_VALUE,
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public ChatRoomVO chats(@PathVariable("crno") int crno){
 		
-		return null;
+		return crService.getInfor(crno);
 	}
 	
 	

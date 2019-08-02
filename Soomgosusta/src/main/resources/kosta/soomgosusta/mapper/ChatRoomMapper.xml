@@ -44,7 +44,35 @@
 	<select id="get" resultType="kosta.soomgosusta.domain.ChatRoomVO">
 		select * from chatroom 
 		Where crno = #{crno}
+		
 	</select>
+	
+	
+	<select id="getInfo" resultMap="ChatRoomMap">
+		select
+		a.crno,a.e_seq,
+		b.e_seq,b.e_amountpart,b.e_amount,b.e_date,b.e_contents,b.l_seq,
+		c.l_seq,c.r_seq,c.e_id,
+		d.r_seq,d.m_id,d.p_seq,
+		e.p_seq,e.p_l_word,e.p_m_word,e.p_s_word,
+		f.m_name,f.m_photo,f.m_address,
+		g.e_name,g.e_photo,g.e_address
+		FROM chatroom a JOIN estimate b
+		ON a.e_seq = b.e_seq
+		JOIN link c
+		ON b.l_seq = c.l_seq
+		JOIN request d
+		ON c.r_seq =d.r_seq
+		JOIN part e
+		ON d.p_seq = e.p_seq
+		JOIN member f
+		ON d.m_id= f.m_id
+		JOIN expert g
+		ON g.e_id = c.e_id
+		WHERE a.crno = #{crno}
+	</select>
+	
+	
 
 	<select id="findExpertName" resultMap="ChatRoomMap">
 		select
