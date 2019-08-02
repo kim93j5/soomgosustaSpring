@@ -33,11 +33,38 @@
 
 }
 
-
-body{
-    display: table-cell;
-    vertical-align: middle;
+.member_register_box{
+	padding: 10px;
+	display: inline-block;
+   margin-right: -4px;
+   padding-right:20px;
+   margin-bottom: 10px;
+   border: solid 0.8px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-left: 12px;
+    width: 200px;
+    height:200px;
+    float:left;
 }
+
+.expert_register_box{
+	padding: 10px;
+	display: inline-block;
+  margin-right: 0px;
+   margin-bottom: 10px;
+   border: solid 0.8px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-left: 12px;
+    width: 200px;
+    height:200px;
+    float:right;
+}
+
+
 
 html {
     display: table;

@@ -4,21 +4,21 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kosta.soomgosusta.mapper.AlarmMapper">
 
-   <select id="getAlarmList" resultType="kosta.soomgosusta.domain.AlarmVO">
-      select * from alarm where receiver = #{receiver}
-   </select>
-   
-   <insert id="alarmInsert">
-      INSERT INTO alarm VALUES(alarm_seq.nextval,#{al_Type},'NOT',sysdate,#{al_Message},#{sender},#{receiver})
-   </insert>
-   
-   <select id="alarmCount" resultType="int">
-      select count(*) from alarm where receiver=#{receiver} AND al_Check='NOT'
-   </select>
-   
-   <update id="alarmCheckUpdate">
-      update alarm set al_Check = 'READ' where al_Seq=#{al_Seq}
-   </update>
+	<select id="getAlarmList" resultType="kosta.soomgosusta.domain.AlarmVO">
+		select * from alarm where receiver = #{receiver} AND al_Check='NOT'
+	</select>
+	
+	<insert id="alarmRequestInsert">
+		INSERT INTO alarm VALUES(alarm_seq.nextval,'request','NOT',sysdate,'요청서가 도착했습니다.',#{sender},#{receiver})
+	</insert>
+	
+	<select id="alarmCount" resultType="int">
+		select count(*) from alarm where receiver=#{receiver} AND al_Check='NOT'
+	</select>
+	
+	<update id="alarmCheckUpdate">
+		update alarm set al_Check = 'READ' where al_Seq=#{al_Seq}
+	</update>
    
    <insert id="insertSDAlarm">
    		INSERT INTO ALARM VALUES(ALARM_SEQ.NEXTVAL, 'schedule', 'NOT', sysdate, '일정이 등록되었습니다.', #{e_Id}, #{m_Id})
@@ -34,3 +34,4 @@
 </mapper>
 
 
+	

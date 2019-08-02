@@ -15,18 +15,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>Insert title here</title>
-   <script type="text/javascript">
+     <script type="text/javascript">
    
    var ws = new WebSocket("ws://localhost:8081/alarm/websocket");
    
    $(document).ready(function(){
       
       send_message();
-      //$('#count').css('display','none');
       
        $("#alarm").on("click","#count" ,function getAlarmList(){
-          
           $('#getAlarmList').toggle();
+       });
+
+      $("#alarm").on("click","a" ,function updateCheck(){
+         var message = $(this).attr("id");
+          ws.send(message);
        });
 
    });
@@ -42,9 +45,9 @@
        ws.onerror = function(evt) {
            onError(evt);
        };
-       ws.onclose = function(evt) {
+    /*    ws.onclose = function(evt) {
           onClose(evt);
-       };
+       }; */
    }
    function onOpen(evt) 
    {
@@ -60,6 +63,8 @@
 function onClose(evt){
    console.log("안녕");
 }
+
+
 $(document).ready(function(){
 	$('#my').click(function(e){
 		e.preventDefault();
@@ -122,10 +127,9 @@ $(document).ready(function(){
                </div>
             </div>
             <div class="right_">
-               <div id="alarm">
-                   <img src="/resources/images/alarmicon.png" style="margin-top: -5px; margin-left: -20px">
-               </div>
-               <div>
+                <div id="alarm"></div>
+                <div id="icon"><img src="/resources/images/alarmicon.png" style="margin-top: -8px; margin-left: -20px"></div>
+            <div>
                   <span>"${loginUser.e_Name}"고수님</span>
                </div>
                <div>
@@ -152,7 +156,7 @@ $(document).ready(function(){
                   <a href="/member/mypage/${loginUser.m_Id }"><span>프로필</span></a>
                </div>
                <div>
-                  <a href="/member/addInfo/${loginUser.m_Id }"><span>부가정보 입력</span></a>
+                  <a href="/member/addInfo"><span>부가정보 입력</span></a>
                </div>
                <div>
                   <a href="/expert/listExpertFind"> <span>고수 찾기</span>
@@ -173,6 +177,7 @@ $(document).ready(function(){
                <div>
                   <a id="logout" href="/main/logout"><span>로그아웃</span></a>
                </div>
+               
             </div>
          </c:when>
          <c:otherwise>
@@ -223,6 +228,4 @@ $(document).ready(function(){
          });
       });
       
- 
  </script>
-</html>

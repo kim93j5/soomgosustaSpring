@@ -49,18 +49,24 @@ public class AlarmHandler extends TextWebSocketHandler{
       List<AlarmVO> alarmList = service.getAlarmList(userId);
       String str="<div id='count'>"+service.alarmCount(userId)+"<div id ='getAlarmList' style = 'display:none;'><ul>";
       for(int i =0;i<alarmList.size();i++){
-         str += "<div id='getAlarm'><li><a href='/member/addInfo'>"+alarmList.get(i).getE_Id()+"님이 보내신 "+alarmList.get(i).getAl_Message()+"입니다</a></li></div>";
-      }
-      str+="</ul></div></div>";
+          str += "<div id='getAlarm'><li><a class='a' href=";
+          if(alarmList.get(i).getAl_Type().equals("request")){
+               str+="/expert/request/received";
+            }else if(alarmList.get(i).getAl_Type().equals("inquiry")){
+               str+="/scheduler/expertScheduler";
+            }else if(alarmList.get(i).getAl_Type().equals("estimate")){
+               str+="/request/sendRequest/"+alarmList.get(i).getReceiver();
+            }else if(alarmList.get(i).getAl_Type().equals("schedule")){
+               str+="/scheduler/memberScheduler/"+alarmList.get(i).getSender();
+            }else if(alarmList.get(i).getAl_Type().equals("reply")){
+               str+="/scheduler/memberScheduler/"+alarmList.get(i).getSender();
+               }
+          
+      str += " id='"+alarmList.get(i).getAl_Seq()+"'>"+alarmList.get(i).getSender()+"님으로부터<br><br>  "+alarmList.get(i).getAl_Message()+"</a></li></div>";
+          logger.info(str);
+       }
+       str+="</ul></div></div>";
       session.sendMessage(new TextMessage(str));
-
-      
-
-      
-      
-      /*logger.info("세션 추가 : "+alarmVo.getM_Id());*/
-      //String alarmList = JsonAlarmList(userId);
-      //sessionList.get(i)
    }
    @Override
    public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception{
@@ -71,52 +77,63 @@ public class AlarmHandler extends TextWebSocketHandler{
       System.out.println("어어어어어어어어어어어어어어어어어ㅓ엉");
       System.out.println(session.getId());
       System.out.println(message);
-      
+      logger.info("{} 메세지 받음", message.getPayload());
+      service.alarmCheckUpdate(Integer.parseInt(message.getPayload()));
       for(WebSocketSession webSocketSession : sessionList){
-    	  String e_id = mapList.get(webSocketSession);
-    	  String str = "";
-    	  if(!session.getId().equals(webSocketSession.getId())){
-    	      List<AlarmVO> alarmList = service.getAlarmList(e_id);
-    	      str+="<div id='count'>"+service.alarmCount(e_id)+"<div id ='getAlarmList' style = 'display:none;'><ul>";
-    	      for(int i =0;i<alarmList.size();i++){
-    	         str += "<div id='getAlarm'><li><a href='/member/addInfo'>"+alarmList.get(i).getE_Id()+"님의  "+alarmList.get(i).getAl_Message()+"</a></li></div>";
-    	         logger.info(str);
-    	      }
-    	      str+="</ul></div></div>";
-    	      
-    	      
-    	     
-    	      logger.info("아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
+         String e_id = mapList.get(webSocketSession);
+         String str = "";
+         if(!session.getId().equals(webSocketSession.getId())){
+             List<AlarmVO> alarmList = service.getAlarmList(e_id);
+             str+="<div id='count'>"+service.alarmCount(e_id)+"<div id ='getAlarmList' style = 'display:none;'><ul>";
+             for(int i =0;i<alarmList.size();i++){
+                str += "<div id="+alarmList.get(i).getAl_Seq()+"><li><a class='a' href=";
+                if(alarmList.get(i).getAl_Type().equals("request")){
+                     str+="/expert/request/received";
+                  }else if(alarmList.get(i).getAl_Type().equals("inquiry")){
+                     str+="/scheduler/expertScheduler";
+                  }else if(alarmList.get(i).getAl_Type().equals("estimate")){
+                     str+="/request/sendRequest/"+alarmList.get(i).getReceiver();
+                  }else if(alarmList.get(i).getAl_Type().equals("schedule")){
+                     str+="/scheduler/memberScheduler/"+alarmList.get(i).getSender();
+                  }else if(alarmList.get(i).getAl_Type().equals("reply")){
+                     str+="/scheduler/memberScheduler/"+alarmList.get(i).getSender();
+                     }
+                
+            str += ">"+alarmList.get(i).getSender()+"님으로부터<br><br>  "+alarmList.get(i).getAl_Message()+"</a></li></div>";
+             }
+             str+="</ul></div></div>";
+             
+             logger.info("아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
               logger.info("e_ID:" + e_id);
               logger.info("아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
-
-    	  }
-    	  webSocketSession.sendMessage(new TextMessage(str));
-    	  
+              webSocketSession.sendMessage(new TextMessage(str));
+         }else{
+            List<AlarmVO> alarmList = service.getAlarmList(userId);
+             String str21="<div id='count'>"+service.alarmCount(userId)+"<div id ='getAlarmList' style = 'display:none;'><ul>";
+             for(int i =0;i<alarmList.size();i++){
+                 str21 += "<div id='getAlarm'><li><a class='a' href=";
+                 if(alarmList.get(i).getAl_Type().equals("request")){
+                      str21+="/expert/request/received";
+                   }else if(alarmList.get(i).getAl_Type().equals("inquiry")){
+                      str21+="/scheduler/expertScheduler";
+                   }else if(alarmList.get(i).getAl_Type().equals("estimate")){
+                      str21+="/request/sendRequest/"+alarmList.get(i).getReceiver();
+                   }else if(alarmList.get(i).getAl_Type().equals("schedule")){
+                      str21+="/scheduler/memberScheduler/"+alarmList.get(i).getSender();
+                   }else if(alarmList.get(i).getAl_Type().equals("reply")){
+                      str21+="/scheduler/memberScheduler/"+alarmList.get(i).getSender();
+                      }
+                 
+             str21 += " id='"+alarmList.get(i).getAl_Seq()+"'>"+alarmList.get(i).getSender()+"님으로부터  "+alarmList.get(i).getAl_Message()+"</a></li></div>";
+              }
+              str21+="</ul></div></div>";
+             session.sendMessage(new TextMessage(str21));
+         }
+         
+         
       }
       
-      //Iterator<String> sessionIds = sessions.keySet().iterator();
-      //String sessionId="";
-      /*while(sessionIds.hasNext()){
-         sessionId = sessionIds.next();
-         sessions.get(sessionId).sendMessage(new TextMessage(userId+" : "+message.getPayload()));
-      }*/
-      /*List<AlarmVO> alarmList = service.getAlarmList(userId);
-      String str="<div id='count'>"+service.alarmCount(userId)+"<div id ='getAlarmList' style = 'display:none;'><ul>";
-      for(int i =0;i<alarmList.size();i++){
-         str += "<div id='getAlarm'><li><a>"+alarmList.get(i).getE_Id()+"님이 보내신 "+alarmList.get(i).getAl_Message()+"입니다</a></li></div>";
-         logger.info(str);
-      }
-      str+="</ul></div></div>";
-      session.sendMessage(new TextMessage(str));
-      logger.info("{}로 부터  {}메세지가 도착함", session.getId(),message.getPayload());
-      */
-      //AlarmVO alvo = AlarmVO.convertMsg(session.getId());
-      /*for(WebSocketSession sess : sessionList){
-         //sess.sendMessage(new TextMessage(alvo.getM_Id()));
-         //sess.sendMessage(new TextMessage(alvo.getAl_Message()));
-         //sess.sendMessage(new TextMessage(alvo.getE_Id()));
-      }*/
+     
    }
    
    @Override
@@ -138,7 +155,7 @@ public class AlarmHandler extends TextWebSocketHandler{
       logger.info("{} 연결 끊킴", session.getId());
    }
    
-   public String JsonAlarmList(String m_Id){
+   /*public String JsonAlarmList(String m_Id){
       List<AlarmVO> alarmList = service.getAlarmList(m_Id);
       String alList = sessionList.size()+"";
       for(int i=0;i<alarmList.size();i++){
@@ -151,7 +168,7 @@ public class AlarmHandler extends TextWebSocketHandler{
          alList += alarmList.get(i).getAl_Time();
       }
       return alList;
-   }
+   }*/
    
    
  

@@ -6,7 +6,7 @@
 
 	<insert id="register">
 		insert into member values(#{m_Id},#{m_Password},'member',
-		'default_userImg','address',#{m_Name})
+		'default_userImg.png','address',#{m_Name})
 	</insert>
 	
 	<select id="login" parameterType="String" resultType="kosta.soomgosusta.domain.MemberVO">

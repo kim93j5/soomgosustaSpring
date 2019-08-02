@@ -14,43 +14,44 @@
 }
 
 #searchBtn{
-	padding: 15px;
-	border-radius: 10px;
-	background: #4092f1;
-	color: white;
-	font-size: 12px;
+
+   padding: 15px;
+   border-radius: 10px;
+   background: #4092f1;
+   color: white;
+   font-size: 12px;
 }
 
 .largelist{
-	border-radius: 10px;
-	border-style: solid;
-	float: left;
-	padding: 10px;
-	margin-right: 40px;
-	width: 100px;
-	height: 100px;
-	text-align: center;
-	border-style: outset;
-	background: white;
+   border-radius: 10px;
+   border-style: solid;
+   float: left;
+   padding: 10px;
+   margin-right: 40px;
+   width: 100px;
+   height: 100px;
+   text-align: center;
+   border-style: outset;
+   background: white;
 }
 
 .part{
-	font-size: 12px;
-	font-weight: bold;
+   font-size: 12px;
+   font-weight: bold;
 }
 
 #group{
-	margin-left: 130px;
-	margin-top: 100px;
-	margin-bottom: 300px;
-	width: 700px;
+   margin-left: 130px;
+   margin-top: 100px;
+   margin-bottom: 300px;
+   width: 700px;
 }
 
 .largelist img{
-	float: none;
-	width: 65px;
-	height: 50px;
-	margin-bottom: 5px;
+   float: none;
+   width: 65px;
+   height: 50px;
+   margin-bottom: 5px;
 }
 
 .modal-body .part{
@@ -59,21 +60,12 @@
 }
 
 #searchresults{
-<<<<<<< HEAD
-   width: 260px;
-   height: 300px;
-   border-style: solid;
-   border-color: #4092f1;
-   position: absolute;
-   background: white;
-=======
 	width: 332px;
 	height: 300px;
 	border-style: solid;
 	border-color: #4092f1;
 	position: absolute;
 	background: white;
->>>>>>> branch 'nano124124' of https://github.com/kim93j5/soomgosustaSpring.git
 }
 
 #searchform{

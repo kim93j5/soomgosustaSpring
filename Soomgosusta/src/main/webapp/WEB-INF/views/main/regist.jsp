@@ -14,14 +14,17 @@
 </head>
 <body>
   <div class="mainregist">
-	<div class="well" id="member_register_box" style="display: inline-block;">
+  
+	 <div class="member_register_box">
 	<a href="/member/register">회원으로 가입</a>
 	</div>
 	
-	<div class="well" id="expert_register_box" style="display: inline-block;">
-	<a href="/expert/register">고수로 가입</a>
+	<div class="expert_register_box">
+	<a href="/expert/register"> 고수로 가입</a>
 	</div>
+	
 `</div>
+   
 </body>
 </html>
 <footer>
