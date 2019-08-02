@@ -2,15 +2,20 @@
        pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<header>
+	<jsp:include page="../includes/header.jsp"></jsp:include>
+</header>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="/resources/js/jquery.js"></script>
 <script type="text/javascript" src="/resources/js/memberAddInfo.js"></script>
+<link rel="stylesheet" href="/resources/css/addInfo.css">
 <title>Insert title here</title>
 </head>
 <body>
+
 <script type="text/javascript">
 $('document').ready(function() {
        $('#part_select2').css('display', 'none');
@@ -18,15 +23,16 @@ $('document').ready(function() {
        
     $("#1_btn").on("click", function getMWordsList(){
        var LWord = $('input:radio[id="large1"]:checked').val();
+       var m_Id = "<c:out value ='${loginUser.m_Id}'/>";
        console.log(LWord);
-       memberAddInfoService.getMWords(LWord, function(list){
+       memberAddInfoService.getMWords(m_Id,LWord, function(list){
              console.log(LWord);
              var str = "";
                  for(var i = 0, len = list.length||0;i<len;i++){
                        str+="<div id='first_select_MWord'>"
-                       str += "<input name='medium1' id='medium1' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br>";
+                       str += "<ul><li class ='listpart'><div class = 'radio_btn'><label><input name='medium1' id='medium1' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br></label></div></li></ul>";
                       
-                                 console.log(list[i]);
+                                // console.log(list[i]);
                  }
                 str += "<br><button type='button' id='pre1_btn'>이전</button>&nbsp;&nbsp;&nbsp;";
                         str += "<button type='button' id='next2_btn'>다음</button>";
@@ -49,7 +55,7 @@ $('document').ready(function() {
              var str = "";
                  for(var i = 0, len = list.length||0;i<len;i++){
                       str+="<div id='first_select_SWord'>"
-                       str += "<input name='small1' id='small1' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br>";
+                       str += "<ul><li class ='listpart'><div class = 'radio_btn'><label><input name='small1' id='small1' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br></label></div></li></ul>";
                       
                                  console.log(list[i]);
                  }
@@ -77,7 +83,7 @@ $('document').ready(function() {
              var str = "";
                  for(var i = 0, len = list.length||0;i<len;i++){
                        str+="<div id='second_select_MWord'>"
-                       str += "<input name='medium2' id='medium2' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br>";
+                       str += "<ul><li class ='listpart'><div class = 'radio_btn'><label><input name='medium2' id='medium2' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br></label></div></li></ul>";
                       
                                  console.log(list[i]);
                  }
@@ -100,7 +106,7 @@ $('document').ready(function() {
              var str = "";
                  for(var i = 0, len = list.length||0;i<len;i++){
                       str+="<div id='second_select_SWord'>"
-                       str += "<input name='small2' id='small2' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br>";
+                       str += "<ul><li class ='listpart'><div class = 'radio_btn'><label><input name='small2' id='small2' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br></label></div></li></ul>";
                       
                                  console.log(list[i]);
                  }
@@ -123,7 +129,7 @@ $('document').ready(function() {
              var str = "";
                  for(var i = 0, len = list.length||0;i<len;i++){
                        str+="<div id='third_select_MWord'>"
-                       str += "<input name='medium3' id='medium3' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br>";
+                       str += "<ul><li class ='listpart'><div class = 'radio_btn'><label><input name='medium3' id='medium3' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br></label></div></li></ul>";
                       
                                  console.log(list[i]);
                  }
@@ -146,7 +152,7 @@ $('document').ready(function() {
              var str = "";
                  for(var i = 0, len = list.length||0;i<len;i++){
                       str+="<div id='third_select_SWord'>"
-                       str += "<input name='small3' id='small3' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br>";
+                       str += "<ul><li class ='listpart'><div class = 'radio_btn'><label><input name='small3' id='small3' type = 'radio' value='"+list[i]+"'>"+list[i]+"<br></label></div></li></ul>";
                       
                                  console.log(list[i]);
                  }
@@ -157,12 +163,12 @@ $('document').ready(function() {
                  $("#third_select_MWord").after(str);
            });
    });
- 
-});
+}); 
+
  
       
        </script>
-       <form id="AddInfoForm" name="AddInfoForm" action="/member/sendRequest" method="post">
+       <form id="AddInfoForm" name="AddInfoForm" action="/request/sendRequest/${m_Id}" method="post">
              <div id="part_select1">
              <h2>관심있는 분야를 선택해주세요(최대 3개)</h2>
              <div id="first_select_LWord">
@@ -192,10 +198,9 @@ $('document').ready(function() {
                     <button type="button" id="3_btn">다음</button>
              <br><br><br>
              </div>
-       </div>
-      
-       <br><br><br>
+       </div>		
        
+
        </form>
 </body>
 </html>

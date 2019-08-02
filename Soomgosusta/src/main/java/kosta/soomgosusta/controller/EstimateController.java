@@ -38,11 +38,14 @@ public class EstimateController {
 	}
 	
 	@GetMapping("/estimate/match/{p_Seq}")
-	public void insertMatch(/* @RequestParam("m_Status") String m_Status,*/
-			/*, @RequestParam("e_Id") String e_Id, @RequestParam("m_Id") String m_Id*/ @PathVariable("p_Seq") int p_Seq, MatchVO matchVO){
-		matchVO.setM_Status("ING");
+	public void insertMatch( @RequestParam("m_Status") String m_Status,
+			 @RequestParam("e_Id") String e_Id, @RequestParam("m_Id") String m_Id, @PathVariable("p_Seq") int p_Seq, MatchVO matchVO){
+/*		matchVO.setM_Status("ING");
 		matchVO.setE_Id("nano");
-		matchVO.setM_Id("nano124");
+		matchVO.setM_Id("nano124");*/
+		matchVO.setM_Status(m_Status);
+		matchVO.setE_Id(e_Id);
+		matchVO.setM_Id(m_Id);
 		
 		service.insertMatchService(matchVO, p_Seq);
 

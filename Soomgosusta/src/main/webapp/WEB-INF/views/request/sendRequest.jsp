@@ -2,9 +2,9 @@
    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<header>
+<%-- <header>
    <jsp:include page="../includes/header.jsp"></jsp:include>
-</header>
+</header> --%>
 
 <html>
 <head>
@@ -13,7 +13,8 @@
 <script type="text/javascript" src="/resources/js/sendRequest.js"></script>
 <link rel="stylesheet" href="/resources/css/memberMain.css" target="text/css">
 <link rel="stylesheet" type="text/css" href="/resources/plugin/slick/slick.css"/>
-<link rel="stylesheet" type="text/css" href="/resources/plugin/slick/slick-theme.css"/> 
+<link rel="stylesheet" type="text/css" href="/resources/plugin/slick/slick-theme.css"/>
+
 <link rel="stylesheet" href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
 <script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
 <script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
@@ -45,10 +46,6 @@ p{
    background-color: white;
  
 }
-
-b{
-   margin-bottom: 10px;
-}
 </style>
 
 <title>Insert title here</title>
@@ -63,11 +60,12 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
 
       //console.log(r_Seq);
       requestService.cancel(r_Seq, function(result){
+
+
        console.log(result);  
        $('#sendRequestForm').empty();
 
           requestService.getList(m_Id,
-
                    function(list) {
 
                       var str = "";
@@ -79,7 +77,7 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
                             str += '<div id = "sendPart"><br>';
                             str += '<h5>' + list.requestDTO[i].p_S_Word
                                   + '</h5>';
-                            str += '<p style = "font-size : 16px">요청시간<br><' + list.requestDTO[i].requestTime +'></p></div>';
+                            str += '<p style = "font-size : 16px">요청날짜<br><' + list.requestDTO[i].requestTime +'></p></div>';
                             str += '<div id = "sendTime"><br>';
                             
                             if(list.requestDTO[i].nowTime > list.requestDTO[i].endTime && list.request[i].r_Status == 'ING') {
@@ -339,7 +337,9 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
                   }
                   
                 }else if(list.size == 0){
+
                      str += '<h3 style = "margin-top:40px; margin-left:-1080px; font-size:16px;">아직 요청서를 작성하지 않으셨습니다. <a href ="/main/mainPage">요청 보내기</a></h3>';
+
                      }
                    
                   
@@ -378,10 +378,17 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
    <h1 style="font-size: 30px; font-weight: bold;">추천서비스<br></h1>
    </div> 
    
+
     <div id="recommend">
+<!--    <div id="button">
+   <button type="button" id="recommend_btn">관심분야순</button>
+   <button type="button" id="best_btn">인기순</button>
+   </div> -->
+
      <c:forEach var="list" begin="1" end="8" items="${listRandom}">
         <div id="recommendService">
         
+
              <a href="/request/listQNA/${list.p_S_Word }">
                 <img class="img" src="/resources/images/${list.p_Image }"><br>         
              </a>     
@@ -391,7 +398,7 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
 
        </div>
      </c:forEach>
-    </div>  
+    </div> 
     
     <div id="best" style="margin-left: 360px;">
     <h1 style="font-size: 30px; font-weight: bold;">인기서비스<br></h1>
@@ -405,6 +412,8 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
              <div class="caption" style="margin-top: 14px;">
                   <p>${listBest.p_S_Word }</p>          
              </div>     
+
+
         </div>
       </c:forEach>
     </div>
@@ -412,6 +421,7 @@ var m_Id = '<c:out value="${loginUser.m_Id}"/>';
 <%--     <footer>
       <jsp:include page="../includes/footer.jsp"></jsp:include>
    </footer> --%>
+
     
 </body>
 </html>

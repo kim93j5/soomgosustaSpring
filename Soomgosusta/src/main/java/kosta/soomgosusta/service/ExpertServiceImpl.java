@@ -57,27 +57,24 @@ public class ExpertServiceImpl implements ExpertService {
 		ExpertVO expertVO = mapper.findExpert(login_Id);
 
 		Decoder decoder = Base64.getDecoder();
-		
-		if(expertVO != null){
-		byte[] decodeBytes = decoder.decode(expertVO.getE_Password()); 
+
+		byte[] decodeBytes = decoder.decode(expertVO.getE_Password());
 		String password = new String(decodeBytes, "UTF-8");
-	
+			
 		System.out.println("=========login_service pass ========" + password);
-		if (loginDTO.getId().equals(expertVO.getE_Id()) && loginDTO.getPassword().equals(password)) {
+		
+			if (loginDTO.getId().equals(expertVO.getE_Id()) && loginDTO.getPassword().equals(password)) {
 			loginDTO.setSuccess(0);
 			return loginDTO.getSuccess();
-		} else if (loginDTO.equals(expertVO.getE_Id())) {
+			}else if(loginDTO.getId().equals(expertVO.getE_Id())){
 			loginDTO.setSuccess(1);
 			return loginDTO.getSuccess();
-		} else {
+			}else{
 			loginDTO.setSuccess(2);
 			return loginDTO.getSuccess();
-		}
-
-		}else{
-			loginDTO.setSuccess(2);
-			return loginDTO.getSuccess();
-		}
+			}
+		
+		
 
 	}
 
@@ -117,18 +114,18 @@ public class ExpertServiceImpl implements ExpertService {
 	@Override
 	public void uploadFile(E_FilesVO vo) {
 		mapper.uploadLicense(vo);
-
+		
 	}
 
 	@Override
 	public void licenseDelete(String ef_Uuid) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public List<E_FilesVO> getFileList(String e_Id) {
-
+		
 		return mapper.getFileList(e_Id);
 	}
 

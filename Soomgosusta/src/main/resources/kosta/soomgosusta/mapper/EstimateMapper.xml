@@ -5,18 +5,18 @@
 <mapper namespace="kosta.soomgosusta.mapper.EstimateMapper">
 
    <select id="listEstimate" resultMap="EstimateMap" parameterType="int">
-      select e.e_name, p.p_s_word, p.p_l_word, ei.ei_district, e.e_amount, e.e_amountpart, e.e_photo 
-      from estimate e JOIN link l
-      ON e.l_seq = l.l_seq
-      JOIN request r
-      ON r.r_seq = l.r_seq
-      JOIN part p 
-      ON p.p_seq = r.p_seq
-      JOIN expert e
-      ON l.e_id = e.e_id
-      JOIN e_info ei
-      ON ei.e_id = e.e_id
-      where l.r_seq = #{r_Seq}
+    select e.e_amount, e.e_amountpart, p.p_s_word, p.p_l_word, ex.e_photo, ex.e_name, ei.ei_district
+    from estimate e JOIN link l
+    ON e.l_seq = l.l_seq
+    JOIN request r
+    ON l.r_seq = r.r_seq
+    JOIN part p
+    ON p.p_seq = r.p_seq
+    JOIN expert ex
+    ON l.e_id = ex.e_id
+    JOIN e_info ei
+    ON ei.e_id = ex.e_id
+    where l.r_seq = #{r_Seq}
    </select>
    
    

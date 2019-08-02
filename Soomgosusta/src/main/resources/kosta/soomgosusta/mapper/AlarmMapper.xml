@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kosta.soomgosusta.mapper.AlarmMapper">
+
+	<select id="getAlarmList" resultType="kosta.soomgosusta.domain.AlarmVO">
+		select * from alarm where m_Id = #{m_Id}
+	</select>
+	
+	<insert id="alarmLinkInsert">
+		INSERT INTO alarm VALUES(alarm_seq.nextval,'요청서','NOT',sysdate,'가나다라',#{e_Id},#{m_Id})
+	</insert>
+	
+	<select id="alarmCount" resultType="int">
+		select count(*) from alarm where m_Id=#{m_Id}
+	</select>
+	
+</mapper>

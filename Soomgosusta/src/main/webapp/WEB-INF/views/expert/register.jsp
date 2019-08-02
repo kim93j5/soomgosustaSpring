@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <head>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+ <link href="/resources/css/register.css" rel="stylesheet">
 </head>
-
-
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <body class="expert_registerPage">
  <div class="logo">
  	<a href="${path}/">
- 		<b>SoomgoSusta</b>
+ 		<b>SoomgoSusta</b>&nbsp
  	</a>
  </div>
  
@@ -52,8 +51,9 @@
  </div>
  
  	<script >
- 	$(document).ready(
- 	function execDaumPostcode() {new daum.Postcode({
+ 	$(document).ready(){
+ 	function execDaumPostcode() {
+ 	    new daum.Postcode({
  	        oncomplete: function(data) {
  	            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
  	            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
@@ -95,7 +95,7 @@
  	        }
  	    }).open();
  	}
- 	
+ 	}
  	
  	</script>
 </body>

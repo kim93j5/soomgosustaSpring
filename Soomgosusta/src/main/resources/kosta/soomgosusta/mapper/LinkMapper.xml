@@ -75,7 +75,7 @@
 	</select>
 
 	<insert id="insertLink">
-		insert into link values(link_seq.nextval,'NOT',sysdate,#{r_seq},#{e_Id},#{l_Percent},'NOT')
+		insert into link values(link_seq.nextval,#{r_Seq},sysdate,'NOT',#{l_Percent},'NOT',#{e_Id})
 	</insert>
 	
 	<resultMap type="kosta.soomgosusta.domain.LinkVO" id="LinkMap">

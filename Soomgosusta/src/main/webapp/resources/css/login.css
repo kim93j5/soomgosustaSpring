@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+.well{
+	margin-top:200px;
+	margin-left: 750px;
+	margin-right: 750px;
+	margin-bottom: 200px !important;
+}
+.login-box-msg{
+	font-size: 20px;
+}
+.btn-login{
+	float: right;
+}

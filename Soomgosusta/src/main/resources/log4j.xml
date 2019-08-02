@@ -14,6 +14,9 @@
 	<logger name="kosta.soomgosusta.controller">
 		<level value="info" />
 	</logger>
+	<logger name="kosta.soomgosusta.handler">
+		<level value="info" />
+	</logger>
 	
     <logger name="kosta.soomgosusta.handler">
 		<level value="info" />

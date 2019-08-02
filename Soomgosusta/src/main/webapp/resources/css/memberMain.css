@@ -1,10 +1,14 @@
 #sendRequestForm{
-   margin-left: 150px;
+<<<<<<< HEAD
+   margin-left: 360px;
+=======
+	margin-left: 360px;
+>>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
 }
 
 
 .sendOneRequest{
-
+<<<<<<< HEAD
    border: 1px solid #e1e3e3;
    width: 350px;
    height: 385px; 
@@ -14,24 +18,46 @@
    margin-top: 15px;
    background-color: white; 
    border-radius: 4px;
+=======
+	border: 1px solid #e1e3e3;
+	width: 350px;
+	height: 385px; 
+	text-align: center;
+	float: left;
+	margin-left: 30px;
+	margin-top: 15px;
+	background-color: white; 
+	border-radius: 4px;
+>>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
 }
 
 #sendPart{
-
+<<<<<<< HEAD
    border-bottom: solid 0.5px;
    border-bottom-color: inherit;
    padding-top : 10px;
    padding-bottom: 10px;
+=======
+	border-bottom: solid 0.5px;
+	border-bottom-color: inherit;
+	padding-top : 10px;
+	padding-bottom: 10px;
+>>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
 }
 
 .send{
+<<<<<<< HEAD
    margin-top: 50px;
-   margin-left: 180px;
+   margin-left: 360px;
+=======
+	margin-top: 50px;
+	margin-left: 360px;
+>>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
 }
 
 #detailPart{
-   height : 80px;
-   margin-top: 30px;
+	height : 80px;
+	margin-top: 30px;
 }
 
 #detail{
@@ -40,108 +66,106 @@
 }
 
 .recommendInfo{
+<<<<<<< HEAD
    margin-top: 500px;
    margin-bottom: 30px;
-   margin-left: 180px;
+   margin-left: 360px;
+=======
+	margin-top: 500px;
+	margin-bottom: 30px;
+	margin-left: 360px;
+>>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
 }
 
 .img{
-   width: 370px;
-   height: 211px;
+<<<<<<< HEAD
+   width: 280px;
+   height: 170px;
    border-radius: 4px;
    margin-bottom: 0px;
-   margin-left: 17px;
-   padding-left: 24px;
+   /* margin-left: 17px; */
+   /* padding-left: 24px; */
+   
+=======
+	width: 280px;
+	height: 170px;
+	border-radius: 4px;
+	margin-bottom: 0px;
+	/* margin-left: 17px; */
+	/* padding-left: 24px; */
+	
+>>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
 }
 
  #recommend{
-   margin-left: 150px;
+<<<<<<< HEAD
+   margin-left: 350px;
    margin-bottom: 100px;
+    width:    65%;
+   display: inline-block;
+   text-align: center;
+=======
+	margin-left: 350px;
+	margin-bottom: 100px;
+    width: 	65%;
+	display: inline-block;
+	text-align: center;
+>>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
 } 
 
  #recommendService{
-    background-color: white; 
-   /* float: left; */
+
+<<<<<<< HEAD
    margin-right: 0px;
    text-align: center;
    margin-bottom: 10px;
    border: solid 0.8px;
+=======
+	margin-right: 0px;
+	text-align: center;
+	margin-bottom: 10px;
+	border: solid 0.8px;
+>>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 4px;
     margin-left: 12px;
+    width: 280px;
+   
 } 
 
 #best{
-   margin-top: -30px;
+<<<<<<< HEAD
+   margin-top: -80px; 
    margin-bottom: 30px;
-   margin-left: 180px;
+=======
+	margin-top: -80px; 
+	margin-bottom: 30px;
+>>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
 }
 
 #bestPopular{
-   margin-left: 180px;
-   margin-bottom: 800px;
+<<<<<<< HEAD
+    margin-left: 350px;
+   margin-bottom: 160px; 
+   width:    65%;
+   display: inline-block;
+   text-align: center;
+=======
+ 	margin-left: 350px;
+	margin-bottom: 160px; 
+	width: 	65%;
+	display: inline-block;
+	text-align: center;
+>>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
 }
 
 .cancelContents{
-   color: red;
+	color: red;
 }
 
 #sendTime{
-	margin-top: 20px;
-}
-
-.btn-btn-default{
-	background-color : #4a7bf8;
-	border-color: #4a7bf8;
-    color: #fff;
-    width: 150px;
-    height: 35px;
-    border-radius: 4px;
-    font-weight: bold;
-}
-
-.btn-btn-default:hover{
-	    background-color: #5986f9;
-}
-
-.cancelRequest{
-	margin-bottom: 5px;
-    border-color: inherit;
-	border-radius: 4px;
-	opacity: 0.7;
-}
-
-#recommend_btn{
-	width: 100px;
-	height: 40px;
-	margin-left: 1400px;
-	margin-bottom: 20px;
-    background-color : #4a7bf8;
-	border-color: #4a7bf8;
-    color: #fff;
-    border-radius: 4px;
-    font-weight: bold;
-}
-
-#recommend_btn:HOVER{
-	background-color: #5986f9;
-}
-
-
-#best_btn{
-	width: 100px;
-	height: 40px;
-	margin-bottom: 20px;
-    background-color : #4a7bf8;
-	border-color: #4a7bf8;
-    color: #fff;
-    border-radius: 4px;
-    font-weight: bold;
-}
-
-#best_btn:HOVER{
-	background-color: #5986f9;
+<<<<<<< HEAD
    margin-top: 20px;
 }
 
@@ -202,13 +226,69 @@
 .slick-slide{
    width: 370px;
 }
+=======
+	margin-top: 20px;
+}
+
+.btn-btn-default{
+	background-color : #4a7bf8;
+	border-color: #4a7bf8;
+    color: #fff;
+    width: 150px;
+    height: 35px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.btn-btn-default:hover{
+	    background-color: #5986f9;
+}
+
+.cancelRequest{
+	margin-bottom: 5px;
+    border-color: inherit;
+	border-radius: 4px;
+	opacity: 0.7;
+}
+
+#recommend_btn{
+	width: 100px;
+	height: 40px;
+	margin-left: 1400px;
+	margin-bottom: 20px;
+    background-color : #4a7bf8;
+	border-color: #4a7bf8;
+    color: #fff;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+#recommend_btn:HOVER{
+	background-color: #5986f9;
+}
+
+
+#best_btn{
+	width: 100px;
+	height: 40px;
+	margin-bottom: 20px;
+    background-color : #4a7bf8;
+	border-color: #4a7bf8;
+    color: #fff;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+#best_btn:HOVER{
+	background-color: #5986f9;
+}
 
 
 .slick-slide{
 	width: 370px;
 }
 
-
+>>>>>>> branch 'dltmddnjs041' of https://github.com/kim93j5/soomgosustaSpring.git
 
 
 

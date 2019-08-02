@@ -29,9 +29,11 @@ import lombok.extern.log4j.Log4j;
 public class MemberInfoRestController {
 	@Autowired
 	private PartService service;
-	@GetMapping(value = "/addInfo/{large}",produces={MediaType.APPLICATION_JSON_UTF8_VALUE,MediaType.APPLICATION_ATOM_XML_VALUE})
-	public List<String> getMWord(@PathVariable("large") String LWord){
+	@GetMapping(value = "/addInfo/{m_Id}/{large}",produces={MediaType.APPLICATION_JSON_UTF8_VALUE,MediaType.APPLICATION_ATOM_XML_VALUE})
+	public List<String> getMWord(@PathVariable("large") String LWord,@PathVariable("m_Id") String m_Id){
 		List<PartVO> part = service.listPartService();
+		log.info("dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+		log.info(LWord);
 		List<String> MWords = new ArrayList<>();
 		for(int i =0;i<part.size();i++){
 			if(LWord.equals(part.get(i).getP_L_Word())){

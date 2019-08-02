@@ -63,7 +63,8 @@ public class ExpertRestController {
 	@GetMapping(value = "/profile/files/{e_Id}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<List<E_FilesVO>> getFileList(@PathVariable("e_Id") String e_Id) {
-
+		log.info("-----------------------");
+		log.info(e_Id);
 		return new ResponseEntity<>(service.getFileList(e_Id), HttpStatus.OK);
 	}
 
