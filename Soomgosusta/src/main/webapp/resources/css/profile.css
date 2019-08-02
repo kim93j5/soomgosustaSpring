@@ -16,6 +16,14 @@
 	background-position: 0 0;
 }
 
+.starimg{
+	width: 15px;
+	height: 15px;
+	margin-right: 3px;
+}
+.profile-basic ul li{
+	font-size: 30px;
+}
 
 .page-wrapper {
  position:relative;
@@ -52,13 +60,13 @@
 .profile-basic{
 	
 	display: inline-block;
-	padding: 10px;
+	padding: 40px;
 	float: right;
     width: 50%;
 }
 .profile-basic ul li{
 	list-style: none;   
-	line-height: 30px;
+	line-height: 60px;
 }
 .uploadResult ul{
 	display:flex;

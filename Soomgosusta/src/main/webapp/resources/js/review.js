@@ -12,7 +12,7 @@ var reviewService = (function(){
 			url : '/review/new',
 			data : JSON.stringify(review),
 			contentType: "application/json; charset=utf-8",
-			seccess: function(result, status, xht){
+			success: function(result, status, xhr){
 				if(callback){
 					callback(result);
 				}
