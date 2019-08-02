@@ -1,5 +1,81 @@
 @CHARSET "UTF-8";
 
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+
+p{
+    margin-bottom: 30px;
+    line-height: 1.7;
+}
+
+
+.next {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 18px;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    margin-left: 100px;
+    margin-top: 10px;
+    color:white;
+    background-color:#4a9cf3;
+    font-family: 'Nanum Gothic Coding', monospace;
+}
+.pre {
+float:left;
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 18px;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-color:#4a9cf3;
+    color:white;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    margin-top : 10px;
+    margin-left:100px;
+    
+    font-family: 'Nanum Gothic Coding', monospace;
+}
+
+h2 {
+    display: block;
+    font-size: 24px;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    font-family: 'Nanum Gothic Coding', monospace;
+}
+
+label{
+  height: 21px;
+  font-size: 16px;
+  font-family: 'Nanum Gothic Coding', monospace;
+  margin: 0px, 0px, -6px;
+  margin-left: 2px;
+}
+
+
+li {
+    text-align: -webkit-match-parent;
+}
+
+
 .answer {
     list-style: none;
     border: 1px solid #ddd;

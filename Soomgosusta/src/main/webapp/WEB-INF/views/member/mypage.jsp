@@ -3,6 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<header>
+	<jsp:include page="../includes/header.jsp"></jsp:include>
+</header>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -14,18 +17,25 @@
 <script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <style type="text/css">
 #image{
-	float: left;
 	width: 200px;
 	height: 200px;
 	border-radius: 100px;
 	margin: 60px;
 }
 #memberInfo{
-	padding-top: 45px;
+	padding-top: 80px;
+}
+#title{
+font-weight: bold;
+font-size: 24px;
+color: #909090;
 }
 .mypage{
+	width: 1000px;
+	height: 400px;
 	margin-top : 150px;
-	margin-left : 430px;
+	margin-left : 530px;
+	margin-bottom: 250px;
 }
 #plusimage{
 	width: 20px;
@@ -33,6 +43,49 @@
 	border-radius: 10px;
 	padding-top: 6px;
 }
+#myImage{
+float: left;
+	margin-top : 10px;
+	margin-left : 50px;
+	margin-bottom: 50px;
+	margin-right : 50px;
+}
+#myInfo{
+	font-size: 20px;
+	color: #909090;
+}
+.icon{
+	width: 30px;
+	height: 30px;
+	margin : 10px;
+}
+.changeBtn{
+	padding-left : 10px;
+	display : inline-block;
+	color: #4a9cf3;
+}
+
+
+.modifyButton {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 21px;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    background-image: none;
+    background-color : #FAFAFA;
+    color: #4a9cf3;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    margin-left : 200px;
+    /* font-family: 'Nanum Gothic Coding', monospace; */
+}
+
 </style>
 
 
@@ -110,7 +163,7 @@
 			});
 		});
 	</script>
-<body>
+<body style="background-color: #f9f9f9">
 
 
 	
@@ -133,20 +186,21 @@
    <!-- /.modal -->
 </div>
 <div class="mypage">
+<h1 id="title">나의 계정 정보</h1><br>
 <div id = "myImage">
-<img id="image" src="/upload/member/${mypageInfo.m_Photo}">
-
-	<input type="file" name="updateFile"/>
+	<img id="image" src="/upload/member/${mypageInfo.m_Photo}">
+	<input type="file" name="updateFile" id="updateFile"/>
+	<button class="modifyButton">수정</button>
 </div>
-<button class="updateBtn">수정</button>
+
 	<div id="memberInfo">
-		<h3>아이디 : ${mypageInfo.m_Id }<br></h3>
-		<h3>이름 : ${mypageInfo.m_Name }<br></h3>
-		<h3>비밀번호 &nbsp;&nbsp;<button class="changeBtn">수정</button><br></h3>
+		<img class="icon" src="https://dmmj3ljielax6.cloudfront.net/static/img/account/account_icon_02.png"><span id="myInfo">${mypageInfo.m_Id }<br></span>
+		<img class="icon" src="https://dmmj3ljielax6.cloudfront.net/static/img/account/account_icon_01.png"><span id="myInfo">${mypageInfo.m_Name }<br></span>
+		<img class="icon" src="https://dmmj3ljielax6.cloudfront.net/static/img/account/account_icon_03.png"><span id="myInfo">비밀번호 &nbsp;&nbsp;<span class="changeBtn">수정</span><br></span>
 		<form id='operForm' action="/boad/modify" method="get">
   <input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
 </form>
-		<h3>관심 분야 : ${myPart1 }&nbsp;&nbsp;
+		<img class="icon" src="/resources/images/InterestingIcon.PNG"><span id="myInfo">${myPart1 }&nbsp;&nbsp;
 		<c:choose>
 			<c:when test="${myPart2 ne '추가' && myPart3 eq '추가'}">
 				${myPart2 }&nbsp;&nbsp;
@@ -163,10 +217,13 @@
 			<c:otherwise>
 				${myPart2 }&nbsp;&nbsp;${myPart3 }&nbsp;&nbsp;
 			</c:otherwise>
-		</c:choose></h3>
-		<h3>주소 : ${mypageInfo.m_Address }<button class="addressModify">수정</button><br></h3></h3>
+		</c:choose></span>
+		
 	</div>
 	
 </div>
 </body>
+<footer>
+	<jsp:include page="../includes/footer.jsp"></jsp:include>
+</footer>
 </html> 

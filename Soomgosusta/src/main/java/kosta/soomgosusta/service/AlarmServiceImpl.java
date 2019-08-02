@@ -20,13 +20,17 @@ public class AlarmServiceImpl implements AlarmService {
 		return mapper.getAlarmList(m_Id);
 	}
 	@Override
-	public void alarmLinkInsert(AlarmVO alarmVo) {
-		mapper.alarmLinkInsert(alarmVo);
+	public void alarmInsert(AlarmVO alarmVo) {
+		mapper.alarmInsert(alarmVo);
 		
 	}
 	@Override
 	public int alarmCount(String m_Id) {
 		return mapper.alarmCount(m_Id);
+	}
+	@Override
+	public int alarmCheckUpdate(int al_Seq) {
+		return mapper.alarmCheckUpdate(al_Seq);
 	}
 
 }

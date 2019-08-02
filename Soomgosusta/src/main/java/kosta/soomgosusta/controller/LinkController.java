@@ -31,7 +31,6 @@ public class LinkController {
 			if(requestInfoList.get(i).getP_Seq() == p_Seq){
 				requestInfo = requestInfoList.get(i);
 			}
-			
 		}
 		String r_Time = requestInfo.getR_QA_12();
 		String r_Start = requestInfo.getR_QA_13();
@@ -53,9 +52,9 @@ public class LinkController {
 			
 		service.insertLinkService(linkInsert);
 		AlarmVO alarmLinkInsert = new AlarmVO();
-		alarmLinkInsert.setE_Id(expertList.get(i).getE_Id());
-		alarmLinkInsert.setM_Id(m_Id);
-		alarmService.alarmLinkInsert(alarmLinkInsert);
+		alarmLinkInsert.setReceiver(expertList.get(i).getE_Id());
+		alarmLinkInsert.setSender(m_Id);
+		alarmService.alarmInsert(alarmLinkInsert);
 		}
 		model.addAttribute("size",size);
 		
