@@ -15,6 +15,19 @@ var chatroomService = (function() {
 		});
 	}
 	
+	function getMemberChatList(name, callback, error) {
+
+		$.getJSON("/requestStatus/chatlist/" + name + ".json", function(data) {
+			if (callback) {
+				callback(data);
+			}
+		}).fail(function(xhr, status, err) {
+			if (error) {
+				error();
+			}
+		});
+	}
+	
 
 	
 
@@ -35,6 +48,7 @@ var chatroomService = (function() {
 
 	return {
 		getList : getList,
+		getMemberChatList : getMemberChatList,
 		get : get
 
 	};

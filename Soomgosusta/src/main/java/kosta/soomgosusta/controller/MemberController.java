@@ -50,6 +50,22 @@ public class MemberController {
 		return "/member/register";
 	}
 	
+	
+	
+	@GetMapping("/chatlist")
+	public void chatList(){
+		
+	}
+	
+	@GetMapping("chats/{crno}")
+	public String chatroomMove(@PathVariable("crno") int crno,Model model){
+	
+		
+		model.addAttribute("crno", crno);
+		return "member/chat";
+	}
+	
+	
 	@PostMapping("/register")
 	public String register(MemberVO memberVO) throws UnsupportedEncodingException{
 		

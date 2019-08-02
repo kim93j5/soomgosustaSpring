@@ -65,4 +65,13 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 		return mapper.get(crno);
 	}
 
+
+
+
+	@Override
+	public List<ChatRoomVO> memberList(String name) {
+	
+		return mapper.getMemberList(name);
+	}
+
 }
