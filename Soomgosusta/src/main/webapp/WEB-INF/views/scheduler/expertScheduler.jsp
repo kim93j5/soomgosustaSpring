@@ -241,6 +241,13 @@ scheduleService.getList(e_Id, function(list){
 	        	$('.modal-footer').append('<button id="modify" type="button" class="btn btn-default" data-dismiss="modal">수정완료</button>');
 	        	$('.modal-footer').append('<button id="close" type="button" class="btn btn-default" data-dismiss="modal">닫기</button>');
 	        	
+	        	$('#start').timepicker({
+	        		  timeFormat: "H:i"
+	        	  });
+	        	  $('#end').timepicker({
+	        		  timeFormat: "H:i"
+	        	  });
+	        	
 	        	$('#modify').click(function(event){
 		        	var startD = data.s_Sd.substring(0, data.s_Sd.indexOf('T'))+ 'T' + $('#start').val();
 		        	var endD = data.s_Ed.substring(0, data.s_Ed.indexOf('T'))+ 'T' + $('#end').val();

@@ -59,7 +59,7 @@
 }
 
 #searchresults{
-	width: 260px;
+	width: 332px;
 	height: 300px;
 	border-style: solid;
 	border-color: #4092f1;
@@ -92,7 +92,7 @@
 }
 
 .recommendInfo{
-	margin-top: 500px;
+	margin-top: 400px;
 	margin-bottom: 30px;
 	margin-left: 360px;
 }
@@ -107,18 +107,21 @@
 .rc-img{
 	width: 15px;
 	height: 15px;
+	float: left;
+	margin-left: 100px;
 }
 .recommend{
   margin-left: 350px;
    margin-bottom: 100px;
     width:    65%;
+    height: 300px;
    display: inline-block;
    text-align: center;
 } 
 
 .recommendService{
-
-   margin-right: 0px;
+	display:inline-block;
+    margin-right: 0px;
    text-align: center;
    margin-bottom: 10px;
    border: solid 0.8px;
@@ -129,3 +132,62 @@
     width: 280px;
    
 } 
+
+.slick-slide{
+   width: 370px;
+   height:320px;
+}
+
+.thumb img{
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	display: inline-block;
+}
+
+.new-review-average img{
+	width: 15px;
+	height: 15px;
+}
+
+.district{
+	height: 300px;
+	margin-left: 380px;
+    width:  65%;
+   display: inline-block;
+}
+
+.districtService{
+	padding: 10px;
+	display: inline-block;
+  margin-right: 0px;
+   margin-bottom: 10px;
+   border: solid 0.8px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-left: 12px;
+    width: 280px;
+	
+}
+
+.districtInfo{
+	
+	margin-top: 100px;
+	margin-bottom: 30px;
+	margin-left: 360px;
+	
+}
+#p1{
+	padding: 50px;
+	float:left;
+	margin-left: 500px;
+	margin-right: 80px;
+}
+
+.p2-s{
+	padding-top: 50px;
+	padding-left: 80px;
+	display: inline-block;
+
+}

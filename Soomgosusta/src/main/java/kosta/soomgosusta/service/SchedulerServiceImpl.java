@@ -13,6 +13,7 @@ import kosta.soomgosusta.domain.ExpertVO;
 import kosta.soomgosusta.domain.FaqDTO;
 import kosta.soomgosusta.domain.FaqVO;
 import kosta.soomgosusta.domain.MScheduleInfoDTO;
+import kosta.soomgosusta.domain.MatchVO;
 import kosta.soomgosusta.domain.SC_ReplyVO;
 import kosta.soomgosusta.domain.ScheduleInfoDTO;
 import kosta.soomgosusta.domain.ScheduleVO;
@@ -130,6 +131,18 @@ public class SchedulerServiceImpl implements SchedulerService {
 		log.info("service..............");
 		mapper.updateMatch(map);
 		return mapper.updateRequest(map);
+	}
+
+	@Override
+	public MatchVO detailFaqAlarmService(int s_Seq) {
+
+		return mapper.detailFaqAlarm(s_Seq);
+	}
+
+	@Override
+	public MatchVO detailRPAlarmService(int sr_Seq) {
+
+		return mapper.detailRPAlarm(sr_Seq);
 	}
 	
 	

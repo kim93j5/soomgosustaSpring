@@ -28,5 +28,20 @@ public class AlarmServiceImpl implements AlarmService {
 	public int alarmCount(String m_Id) {
 		return mapper.alarmCount(m_Id);
 	}
+	@Override
+	public int insertSDAlarmService(String m_Id, String e_Id) {
+
+		return mapper.insertSDAlarm(m_Id, e_Id);
+	}
+	@Override
+	public int insertIQAlarmService(String m_Id, String e_Id) {
+		
+		return mapper.insertIQAlarm(m_Id, e_Id);
+	}
+	@Override
+	public int insertRPAlarmService(String m_Id, String e_Id) {
+		
+		return mapper.insertRPAlarm(m_Id, e_Id);
+	}
 
 }

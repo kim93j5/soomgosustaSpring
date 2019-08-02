@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import kosta.soomgosusta.domain.FaqDTO;
+import kosta.soomgosusta.domain.MatchVO;
 import kosta.soomgosusta.domain.SC_ReplyVO;
 import kosta.soomgosusta.domain.ScheduleInfoDTO;
 import kosta.soomgosusta.domain.ScheduleVO;
 import kosta.soomgosusta.domain.SchedulerMatchDTO;
+import kosta.soomgosusta.service.AlarmService;
 import kosta.soomgosusta.service.PartService;
 import kosta.soomgosusta.service.SchedulerService;
 import lombok.AllArgsConstructor;
@@ -32,6 +34,7 @@ import lombok.extern.log4j.Log4j;
 public class ManageScheduleController {
 	
 	private SchedulerService service;
+	private AlarmService alservice;
 	
 	@PostMapping(value= "/insert", consumes="application/json", produces={MediaType.TEXT_PLAIN_VALUE, MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<String> insert(@RequestBody SchedulerMatchDTO schedule){
@@ -46,6 +49,7 @@ public class ManageScheduleController {
 		newSche.setS_Sd(schedule.getS_Sd());
 		
 		int insertCount = service.insertSchedule(newSche, schedule.getM_Id(), schedule.getE_Id());
+		alservice.insertSDAlarmService(schedule.getM_Id(), schedule.getE_Id());
 		
 		return insertCount == 1 ? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -99,7 +103,9 @@ public class ManageScheduleController {
 	public ResponseEntity<String> insertReply(@RequestBody SC_ReplyVO reply){
 		log.info(reply);
 		int insertCount = service.insertReplyService(reply);
+		MatchVO match = service.detailRPAlarmService(reply.getSr_Seq());
 		
+		alservice.insertRPAlarmService(match.getM_Id(), match.getE_Id());
 		return insertCount == 1 ? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
