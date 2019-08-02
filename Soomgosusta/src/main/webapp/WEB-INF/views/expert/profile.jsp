@@ -69,6 +69,7 @@
 			</div>
 		</section>
 		</div>
+		<hr>
 		<c:if test="${loginUser.user_Divide =='expert'}">
 		<div id='profileForm' >
 
