@@ -23,22 +23,22 @@
 		 where re_Seq = #{re_Seq}
 	</update>
 	
-	<select id="getListWithPaging" resultType ="kosta.soomgosusta.domain.ReviewVO">
+	<select id="getListWithPaging" resultMap ="ReviewMap">
 	
 	<![CDATA[
- 	select  e_Id, re_seq, m_id,re_StarPoint, re_contents, m_seq,re_date
- 	from 
-   	(
-   		select /*+INDEX(review idx_review)*/
-		rownum rn, e_Id, re_seq, m_id,re_StarPoint, re_contents, m_seq,re_date
-		from review
-		where e_Id=#{e_Id}
-		and re_seq>0
-    and rownum <= #{cri.pageNum} * #{cri.amount}
-   	) where rn > (#{cri.pageNum} -1) * #{cri.amount}
+ 	select E_ID, RE_SEQ, M_ID, RE_STARPOINT, RE_CONTENTS, M_SEQ,RE_DATE
+     from 
+      (
+         select /*+INDEX(review idx_review)*/
+      rownum rn, e_Id, re_seq, m_id,re_StarPoint, re_contents, m_seq,re_date
+      from review 
+      where e_Id=#{e_Id}
+      and re_seq>0
+       and rownum <= #{cri.pageNum} * #{cri.amount}
+      ) where rn > (#{cri.pageNum} -1) * #{cri.amount} and e_Id=#{e_Id}
 	]]>
 	</select> 
-	
+		
 	<select id="getCountByEid" resultType="int">
 	<![CDATA[
 	select count(re_seq) from review where e_Id =#{e_Id}
@@ -53,5 +53,26 @@
 	<select id="getMember" resultType="kosta.soomgosusta.domain.MemberVO">
 		select * from member where m_Id =#{m_Id}
 	</select>
+	
+	
+	<resultMap type="kosta.soomgosusta.domain.ReviewVO" id="ReviewMap">
+	<result column="re_seq" property ="re_Seq"/>
+	<result column="re_date" property ="re_Date"/>
+	<result column="re_starpoint" property ="re_StarPoint"/>
+	<result column="re_contents" property ="re_Contents"/>
+	<result column="m_id" property ="m_Id"/>
+	<result column="e_id" property ="e_Id"/>
+	<collection property="member" resultMap="Member"/>
+	</resultMap>
+	
+	
+	<resultMap type="kosta.soomgosusta.domain.MemberVO" id="Member">
+      <result column="m_id" property="m_Id"/>
+      <result column="m_password" property="m_Password"/>
+      <result column="m_name" property="m_Name"/>
+      <result column="user_divide" property="user_Divide"/>
+      <result column="m_photo" property="m_Photo"/>
+   </resultMap>
+	
 	
 </mapper>

@@ -1,22 +1,38 @@
 .register_box{
-	display: table-cell;
+	margin-top:200px;
+	margin-left: 750px;
+	margin-right: 750px;
+	margin-bottom: 200px !important;
+    border: 5pt groove #00c7ae;
+	/* display: table-cell; */
+    vertical-align: middle;
+    text-align: center;
+    font-family: fantasy;
+    font-style: oblique;
+    font-size: 13px;
+  
+}
+.mainregist{
+	margin-top:200px;
+	margin-left: 750px;
+	margin-right: 750px;
+	margin-bottom: 200px !important;
+}
+.login_box{
+	    margin-top:200px;
+	margin-left: 750px;
+	margin-right: 750px;
+	margin-bottom: 200px !important;
+    border: 5pt groove #00c7ae;
+/* 	display: table-cell;*/
     vertical-align: middle;
         text-align: center;
         font-family: fantasy;
         font-style: oblique;
         font-size: 13px;
-    border: 5pt groove #3f51b5;
+
 }
 
-.login_box{
-	display: table-cell;
-    vertical-align: middle;
-        text-align: center;
-        font-family: fantasy;
-        font-style: oblique;
-        font-size: 13px;
-    border: 5pt groove #3f51b5;
-}
 
 body{
     display: table-cell;

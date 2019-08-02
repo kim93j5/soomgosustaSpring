@@ -15,6 +15,16 @@
 .starR.on {
 	background-position: 0 0;
 }
+.icon{
+	width: 30px;
+	height: 30px;
+	margin-right: 10px;
+}
+.starimg{
+	width: 15px;
+	height: 15px;
+	margin-right: 3px;
+}
 
 
 .page-wrapper {
@@ -52,13 +62,15 @@
 .profile-basic{
 	
 	display: inline-block;
-	padding: 10px;
+	padding: 40px;
 	float: right;
     width: 50%;
 }
 .profile-basic ul li{
+	width:500px;
 	list-style: none;   
-	line-height: 30px;
+	line-height: 60px;
+	font-size: 30px;
 }
  .uploadResult ul{
 	display:flex;

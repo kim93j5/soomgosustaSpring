@@ -13,6 +13,7 @@ import lombok.Setter;
 @Service
 @AllArgsConstructor
 public class AlarmServiceImpl implements AlarmService {
+
 	@Setter(onMethod_ = @Autowired)
 	private AlarmMapper mapper;
 	@Override

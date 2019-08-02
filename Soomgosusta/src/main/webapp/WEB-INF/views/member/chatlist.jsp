@@ -220,7 +220,7 @@
 							var _chatlistUL = $(".chat-list");
 							var _notchatlist = $(".not-chat-list");
 
-							var _name = '${loginUser.e_Name}';
+							var _name = '${loginUser.m_Name}';
 
 							var header = "";
 
@@ -234,10 +234,7 @@
 
 							_pageHeader.html(header);
 
-							chatroomService
-									.getList(
-											_name,
-											function(list) {
+							chatroomService.getMemberChatList(_name,function(list) {
 
 												var str = "";
 
@@ -245,11 +242,11 @@
 														|| list.length == 0) {
 
 													str += "<div class='title'>"
-													str += "<h1 class='first-message'>요청자에게 첫 메세지를 보내보세요. </h1>"
-													str += "<p class='second-message'> 받은 요청을 확인하고 <br>요청자에게 첫 메세지를 보내보세요.</p>"
+													str += "<h1 class='first-message'> 대화중인 방이 없어요. </h1>"
+													str += "<p class='second-message'> 요청서를 작성하고 <br>고수에게 첫 메세지를 받아보세요.</p>"
 													str += "<div class='message-area'>"
 													str += "<button type='button' id='move-receive' class='send-message' >"
-													str += "<span>첫 메세지 보내기</span>"
+													str += "<span> 요청서 작성하기</span>"
 													str += "</button>"
 													str += "</div>"
 													str += "</div>"
@@ -267,14 +264,16 @@
 													str += "<section class='user-info'>"
 													str += "<div>"
 													str += "<div class='user-profile-picture'>"
-													if (list[i].member.m_Photo == 'null') {
+													if (list[i].expert.e_Photo == 'null') {
 														str += "<img src='/resources/images/default.jpg'/>"
 													}
+													
+													str += "<img src='/upload/profile/" +list[i].expert.e_Photo  + "'/>";
 													str += "</div>"
 													str += "</div>"
 													str += "<div class='service-info'>"
 													str += "<h5>"
-															+ list[i].member.m_Name
+															+ list[i].expert.e_Name
 															+ "</h5>"
 													str += "<p>"
 															+ list[i].part.p_S_Word
@@ -317,7 +316,7 @@
 
 								$.ajax({
 									type : 'get',
-									url : '/requestStatus/chat/' + _crno,
+									url : '/requests/chat/' + _crno,
 									data : _crno,
 									success : function() {
 

@@ -54,7 +54,7 @@
 	</select>
 
 	<select id="listExpertAnswer" resultType="kosta.soomgosusta.domain.AnswerVO">
-	    select * from answer where q_seq in(21, 22, 23)
+	    select * from answer where q_seq in(1, 2, 3)
 	</select>
 	
 	<update id="updateSearchLog" parameterType="int">

@@ -2,16 +2,23 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+
+
+<header>
+	<jsp:include page="../include/header.jsp"></jsp:include>
+</header>
+
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
-<link rel="stylesheet"
-	href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
-<script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
-<script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+
 <script type="text/javascript" src="/resources/js/link.js"></script>
+
+
 
 
 <style>
@@ -289,7 +296,7 @@ padding-left : 10px;
 						sttr += "<div>"
 						sttr += "<h4>" + data.m_Name + "</h4>"
 						sttr += "</div>"
-						sttr += "<h6 class='part'>" + data.p_T_Word +  " " +data.p_F_Word + "</h6>"
+						sttr += "<h6 class='part'>" + data.p_S_Word +  " " +data.p_L_Word + "</h6>"
 						sttr += "</div>"
 						sttr += "</div>"
 						sttr += "<div id='user-pciture' class='col-md-3'>"

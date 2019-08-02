@@ -12,5 +12,6 @@ public class ReviewVO {
 	private int m_Seq;
 	private String m_Id;
 	private String e_Id;
+	private MemberVO member;
 	
 }

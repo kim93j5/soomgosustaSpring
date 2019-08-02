@@ -1,18 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<header>
+	<jsp:include page="../includes/header.jsp"></jsp:include>
+</header>
 <html>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="/resources/css/register.css" rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
-	<div id="member_register_box">
+  <div class="mainregist">
+	<div class="well" id="member_register_box" style="display: inline-block;">
 	<a href="/member/register">회원으로 가입</a>
 	</div>
 	
-	<div id="expert_register_box">
+	<div class="well" id="expert_register_box" style="display: inline-block;">
 	<a href="/expert/register">고수로 가입</a>
 	</div>
+`</div>
 </body>
 </html>
+<footer>
+	<jsp:include page="../includes/footer.jsp"></jsp:include>
+</footer>>

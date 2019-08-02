@@ -43,18 +43,19 @@ public class AlarmHandler extends TextWebSocketHandler{
       logger.info("DddddDDDDDDDDDDDDDddddd3");
       mapList.put(session, userId);
       sessionList.add(session);
+      logger.info("세션리스트사이즈:" + sessionList.size());
       logger.info("DddddDDDDDDDDDDDDDddddd4");
       logger.info(userId);
-      
       List<AlarmVO> alarmList = service.getAlarmList(userId);
       String str="<div id='count'>"+service.alarmCount(userId)+"<div id ='getAlarmList' style = 'display:none;'><ul>";
       for(int i =0;i<alarmList.size();i++){
          str += "<div id='getAlarm'><li><a href='/member/addInfo'>"+alarmList.get(i).getE_Id()+"님이 보내신 "+alarmList.get(i).getAl_Message()+"입니다</a></li></div>";
-         logger.info(str);
       }
       str+="</ul></div></div>";
       session.sendMessage(new TextMessage(str));
+
       
+
       
       
       /*logger.info("세션 추가 : "+alarmVo.getM_Id());*/
@@ -70,6 +71,30 @@ public class AlarmHandler extends TextWebSocketHandler{
       System.out.println("어어어어어어어어어어어어어어어어어ㅓ엉");
       System.out.println(session.getId());
       System.out.println(message);
+      
+      for(WebSocketSession webSocketSession : sessionList){
+    	  String e_id = mapList.get(webSocketSession);
+    	  String str = "";
+    	  if(!session.getId().equals(webSocketSession.getId())){
+    	      List<AlarmVO> alarmList = service.getAlarmList(e_id);
+    	      str+="<div id='count'>"+service.alarmCount(e_id)+"<div id ='getAlarmList' style = 'display:none;'><ul>";
+    	      for(int i =0;i<alarmList.size();i++){
+    	         str += "<div id='getAlarm'><li><a href='/member/addInfo'>"+alarmList.get(i).getE_Id()+"님의  "+alarmList.get(i).getAl_Message()+"</a></li></div>";
+    	         logger.info(str);
+    	      }
+    	      str+="</ul></div></div>";
+    	      
+    	      
+    	     
+    	      logger.info("아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
+              logger.info("e_ID:" + e_id);
+              logger.info("아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
+
+    	  }
+    	  webSocketSession.sendMessage(new TextMessage(str));
+    	  
+      }
+      
       //Iterator<String> sessionIds = sessions.keySet().iterator();
       //String sessionId="";
       /*while(sessionIds.hasNext()){

@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<header>
+	<jsp:include page="../include/header.jsp"></jsp:include>
+</header>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -9,10 +12,9 @@
 <title>Insert title here</title>
 
 
-<link rel="stylesheet"
-	href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
-<script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
-<script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+
+
+
 <script type="text/javascript" src="/resources/js/link.js"></script>
 
 <style>
@@ -161,6 +163,13 @@
 	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
 		rgba(0, 0, 0, 0.19);
 }
+
+p{
+	text-align: center;
+	color: #999;
+	margin: 0;
+	margin-bottom: 4rem;
+}
 </style>
 
 </head>
@@ -283,11 +292,43 @@
 													str += "<div>"
 													str += "<p>아직 받은 요청서가 없어요. 요청서를 기다리는동안 고수를 위한 팁을 확인해보세요.</p>"
 													str += "</div>"
-													str += "<li class='request-item'>"
-													str += "<div>"
-													str += "<h5>받은 요청이 없습니다</h5>"
-													str += "</div>"
-													str += "</li>"
+														str += "<li class='request-item' >"
+															str += "<div class='profile-img'>"
+															str += "<div class='user-profile-picture'>"
+															str += "<div data-name='image' class='is-square'>"
+															str += "<img src='/resources/images/dog.jpeg'/>"
+															str += "</div>"
+															str += "</div>"
+															str += "</div>"
+															str += "<div class='request-info'>"
+															str += "<div class='name'>"
+																		+ "나조장"
+																		+ "</div>"
+															str += "<div class='status' data-status=''>"
+															str += "</div>"
+															str += "<div class='part'>"
+																	+ "강아지"
+																	+ " "
+																	+ "산책"
+																	+ "</div>"
+															str += "<div class='address'>"
+																	+ "주소" + "</div>"
+															str += "</div>"
+
+															str += "<div class='date'>"
+															str += "<div class='date-execute'>"
+																	+ "방금전"
+															str += "</div>"
+															str += "</div>"
+															str += "<div class='footer-container'>"
+															str += "<span class='percent'>"
+																	+ "요청서 예시입니다. </span>"
+															str += "<div class='footer-button-containerr'>"
+															str += "</div>"
+															str += "</div>"
+															str += "</li>"
+													
+													
 
 													_requestUL.html(str);
 
@@ -319,7 +360,7 @@
 													str += "</div>"
 													str += "<div class='request-info'>"
 
-													if (list[i].l_Enter != "not") {
+													if (list[i].l_Enter != "NOT") {
 														str += "<div class='name-read'>"
 																+ list[i].member.m_Name
 																+ "</div>"
@@ -520,7 +561,7 @@
 													str += "</div>"
 													str += "<div class='request-info'>"
 
-													if (list[i].l_Enter != "not") {
+													if (list[i].l_Enter != "NOT") {
 														str += "<div class='name-read'>"
 																+ list[i].member.m_Name
 																+ "</div>"

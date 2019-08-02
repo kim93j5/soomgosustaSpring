@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <!-- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> -->
 <html>
 <head>
-<link rel="stylesheet"
-   href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/bootstrap-3.3.2-dist/css/bootstrap.min.css">
 <script src="/resources/bootstrap-3.3.2-dist/js/jquery-3.2.1.js"></script>
 <script src="/resources/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
 <!-- <script type="text/javascript" src="/resources/js/socket.js"></script> -->
@@ -52,7 +51,6 @@
    }
    function onMessage(msg){
       var data = msg.data;
-      $("#alarm").empty();
       $("#alarm").append( msg.data);
 }
 
@@ -60,10 +58,55 @@ function onClose(evt){
    console.log("안녕");
 }
 
-
-
     </script>
 
+<title>Insert title here</title>
+   <script type="text/javascript">
+   
+   var ws = new WebSocket("ws://localhost:8081/alarm/websocket");
+   
+   $(document).ready(function(){
+      
+      send_message();
+      //$('#count').css('display','none');
+      
+       $("#alarm").on("click","#count" ,function getAlarmList(){
+          
+          $('#getAlarmList').toggle();
+       });
+   });
+   
+   function send_message() {
+      
+      ws.onopen = function(evt) {
+           onOpen(evt);
+       };
+       ws.onmessage = function(evt) {
+           onMessage(evt);
+       };
+       ws.onerror = function(evt) {
+           onError(evt);
+       };
+       ws.onclose = function(evt) {
+          onClose(evt);
+       };
+   }
+   function onOpen(evt) 
+   {
+      console.log("아아");
+      ws.send("안녕하세요........");
+   }
+   function onMessage(msg){
+      var data = msg.data;
+      $("#alarm").append( msg.data);
+}
+
+function onClose(evt){
+   console.log("안녕");
+   $('#getAlarm').append("연결 끊김");
+}
+
+    </script>
 </head>
 <body>
    <c:set var='expert' value="${expert}" scope="request" />
@@ -88,9 +131,6 @@ function onClose(evt){
                   <a href="/expert/profile?e_Id=${loginUser.e_Id}"><span>프로필</span></a>
                </div>
                <div>
-                  <a href="/expert/listExpertInfo"><span>부가정보 입력</span></a>
-               </div>
-               <div>
                   <a href="/scheduler/expertScheduler"> <span>일정</span>
                   </a>
                </div>
@@ -100,8 +140,8 @@ function onClose(evt){
                </div>
             </div>
             <div class="right_">
-               <div id="alarm">
-                   <img src="/resources/images/alarmicon.png" style="margin-top: -5px; margin-left: -20px">
+            <div id="alarm">
+                    알림
                </div>
                <div>
                   <span>"${loginUser.e_Name}"고수님</span>
@@ -130,7 +170,7 @@ function onClose(evt){
                   <a href="/member/mypage/${loginUser.m_Id }"><span>프로필</span></a>
                </div>
                <div>
-                  <a href="/member/addInfo"><span>부가정보 입력</span></a>
+                  <a href="/member/addInfo/${loginUser.m_Id }"><span>부가정보 입력</span></a>
                </div>
                <div>
                   <a href="/expert/listExpertFind"> <span>고수 찾기</span>
@@ -142,8 +182,8 @@ function onClose(evt){
                </div>
             </div>
             <div class="right_">
-               <div id="alarm">
-                   <img src="/resources/images/alarmicon.png" style="margin-top: -5px; margin-left: -20px">
+            <div id="alarm">
+                    알림
                </div>
                <div>
                   <span>"${loginUser.m_Name}"고객님</span>
@@ -183,6 +223,7 @@ function onClose(evt){
          </c:otherwise>
       </c:choose>
    </div>
+
 </body>
  <script>
  $(document).ready(function(){

@@ -32,3 +32,5 @@
       		INSERT INTO ALARM VALUES(ALARM_SEQ.NEXTVAL, 'reply', 'NOT', sysdate, '댓글이 달렸습니다.', #{e_Id}, #{m_Id})
    </insert>
 </mapper>
+
+

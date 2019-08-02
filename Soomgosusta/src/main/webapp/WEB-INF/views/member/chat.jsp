@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<header> <jsp:include page="../includes/header.jsp"></jsp:include>
+<header>
+	<jsp:include page="../includes/header.jsp"></jsp:include>
 </header>
 
 
@@ -22,8 +23,10 @@
 	height: calc(920px - 71px);
 }
 
-html, #app-body {
-	height: 100%;
+
+html , #app-body{
+height: 100%;
+
 }
 
 .container-fluid {
@@ -253,69 +256,83 @@ html, #app-body {
 }
 
 .chat-profile {
+
 	display: inline-block;
 	vertical-align: top;
 	margin-right: .6rem;
 }
 
 .chat-user-profile {
-	width: 2.5rem;
-	height: 2.5rem;
-}
 
+	width: 4.5rem;
+	height: 4.5rem;
+}
 .chat-user-profile-img img {
-	width: 2.5rem;
-	height: 2.5rem;
+	width: 4.5rem;
+	height: 4.5rem;
 	border-radius: 50%;
 }
 
-.chat-name {
-	display: inline-block;
+.chat-name{
+
+	display:inline-block;
 }
 
-.chat-user-name {
-	display: inline-block;
+.chat-user-name{
+
+		display:inline-block;
 	vertical-align: middle;
+
 }
 
-.chat-contents-frame {
-	display: inline-block;
+.chat-contents-frame{
+
+	display:inline-block;
 	vertical-align: middle;
 	margin-left: 20px;
 	border: solid 1px white;
-	background-color: white;
-	border-radius: 10px;
-	max-width: 40%;
+    background-color: white;
+    border-radius: 10px;
+    max-width: 40%;
 }
 
-.chat-contents {
-	display: inline-block;
-	padding: 10px;
-	margin-bottom: 0px;
+.chat-contents{
+
+	display:inline-block;
+	padding : 10px;
+	margin-bottom : 0px;
 }
 
-.data-li-sender {
-	text-align: right;
+
+
+.data-li-sender{
+text-align:right;
 	list-style: none;
 }
 
 .chat-profile-sender {
+
+	display: inline-block;
 	vertical-align: top;
+	margin-right: .6rem;
 }
 
 .chat-user-profile-sender {
-	display:inline-block;
+
 	width: 4.5rem;
 	height: 4.5rem;
 }
 
+
+
 .chat-user-profile-img-sender img {
+
 	width: 4.5rem;
 	height: 4.5rem;
 	border-radius: 50%;
 }
 
-
+			
 </style>
 
 </head>
@@ -389,7 +406,7 @@ html, #app-body {
 	$(document).ready(function() {
 
 		$("#send-btn").click(function() {
-
+			
 			sendMessage();
 			$('#textform').val('')
 		});
@@ -412,57 +429,62 @@ html, #app-body {
 
 	connect();
 
+	
+  
+	
 	function getTimeStamp() {
-		var d = new Date();
-		if (leadingZeros(d.getHours(), 2) < 12) {
-			var str = '오전';
-			var s = str + leadingZeros(d.getHours(), 2) + ':'
-					+ leadingZeros(d.getMinutes(), 2);
-			return s;
+		   var d = new Date();
+			   if(leadingZeros(d.getHours(), 2) < 12){
+			    	 var str = '오전';
+			    	var s = str + leadingZeros(d.getHours(), 2) + ':' +
+				     leadingZeros(d.getMinutes(), 2);
+			    	 return s;
+			    	 
+			     } else{
+			    	 var str ='오후';
+			    	 var s = str + (leadingZeros(d.getHours(), 2)-12) + ':' +
+				     leadingZeros(d.getMinutes(), 2);
+			    	 return s;
+			     }
+		 }
 
-		} else {
-			var str = '오후';
-			var s = str + (leadingZeros(d.getHours(), 2) - 12) + ':'
-					+ leadingZeros(d.getMinutes(), 2);
-			return s;
+		 function leadingZeros(n, digits) {
+		   var zero = '';
+		   n = n.toString();
+
+		   if (n.length < digits) {
+		     for (i = 0; i < digits - n.length; i++)
+		       zero += '0';
+		   }
+		   return zero + n;
+		 }
+	
+	 function connect() {
+		    sock = new SockJS('/chating');
+		    sock.onopen = function() {
+		        console.log('open');
+		    };
+		    sock.onmessage = function(evt) {
+	    	 var data = evt.data;
+	    	   console.log(data)
+	  		   var obj = JSON.parse(data)  	   
+	    	   console.log(obj)
+	    	   appendMessage(obj);
+		    };
+		    sock.onclose = function() {
+		    	$("#data")
+				.append("연결 종료");
+		        console.log('close');
+		    };
 		}
-	}
-
-	function leadingZeros(n, digits) {
-		var zero = '';
-		n = n.toString();
-
-		if (n.length < digits) {
-			for (i = 0; i < digits - n.length; i++)
-				zero += '0';
-		}
-		return zero + n;
-	}
-
-	function connect() {
-		sock = new SockJS('/chating');
-		sock.onopen = function() {
-			console.log('open');
-		};
-		sock.onmessage = function(evt) {
-			var data = evt.data;
-			console.log(data)
-			var obj = JSON.parse(data)
-			console.log(obj)
-			appendMessage(obj);
-		};
-		sock.onclose = function() {
-			$("#data").append("연결 종료");
-			console.log('close');
-		};
-	}
-
+	
+	
 	function sendMessage() {
 		var msg = $("#textform").val();
 		if (msg != "") {
 			chat = {};
 			chat.ch_Contents = $("#textform").val()
-			chat.ch_Sender = '${loginUser.e_Name}'
+			chat.ch_Sender = '${loginUser.m_Name}'
 			chat.crno = ${crno}
 		}
 
@@ -470,28 +492,36 @@ html, #app-body {
 		$("#message").val("");
 	}
 
-	function appendMessage(msg) {
+	function  appendMessage(msg) {
 
-		if (msg == '') {
-			return false;
-		} else {
-
-			if (msg.ch_Sender == '${loginUser.e_Name}') {
-				var t = getTimeStamp();
-				$("#data").append(
+		if(msg == ''){
+			 return false;
+		 }else{
+			 
+		if(msg.ch_Sender ==  '${loginUser.m_Name}'){
+		 var t = getTimeStamp();
+		$("#data")
+				.append(
 						"<li class='data-li-sender'><div class='chat-content'>"
-								+ "<div class='chat-contents-frame'>"
-								+ "<p class='chat-contents'>" + "<span>"
-								+ msg.ch_Contents + "</span></p></div>"
-								+ "<div>" + "<p>" + "<span>" + t + "</p>"
-								+ "</span>" + "</div>" + "</div>" + "</li>");
+						+ "<div class='chat-contents-frame'>" 
+						+ "<p class='chat-contents'>" + "<span>"
+						+ msg.ch_Contents + "</span></p></div>"
+						+ "<div>" 
+						+ "<p>"
+						+ "<span>"
+						+ t 
+						+ "</p>"
+						+ "</span>"
+						+ "</div>"
+						+ "</div>"
+						+ "</li>");
 
-				var chatAreaHeight = $(".chat-message-body").height();
-				var maxScroll = $("#data").height() - chatAreaHeight;
-				$(".chat-message-body").scrollTop(maxScroll);
-			} else {
-
-				var t = getTimeStamp();
+		var chatAreaHeight = $(".chat-message-body").height();
+		var maxScroll = $("#data").height() - chatAreaHeight;
+		$(".chat-message-body").scrollTop(maxScroll);
+		}else {
+			
+			 var t = getTimeStamp();
 				$("#data")
 						.append(
 								"<li class='data-li'><div class='chat-content'>"
@@ -501,22 +531,31 @@ html, #app-body {
 										+ "<img src='/resources/images/default.jpg'></div></div>"
 										+ "<div class='chat-name'>"
 										+ "<p class='chat-user-name'>"
-										+ "<span>" + '${loginUser.e_Name}'
-										+ "</span>" + "</p>" + "</div>"
-										+ "<div class='chat-contents-frame'>"
-										+ "<p class='chat-contents'>"
-										+ "<span>" + msg.ch_Contents
-										+ "</span></p></div>" + "<div>" + "<p>"
-										+ "<span>" + t + "</p>" + "</span>"
-										+ "</div>" + "</div>" + "</li>");
+										+ "<span>" + '${loginUser.e_Name}' + "</span>"
+										+ "</p>"
+										+ "</div>"
+										+ "<div class='chat-contents-frame'>" 
+										+ "<p class='chat-contents'>" + "<span>"
+										+ msg.ch_Contents + "</span></p></div>"
+										+ "<div>" 
+										+ "<p>"
+										+ "<span>"
+										+ t 
+										+ "</p>"
+										+ "</span>"
+										+ "</div>"
+										+ "</div>"
+										+ "</li>");
 
 				var chatAreaHeight = $(".chat-message-body").height();
 				var maxScroll = $("#data").height() - chatAreaHeight;
 				$(".chat-message-body").scrollTop(maxScroll);
-
-			}
+			
 		}
 	}
+	}
+
+
 </script>
 
 
