@@ -356,7 +356,7 @@ scheduleService.getList(e_Id, function(list){
 									var str="";
 									
 									str += '<div class="faq">';
-									str += '<div class="faq-photo"><img src="/resources/images/'+ list[i].m_Photo +'"></div>';
+									str += '<div class="faq-photo"><img src="/upload/profile'+ list[i].m_Photo +'"></div>';
 									str += '<div class="faq-name">'+list[i].m_Name+'</div>';
 									str += '<div class="faq-date">'+list[i].f_Date+'</div>';
 									str += '<div class="faq-reply"><button class="reply-register" type="button">답글</button></div>';

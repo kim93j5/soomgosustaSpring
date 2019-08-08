@@ -14,13 +14,13 @@
 </head>
 <body>
   <div class="mainregist">
-  
+  	<h1>숨고 무료 가입하기</h1>
 	 <div class="member_register_box">
-	<a href="/member/register">회원으로 가입</a>
+	<a href="/member/register">회원</a>
 	</div>
 	
 	<div class="expert_register_box">
-	<a href="/expert/register"> 고수로 가입</a>
+	<a href="/expert/register"> 고수</a>
 	</div>
 	
 `</div>

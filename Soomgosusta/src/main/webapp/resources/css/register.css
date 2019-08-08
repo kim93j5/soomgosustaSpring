@@ -44,11 +44,18 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     margin-left: 12px;
-    width: 200px;
-    height:200px;
+    width: 100px;
+    height:100px;
     float:left;
+    font-size: 30px;
+}
+.mainregist h1{
+	margin-left: 20px;
 }
 
+.member_register_box a{
+	
+}
 .expert_register_box{
 	padding: 10px;
 	display: inline-block;
@@ -59,9 +66,10 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     margin-left: 12px;
-    width: 200px;
-    height:200px;
+    width: 100px;
+    height:100px;
     float:right;
+    font-size:30px;
 }
 
 

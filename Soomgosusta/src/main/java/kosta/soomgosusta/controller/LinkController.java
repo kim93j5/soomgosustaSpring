@@ -52,10 +52,10 @@ public class LinkController {
 		linkInsert.setR_Seq(requestInfo.getR_Seq());
 			
 		service.insertLinkService(linkInsert);
-		AlarmVO alarmLinkInsert = new AlarmVO();
-		alarmLinkInsert.setReceiver(expertList.get(i).getE_Id());
+		//AlarmVO alarmLinkInsert = new AlarmVO();
+	/*	alarmLinkInsert.setReceiver(expertList.get(i).getE_Id());
 		alarmLinkInsert.setSender(m_Id);
-		alarmService.alarmInsert(alarmLinkInsert);
+		alarmService.alarmInsert(alarmLinkInsert);*/
 		}
 		model.addAttribute("size",size);
 		
