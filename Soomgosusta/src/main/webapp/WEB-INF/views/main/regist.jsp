@@ -13,16 +13,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-  <div class="mainregist">
+  <div class="col-sm-6 col-md-offset-3">
+  	<div class="regist-msg" style="text-align: center;">
   	<h1>숨고 무료 가입하기</h1>
-	 <div class="member_register_box">
+  	</div>
+	 <div class="col-sm-5 user-signup">
 	<a href="/member/register">회원</a>
 	</div>
 	
-	<div class="expert_register_box">
+	<div class="col-sm-5 pro-signup">
 	<a href="/expert/register"> 고수</a>
 	</div>
-	
 `</div>
    
 </body>

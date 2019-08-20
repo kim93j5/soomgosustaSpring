@@ -90,7 +90,7 @@
 					<button id="uploadBtn">등록</button> 
 				</div>
 					<button id="licenseModifyBtn">수정</button>
-				</c:if>
+			</c:if>
 
 				<div id="uploadResult" class="uploadResult">
 				  <ul>

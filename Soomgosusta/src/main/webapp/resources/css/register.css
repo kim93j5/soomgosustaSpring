@@ -1,131 +1,45 @@
 .register_box{
-	margin-top:200px;
-	margin-left: 750px;
-	margin-right: 750px;
-	margin-bottom: 200px !important;
-    border: 5pt groove #00c7ae;
-	/* display: table-cell; */
-    vertical-align: middle;
-    text-align: center;
-    font-family: fantasy;
-    font-style: oblique;
-    font-size: 13px;
-  
+	margin: auto;
+    width: 400px;
+	margin-top: 20%;
+	margin-bottom: 20%;
+	border:solid 2px #b7ddf2;
+	background:rgba(220, 220, 220, 0.45);
+	background-image: url("/resources/images/hima.png");
+	background-position: top;
+	padding: 10px;
+	opacity:0.2;
+	text-align: center; 
+	border-radius: 2px;
+	border-radius: 10px;
+	font-size: 2rem;
+}
+.register_box a{
+	font-weight:bold;
+	color:#337ab7;
+}
+.register_box p{
+	font-weight:bold;
+	font-size: 3rem;
+}
+.register_box p text{
+	text-shadow: black;
 }
 .mainregist{
-	margin-top:200px;
-	margin-left: 750px;
-	margin-right: 750px;
-	margin-bottom: 200px !important;
+	margin:10px;
+	width:400px;
+	padding:14px;
 }
-.login_box{
-	    margin-top:200px;
-	margin-left: 750px;
-	margin-right: 750px;
-	margin-bottom: 200px !important;
-    border: 5pt groove #00c7ae;
-/* 	display: table-cell;*/
-    vertical-align: middle;
-        text-align: center;
-        font-family: fantasy;
-        font-style: oblique;
-        font-size: 13px;
-
+.user-signup{
+	width:400px;
+	height:200px;
+	background-image: url("/resources/images/cookingHelper.JPG");
+	border:solid 2px #b7ddf2;
+	text-align: center;
 }
-
-.member_register_box{
-	padding: 10px;
-	display: inline-block;
-   margin-right: -4px;
-   padding-right:20px;
-   margin-bottom: 10px;
-   border: solid 0.8px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-left: 12px;
-    width: 100px;
-    height:100px;
-    float:left;
-    font-size: 30px;
-}
-.mainregist h1{
-	margin-left: 20px;
-}
-
-.member_register_box a{
-	
-}
-.expert_register_box{
-	padding: 10px;
-	display: inline-block;
-  margin-right: 0px;
-   margin-bottom: 10px;
-   border: solid 0.8px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-left: 12px;
-    width: 100px;
-    height:100px;
-    float:right;
-    font-size:30px;
-}
-
-
-
-html {
-    display: table;
-    margin: auto;
-}
-
-html, body {
-    height: 100%;
-}
-
-
-
-#registerForm {
-    width: 280px;
-     font-size: 0.9rem;
-    margin: 0;
-    padding: 0;
-	text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 0.8rem;
-}
-
-.login-form-text {
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 0.8rem;
-}
-
-.login-text {
-    margin-top: -6px;
-    margin-left: -6px !important;
-}
-
-.margin {
-    margin: 0 !important;
-}
-
-.pointer-events {
-    pointer-events: auto !important;
-}
-
-.input-field >.material-icons  {
-    padding-top:10px;
-}
-
-.input-field div.error{
-    position: relative;
-    top: -1rem;
-    left: 3rem;
-    font-size: 0.8rem;
-    color:#FF4081;
-    -webkit-transform: translateY(0%);
-    -ms-transform: translateY(0%);
-    -o-transform: translateY(0%);
-    transform: translateY(0%);
+.pro-signup{
+	width:400px;
+	height:200px;
+	border:solid 2px #b7ddf2;
+	text-align: center;
 }

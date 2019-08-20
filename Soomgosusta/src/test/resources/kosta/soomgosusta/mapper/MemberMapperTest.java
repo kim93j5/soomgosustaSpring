@@ -1,10 +1,12 @@
 import static org.junit.Assert.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 
 import org.junit.Test;
 	import org.junit.Test;
 	import org.springframework.beans.factory.annotation.Autowired;
 
-	import kosta.soomgosusta.domain.MemberVO;
+import kosta.soomgosusta.domain.LoginDTO;
+import kosta.soomgosusta.domain.MemberVO;
 	import kosta.soomgosusta.mapper.MemberMapper;
 	import lombok.Setter;
 
@@ -28,6 +30,7 @@ import org.junit.Test;
 				mapper.register(memberVO);
 				log.info(meberVO);
 			}
-	}
+			
+		
 
 }
